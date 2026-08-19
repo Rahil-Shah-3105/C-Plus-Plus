@@ -35,11 +35,15 @@ vector<int> root, rank;
  *
  */
 void CreateSet(int n) {
+	std::cerr << ">>> Entering CreateSet(n=" << n << ")" << std::endl;
     root = vector<int>(n + 1);
     rank = vector<int>(n + 1, 1);
     for (int i = 1; i <= n; ++i) {
+		std::cerr << "CreateSet(n=" << n << "): root → " << root << std::endl;
+		std::cerr << "CreateSet(n=" << n << "): rank → " << rank << std::endl;
         root[i] = i;
     }
+	std::cerr << "<<< Exiting CreateSet(n=" << n << ")" << std::endl;
 }
 
 /**
@@ -51,7 +55,9 @@ void CreateSet(int n) {
  *
  */
 int Find(int x) {
+	std::cerr << ">>> Entering Find(x=" << x << ")" << std::endl;
     if (root[x] == x) {
+	std::cerr << "<<< Exiting Find(x=" << x << ")" << std::endl;
         return x;
     }
     return root[x] = Find(root[x]);
@@ -76,8 +82,10 @@ bool InSameUnion(int x, int y) { return Find(x) == Find(y); }
  *
  */
 void Union(int x, int y) {
+	std::cerr << ">>> Entering Union(x=" << x << ",y=" << y << ")" << std::endl;
     int a = Find(x), b = Find(y);
     if (a != b) {
+		std::cerr << "Union(x=" << x << ",y=" << y << "): a → " << a << std::endl;
         if (rank[a] < rank[b]) {
             root[a] = b;
         } else if (rank[a] > rank[b]) {
@@ -87,10 +95,12 @@ void Union(int x, int y) {
             ++rank[b];
         }
     }
+	std::cerr << "<<< Exiting Union(x=" << x << ",y=" << y << ")" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // tests CreateSet & Find
     int n = 100;
     CreateSet(n);
@@ -110,5 +120,6 @@ int main() {
     if (!InSameUnion(1, 2)) {
         cout << "Fail" << endl;
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

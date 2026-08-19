@@ -63,6 +63,7 @@
  */
 template <typename T>
 std::uint32_t longest_increasing_subsequence_using_binary_search(std::vector<T>& nums) {
+	std::cerr << ">>> Entering longest_increasing_subsequence_using_binary_search(nums=" << nums << ")" << std::endl;
     if (nums.empty()) return 0;
 
     std::vector<T> ans;
@@ -72,9 +73,11 @@ std::uint32_t longest_increasing_subsequence_using_binary_search(std::vector<T>&
             ans.push_back(nums[i]);
         } else {
             auto idx = std::lower_bound(ans.begin(), ans.end(), nums[i]) - ans.begin();
+			std::cerr << "longest_increasing_subsequence_using_binary_search(nums=" << nums << "): idx → " << idx << std::endl;
             ans[idx] = nums[i];
         }
     }
+	std::cerr << "<<< Exiting longest_increasing_subsequence_using_binary_search(nums=" << nums << ")" << std::endl;
     return static_cast<std::uint32_t>(ans.size());
 }
 
@@ -83,6 +86,7 @@ std::uint32_t longest_increasing_subsequence_using_binary_search(std::vector<T>&
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::vector<int> arr = {10, 9, 2, 5, 3, 7, 101, 18};
     assert(longest_increasing_subsequence_using_binary_search(arr) == 4);
 
@@ -99,12 +103,14 @@ static void tests() {
     assert(longest_increasing_subsequence_using_binary_search(arr5) == 4);
 
     std::vector<char> arr6 = {'a', 'b', 'c', 'a', 'd'};
+	std::cerr << "tests(): arr6 → " << arr6 << std::endl;
     assert(longest_increasing_subsequence_using_binary_search(arr6) == 4);
 
     std::vector<int> arr7 = {};
     assert(longest_increasing_subsequence_using_binary_search(arr7) == 0);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -112,6 +118,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self test implementation
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

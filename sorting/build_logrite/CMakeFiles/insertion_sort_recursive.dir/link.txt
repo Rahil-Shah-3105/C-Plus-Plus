@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/insertion_sort_recursive.dir/insertion_sort_recursive.o -o insertion_sort_recursive 

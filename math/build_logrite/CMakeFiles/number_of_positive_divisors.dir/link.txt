@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/number_of_positive_divisors.dir/number_of_positive_divisors.o -o number_of_positive_divisors 

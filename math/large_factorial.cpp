@@ -15,6 +15,7 @@
  * @returns True if test pass else False
  */
 bool test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::cout << "---- Check 1\t";
     unsigned int i, number = 10;
     large_number result;
@@ -31,6 +32,7 @@ bool test1() {
     }
 
     const size_t N = result.num_digits();
+	std::cerr << "test1(): N → " << N << std::endl;
     for (i = 0; i < N; i++) {
         if (known_reslt[i] != result.digit_char(i)) {
             std::cerr << i << "^th digit mismatch! " << known_reslt[i]
@@ -40,6 +42,7 @@ bool test1() {
     }
 
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test1()" << std::endl;
     return true;
 }
 
@@ -52,6 +55,7 @@ bool test1() {
  * @returns True if test pass else False
  */
 bool test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::cout << "---- Check 2\t";
     unsigned int i, number = 100;
     large_number result;
@@ -71,6 +75,7 @@ bool test2() {
     }
 
     const size_t N = result.num_digits();
+	std::cerr << "test2(): N → " << N << std::endl;
     for (i = 0; i < N; i++) {
         if (known_reslt[i] != result.digit_char(i)) {
             std::cerr << i << "^th digit mismatch! " << known_reslt[i]
@@ -80,6 +85,7 @@ bool test2() {
     }
 
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test2()" << std::endl;
     return true;
 }
 
@@ -87,11 +93,13 @@ bool test2() {
  * Main program
  **/
 int main(int argc, char *argv[]) {
+	std::cerr << ">>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     int number, i;
 
     if (argc == 2) {
         number = atoi(argv[1]);
     } else {
+		std::cerr << "main(argc=" << argc << ",argv=" << argv << "): number → " << number << std::endl;
         std::cout << "Enter the value of n(n starts from 0 ): ";
         std::cin >> number;
     }
@@ -102,6 +110,7 @@ int main(int argc, char *argv[]) {
     for (i = 2; i <= number; i++) /* Multiply every number from 2 thru N */
         result *= i;
     std::clock_t end_time = std::clock();
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): end_time → " << end_time << std::endl;
     double time_taken =
         static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
 
@@ -114,5 +123,6 @@ int main(int argc, char *argv[]) {
     test2();
     result.test();
 
+	std::cerr << "<<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

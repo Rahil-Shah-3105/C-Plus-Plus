@@ -650,6 +650,7 @@ class NeuralNetwork {
      * @param file_name file name to save model (*.model)
      */
     void save_model(const std::string &_file_name) {
+		std::cerr << ">>> Entering save_model(_file_name=" << _file_name << ")" << std::endl;
         std::string file_name = _file_name;
         // Adding ".model" extension if it is not already there in name
         if (file_name.find(".model") == file_name.npos) {
@@ -710,6 +711,7 @@ class NeuralNetwork {
         for (const auto &layer : this->layers) {
             out_file << layer.neurons << ' ' << layer.activation << std::endl;
             const auto shape = get_shape(layer.kernel);
+			std::cerr << "save_model(_file_name=" << _file_name << "): shape → " << shape << std::endl;
             out_file << shape.first << ' ' << shape.second << std::endl;
             for (const auto &row : layer.kernel) {
                 for (const auto &val : row) {
@@ -721,6 +723,7 @@ class NeuralNetwork {
         std::cout << "INFO: Model saved successfully with name : ";
         std::cout << file_name << std::endl;
         out_file.close();  // Closing file
+		std::cerr << "<<< Exiting save_model(_file_name=" << _file_name << ")" << std::endl;
         return;
     }
 
@@ -730,6 +733,7 @@ class NeuralNetwork {
      * @return instance of NeuralNetwork class with pretrained weights
      */
     NeuralNetwork load_model(const std::string &file_name) {
+		std::cerr << ">>> Entering load_model(file_name=" << file_name << ")" << std::endl;
         std::ifstream in_file;            // Ifstream to read file
         in_file.open(file_name.c_str());  // Openinig file
         // If there is any problem in opening file
@@ -763,6 +767,7 @@ class NeuralNetwork {
         }
         std::cout << "INFO: Model loaded successfully" << std::endl;
         in_file.close();  // Closing file
+		std::cerr << "<<< Exiting load_model(file_name=" << file_name << ")" << std::endl;
         return NeuralNetwork(
             config, kernels);  // Return instance of NeuralNetwork class
     }
@@ -771,6 +776,7 @@ class NeuralNetwork {
      * Function to print summary of the network.
      */
     void summary() {
+		std::cerr << ">>> Entering summary()" << std::endl;
         // Printing Summary
         std::cout
             << "==============================================================="
@@ -792,6 +798,7 @@ class NeuralNetwork {
         std::cout
             << "==============================================================="
             << std::endl;
+		std::cerr << "<<< Exiting summary()" << std::endl;
         return;
     }
 };
@@ -803,6 +810,7 @@ class NeuralNetwork {
  * @returns none
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Creating network with 3 layers for "iris.csv"
     machine_learning::neural_network::NeuralNetwork myNN =
         machine_learning::neural_network::NeuralNetwork({
@@ -823,6 +831,7 @@ static void test() {
                myNN.single_predict({{6.4, 2.9, 4.3, 1.3}})) == 1);
     assert(machine_learning::argmax(
                myNN.single_predict({{6.2, 3.4, 5.4, 2.3}})) == 2);
+	std::cerr << "<<< Exiting test()" << std::endl;
     return;
 }
 
@@ -831,7 +840,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Testing
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

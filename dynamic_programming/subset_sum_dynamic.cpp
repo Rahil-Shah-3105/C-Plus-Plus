@@ -68,8 +68,11 @@ bool subset_sum_recursion(const std::vector<int> &arr, int targetSum,
  * @returns true/false based on if the target sum subset exists or not.
  */
 bool subset_sum_problem(const std::vector<int> &arr, const int targetSum) {
+	std::cerr << ">>> Entering subset_sum_problem(arr=" << arr << ",targetSum=" << targetSum << ")" << std::endl;
     size_t n = arr.size();
     std::vector<std::unordered_map<int, bool>> dp(n);
+	std::cerr << "subset_sum_problem(arr=" << arr << ",targetSum=" << targetSum << "): n → " << n << std::endl;
+	std::cerr << "<<< Exiting subset_sum_problem(arr=" << arr << ",targetSum=" << targetSum << ")" << std::endl;
     return subset_sum_recursion(arr, targetSum, &dp);
 }
 }  // namespace subset_sum
@@ -80,6 +83,7 @@ bool subset_sum_problem(const std::vector<int> &arr, const int targetSum) {
  * @return void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // custom input vector
     std::vector<std::vector<int>> custom_input_arr(3);
     custom_input_arr[0] = std::vector<int>{1, -10, 2, 31, -6};
@@ -111,6 +115,7 @@ static void test() {
     }
 
     std::cout << "All tests passed successfully!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -118,6 +123,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

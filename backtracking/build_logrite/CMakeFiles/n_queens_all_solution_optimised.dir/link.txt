@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/n_queens_all_solution_optimised.dir/n_queens_all_solution_optimised.o -o n_queens_all_solution_optimised 

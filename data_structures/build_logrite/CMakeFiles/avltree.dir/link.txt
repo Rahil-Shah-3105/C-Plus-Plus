@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/avltree.dir/avltree.o -o avltree 

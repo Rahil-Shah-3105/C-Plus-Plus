@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/vector_cross_product.dir/vector_cross_product.o -o vector_cross_product 

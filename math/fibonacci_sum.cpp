@@ -56,16 +56,19 @@ math::fibonacci_sum::matrix multiply(const math::fibonacci_sum::matrix &T,
  * @returns resultant matrix
  */
 math::fibonacci_sum::matrix power(math::fibonacci_sum::matrix T, uint64_t ex) {
+	std::cerr << ">>> Entering power(T=" << T << ",ex=" << ex << ")" << std::endl;
     math::fibonacci_sum::matrix A{{1, 1}, {1, 0}};
     if (ex == 0 || ex == 1) {
         return T;
     }
 
     T = power(T, ex / 2);
+	std::cerr << "power(T=" << T << ",ex=" << ex << "): T → " << T << std::endl;
     T = multiply(T, T);
     if (ex & 1) {
         T = multiply(T, A);
     }
+	std::cerr << "<<< Exiting power(T=" << T << ",ex=" << ex << ")" << std::endl;
     return T;
 }
 
@@ -75,10 +78,14 @@ math::fibonacci_sum::matrix power(math::fibonacci_sum::matrix T, uint64_t ex) {
  * @returns uint64_t ans, the sum of sequence
  */
 uint64_t result(uint64_t n) {
+	std::cerr << ">>> Entering result(n=" << n << ")" << std::endl;
     math::fibonacci_sum::matrix T{{1, 1}, {1, 0}};
     T = power(T, n);
+	std::cerr << "result(n=" << n << "): T → " << T << std::endl;
     uint64_t ans = T[0][1];
+	std::cerr << "result(n=" << n << "): ans → " << ans << std::endl;
     ans = (ans - 1);
+	std::cerr << "<<< Exiting result(n=" << n << ")" << std::endl;
     return ans;
 }
 
@@ -89,6 +96,8 @@ uint64_t result(uint64_t n) {
  * @returns uint64_t the sum of sequence
  */
 uint64_t fiboSum(uint64_t n, uint64_t m) {
+	std::cerr << ">>> Entering fiboSum(n=" << n << ",m=" << m << ")" << std::endl;
+	std::cerr << "<<< Exiting fiboSum(n=" << n << ",m=" << m << ")" << std::endl;
     return (result(m + 2) - result(n + 1));
 }
 }  // namespace fibonacci_sum
@@ -100,34 +109,43 @@ uint64_t fiboSum(uint64_t n, uint64_t m) {
  * @returns `void`
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     uint64_t n = 0, m = 3;
     uint64_t test_1 = math::fibonacci_sum::fiboSum(n, m);
+	std::cerr << "test(): m → " << m << std::endl;
+	std::cerr << "test(): test_1 → " << test_1 << std::endl;
     assert(test_1 == 4);
     std::cout << "Passed Test 1!" << std::endl;
 
+	std::cerr << "test(): n → " << n << std::endl;
     n = 3;
     m = 5;
     uint64_t test_2 = math::fibonacci_sum::fiboSum(n, m);
+	std::cerr << "test(): test_2 → " << test_2 << std::endl;
     assert(test_2 == 10);
     std::cout << "Passed Test 2!" << std::endl;
 
     n = 5;
     m = 7;
     uint64_t test_3 = math::fibonacci_sum::fiboSum(n, m);
+	std::cerr << "test(): test_3 → " << test_3 << std::endl;
     assert(test_3 == 26);
     std::cout << "Passed Test 3!" << std::endl;
 
     n = 7;
     m = 10;
     uint64_t test_4 = math::fibonacci_sum::fiboSum(n, m);
+	std::cerr << "test(): test_4 → " << test_4 << std::endl;
     assert(test_4 == 123);
     std::cout << "Passed Test 4!" << std::endl;
 
     n = 9;
     m = 12;
     uint64_t test_5 = math::fibonacci_sum::fiboSum(n, m);
+	std::cerr << "test(): test_5 → " << test_5 << std::endl;
     assert(test_5 == 322);
     std::cout << "Passed Test 5!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -135,6 +153,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

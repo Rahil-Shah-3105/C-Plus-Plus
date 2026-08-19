@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/power_of_two.dir/power_of_two.o -o power_of_two 

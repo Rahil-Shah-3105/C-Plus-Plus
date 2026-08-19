@@ -36,6 +36,7 @@
 // this is main fuction
 // ***
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int64_t r, mr = 0, x, q, i, z;
     std::cout << "Enter Number of array you want to Store :";
     std::cin >> x;
@@ -68,6 +69,7 @@ int main() {
     // ***
     for (z = 0; z < q; z++) {
         int64_t r1 = 0, q1 = 0;
+		std::cerr << "main(): r1 → " << r1 << std::endl;
         std::cout << "enter the number of row which element you want to find :";
         std::cin >> r1;
         r1 = r1 - 1;
@@ -77,4 +79,5 @@ int main() {
         // use this to find desire position of element in desire array
         std::cout << "The element is " << ar[r1][q1] << std::endl;
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
 }

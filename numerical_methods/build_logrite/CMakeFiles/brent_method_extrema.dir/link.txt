@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/brent_method_extrema.dir/brent_method_extrema.o -o brent_method_extrema 

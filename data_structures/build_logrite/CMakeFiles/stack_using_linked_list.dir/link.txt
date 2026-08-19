@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/stack_using_linked_list.dir/stack_using_linked_list.o -o stack_using_linked_list 

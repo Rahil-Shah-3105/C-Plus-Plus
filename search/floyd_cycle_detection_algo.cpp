@@ -35,14 +35,17 @@ namespace cycle_detection {
  */
 template <typename T>
 int32_t duplicateNumber(const std::vector<T> &in_arr, const uint32_t &n) {
+	std::cerr << ">>> Entering duplicateNumber(in_arr=" << in_arr << ",n=" << n << ")" << std::endl;
     if (n == 0 ||
         n == 1) {  // to find duplicate in an array its size should be atleast 2
         return -1;
     }
     uint32_t tortoise = in_arr[0];  // variable tortoise is used for the longer
+									std::cerr << "duplicateNumber(in_arr=" << in_arr << ",n=" << n << "): tortoise → " << tortoise << std::endl;
                                     // jumps in the array
     uint32_t hare =
         in_arr[0];  // variable hare is used for shorter jumps in the array
+		std::cerr << "duplicateNumber(in_arr=" << in_arr << ",n=" << n << "): hare → " << hare << std::endl;
     do {
         tortoise = in_arr[tortoise];
         hare = in_arr[in_arr[hare]];
@@ -52,6 +55,7 @@ int32_t duplicateNumber(const std::vector<T> &in_arr, const uint32_t &n) {
         tortoise = in_arr[tortoise];
         hare = in_arr[hare];
     }
+	std::cerr << "<<< Exiting duplicateNumber(in_arr=" << in_arr << ",n=" << n << ")" << std::endl;
     return tortoise;
 }
 }  // namespace cycle_detection
@@ -62,6 +66,7 @@ int32_t duplicateNumber(const std::vector<T> &in_arr, const uint32_t &n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     // [3, 4, 8, 5, 9, 1, 2, 6, 7, 4] return 4
     std::vector<uint32_t> array1 = {3, 4, 8, 5, 9, 1, 2, 6, 7, 4};
@@ -86,6 +91,7 @@ static void test() {
            -1);  // since the input array is empty no duplicate number exists in
                  // this case
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -93,6 +99,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

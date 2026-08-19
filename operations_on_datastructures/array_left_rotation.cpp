@@ -27,10 +27,12 @@ namespace operations_on_datastructures {
  * @returns void
  */
 void print(const std::vector<int32_t> &array) {
+	std::cerr << ">>> Entering print(array=" << array << ")" << std::endl;
     for (int32_t i : array) {
         std::cout << i << " ";  /// Print each value in the array
     }
     std::cout << "\n";  /// Print newline
+	std::cerr << "<<< Exiting print(array=" << array << ")" << std::endl;
 }
 
 /**
@@ -73,53 +75,64 @@ using operations_on_datastructures::shift_left;
  * @returns void
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {3, 4, 5, 1, 2}\n";
     std::vector<int32_t> arr = {1, 2, 3, 4, 5};
     std::vector<int32_t> res = shift_left(arr, 2);
+	std::cerr << "test1(): res → " << res << std::endl;
     std::vector<int32_t> expected = {3, 4, 5, 1, 2};
     assert(res == expected);
     print(res);  ///< Should print 3 4 5 1 2
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an empty vector
  * @returns void
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Initialized arr = {}\n";
     std::cout << "Expected result: {}\n";
     std::vector<int32_t> arr = {};
     std::vector<int32_t> res = shift_left(arr, 2);
+	std::cerr << "test2(): res → " << res << std::endl;
     std::vector<int32_t> expected = {};
     assert(res == expected);
     print(res);  ///< Should print empty newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check an invalid shift value
  * @returns void
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {}\n";
     std::vector<int32_t> arr = {1, 2, 3, 4, 5};
     std::vector<int32_t> res = shift_left(arr, 7);  ///< 7 > 5
+	std::cerr << "test3(): res → " << res << std::endl;
     std::vector<int32_t> expected = {};
     assert(res == expected);
     print(res);  ///< Should print empty newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check a very large input
  * @returns void
  */
 void test4() {
+	std::cerr << ">>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Initialized arr = {2, 4, ..., 420}\n";
+	std::cerr << "test4(): arr → " << arr << std::endl;
     std::cout << "Expected result: {4, 6, ..., 420, 2}\n";
     std::vector<int32_t> arr;
     for (int i = 1; i <= 210; i++) {
@@ -127,6 +140,7 @@ void test4() {
     }
     print(arr);
     std::vector<int32_t> res = shift_left(arr, 1);
+	std::cerr << "test4(): res → " << res << std::endl;
     std::vector<int32_t> expected;
     for (int i = 1; i < 210; i++) {
         expected.push_back(arr[i]);
@@ -135,20 +149,24 @@ void test4() {
     assert(res == expected);
     print(res);  ///< Should print {4, 6, ..., 420, 2}
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test4()" << std::endl;
 }
 /**
  * @brief A Test to check a shift of zero
  * @returns void
  */
 void test5() {
+	std::cerr << ">>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {1, 2, 3, 4, 5}\n";
     std::vector<int32_t> arr = {1, 2, 3, 4, 5};
     std::vector<int32_t> res = shift_left(arr, 0);
+	std::cerr << "test5(): res → " << res << std::endl;
     assert(res == arr);
     print(res);  ///< Should print 1 2 3 4 5
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test5()" << std::endl;
 }
 }  // namespace tests
 
@@ -157,11 +175,13 @@ void test5() {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -169,6 +189,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/gray_code.dir/gray_code.o -o gray_code 

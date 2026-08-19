@@ -52,8 +52,10 @@ namespace wiggle_sort {
 template <typename T>  // this allows to have vectors of ints, double, float,
                        // etc
 std::vector<T> wiggleSort(const std::vector<T> &arr) {
+	std::cerr << ">>> Entering wiggleSort(arr=" << arr << ")" << std::endl;
     uint32_t size = arr.size();
 
+	std::cerr << "wiggleSort(arr=" << arr << "): size → " << size << std::endl;
     std::vector<T> out(
         arr);  // create a copy of input vector. this way, the original input
                // vector does not get modified. a sorted array is is returned.
@@ -68,6 +70,7 @@ std::vector<T> wiggleSort(const std::vector<T> &arr) {
         }
     }
 
+	std::cerr << "<<< Exiting wiggleSort(arr=" << arr << ")" << std::endl;
     return out;  // returns the sorted vector
 }
 }  // namespace wiggle_sort
@@ -84,8 +87,10 @@ std::vector<T> wiggleSort(const std::vector<T> &arr) {
  */
 template <typename T>
 static void displayElements(const std::vector<T> &arr) {
+	std::cerr << ">>> Entering displayElements(arr=" << arr << ")" << std::endl;
     uint32_t size = arr.size();
 
+	std::cerr << "displayElements(arr=" << arr << "): size → " << size << std::endl;
     std::cout << "Sorted elements are as follows: ";
 
     std::cout << "[";
@@ -98,6 +103,7 @@ static void displayElements(const std::vector<T> &arr) {
     }
 
     std::cout << "]" << std::endl;
+	std::cerr << "<<< Exiting displayElements(arr=" << arr << ")" << std::endl;
 }
 
 /**
@@ -105,14 +111,17 @@ static void displayElements(const std::vector<T> &arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::srand(std::time(nullptr));  // initialize random number generator
 
     std::vector<float> data1(100);
     for (auto &d : data1) {  // generate random numbers between -5.0 and 4.99
         d = float(std::rand() % 1000 - 500) / 100.f;
+		std::cerr << "test(): d → " << d << std::endl;
     }
 
     std::vector<float> sorted = sorting::wiggle_sort::wiggleSort<float>(data1);
+	std::cerr << "test(): sorted → " << sorted << std::endl;
 
     displayElements(sorted);
 
@@ -122,11 +131,14 @@ static void test() {
     }
 
     std::cout << "Test 1 passed\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
 

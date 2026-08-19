@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/disjoint_set.dir/disjoint_set.o -o disjoint_set 

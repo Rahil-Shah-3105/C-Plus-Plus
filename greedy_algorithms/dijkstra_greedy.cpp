@@ -42,6 +42,7 @@ class Graph {
      * @param V number of vertices of the graph
      */
     explicit Graph(const int V) {
+		std::cerr << ">>> Entering Graph(V=" << V << ")" << std::endl;
         // Initialize the array edges
         this->edges = std::vector<std::vector<int>>(V, std::vector<int>(V, 0));
         for (int i = 0; i < V; i++) {
@@ -56,6 +57,7 @@ class Graph {
         }
 
         this->vertexNum = V;
+		std::cerr << "<<< Exiting Graph(V=" << V << ")" << std::endl;
     }
 
     /**
@@ -66,7 +68,9 @@ class Graph {
      * @returns void
      */
     void add_edge(int src, int dst, int weight) {
+		std::cerr << ">>> Entering add_edge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
         this->edges[src][dst] = weight;
+		std::cerr << "<<< Exiting add_edge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
     }
 };
 
@@ -80,14 +84,18 @@ class Graph {
  * @returns index of the vertex with the minimum distance
  */
 int minimum_distance(std::vector<int> mdist, std::vector<bool> vset, int V) {
+	std::cerr << ">>> Entering minimum_distance(mdist=" << mdist << ",vset=" << vset << ",V=" << V << ")" << std::endl;
     int minVal = INT_MAX, minInd = 0;
     for (int i = 0; i < V; i++) {
+		std::cerr << "minimum_distance(mdist=" << mdist << ",vset=" << vset << ",V=" << V << "): minVal → " << minVal << std::endl;
         if (!vset[i] && (mdist[i] < minVal)) {
             minVal = mdist[i];
             minInd = i;
+			std::cerr << "minimum_distance(mdist=" << mdist << ",vset=" << vset << ",V=" << V << "): minInd → " << minInd << std::endl;
         }
     }
 
+	std::cerr << "<<< Exiting minimum_distance(mdist=" << mdist << ",vset=" << vset << ",V=" << V << ")" << std::endl;
     return minInd;
 }
 
@@ -102,6 +110,7 @@ int minimum_distance(std::vector<int> mdist, std::vector<bool> vset, int V) {
  * @return void
  */
 void print(std::vector<int> dist, int V) {
+	std::cerr << ">>> Entering print(dist=" << dist << ",V=" << V << ")" << std::endl;
     std::cout << "\nVertex  Distance\n";
     for (int i = 0; i < V; i++) {
         if (dist[i] < INT_MAX) {
@@ -111,6 +120,7 @@ void print(std::vector<int> dist, int V) {
             std::cout << i << "\tINF" << "\n";
         }
     }
+	std::cerr << "<<< Exiting print(dist=" << dist << ",V=" << V << ")" << std::endl;
 }
 
 /**
@@ -122,6 +132,7 @@ void print(std::vector<int> dist, int V) {
  * @returns void
  */
 void dijkstra(Graph graph, int src) {
+	std::cerr << ">>> Entering dijkstra(graph=" << graph << ",src=" << src << ")" << std::endl;
     int V = graph.vertexNum;
     std::vector<int> mdist{};  // Stores updated distances to the vertex
     std::vector<bool> vset{};  // `vset[i]` is true if the vertex `i` is included in the shortest path tree

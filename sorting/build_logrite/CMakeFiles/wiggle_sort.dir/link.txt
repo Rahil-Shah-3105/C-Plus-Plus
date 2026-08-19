@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/wiggle_sort.dir/wiggle_sort.o -o wiggle_sort 

@@ -18,35 +18,45 @@ class stack_linkedList {
     void display();
 };
 void stack_linkedList::enqueue(int ele) {
+	std::cerr << ">>> Entering stack_linkedList::enqueue(ele=" << ele << ")" << std::endl;
     linkedlist *temp = new linkedlist();
     temp->data = ele;
     temp->next = NULL;
 
     if (front == NULL)
+		std::cerr << "Exception in stack_linkedList::enqueue(ele=" << ele << "): " << e.what() << std::endl;
+		std::cerr << "stack_linkedList::enqueue(ele=" << ele << "): front → " << front << std::endl;
         front = rear = temp;
     else {
         rear->next = temp;
         rear = temp;
     }
+	std::cerr << "<<< Exiting stack_linkedList::enqueue(ele=" << ele << ")" << std::endl;
 }
 int stack_linkedList::dequeue() {
+	std::cerr << ">>> Entering stack_linkedList::dequeue()" << std::endl;
     linkedlist *temp;
     int ele;
     if (front == NULL)
+		std::cerr << "Exception in stack_linkedList::dequeue(): " << e.what() << std::endl;
         std::cout << "\nStack is empty";
     else {
         temp = front;
         ele = temp->data;
+		std::cerr << "stack_linkedList::dequeue(): ele → " << ele << std::endl;
         if (front == rear)  // if length of queue is 1;
             rear = rear->next;
         front = front->next;
         delete (temp);
     }
+	std::cerr << "<<< Exiting stack_linkedList::dequeue()" << std::endl;
     return ele;
 }
 void stack_linkedList::display() {
+	std::cerr << ">>> Entering stack_linkedList::display()" << std::endl;
     if (front == NULL)
         std::cout << "\nStack is empty";
+		std::cerr << "Exception in stack_linkedList::display(): " << e.what() << std::endl;
 
     else {
         linkedlist *temp;
@@ -56,9 +66,11 @@ void stack_linkedList::display() {
             temp = temp->next;
         }
     }
+	std::cerr << "<<< Exiting stack_linkedList::display()" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int op, data;
     stack_linkedList ob;
     std::cout << "\n1. enqueue(Insertion) ";
@@ -75,6 +87,7 @@ int main() {
             ob.enqueue(data);
         } else if (op == 2)
             data = ob.dequeue();
+			std::cerr << "main(): data → " << data << std::endl;
         else if (op == 3)
             ob.display();
         else if (op == 4)
@@ -82,5 +95,6 @@ int main() {
         else
             std::cout << "\nWrong choice ";
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

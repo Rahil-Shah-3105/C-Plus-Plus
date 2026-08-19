@@ -31,16 +31,20 @@ namespace math {
  * @returns void
  */
 void sieve(std::vector<bool> *vec) {
+	std::cerr << ">>> Entering sieve(vec=" << vec << ")" << std::endl;
     (*vec)[0] = false;
     (*vec)[1] = false;
 
     // The sieve sets values to false as they are found not prime
     for (uint64_t n = 2; n < vec->size(); n++) {
+		std::cerr << "sieve(vec=" << vec << "): n → " << n << std::endl;
         for (uint64_t multiple = n << 1; multiple < vec->size();
              multiple += n) {
+			std::cerr << "sieve(vec=" << vec << "): multiple → " << multiple << std::endl;
             (*vec)[multiple] = false;
         }
     }
+	std::cerr << "<<< Exiting sieve(vec=" << vec << ")" << std::endl;
 }
 
 /**
@@ -49,11 +53,13 @@ void sieve(std::vector<bool> *vec) {
  * @returns void
  */
 void print_primes(std::vector<bool> const &primes) {
+	std::cerr << ">>> Entering print_primes(primes=" << primes << ")" << std::endl;
     for (uint64_t i = 0; i < primes.size(); i++) {
         if (primes[i]) {
             std::cout << i << std::endl;
         }
     }
+	std::cerr << "<<< Exiting print_primes(primes=" << primes << ")" << std::endl;
 }
 }  // namespace math
 
@@ -62,8 +68,10 @@ void print_primes(std::vector<bool> const &primes) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     auto primes = std::vector<bool>(10, true);
     math::sieve(&primes);
+	std::cerr << "test(): primes → " << primes << std::endl;
     assert(primes[0] == false);
     assert(primes[1] == false);
     assert(primes[2] == true);
@@ -76,6 +84,7 @@ static void test() {
     assert(primes[9] == false);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -85,6 +94,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main(int argc, char *argv[]) {
+	std::cerr << ">>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     test();  // run self-test implementations
 
     // The largest prime we will check for
@@ -93,6 +103,7 @@ int main(int argc, char *argv[]) {
     // Store a boolean for every number which states if that index is prime or
     // not
     auto primes = std::vector<bool>(max, true);
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): primes → " << primes << std::endl;
 
     // Store the algorithm start time
     auto start = std::chrono::high_resolution_clock::now();
@@ -114,5 +125,6 @@ int main(int argc, char *argv[]) {
     // Print the time taken we found earlier
     std::cout << "Time taken: " << time << " seconds" << std::endl;
 
+	std::cerr << "<<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

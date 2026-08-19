@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/get_size_of_linked_list.dir/get_size_of_linked_list.o -o get_size_of_linked_list 

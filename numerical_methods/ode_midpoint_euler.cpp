@@ -64,8 +64,10 @@ void problem(const double &x, std::valarray<double> *y,
  * @param[in,out]	y		dependent variable
  */
 void exact_solution(const double &x, std::valarray<double> *y) {
+	std::cerr << ">>> Entering exact_solution(x=" << x << ",y=" << y << ")" << std::endl;
     y[0][0] = std::cos(x);
     y[0][1] = -std::sin(x);
+	std::cerr << "<<< Exiting exact_solution(x=" << x << ",y=" << y << ")" << std::endl;
 }
 
 /** \addtogroup ode Ordinary Differential Equations
@@ -190,6 +192,7 @@ void save_exact_solution(const double &X0, const double &X_MAX,
  * Main Function
  */
 int main(int argc, char *argv[]) {
+	std::cerr << ">>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     double X0 = 0.f;                       /* initial value of x0 */
     double X_MAX = 10.F;                   /* upper limit of integration */
     std::valarray<double> Y0 = {1.f, 0.f}; /* initial value Y = y(x = x_0) */
@@ -202,13 +205,16 @@ int main(int argc, char *argv[]) {
         // use commandline argument as independent variable step size
         step_size = std::atof(argv[1]);
     }
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): step_size → " << step_size << std::endl;
 
     // get approximate solution
     double total_time = midpoint_euler(step_size, X0, X_MAX, &Y0, true);
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): total_time → " << total_time << std::endl;
     std::cout << "\tTime = " << total_time << " ms\n";
 
     /* compute exact solution for comparion */
     save_exact_solution(X0, X_MAX, step_size, Y0);
 
+	std::cerr << "<<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

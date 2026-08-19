@@ -14,11 +14,13 @@ struct Btree {
 };
 
 void insert(Btree **root, int d) {
+	std::cerr << ">>> Entering insert(root=" << root << ",d=" << d << ")" << std::endl;
     Btree *nn = new Btree();  // Creating new node
     nn->data = d;
     nn->left = NULL;
     nn->right = NULL;
     if (*root == NULL) {
+		std::cerr << "Exception in insert(root=" << root << ",d=" << d << "): " << e.what() << std::endl;
         *root = nn;
         return;
     } else {
@@ -43,6 +45,7 @@ void insert(Btree **root, int d) {
             else {
                 // Adding new node if no right child is present
                 node->right = nn;
+				std::cerr << "<<< Exiting insert(root=" << root << ",d=" << d << ")" << std::endl;
                 return;
             }
         }
@@ -50,10 +53,13 @@ void insert(Btree **root, int d) {
 }
 
 void morrisInorder(Btree *root) {
+	std::cerr << ">>> Entering morrisInorder(root=" << root << ")" << std::endl;
     Btree *curr = root;
     Btree *temp;
+	std::cerr << "morrisInorder(root=" << root << "): curr → " << curr << std::endl;
     while (curr) {
         if (curr->left == NULL) {
+			std::cerr << "Exception in morrisInorder(root=" << root << "): " << e.what() << std::endl;
             cout << curr->data << " ";
             // If left of current node is NULL then curr is shifted to right
             curr = curr->right;
@@ -70,6 +76,7 @@ void morrisInorder(Btree *root) {
                 curr = curr->left;
             }
             // If extreme right already points to currrent node it it set to
+			std::cerr << "<<< Exiting morrisInorder(root=" << root << ")" << std::endl;
             // null
             else if (temp->right == curr) {
                 cout << curr->data << " ";
@@ -82,14 +89,17 @@ void morrisInorder(Btree *root) {
 }
 
 void deleteAll(const Btree *const root) {
+	std::cerr << ">>> Entering deleteAll(root=" << root << ")" << std::endl;
     if (root) {
         deleteAll(root->left);
         deleteAll(root->right);
         delete root;
     }
+	std::cerr << "<<< Exiting deleteAll(root=" << root << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Testing morrisInorder funtion
     Btree *root = NULL;
     int i;
@@ -97,5 +107,6 @@ int main() {
     cout << "Morris Inorder: ";
     morrisInorder(root);
     deleteAll(root);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

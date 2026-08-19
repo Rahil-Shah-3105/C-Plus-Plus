@@ -41,6 +41,7 @@ namespace pancake_sort {
  */
 template <typename T>
 void reverse(std::vector<T> &arr, int start, int end) {
+	std::cerr << ">>> Entering reverse(arr=" << arr << ",start=" << start << ",end=" << end << ")" << std::endl;
     T temp;  // Temporary variable
     while (start <= end) {
         temp = arr[start];
@@ -49,6 +50,7 @@ void reverse(std::vector<T> &arr, int start, int end) {
         start++;
         end--;
     }
+	std::cerr << "<<< Exiting reverse(arr=" << arr << ",start=" << start << ",end=" << end << ")" << std::endl;
 }
 /**
  * @brief This implementation is for a C-style array input that gets modified in
@@ -59,9 +61,12 @@ void reverse(std::vector<T> &arr, int start, int end) {
  */
 template <typename T>
 int pancakeSort(std::vector<T> &arr, int size) {
+	std::cerr << ">>> Entering pancakeSort(arr=" << arr << ",size=" << size << ")" << std::endl;
     for (int i = size; i > 1; --i) {
         int max_index = 0, j = 0;  // intialize some variables.
+		std::cerr << "pancakeSort(arr=" << arr << ",size=" << size << "): max_index → " << max_index << std::endl;
         T max_value = 0;
+		std::cerr << "pancakeSort(arr=" << arr << ",size=" << size << "): max_value → " << max_value << std::endl;
         for (j = 0; j < i; j++) {
             if (arr[j] >= max_value) {
                 max_value = arr[j];
@@ -74,6 +79,7 @@ int pancakeSort(std::vector<T> &arr, int size) {
             reverse(arr, 0, i - 1);
         }
     }
+	std::cerr << "<<< Exiting pancakeSort(arr=" << arr << ",size=" << size << ")" << std::endl;
     return 0;
 }
 }  // namespace pancake_sort
@@ -84,6 +90,7 @@ int pancakeSort(std::vector<T> &arr, int size) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // example 1: vector of int
     const int size1 = 7;
     std::cout << "\nTest 1- as std::vector<int>...";
@@ -120,12 +127,15 @@ static void test() {
         std::cout << arr3[i] << ", ";
     }
     std::cout << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

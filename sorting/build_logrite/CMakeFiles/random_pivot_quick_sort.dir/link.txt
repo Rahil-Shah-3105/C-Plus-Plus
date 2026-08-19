@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/random_pivot_quick_sort.dir/random_pivot_quick_sort.o -o random_pivot_quick_sort 

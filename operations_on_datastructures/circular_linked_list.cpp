@@ -37,8 +37,11 @@ struct Node {
      * @param _data Value of Node
      */
     explicit Node(int64_t _data) {
+		std::cerr << ">>> Entering Node(_data=" << _data << ")" << std::endl;
         data = _data;    ///< Set value of Node data
         next = nullptr;  ///< Initialize successor
+		std::cerr << "<<< Exiting Node(_data=" << _data << ")" << std::endl;
+		std::cerr << "Node(_data=" << _data << "): data → " << data << std::endl;
     }
     /**
      * @brief Creates a new Node with initial data and a successor
@@ -48,6 +51,7 @@ struct Node {
     explicit Node(int64_t _data, Node* _next) {
         data = _data;  ///< Set value of Node data
         next = _next;  ///< Initialize successor
+		std::cerr << "Node(_data=" << _data << ",_next=" << _next << "): data → " << data << std::endl;
     }
 };
 
@@ -64,8 +68,16 @@ class CircularLinkedList {
      * @brief Creates an empty CircularLinkedList.
      */
     CircularLinkedList() {
+		std::cerr << ">>> Entering CircularLinkedList()" << std::endl;
         root = nullptr;
         end = nullptr;
+		std::cerr << "CircularLinkedList(): end → " << end << std::endl;
+		std::cerr << "CircularLinkedList(source=" << source << "): root → " << root << std::endl;
+		std::cerr << "CircularLinkedList(): root → " << root << std::endl;
+		std::cerr << ">>> Entering CircularLinkedList(copy=" << copy << ")" << std::endl;
+		std::cerr << "<<< Exiting CircularLinkedList()" << std::endl;
+		std::cerr << "CircularLinkedList(copy=" << copy << "): root → " << root << std::endl;
+		std::cerr << "<<< Exiting CircularLinkedList(copy=" << copy << ")" << std::endl;
     }
     /**
      * @brief Copy constructor for CircularLinkedList.
@@ -78,6 +90,10 @@ class CircularLinkedList {
             insert(node->data);
             node = node->next;
         }
+		std::cerr << ">>> Entering CircularLinkedList(source=" << source << ")" << std::endl;
+		std::cerr << "CircularLinkedList(source=" << source << "): end → " << end << std::endl;
+		std::cerr << "CircularLinkedList(source=" << source << "): source.root → " << source.root << std::endl;
+		std::cerr << "CircularLinkedList(source=" << source << "): source.end → " << source.end << std::endl;
     }
     /**
      * @brief Move constructor for CircularLinkedList
@@ -88,6 +104,7 @@ class CircularLinkedList {
         end = source.end;
         source.root = nullptr;
         source.end = nullptr;
+		std::cerr << "<<< Exiting CircularLinkedList(source=" << source << ")" << std::endl;
     }
     /**
      * @brief Copy assignment operator
@@ -124,6 +141,7 @@ class CircularLinkedList {
      * Iteratively frees each node in the Circular Linked List from the heap
      */
     void erase() {
+		std::cerr << ">>> Entering erase()" << std::endl;
         if (root == nullptr) {
             return;
         }
@@ -134,7 +152,10 @@ class CircularLinkedList {
             delete (temp);
         } while (node != root);
         root = nullptr;
+		std::cerr << "erase(): root → " << root << std::endl;
+		std::cerr << "erase(): end → " << end << std::endl;
         end = nullptr;
+		std::cerr << "<<< Exiting erase()" << std::endl;
     }
     /**
      * @brief Inserts all the values from a vector into the Circular Linked List
@@ -144,9 +165,11 @@ class CircularLinkedList {
      * @returns void
      */
     void insert(const std::vector<int64_t>& values) {
+		std::cerr << ">>> Entering insert(values=" << values << ")" << std::endl;
         for (int64_t value : values) {
             insert(value);
         }
+		std::cerr << "<<< Exiting insert(values=" << values << ")" << std::endl;
     }
     /**
      * @brief Inserts a single value into the Circular Linked List
@@ -156,8 +179,11 @@ class CircularLinkedList {
      * @returns void
      */
     void insert(int64_t data) {
+		std::cerr << ">>> Entering insert(data=" << data << ")" << std::endl;
         Node* node = new Node(data, root);
         insert(node);
+		std::cerr << "<<< Exiting insert(data=" << data << ")" << std::endl;
+		std::cerr << "insert(node=" << node << "): end → " << end << std::endl;
     }
     /**
      * @brief Inserts a given Node into the Circular Linked List
@@ -194,6 +220,7 @@ class CircularLinkedList {
      * @returns void
      */
     void print(Node* root) {
+		std::cerr << ">>> Entering print(root=" << root << ")" << std::endl;
         Node* temp = root;
         if (root == nullptr) {
             std::cout << "Empty List!\n";
@@ -203,6 +230,7 @@ class CircularLinkedList {
             std::cout << temp->data << " ";
             temp = temp->next;
         } while (temp != root);
+		std::cerr << "<<< Exiting print(root=" << root << ")" << std::endl;
         std::cout << "\n";
     }
     /**
@@ -221,6 +249,7 @@ class CircularLinkedList {
      * @returns A std::vector of the list's values
      */
     std::vector<int64_t> values(Node* root) {
+		std::cerr << ">>> Entering values(root=" << root << ")" << std::endl;
         std::vector<int64_t> res;
         if (root == nullptr) {
             return res;  ///< Return empty vector
@@ -230,6 +259,7 @@ class CircularLinkedList {
             res.push_back(temp->data);
             temp = temp->next;
         } while (temp != root);
+		std::cerr << "<<< Exiting values(root=" << root << ")" << std::endl;
         return res;
     }
 };
@@ -250,8 +280,10 @@ using operations_on_datastructures::circular_linked_list::Node;
  * @returns void
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Intialized a = {2}\n";
+	std::cerr << "test1(): a → " << a << std::endl;
     std::cout << "Expected result: {2}\n";
     CircularLinkedList a;
     std::vector<int64_t> res = {2};
@@ -259,14 +291,17 @@ void test1() {
     assert(a.values() == res);
     a.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check a few values
  * @returns void
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Intialized a = {2, 5, 6}\n";
+	std::cerr << "test2(): a → " << a << std::endl;
     std::cout << "Expected result: {2, 5, 6}\n";
     CircularLinkedList a;
     std::vector<int64_t> res = {2, 5, 6};
@@ -276,14 +311,17 @@ void test2() {
     assert(a.values() == res);
     a.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check an input array
  * @returns void
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Intialized a = {2, 7, 8, 3, 2, 6}\n";
+	std::cerr << "test3(): a → " << a << std::endl;
     std::cout << "Expected result: {2, 7, 8, 3, 2, 6}\n";
     CircularLinkedList a;
     std::vector<int64_t> res = {2, 7, 8, 3, 2, 6};
@@ -291,14 +329,17 @@ void test3() {
     a.print();
     assert(a.values() == res);
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check using a specific Node as the starting point
  * @returns void
  */
 void test4() {
+	std::cerr << ">>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Intialized a = {2, 5}\n";
+	std::cerr << "test4(): a → " << a << std::endl;
     std::cout << "Expected result: {5, 2}\n";
     CircularLinkedList a;
     std::vector<int64_t> res = {5, 2};
@@ -308,6 +349,7 @@ void test4() {
     assert(a.values(start) == res);
     a.print(start);
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test4()" << std::endl;
 }
 
 /**
@@ -315,14 +357,17 @@ void test4() {
  * @returns void
  */
 void test5() {
+	std::cerr << ">>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Intialized a = {}\n";
+	std::cerr << "test5(): a → " << a << std::endl;
     std::cout << "Expected result: Empty List!\n";
     CircularLinkedList a;
     std::vector<int64_t> res = {};
     assert(a.values() == res);
     a.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test5()" << std::endl;
 }
 }  // namespace tests
 
@@ -331,11 +376,13 @@ void test5() {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -343,6 +390,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

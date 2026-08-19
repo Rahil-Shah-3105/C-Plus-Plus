@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/gale_shapley.dir/gale_shapley.o -o gale_shapley 

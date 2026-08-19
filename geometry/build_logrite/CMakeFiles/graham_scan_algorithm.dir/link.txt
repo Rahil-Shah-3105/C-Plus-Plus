@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/graham_scan_algorithm.dir/graham_scan_algorithm.o -o graham_scan_algorithm 

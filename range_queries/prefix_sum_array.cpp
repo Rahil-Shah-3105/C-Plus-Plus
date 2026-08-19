@@ -39,11 +39,13 @@ std::vector<int64_t> PSA{};
  * @returns void
  */
 void build(const std::vector<int64_t>& original_array) {
+	std::cerr << ">>> Entering build(original_array=" << original_array << ")" << std::endl;
     PSA.clear();
     PSA.push_back(0);
     for (std::size_t i = 1; i < original_array.size(); ++i) {
         PSA.push_back(PSA.back() + original_array[i]);
     }
+	std::cerr << "<<< Exiting build(original_array=" << original_array << ")" << std::endl;
 }
 /**
  * @brief query function
@@ -61,6 +63,7 @@ int64_t query(int64_t beg, int64_t end) { return PSA[end] - PSA[beg - 1]; }
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<int64_t> values{0,  123, 0,  2,  -2, 5,
                                 24, 0,   23, -1, -1};  // original array
 
@@ -73,6 +76,7 @@ static void test() {
            27);  // the sum of the interval [4, 6]
     assert(range_queries::prefix_sum_array::query(5, 9) ==
            51);  // the sum of the interval [5, 9]
+		std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -80,6 +84,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

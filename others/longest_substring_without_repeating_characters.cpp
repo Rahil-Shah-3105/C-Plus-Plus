@@ -42,12 +42,14 @@ public:
      * @return Length of the longest substring.
      */
     int lengthOfLongestSubstring(std::string s) {
+		std::cerr << ">>> Entering lengthOfLongestSubstring(s=" << s << ")" << std::endl;
         // If the size of string is 1, then it will be the answer.
         if (s.size() == 1) return 1;
 
         // Map used to store the character frequency.
         std::unordered_map<char, int> m;
         int n = s.length();
+		std::cerr << "lengthOfLongestSubstring(s=" << s << "): n → " << n << std::endl;
 
         // Deque to remove from back if repeating characters are present.
         std::deque<char> temp;
@@ -63,6 +65,7 @@ public:
                 if (temp.size() > res.size()) {
                     res = temp;
                 }
+				std::cerr << "lengthOfLongestSubstring(s=" << s << "): res → " << res << std::endl;
 
                 while (m[s[j]] > 1) {
                     temp.pop_front();
@@ -81,6 +84,7 @@ public:
             res = temp;
         }
 
+		std::cerr << "<<< Exiting lengthOfLongestSubstring(s=" << s << ")" << std::endl;
         return res.size();  // Return the length of the longest substring.
     }
 };
@@ -90,6 +94,7 @@ public:
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     Longest_Substring soln;
     assert(soln.lengthOfLongestSubstring("abcabcbb") == 3);
     assert(soln.lengthOfLongestSubstring("bbbbb") == 1);
@@ -98,6 +103,7 @@ static void tests() {
     assert(soln.lengthOfLongestSubstring("abcdef") == 6); // Test case for all unique characters
     assert(soln.lengthOfLongestSubstring("a") == 1); // Single character
     std::cout << "All test cases passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -105,6 +111,8 @@ static void tests() {
  * @return 0 on successful execution.
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests(); // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

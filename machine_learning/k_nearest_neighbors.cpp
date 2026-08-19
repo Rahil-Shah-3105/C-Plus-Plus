@@ -41,10 +41,12 @@ namespace k_nearest_neighbors {
  */
 template <typename T>
 double euclidean_distance(const std::vector<T>& a, const std::vector<T>& b) {
+	std::cerr << ">>> Entering euclidean_distance(a=" << a << ",b=" << b << ")" << std::endl;
     std::vector<double> aux;
     std::transform(a.begin(), a.end(), b.begin(), std::back_inserter(aux),
                    [](T x1, T x2) { return std::pow((x1 - x2), 2); });
     aux.shrink_to_fit();
+	std::cerr << "<<< Exiting euclidean_distance(a=" << a << ",b=" << b << ")" << std::endl;
     return std::sqrt(std::accumulate(aux.begin(), aux.end(), 0.0));
 }
 
@@ -101,10 +103,14 @@ class Knn {
      * @return int label of most frequent neighbors
      */
     int predict(std::vector<double>& sample, int k) {
+		std::cerr << ">>> Entering predict(sample=" << sample << ",k=" << k << ")" << std::endl;
         std::vector<int> neighbors;
         std::vector<std::pair<double, int>> distances;
         for (size_t i = 0; i < this->X_.size(); ++i) {
             auto current = this->X_.at(i);
+			std::cerr << "predict(sample=" << sample << ",k=" << k << "): current → " << current << std::endl;
+			std::cerr << "predict(sample=" << sample << ",k=" << k << "): label → " << label << std::endl;
+			std::cerr << "predict(sample=" << sample << ",k=" << k << "): distance → " << distance << std::endl;
             auto label = this->Y_.at(i);
             auto distance = euclidean_distance(current, sample);
             distances.emplace_back(distance, label);
@@ -120,6 +126,8 @@ class Knn {
         }
         std::pair<int, int> predicted;
         predicted.first = -1;
+		std::cerr << "predict(sample=" << sample << ",k=" << k << "): predicted.first → " << predicted.first << std::endl;
+		std::cerr << "predict(sample=" << sample << ",k=" << k << "): predicted.second → " << predicted.second << std::endl;
         predicted.second = -1;
         for (auto& kv : frequency) {
             if (kv.second > predicted.second) {
@@ -127,6 +135,7 @@ class Knn {
                 predicted.first = kv.first;
             }
         }
+		std::cerr << "<<< Exiting predict(sample=" << sample << ",k=" << k << ")" << std::endl;
         return predicted.first;
     }
 };
@@ -138,12 +147,14 @@ class Knn {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::cout << "------- Test 1 -------" << std::endl;
     std::vector<std::vector<double>> X1 = {{0.0, 0.0}, {0.25, 0.25},
                                            {0.0, 0.5}, {0.5, 0.5},
                                            {1.0, 0.5}, {1.0, 1.0}};
     std::vector<int> Y1 = {1, 1, 1, 1, 2, 2};
     auto model1 = machine_learning::k_nearest_neighbors::Knn(X1, Y1);
+	std::cerr << "test(): model1 → " << model1 << std::endl;
     std::vector<double> sample1 = {1.2, 1.2};
     std::vector<double> sample2 = {0.1, 0.1};
     std::vector<double> sample3 = {0.1, 0.5};
@@ -159,6 +170,7 @@ static void test() {
         {1.0, 0.5, 0.0}, {1.0, 1.0, 0.0},   {1.0, 1.0, 1.0}, {1.5, 1.5, 1.0}};
     std::vector<int> Y2 = {1, 1, 1, 1, 2, 2, 3, 3};
     auto model2 = machine_learning::k_nearest_neighbors::Knn(X2, Y2);
+	std::cerr << "test(): model2 → " << model2 << std::endl;
     std::vector<double> sample5 = {1.2, 1.2, 0.0};
     std::vector<double> sample6 = {0.1, 0.1, 0.0};
     std::vector<double> sample7 = {0.1, 0.5, 0.0};
@@ -173,6 +185,7 @@ static void test() {
                                            {4.0}, {5.0}, {6.0}, {7.0}};
     std::vector<int> Y3 = {1, 1, 1, 1, 2, 2, 2, 2};
     auto model3 = machine_learning::k_nearest_neighbors::Knn(X3, Y3);
+	std::cerr << "test(): model3 → " << model3 << std::endl;
     std::vector<double> sample9 = {0.5};
     std::vector<double> sample10 = {2.9};
     std::vector<double> sample11 = {5.5};
@@ -182,6 +195,7 @@ static void test() {
     assert(model3.predict(sample11, 3) == 2);
     assert(model3.predict(sample12, 3) == 2);
     std::cout << "... Passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -189,6 +203,8 @@ static void test() {
  * @return int 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -32,16 +32,21 @@
  */
 template <class Type>
 inline Type* binary_s(Type* array, size_t size, Type key) {
+	std::cerr << ">>> Entering binary_s(array=" << array << ",size=" << size << ",key=" << key << ")" << std::endl;
     int32_t lower_index(0), upper_index(size - 1), middle_index;
 
     while (lower_index <= upper_index) {
         middle_index = std::floor((lower_index + upper_index) / 2);
 
+		std::cerr << "binary_s(array=" << array << ",size=" << size << ",key=" << key << "): middle_index → " << middle_index << std::endl;
         if (*(array + middle_index) < key)
             lower_index = (middle_index + 1);
         else if (*(array + middle_index) > key)
+			std::cerr << "binary_s(array=" << array << ",size=" << size << ",key=" << key << "): lower_index → " << lower_index << std::endl;
             upper_index = (middle_index - 1);
         else
+			std::cerr << "binary_s(array=" << array << ",size=" << size << ",key=" << key << "): upper_index → " << upper_index << std::endl;
+	std::cerr << "<<< Exiting binary_s(array=" << array << ",size=" << size << ",key=" << key << ")" << std::endl;
             return (array + middle_index);
     }
 
@@ -57,13 +62,16 @@ inline Type* binary_s(Type* array, size_t size, Type key) {
  */
 template <class Type>
 Type* struzik_search(Type* array, size_t size, Type key) {
+	std::cerr << ">>> Entering struzik_search(array=" << array << ",size=" << size << ",key=" << key << ")" << std::endl;
     uint32_t block_front(0), block_size = size == 0 ? 0 : 1;
     while (block_front != block_size) {
         if (*(array + block_size - 1) < key) {
             block_front = block_size;
+			std::cerr << "struzik_search(array=" << array << ",size=" << size << ",key=" << key << "): block_front → " << block_front << std::endl;
             (block_size * 2 - 1 < size) ? (block_size *= 2) : block_size = size;
             continue;
         }
+	std::cerr << "<<< Exiting struzik_search(array=" << array << ",size=" << size << ",key=" << key << ")" << std::endl;
         return binary_s<Type>(array + block_front, (block_size - block_front),
                               key);
     }
@@ -72,6 +80,7 @@ Type* struzik_search(Type* array, size_t size, Type key) {
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // TEST CASES
     int* sorted_array = new int[7]{7, 10, 15, 23, 70, 105, 203};
     assert(struzik_search<int>(sorted_array, 7, 0) == nullptr);
@@ -80,5 +89,6 @@ int main() {
     assert(struzik_search<int>(sorted_array, 7, 7) == sorted_array);
     // TEST CASES
     delete[] sorted_array;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

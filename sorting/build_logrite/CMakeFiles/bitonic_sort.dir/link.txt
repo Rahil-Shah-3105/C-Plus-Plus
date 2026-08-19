@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/bitonic_sort.dir/bitonic_sort.o -o bitonic_sort 

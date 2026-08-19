@@ -5,8 +5,10 @@
 using namespace std;
 
 void oddEven(vector<int> &arr, int size) {
+	std::cerr << ">>> Entering oddEven(arr=" << arr << ",size=" << size << ")" << std::endl;
     bool sorted = false;
     while (!sorted) {
+		std::cerr << "oddEven(arr=" << arr << ",size=" << size << "): sorted → " << sorted << std::endl;
         sorted = true;
         for (int i = 1; i < size - 1; i += 2)  // Odd
         {
@@ -24,14 +26,18 @@ void oddEven(vector<int> &arr, int size) {
             }
         }
     }
+	std::cerr << "<<< Exiting oddEven(arr=" << arr << ",size=" << size << ")" << std::endl;
 }
 
 void show(vector<int> A, int size) {
+	std::cerr << ">>> Entering show(A=" << A << ",size=" << size << ")" << std::endl;
     int i;
     for (i = 0; i < size; i++) cout << A[i] << "\n";
+	std::cerr << "<<< Exiting show(A=" << A << ",size=" << size << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int size, temp;
     cout << "\nEnter the number of elements : ";
     cin >> size;
@@ -49,5 +55,6 @@ int main() {
 
     cout << "Sorted array\n";
     show(arr, size);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

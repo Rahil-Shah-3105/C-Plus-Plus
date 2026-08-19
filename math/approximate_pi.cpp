@@ -45,12 +45,15 @@ using Point = struct {
  * @return  an estimate of the number π.
  */
 double approximate_pi(const std::vector<Point> &pts) {
+	std::cerr << ">>> Entering approximate_pi(pts=" << pts << ")" << std::endl;
     double count = 0;  // Points in circle
     for (Point p : pts) {
+		std::cerr << "approximate_pi(pts=" << pts << "): count → " << count << std::endl;
         if ((p.x * p.x) + (p.y * p.y) <= 1) {
             count++;
         }
     }
+	std::cerr << "<<< Exiting approximate_pi(pts=" << pts << ")" << std::endl;
     return 4.0 * count / static_cast<double>(pts.size());
 }
 }  // namespace math
@@ -60,6 +63,7 @@ double approximate_pi(const std::vector<Point> &pts) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::vector<math::Point> rands;
     for (std::size_t i = 0; i < 100000; i++) {
         math::Point p;
@@ -71,6 +75,7 @@ static void tests() {
     assert(math::approximate_pi(rands) < 3.145);
 
     std::cout << "All tests have successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -78,6 +83,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

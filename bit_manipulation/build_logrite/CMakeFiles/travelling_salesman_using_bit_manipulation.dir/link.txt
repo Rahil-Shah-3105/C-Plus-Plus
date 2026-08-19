@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/travelling_salesman_using_bit_manipulation.dir/travelling_salesman_using_bit_manipulation.o -o travelling_salesman_using_bit_manipulation 

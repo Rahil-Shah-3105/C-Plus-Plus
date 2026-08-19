@@ -87,6 +87,7 @@ struct pattern {
  * @returns void
  */
 void init_good_suffix(const std::string& str, std::vector<size_t>& arg) {
+	std::cerr << ">>> Entering init_good_suffix(str=" << str << ",arg=" << arg << ")" << std::endl;
     arg.resize(str.size() + 1, 0);
 
     // border_pos[i] - the index of the longest proper suffix of str[i..] which
@@ -94,8 +95,10 @@ void init_good_suffix(const std::string& str, std::vector<size_t>& arg) {
     std::vector<size_t> border_pos(str.size() + 1, 0);
 
     size_t current_char = str.length();
+	std::cerr << "init_good_suffix(str=" << str << ",arg=" << arg << "): current_char → " << current_char << std::endl;
 
     size_t border_index = str.length() + 1;
+	std::cerr << "init_good_suffix(str=" << str << ",arg=" << arg << "): border_index → " << border_index << std::endl;
 
     border_pos[current_char] = border_index;
 
@@ -115,6 +118,7 @@ void init_good_suffix(const std::string& str, std::vector<size_t>& arg) {
     }
 
     size_t largest_border_index = border_pos[0];
+	std::cerr << "init_good_suffix(str=" << str << ",arg=" << arg << "): largest_border_index → " << largest_border_index << std::endl;
 
     for (size_t i = 0; i < str.size(); i++) {
         if (arg[i] == 0) {
@@ -126,6 +130,7 @@ void init_good_suffix(const std::string& str, std::vector<size_t>& arg) {
             largest_border_index = border_pos[largest_border_index];
         }
     }
+	std::cerr << "<<< Exiting init_good_suffix(str=" << str << ",arg=" << arg << ")" << std::endl;
 }
 
 /**
@@ -136,11 +141,13 @@ void init_good_suffix(const std::string& str, std::vector<size_t>& arg) {
  * @returns void
  */
 void init_bad_char(const std::string& str, std::vector<size_t>& arg) {
+	std::cerr << ">>> Entering init_bad_char(str=" << str << ",arg=" << arg << ")" << std::endl;
     arg.resize(APLHABET_SIZE, str.length());
 
     for (size_t i = 0; i < str.length(); i++) {
         arg[str[i]] = str.length() - i - 1;
     }
+	std::cerr << "<<< Exiting init_bad_char(str=" << str << ",arg=" << arg << ")" << std::endl;
 }
 
 /**
@@ -151,9 +158,12 @@ void init_bad_char(const std::string& str, std::vector<size_t>& arg) {
  * @returns void
  */
 void init_pattern(const std::string& str, pattern& arg) {
+	std::cerr << ">>> Entering init_pattern(str=" << str << ",arg=" << arg << ")" << std::endl;
     arg.pat = str;
     init_bad_char(str, arg.bad_char);
+	std::cerr << "init_pattern(str=" << str << ",arg=" << arg << "): arg.pat → " << arg.pat << std::endl;
     init_good_suffix(str, arg.good_suffix);
+	std::cerr << "<<< Exiting init_pattern(str=" << str << ",arg=" << arg << ")" << std::endl;
 }
 /**
  * @brief A function that implements Boyer-Moore's algorithm.
@@ -163,12 +173,15 @@ void init_pattern(const std::string& str, pattern& arg) {
  * @return Vector of indexes of the occurrences of pattern in text
  */
 std::vector<size_t> search(const std::string& str, const pattern& arg) {
+	std::cerr << ">>> Entering search(str=" << str << ",arg=" << arg << ")" << std::endl;
     size_t index_position = arg.pat.size() - 1;
     std::vector<size_t> index_storage;
+	std::cerr << "search(str=" << str << ",arg=" << arg << "): index_position → " << index_position << std::endl;
 
     while (index_position < str.length()) {
         size_t index_string = index_position;
         int index_pattern = static_cast<int>(arg.pat.size()) - 1;
+		std::cerr << "search(str=" << str << ",arg=" << arg << "): index_pattern → " << index_pattern << std::endl;
 
         while (index_pattern >= 0 &&
                str[index_string] == arg.pat[index_pattern]) {
@@ -177,6 +190,7 @@ std::vector<size_t> search(const std::string& str, const pattern& arg) {
         }
 
         if (index_pattern < 0) {
+			std::cerr << "Exception in search(str=" << str << ",arg=" << arg << "): " << e.what() << std::endl;
             index_storage.push_back(index_position - arg.pat.length() + 1);
             index_position += arg.good_suffix[0];
         } else {
@@ -185,6 +199,7 @@ std::vector<size_t> search(const std::string& str, const pattern& arg) {
         }
     }
 
+	std::cerr << "<<< Exiting search(str=" << str << ",arg=" << arg << ")" << std::endl;
     return index_storage;
 }
 
@@ -198,6 +213,7 @@ std::vector<size_t> search(const std::string& str, const pattern& arg) {
  * @returns `false` if pat is NOT a prefix of str.
  */
 bool is_prefix(const char* str, const char* pat, size_t len) {
+	std::cerr << ">>> Entering is_prefix(str=" << str << ",pat=" << pat << ",len=" << len << ")" << std::endl;
     if (strlen(str) < len) {
         return false;
     }
@@ -208,6 +224,7 @@ bool is_prefix(const char* str, const char* pat, size_t len) {
         }
     }
 
+	std::cerr << "<<< Exiting is_prefix(str=" << str << ",pat=" << pat << ",len=" << len << ")" << std::endl;
     return true;
 }
 }  // namespace boyer_moore
@@ -218,13 +235,16 @@ bool is_prefix(const char* str, const char* pat, size_t len) {
  * @returns void
  */
 void and_test(const char* text) {
+	std::cerr << ">>> Entering and_test(text=" << text << ")" << std::endl;
     strings::boyer_moore::pattern ands;
     strings::boyer_moore::init_pattern("and", ands);
     std::vector<size_t> indexes = strings::boyer_moore::search(text, ands);
+	std::cerr << "and_test(text=" << text << "): indexes → " << indexes << std::endl;
 
     assert(indexes.size() == 2);
     assert(strings::boyer_moore::is_prefix(text + indexes[0], "and", 3));
     assert(strings::boyer_moore::is_prefix(text + indexes[1], "and", 3));
+	std::cerr << "<<< Exiting and_test(text=" << text << ")" << std::endl;
 }
 
 /**
@@ -233,21 +253,25 @@ void and_test(const char* text) {
  * @returns void
  */
 void pat_test(const char* text) {
+	std::cerr << ">>> Entering pat_test(text=" << text << ")" << std::endl;
     strings::boyer_moore::pattern pat;
     strings::boyer_moore::init_pattern("pat", pat);
     std::vector<size_t> indexes = strings::boyer_moore::search(text, pat);
+	std::cerr << "pat_test(text=" << text << "): indexes → " << indexes << std::endl;
 
     assert(indexes.size() == 6);
 
     for (const auto& currentIndex : indexes) {
         assert(strings::boyer_moore::is_prefix(text + currentIndex, "pat", 3));
     }
+	std::cerr << "<<< Exiting pat_test(text=" << text << ")" << std::endl;
 }
 /**
  * @brief Self-test implementations
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     const char* text =
         "When pat Mr. and Mrs. pat Dursley woke up on the dull, gray  \
                             Tuesday our story starts, \
@@ -260,6 +284,7 @@ static void tests() {
     pat_test(text);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -267,6 +292,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

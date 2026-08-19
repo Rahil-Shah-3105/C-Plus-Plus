@@ -1,0 +1,19 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/root/logrite/scans/r3/p4853/math/sum_of_binomial_coefficient.cpp" "CMakeFiles/sum_of_binomial_coefficient.dir/sum_of_binomial_coefficient.o" "gcc" "CMakeFiles/sum_of_binomial_coefficient.dir/sum_of_binomial_coefficient.o.d"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/z_function.dir/z_function.o -o z_function 

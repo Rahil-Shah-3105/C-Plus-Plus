@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/bubble_sort.dir/bubble_sort.o -o bubble_sort 

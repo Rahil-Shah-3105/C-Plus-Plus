@@ -83,6 +83,7 @@ namespace inversion {
  */
 template <typename T>
 uint32_t merge(T* arr, T* temp, uint32_t left, uint32_t mid, uint32_t right) {
+	std::cerr << ">>> Entering merge(arr=" << arr << ",temp=" << temp << ",left=" << left << ",mid=" << mid << ",right=" << right << ")" << std::endl;
     uint32_t i = left;       /* i --> index of left sub-array */
     uint32_t j = mid + 1;    /* j --> index for right sub-array */
     uint32_t k = left;       /* k --> index for resultant array temp */
@@ -109,6 +110,7 @@ uint32_t merge(T* arr, T* temp, uint32_t left, uint32_t mid, uint32_t right) {
     for (k = left; k <= right; k++) {
         arr[k] = temp[k];
     }
+	std::cerr << "<<< Exiting merge(arr=" << arr << ",temp=" << temp << ",left=" << left << ",mid=" << mid << ",right=" << right << ")" << std::endl;
     return inv_count;
 }
 
@@ -130,8 +132,10 @@ uint32_t merge(T* arr, T* temp, uint32_t left, uint32_t mid, uint32_t right) {
  */
 template <typename T>
 uint32_t mergeSort(T* arr, T* temp, uint32_t left, uint32_t right) {
+	std::cerr << ">>> Entering mergeSort(arr=" << arr << ",temp=" << temp << ",left=" << left << ",right=" << right << ")" << std::endl;
     uint32_t mid = 0, inv_count = 0;
     if (right > left) {
+		std::cerr << "mergeSort(arr=" << arr << ",temp=" << temp << ",left=" << left << ",right=" << right << "): mid → " << mid << std::endl;
         // midpoint to split the array
         mid = (right + left) / 2;
         // Add inversions in left and right sub-arrays
@@ -141,6 +145,7 @@ uint32_t mergeSort(T* arr, T* temp, uint32_t left, uint32_t right) {
         // inversions in the merge step
         inv_count += merge(arr, temp, left, mid, right);
     }
+	std::cerr << "<<< Exiting mergeSort(arr=" << arr << ",temp=" << temp << ",left=" << left << ",right=" << right << ")" << std::endl;
     return inv_count;
 }
 
@@ -162,9 +167,11 @@ uint32_t mergeSort(T* arr, T* temp, uint32_t left, uint32_t right) {
  */
 template <class T>
 uint32_t countInversion(T* arr, const uint32_t size) {
+	std::cerr << ">>> Entering countInversion(arr=" << arr << ",size=" << size << ")" << std::endl;
     std::vector<T> temp;
     temp.reserve(size);
     temp.assign(size, 0);
+	std::cerr << "<<< Exiting countInversion(arr=" << arr << ",size=" << size << ")" << std::endl;
     return mergeSort(arr, temp.data(), 0, size - 1);
 }
 
@@ -177,11 +184,13 @@ uint32_t countInversion(T* arr, const uint32_t size) {
  */
 template <typename T>
 void show(T* arr, const uint32_t array_size) {
+	std::cerr << ">>> Entering show(arr=" << arr << ",array_size=" << array_size << ")" << std::endl;
     std::cout << "Printing array: \n";
     for (uint32_t i = 0; i < array_size; i++) {
         std::cout << " " << arr[i];
     }
     std::cout << "\n";
+	std::cerr << "<<< Exiting show(arr=" << arr << ",array_size=" << array_size << ")" << std::endl;
 }
 
 }  // namespace inversion
@@ -192,6 +201,7 @@ void show(T* arr, const uint32_t array_size) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     std::vector<uint64_t> arr1 = {
         100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84,
@@ -201,28 +211,38 @@ static void test() {
         32,  31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16,
         15,  14, 13, 12, 11, 10, 9,  8,  7,  6,  5,  4,  3,  2,  1};
     uint32_t size1 = arr1.size();
+	std::cerr << "test(): size1 → " << size1 << std::endl;
     uint32_t inv_count1 = 4950;
     uint32_t result1 = sorting::inversion::countInversion(arr1.data(), size1);
+	std::cerr << "test(): result1 → " << result1 << std::endl;
     assert(inv_count1 == result1);
     // Test 2
     std::vector<int> arr2 = {22, 66, 75, 23, 11, 87, 2, 44, 98, 43};
     uint32_t size2 = arr2.size();
+	std::cerr << "test(): size2 → " << size2 << std::endl;
     uint32_t inv_count2 = 20;
     uint32_t result2 = sorting::inversion::countInversion(arr2.data(), size2);
+	std::cerr << "test(): result2 → " << result2 << std::endl;
     assert(inv_count2 == result2);
     // Test 3
     std::vector<double> arr3 = {33.1, 45.2, 65.4, 76.5, 1.0,
                                 2.9,  5.4,  7.7,  88.9, 12.4};
     uint32_t size3 = arr3.size();
+	std::cerr << "test(): size3 → " << size3 << std::endl;
     uint32_t inv_count3 = 21;
     uint32_t result3 = sorting::inversion::countInversion(arr3.data(), size3);
+	std::cerr << "test(): result3 → " << result3 << std::endl;
     assert(inv_count3 == result3);
     // Test 4
     std::vector<char> arr4 = {'a', 'b', 'c', 'd', 'e'};
+	std::cerr << "test(): arr4 → " << arr4 << std::endl;
+	std::cerr << "test(): size4 → " << size4 << std::endl;
     uint32_t size4 = arr4.size();
     uint32_t inv_count4 = 0;
     uint32_t result4 = sorting::inversion::countInversion(arr4.data(), size4);
+	std::cerr << "test(): result4 → " << result4 << std::endl;
     assert(inv_count4 == result4);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 // /**
@@ -269,7 +289,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // Run test implementations
     // body(); // test your own array
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

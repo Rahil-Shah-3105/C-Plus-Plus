@@ -66,8 +66,10 @@ std::array<int, N> pigeonSort(std::array<int, N> arr) {
  * @returns none
  */
 static void test_1() {
+	std::cerr << ">>> Entering test_1()" << std::endl;
     const int n = 7;
     std::array<int, n> test_array = {8, 3, 2, 7, 4, 6, 8};
+	std::cerr << "test_1(): test_array → " << test_array << std::endl;
 
     test_array = sorting::pigeonSort<n>(test_array);
 
@@ -78,6 +80,7 @@ static void test_1() {
         std::cout << test_array.at(i) << " ";
     }
     std::cout << "\nPassed\n";
+	std::cerr << "<<< Exiting test_1()" << std::endl;
 }
 
 /**
@@ -86,11 +89,13 @@ static void test_1() {
  * @returns none
  */
 static void test_2() {
+	std::cerr << ">>> Entering test_2()" << std::endl;
     const int n = 10;
     std::array<int, n> test_array = {802, 630, 20,  745, 52,
                                      300, 612, 932, 78,  187};
 
     test_array = sorting::pigeonSort<n>(test_array);
+	std::cerr << "test_2(): test_array → " << test_array << std::endl;
 
     assert(std::is_sorted(std::begin(test_array), std::end(test_array)));
 
@@ -99,6 +104,7 @@ static void test_2() {
         std::cout << test_array.at(i) << " ";
     }
     std::cout << "\nPassed\n";
+	std::cerr << "<<< Exiting test_2()" << std::endl;
 }
 
 /**
@@ -107,8 +113,10 @@ static void test_2() {
  * @returns none
  */
 static void test_3() {
+	std::cerr << ">>> Entering test_3()" << std::endl;
     const int n = 4;
     std::array<int, n> test_array = {11, 13, 12, 14};
+	std::cerr << "test_3(): test_array → " << test_array << std::endl;
 
     test_array = sorting::pigeonSort<n>(test_array);
 
@@ -119,15 +127,18 @@ static void test_3() {
         std::cout << test_array.at(i) << " ";
     }
     std::cout << "\nPassed\n";
+	std::cerr << "<<< Exiting test_3()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test_1();
     test_2();
     test_3();
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

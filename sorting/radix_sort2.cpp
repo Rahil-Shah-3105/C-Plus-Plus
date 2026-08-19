@@ -80,6 +80,7 @@ std::vector<uint64_t> step_ith(
  * @returns sorted vector
  */
 std::vector<uint64_t> radix(const std::vector<uint64_t>& ar) {
+	std::cerr << ">>> Entering radix(ar=" << ar << ")" << std::endl;
     uint64_t max_ele =
         *max_element(ar.begin(), ar.end());  // returns the max element.
     std::vector<uint64_t> temp = ar;
@@ -92,6 +93,7 @@ std::vector<uint64_t> radix(const std::vector<uint64_t>& ar) {
         std::cout << i << " ";
     }
     std::cout << "\n";
+	std::cerr << "<<< Exiting radix(ar=" << ar << ")" << std::endl;
     return temp;
 }
 }  // namespace radix_sort
@@ -102,21 +104,27 @@ std::vector<uint64_t> radix(const std::vector<uint64_t>& ar) {
  * @returns none
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     /// Test 1
     std::vector<uint64_t> ar1 = {432, 234, 143, 332, 123};
+	std::cerr << "tests(): ar1 → " << ar1 << std::endl;
     ar1 = sorting::radix_sort::radix(ar1);
     assert(std::is_sorted(ar1.begin(), ar1.end()));
     /// Test 2
     std::vector<uint64_t> ar2 = {213, 3214, 123, 111, 112, 142,
                                  133, 132,  32,  12,  113};
     ar2 = sorting::radix_sort::radix(ar2);
+	std::cerr << "tests(): ar2 → " << ar2 << std::endl;
     assert(std::is_sorted(ar2.begin(), ar2.end()));
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

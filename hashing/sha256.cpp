@@ -56,6 +56,8 @@ class Hash {
  * @return uint32_t The rotated integer
  */
 uint32_t right_rotate(uint32_t n, size_t rotate) {
+	std::cerr << ">>> Entering right_rotate(n=" << n << ",rotate=" << rotate << ")" << std::endl;
+	std::cerr << "<<< Exiting right_rotate(n=" << n << ",rotate=" << rotate << ")" << std::endl;
     return (n >> rotate) | (n << (32 - rotate));
 }
 
@@ -65,6 +67,7 @@ uint32_t right_rotate(uint32_t n, size_t rotate) {
  * @return void
  */
 void Hash::update(const std::array<uint32_t, 64> &blocks) {
+	std::cerr << ">>> Entering Hash::update(blocks=" << blocks << ")" << std::endl;
     // Initialize array of round constants with first 32 bits of the fractional
     // parts of the cube roots of the first 64 primes 2..311
     const std::array<uint32_t, 64> round_constants = {
@@ -82,24 +85,34 @@ void Hash::update(const std::array<uint32_t, 64> &blocks) {
 
     // Initialize working variables
     auto a = hash[0];
+	std::cerr << "Hash::update(blocks=" << blocks << "): a → " << a << std::endl;
     auto b = hash[1];
+	std::cerr << "Hash::update(blocks=" << blocks << "): b → " << b << std::endl;
     auto c = hash[2];
+	std::cerr << "Hash::update(blocks=" << blocks << "): c → " << c << std::endl;
     auto d = hash[3];
+	std::cerr << "Hash::update(blocks=" << blocks << "): d → " << d << std::endl;
     auto e = hash[4];
+	std::cerr << "Hash::update(blocks=" << blocks << "): e → " << e << std::endl;
     auto f = hash[5];
+	std::cerr << "Hash::update(blocks=" << blocks << "): f → " << f << std::endl;
     auto g = hash[6];
+	std::cerr << "Hash::update(blocks=" << blocks << "): g → " << g << std::endl;
     auto h = hash[7];
+	std::cerr << "Hash::update(blocks=" << blocks << "): h → " << h << std::endl;
 
     // Compression function main loop
     for (size_t block_num = 0; block_num < 64; ++block_num) {
         const auto s1 =
             right_rotate(e, 6) ^ right_rotate(e, 11) ^ right_rotate(e, 25);
         const auto ch = (e & f) ^ (~e & g);
+		std::cerr << "Hash::update(blocks=" << blocks << "): ch → " << ch << std::endl;
         const auto temp1 =
             h + s1 + ch + round_constants[block_num] + blocks[block_num];
         const auto s0 =
             right_rotate(a, 2) ^ right_rotate(a, 13) ^ right_rotate(a, 22);
         const auto maj = (a & b) ^ (a & c) ^ (b & c);
+		std::cerr << "Hash::update(blocks=" << blocks << "): maj → " << maj << std::endl;
         const auto temp2 = s0 + maj;
 
         h = g;
@@ -121,6 +134,7 @@ void Hash::update(const std::array<uint32_t, 64> &blocks) {
     hash[5] += f;
     hash[6] += g;
     hash[7] += h;
+	std::cerr << "<<< Exiting Hash::update(blocks=" << blocks << ")" << std::endl;
 }
 
 /**
@@ -128,10 +142,12 @@ void Hash::update(const std::array<uint32_t, 64> &blocks) {
  * @return std::string Final hash value
  */
 std::string Hash::to_string() const {
+	std::cerr << ">>> Entering Hash::to_string()" << std::endl;
     std::stringstream ss;
     for (size_t i = 0; i < 8; ++i) {
         ss << std::hex << std::setfill('0') << std::setw(8) << hash[i];
     }
+	std::cerr << "<<< Exiting Hash::to_string()" << std::endl;
     return ss.str();
 }
 
@@ -141,7 +157,9 @@ std::string Hash::to_string() const {
  * @return size_t Size of the padded input
  */
 std::size_t compute_padded_size(const std::size_t input_size) {
+	std::cerr << ">>> Entering compute_padded_size(input_size=" << input_size << ")" << std::endl;
     if (input_size % 64 < 56) {
+	std::cerr << "<<< Exiting compute_padded_size(input_size=" << input_size << ")" << std::endl;
         return input_size + 64 - (input_size % 64);
     }
     return input_size + 128 - (input_size % 64);
@@ -155,7 +173,10 @@ std::size_t compute_padded_size(const std::size_t input_size) {
  */
 template <typename T>
 uint8_t extract_byte(const T in_value, const std::size_t byte_num) {
+	std::cerr << ">>> Entering extract_byte(in_value=" << in_value << ",byte_num=" << byte_num << ")" << std::endl;
     if (sizeof(in_value) <= byte_num) {
+		std::cerr << "Throwing std from extract_byte(in_value=" << in_value << ",byte_num=" << byte_num << ")" << std::endl;
+	std::cerr << "<<< Exiting extract_byte(in_value=" << in_value << ",byte_num=" << byte_num << ")" << std::endl;
         throw std::out_of_range("Byte at index byte_num does not exist");
     }
     return (in_value >> (byte_num * 8)) & 0xFF;
@@ -168,18 +189,23 @@ uint8_t extract_byte(const T in_value, const std::size_t byte_num) {
  * @return char Character at the index pos in the padded string
  */
 char get_char(const std::string &input, std::size_t pos) {
+	std::cerr << ">>> Entering get_char(input=" << input << ",pos=" << pos << ")" << std::endl;
     const auto input_size = input.length();
     if (pos < input_size) {
+		std::cerr << "get_char(input=" << input << ",pos=" << pos << "): input_size → " << input_size << std::endl;
         return input[pos];
     }
     if (pos == input_size) {
         return '\x80';
     }
     const auto padded_input_size = compute_padded_size(input_size);
+	std::cerr << "get_char(input=" << input << ",pos=" << pos << "): padded_input_size → " << padded_input_size << std::endl;
     if (pos < padded_input_size - 8) {
         return '\x00';
     }
     if (padded_input_size <= pos) {
+		std::cerr << "Throwing std from get_char(input=" << input << ",pos=" << pos << ")" << std::endl;
+	std::cerr << "<<< Exiting get_char(input=" << input << ",pos=" << pos << ")" << std::endl;
         throw std::out_of_range("pos is out of range");
     }
     return static_cast<char>(
@@ -230,12 +256,15 @@ std::array<uint32_t, 64> create_message_schedule_array(const std::string &input,
  * @return std::string The final hash value
  */
 std::string sha256(const std::string &input) {
+	std::cerr << ">>> Entering sha256(input=" << input << ")" << std::endl;
     Hash h;
     // Process message in successive 512-bit (64-byte) chunks
     for (size_t byte_num = 0; byte_num < compute_padded_size(input.length());
          byte_num += 64) {
+		std::cerr << "sha256(input=" << input << "): byte_num → " << byte_num << std::endl;
         h.update(create_message_schedule_array(input, byte_num));
     }
+	std::cerr << "<<< Exiting sha256(input=" << input << ")" << std::endl;
     return h.to_string();
 }
 }  // namespace sha256
@@ -246,46 +275,58 @@ std::string sha256(const std::string &input) {
  * @returns void
  */
 static void test_compute_padded_size() {
+	std::cerr << ">>> Entering test_compute_padded_size()" << std::endl;
     assert(hashing::sha256::compute_padded_size(55) == 64);
     assert(hashing::sha256::compute_padded_size(56) == 128);
     assert(hashing::sha256::compute_padded_size(130) == 192);
+	std::cerr << "<<< Exiting test_compute_padded_size()" << std::endl;
 }
 
 static void test_extract_byte() {
+	std::cerr << ">>> Entering test_extract_byte()" << std::endl;
     assert(hashing::sha256::extract_byte<uint32_t>(512, 0) == 0);
     assert(hashing::sha256::extract_byte<uint32_t>(512, 1) == 2);
     bool exception = false;
+	std::cerr << "test_extract_byte(): exception → " << exception << std::endl;
     try {
         hashing::sha256::extract_byte<uint32_t>(512, 5);
     } catch (const std::out_of_range &) {
         exception = true;
     }
     assert(exception);
+	std::cerr << "<<< Exiting test_extract_byte()" << std::endl;
 }
 
 static void test_get_char() {
+	std::cerr << ">>> Entering test_get_char()" << std::endl;
     assert(hashing::sha256::get_char("test", 3) == 't');
     assert(hashing::sha256::get_char("test", 4) == '\x80');
     assert(hashing::sha256::get_char("test", 5) == '\x00');
     assert(hashing::sha256::get_char("test", 63) == 32);
     bool exception = false;
+	std::cerr << "test_get_char(): exception → " << exception << std::endl;
     try {
         hashing::sha256::get_char("test", 64);
     } catch (const std::out_of_range &) {
         exception = true;
     }
     assert(exception);
+	std::cerr << "<<< Exiting test_get_char()" << std::endl;
 }
 
 static void test_right_rotate() {
+	std::cerr << ">>> Entering test_right_rotate()" << std::endl;
     assert(hashing::sha256::right_rotate(128, 3) == 16);
     assert(hashing::sha256::right_rotate(1, 30) == 4);
     assert(hashing::sha256::right_rotate(6, 30) == 24);
+	std::cerr << "<<< Exiting test_right_rotate()" << std::endl;
 }
 
 static void test_sha256() {
+	std::cerr << ">>> Entering test_sha256()" << std::endl;
     struct TestCase {
         const std::string input;
+		std::cerr << "<<< Exiting test_sha256()" << std::endl;
         const std::string expected_hash;
         TestCase(std::string input, std::string expected_hash)
             : input(std::move(input)),
@@ -310,6 +351,7 @@ static void test_sha256() {
 }
 
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     test_compute_padded_size();
     test_extract_byte();
     test_get_char();
@@ -317,6 +359,7 @@ static void test() {
     test_sha256();
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -324,6 +367,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // Run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/wildcard_matching.dir/wildcard_matching.o -o wildcard_matching 

@@ -10,8 +10,10 @@
    or DESCENDING; if (a[i] > a[j]) agrees with the direction,
    then a[i] and a[j] are interchanged.*/
 void compAndSwap(int a[], int i, int j, int dir) {
+	std::cerr << ">>> Entering compAndSwap(a=" << a << ",i=" << i << ",j=" << j << ",dir=" << dir << ")" << std::endl;
     if (dir == (a[i] > a[j]))
         std::swap(a[i], a[j]);
+		std::cerr << "<<< Exiting compAndSwap(a=" << a << ",i=" << i << ",j=" << j << ",dir=" << dir << ")" << std::endl;
 }
 
 /*It recursively sorts a bitonic sequence in ascending order,
@@ -19,18 +21,21 @@ void compAndSwap(int a[], int i, int j, int dir) {
   The sequence to be sorted starts at index position low,
   the parameter cnt is the number of elements to be sorted.*/
 void bitonicMerge(int a[], int low, int cnt, int dir) {
+	std::cerr << ">>> Entering bitonicMerge(a=" << a << ",low=" << low << ",cnt=" << cnt << ",dir=" << dir << ")" << std::endl;
     if (cnt > 1) {
         int k = cnt / 2;
         for (int i = low; i < low + k; i++) compAndSwap(a, i, i + k, dir);
         bitonicMerge(a, low, k, dir);
         bitonicMerge(a, low + k, k, dir);
     }
+	std::cerr << "<<< Exiting bitonicMerge(a=" << a << ",low=" << low << ",cnt=" << cnt << ",dir=" << dir << ")" << std::endl;
 }
 
 /* This function first produces a bitonic sequence by recursively
     sorting its two halves in opposite sorting orders, and then
     calls bitonicMerge to make them in the same order */
 void bitonicSort(int a[], int low, int cnt, int dir) {
+	std::cerr << ">>> Entering bitonicSort(a=" << a << ",low=" << low << ",cnt=" << cnt << ",dir=" << dir << ")" << std::endl;
     if (cnt > 1) {
         int k = cnt / 2;
 
@@ -44,6 +49,7 @@ void bitonicSort(int a[], int low, int cnt, int dir) {
         // since dir=1.
         bitonicMerge(a, low, cnt, dir);
     }
+	std::cerr << "<<< Exiting bitonicSort(a=" << a << ",low=" << low << ",cnt=" << cnt << ",dir=" << dir << ")" << std::endl;
 }
 
 /* Caller of bitonicSort for sorting the entire array of
@@ -52,13 +58,16 @@ void sort(int a[], int N, int up) { bitonicSort(a, 0, N, up); }
 
 // Driver code
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int a[] = {3, 7, 4, 8, 6, 2, 1, 5};
     int N = sizeof(a) / sizeof(a[0]);
+	std::cerr << "main(): N → " << N << std::endl;
 
     int up = 1;  // means sort in ascending order
     sort(a, N, up);
 
     std::cout << "Sorted array: \n";
     for (int i = 0; i < N; i++) std::cout << a[i] << " ";
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

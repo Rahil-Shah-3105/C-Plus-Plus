@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/queue_using_two_stacks.dir/queue_using_two_stacks.o -o queue_using_two_stacks 

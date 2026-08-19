@@ -5,14 +5,17 @@ int front = 0;
 int rear = 0;
 
 void Enque(int x) {
+	std::cerr << ">>> Entering Enque(x=" << x << ")" << std::endl;
     if (rear == 10) {
         std::cout << "\nOverflow";
     } else {
         queue[rear++] = x;
     }
+	std::cerr << "<<< Exiting Enque(x=" << x << ")" << std::endl;
 }
 
 void Deque() {
+	std::cerr << ">>> Entering Deque()" << std::endl;
     if (front == rear) {
         std::cout << "\nUnderflow";
     }
@@ -23,17 +26,23 @@ void Deque() {
             queue[i - front] = queue[i];
         }
         rear = rear - front;
+		std::cerr << "Deque(): rear → " << rear << std::endl;
+		std::cerr << "Deque(): front → " << front << std::endl;
         front = 0;
     }
+	std::cerr << "<<< Exiting Deque()" << std::endl;
 }
 
 void show() {
+	std::cerr << ">>> Entering show()" << std::endl;
     for (int i = front; i < rear; i++) {
         std::cout << queue[i] << "\t";
     }
+	std::cerr << "<<< Exiting show()" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int ch, x;
     do {
         std::cout << "\n1. Enque";
@@ -52,5 +61,6 @@ int main() {
         }
     } while (ch != 0);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

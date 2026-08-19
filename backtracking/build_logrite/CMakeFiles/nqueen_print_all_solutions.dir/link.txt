@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/nqueen_print_all_solutions.dir/nqueen_print_all_solutions.o -o nqueen_print_all_solutions 

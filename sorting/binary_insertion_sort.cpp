@@ -61,15 +61,18 @@ namespace sorting {
  */
 template <class T>
 int64_t binary_search(std::vector<T> &arr, T val, int64_t low, int64_t high) {
+	std::cerr << ">>> Entering binary_search(arr=" << arr << ",val=" << val << ",low=" << low << ",high=" << high << ")" << std::endl;
     if (high <= low) {
         return (val > arr[low]) ? (low + 1) : low;
     }
     int64_t mid = low + (high - low) / 2;
+	std::cerr << "binary_search(arr=" << arr << ",val=" << val << ",low=" << low << ",high=" << high << "): mid → " << mid << std::endl;
     if (arr[mid] > val) {
         return binary_search(arr, val, low, mid - 1);
     } else if (arr[mid] < val) {
         return binary_search(arr, val, mid + 1, high);
     } else {
+		std::cerr << "<<< Exiting binary_search(arr=" << arr << ",val=" << val << ",low=" << low << ",high=" << high << ")" << std::endl;
         return mid + 1;
     }
 }
@@ -82,18 +85,23 @@ int64_t binary_search(std::vector<T> &arr, T val, int64_t low, int64_t high) {
  */
 template <typename T>
 void insertionSort_binsrch(std::vector<T> &arr) {
+	std::cerr << ">>> Entering insertionSort_binsrch(arr=" << arr << ")" << std::endl;
     int64_t n = arr.size();
 
+	std::cerr << "insertionSort_binsrch(arr=" << arr << "): n → " << n << std::endl;
     for (int64_t i = 1; i < n; i++) {
         T key = arr[i];
+		std::cerr << "insertionSort_binsrch(arr=" << arr << "): key → " << key << std::endl;
         int64_t j = i - 1;
         int64_t loc = sorting::binary_search(arr, key, 0, j);
+		std::cerr << "insertionSort_binsrch(arr=" << arr << "): loc → " << loc << std::endl;
         while (j >= loc) {
             arr[j + 1] = arr[j];
             j--;
         }
         arr[j + 1] = key;
     }
+	std::cerr << "<<< Exiting insertionSort_binsrch(arr=" << arr << ")" << std::endl;
 }
 }  // namespace sorting
 
@@ -102,6 +110,7 @@ void insertionSort_binsrch(std::vector<T> &arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /* descriptions of the following test */
     /* 1st test:
        [5, -3, -1, -2, 7] returns [-3, -2, -1, 5, 7] */
@@ -134,6 +143,7 @@ static void test() {
     sorting::insertionSort_binsrch(arr4);
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -141,6 +151,8 @@ static void test() {
  * @return 0 on exit.
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/non_recursive_merge_sort.dir/non_recursive_merge_sort.o -o non_recursive_merge_sort 

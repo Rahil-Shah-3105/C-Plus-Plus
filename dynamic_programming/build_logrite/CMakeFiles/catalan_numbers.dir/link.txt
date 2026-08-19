@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/catalan_numbers.dir/catalan_numbers.o -o catalan_numbers 

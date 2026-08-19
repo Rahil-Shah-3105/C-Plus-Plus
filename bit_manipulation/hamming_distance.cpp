@@ -33,13 +33,16 @@ namespace hamming_distance {
  * @returns the number of set bits in the given number.
  */
 uint64_t bitCount(uint64_t value) {
+	std::cerr << ">>> Entering bitCount(value=" << value << ")" << std::endl;
     uint64_t count = 0;
     while (value) {       // until all bits are zero
+		std::cerr << "bitCount(value=" << value << "): count → " << count << std::endl;
         if (value & 1) {  // check lower bit
             count++;
         }
         value >>= 1;  // shift bits, removing lower bit
     }
+	std::cerr << "<<< Exiting bitCount(value=" << value << ")" << std::endl;
     return count;
 }
 
@@ -58,12 +61,16 @@ uint64_t hamming_distance(uint64_t a, uint64_t b) { return bitCount(a ^ b); }
  * @returns the number of characters differing between the two strings.
  */
 uint64_t hamming_distance(const std::string& a, const std::string& b) {
+	std::cerr << ">>> Entering hamming_distance(a=" << a << ",b=" << b << ")" << std::endl;
     assert(a.size() == b.size());
     size_t n = a.size();
+	std::cerr << "hamming_distance(a=" << a << ",b=" << b << "): n → " << n << std::endl;
+	std::cerr << "hamming_distance(a=" << a << ",b=" << b << "): count → " << count << std::endl;
     uint64_t count = 0;
     for (size_t i = 0; i < n; i++) {
         count += (b[i] != a[i]);
     }
+	std::cerr << "<<< Exiting hamming_distance(a=" << a << ",b=" << b << ")" << std::endl;
     return count;
 }
 }  // namespace hamming_distance
@@ -74,6 +81,7 @@ uint64_t hamming_distance(const std::string& a, const std::string& b) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     assert(bit_manipulation::hamming_distance::hamming_distance(11, 2) == 2);
     assert(bit_manipulation::hamming_distance::hamming_distance(2, 0) == 1);
     assert(bit_manipulation::hamming_distance::hamming_distance(11, 0) == 3);
@@ -91,6 +99,7 @@ static void test() {
                                                                 "abcd") == 0);
     assert(bit_manipulation::hamming_distance::hamming_distance("dcba",
                                                                 "abcd") == 4);
+																std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -98,6 +107,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();           // execute the tests
     uint64_t a = 11;  // 1011 in binary
     uint64_t b = 2;   // 0010 in binary
@@ -105,4 +115,5 @@ int main() {
     std::cout << "Hamming distance between " << a << " and " << b << " is "
               << bit_manipulation::hamming_distance::hamming_distance(a, b)
               << std::endl;
+			std::cerr << "<<< Exiting main()" << std::endl;
 }

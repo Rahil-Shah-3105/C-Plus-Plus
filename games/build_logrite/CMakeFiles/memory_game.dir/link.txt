@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/memory_game.dir/memory_game.o -o memory_game 

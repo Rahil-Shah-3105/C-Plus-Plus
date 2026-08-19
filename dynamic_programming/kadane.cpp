@@ -40,14 +40,18 @@ namespace kadane {
  */
 template <size_t N>
 int maxSubArray(const std::array<int, N> &n) {
+	std::cerr << ">>> Entering maxSubArray(n=" << n << ")" << std::endl;
     int curr_sum =
         0;  // declaring a variable named as curr_sum and initialized it to 0
+		std::cerr << "maxSubArray(n=" << n << "): curr_sum → " << curr_sum << std::endl;
     int max_sum = INT_MIN;  // Initialized max_sum to INT_MIN
+	std::cerr << "maxSubArray(n=" << n << "): max_sum → " << max_sum << std::endl;
     for (int i : n) {  // for loop to iterate over the elements of the array
         curr_sum += n[i];
         max_sum = std::max(max_sum, curr_sum);  // getting the maximum value
         curr_sum = std::max(curr_sum, 0);  // updating the value of curr_sum
     }
+	std::cerr << "<<< Exiting maxSubArray(n=" << n << ")" << std::endl;
     return max_sum;  // returning the value of max_sum
 }
 }  // namespace kadane
@@ -58,6 +62,7 @@ int maxSubArray(const std::array<int, N> &n) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     const int N = 5;
     std::array<int, N> n{};  // declaring array
                              // taking values of elements from user
@@ -70,5 +75,6 @@ int main() {
         n);  // calling maxSubArray function
     std::cout << "Maximum subarray sum is " << max_sum;  // Printing the answer
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

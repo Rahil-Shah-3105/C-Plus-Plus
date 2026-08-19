@@ -74,12 +74,14 @@ vector<vector<ll>> multiply(const vector<vector<ll>> &A,
  * \return matrix of same dimension as A
  */
 vector<vector<ll>> power(const vector<vector<ll>> &A, ll p) {
+	std::cerr << ">>> Entering power(A=" << A << ",p=" << p << ")" << std::endl;
     if (p == 1)
         return A;
     if (p % 2 == 1) {
         return multiply(A, power(A, p - 1));
     } else {
         vector<vector<ll>> X = power(A, p / 2);
+		std::cerr << "<<< Exiting power(A=" << A << ",p=" << p << ")" << std::endl;
         return multiply(X, X);
     }
 }
@@ -89,6 +91,7 @@ vector<vector<ll>> power(const vector<vector<ll>> &A, ll p) {
  * \return \f$n^\text{th}\f$ Fibonacci number
  */
 ll ans(ll n) {
+	std::cerr << ">>> Entering ans(n=" << n << ")" << std::endl;
     if (n == 0)
         return 0;
     if (n <= mat_size)
@@ -113,17 +116,21 @@ ll ans(ll n) {
     }
     // T^n-1
     T = power(T, n - 1);
+	std::cerr << "ans(n=" << n << "): T → " << T << std::endl;
 
     // T*F1
     ll res = 0;
+	std::cerr << "ans(n=" << n << "): res → " << res << std::endl;
     for (ll i = 1; i <= mat_size; i++) {
         res = (res + (T[1][i] * F1[i]) % MOD) % MOD;
     }
+	std::cerr << "<<< Exiting ans(n=" << n << ")" << std::endl;
     return res;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     cin.tie(0);
     cout.tie(0);
     ll t;
@@ -144,5 +151,6 @@ int main() {
         fib_b.clear();
         fib_c.clear();
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

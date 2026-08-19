@@ -66,10 +66,12 @@ class Node {
  * @returns A pointer to the newly allocated Node.
  * */
 Node *makeNode(int64_t data) {
+	std::cerr << ">>> Entering makeNode(data=" << data << ")" << std::endl;
     Node *node = new Node();
     node->data = data;      ///< setting data for node
     node->left = nullptr;   ///< setting left child as null
     node->right = nullptr;  ///< setting right child as null
+	std::cerr << "<<< Exiting makeNode(data=" << data << ")" << std::endl;
     return node;
 }
 
@@ -80,13 +82,16 @@ Node *makeNode(int64_t data) {
  * @returns Node* Pointer to the root node.
  * */
 Node *Insert(Node *root, int64_t data) {
+	std::cerr << ">>> Entering Insert(root=" << root << ",data=" << data << ")" << std::endl;
     if (root == nullptr) {
         root = makeNode(data);
+		std::cerr << "Insert(root=" << root << ",data=" << data << "): root → " << root << std::endl;
     } else if (data <= root->data) {
         root->left = Insert(root->left, data);
     } else {
         root->right = Insert(root->right, data);
     }
+	std::cerr << "<<< Exiting Insert(root=" << root << ",data=" << data << ")" << std::endl;
     return root;
 }
 
@@ -98,6 +103,7 @@ Node *Insert(Node *root, int64_t data) {
  * @returns Node* pointer to the found node
  * */
 Node *getNode(Node *root, int64_t data) {
+	std::cerr << ">>> Entering getNode(root=" << root << ",data=" << data << ")" << std::endl;
     if (root == nullptr) {
         return nullptr;
     } else if (root->data == data) {
@@ -109,6 +115,7 @@ Node *getNode(Node *root, int64_t data) {
     } else {
         /// Traverse left subtree recursively as the given data is less than the
         /// data in root node, data must be present in left subtree.
+		std::cerr << "<<< Exiting getNode(root=" << root << ",data=" << data << ")" << std::endl;
         return getNode(root->left, data);
     }
 }
@@ -119,12 +126,14 @@ Node *getNode(Node *root, int64_t data) {
  * @returns Node* Pointer to the found node
  * */
 Node *findMinNode(Node *root) {
+	std::cerr << ">>> Entering findMinNode(root=" << root << ")" << std::endl;
     if (root == nullptr) {
         return root;
     }
     while (root->left != nullptr) {
         root = root->left;
     }
+	std::cerr << "<<< Exiting findMinNode(root=" << root << ")" << std::endl;
     return root;
 }
 
@@ -134,6 +143,7 @@ Node *findMinNode(Node *root) {
  * @returns void
  * */
 void printInorder(Node *root) {
+	std::cerr << ">>> Entering printInorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {
         return;
     }
@@ -141,6 +151,7 @@ void printInorder(Node *root) {
     printInorder(root->left);  /// recursive call to left subtree
     std::cout << root->data << " ";
     printInorder(root->right);  /// recursive call to right subtree
+	std::cerr << "<<< Exiting printInorder(root=" << root << ")" << std::endl;
 }
 
 /**
@@ -153,9 +164,12 @@ void printInorder(Node *root) {
  * @returns Node pointer to the root node.
  * */
 Node *makeBST(Node *root, const std::vector<int64_t> &data) {
+	std::cerr << ">>> Entering makeBST(root=" << root << ",data=" << data << ")" << std::endl;
     for (int64_t values : data) {
         root = Insert(root, values);
+		std::cerr << "makeBST(root=" << root << ",data=" << data << "): root → " << root << std::endl;
     }
+	std::cerr << "<<< Exiting makeBST(root=" << root << ",data=" << data << ")" << std::endl;
     return root;
 }
 
@@ -174,6 +188,7 @@ Node *makeBST(Node *root, const std::vector<int64_t> &data) {
  * @returns Node pointer to the inorder successor node.
  * */
 Node *getInorderSuccessor(Node *root, int64_t data) {
+	std::cerr << ">>> Entering getInorderSuccessor(root=" << root << ",data=" << data << ")" << std::endl;
     Node *current = getNode(root, data);
     if (current == nullptr) {
         return nullptr;
@@ -187,16 +202,19 @@ Node *getInorderSuccessor(Node *root, int64_t data) {
     else {
         Node *successor = nullptr;
         Node *ancestor = root;
+		std::cerr << "getInorderSuccessor(root=" << root << ",data=" << data << "): ancestor → " << ancestor << std::endl;
 
         while (ancestor != current && ancestor != nullptr) {
             // This means my current node is in left of the root node
             if (current->data < ancestor->data) {
                 successor = ancestor;
+				std::cerr << "getInorderSuccessor(root=" << root << ",data=" << data << "): successor → " << successor << std::endl;
                 ancestor = ancestor->left;  // keep going left
             } else {
                 ancestor = ancestor->right;
             }
         }
+		std::cerr << "<<< Exiting getInorderSuccessor(root=" << root << ",data=" << data << ")" << std::endl;
         return successor;  // Nodes with maximum vales will not have a successor
     }
 }
@@ -208,12 +226,14 @@ Node *getInorderSuccessor(Node *root, int64_t data) {
  * @returns void
  * */
 void deallocate(Node *rootNode) {
+	std::cerr << ">>> Entering deallocate(rootNode=" << rootNode << ")" << std::endl;
     if (rootNode == nullptr) {
         return;
     }
     deallocate(rootNode->left);
     deallocate(rootNode->right);
     delete (rootNode);
+	std::cerr << "<<< Exiting deallocate(rootNode=" << rootNode << ")" << std::endl;
 }
 
 }  // namespace inorder_traversal_of_bst
@@ -231,8 +251,10 @@ class TestCases {
      * */
     template <typename T>
     void log(T msg) {
+		std::cerr << ">>> Entering log(msg=" << msg << ")" << std::endl;
         // It's just to avoid writing cout and endl
         std::cout << "[TESTS] : ---> " << msg << std::endl;
+		std::cerr << "<<< Exiting log(msg=" << msg << ")" << std::endl;
     }
 
  public:
@@ -241,6 +263,7 @@ class TestCases {
      * @returns void
      * */
     void runTests() {
+		std::cerr << ">>> Entering runTests()" << std::endl;
         log("Running Tests...");
 
         testCase_1();
@@ -249,6 +272,7 @@ class TestCases {
 
         log("Test Cases over!");
         std::cout << std::endl;
+		std::cerr << "<<< Exiting runTests()" << std::endl;
     }
 
     /**
@@ -257,6 +281,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_1() {
+		std::cerr << ">>> Entering testCase_1()" << std::endl;
         const operations_on_datastructures::inorder_traversal_of_bst::Node
             *expectedOutput = nullptr;  ///< Expected output of this test
 
@@ -275,6 +300,7 @@ class TestCases {
             root,
             node_data);  ///< Adding nodes to BST
 
+			std::cerr << "testCase_1(): root → " << root << std::endl;
         std::cout << "Inorder sequence is : ";
         operations_on_datastructures::inorder_traversal_of_bst::printInorder(
             root);  ///< Printing inorder to cross-verify.
@@ -294,6 +320,7 @@ class TestCases {
 
         log("[PASS] : TEST CASE 1 PASS!");
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		std::cerr << "<<< Exiting testCase_1()" << std::endl;
     }
 
     /**
@@ -302,6 +329,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_2() {
+		std::cerr << ">>> Entering testCase_2()" << std::endl;
         const int expectedOutput = 21;  ///< Expected output of this test
 
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -316,6 +344,7 @@ class TestCases {
             root,
             node_data);  ///< Adding nodes to BST
 
+			std::cerr << "testCase_2(): root → " << root << std::endl;
         std::cout << "Inorder sequence is : ";
         operations_on_datastructures::inorder_traversal_of_bst::printInorder(
             root);  ///< Printing inorder to cross-verify.
@@ -335,6 +364,7 @@ class TestCases {
 
         log("[PASS] : TEST CASE 2 PASS!");
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		std::cerr << "<<< Exiting testCase_2()" << std::endl;
     }
 
     /**
@@ -343,6 +373,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_3() {
+		std::cerr << ">>> Entering testCase_3()" << std::endl;
         const int expectedOutput = 110;  ///< Expected output of this test
 
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -358,6 +389,7 @@ class TestCases {
             root,
             node_data);  ///< Adding nodes to BST
 
+			std::cerr << "testCase_3(): root → " << root << std::endl;
         std::cout << "Inorder sequence is : ";
         operations_on_datastructures::inorder_traversal_of_bst::printInorder(
             root);  ///< Printing inorder to cross-verify.
@@ -377,6 +409,7 @@ class TestCases {
 
         log("[PASS] : TEST CASE 3 PASS!");
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		std::cerr << "<<< Exiting testCase_3()" << std::endl;
     }
 };
 
@@ -385,8 +418,10 @@ class TestCases {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     TestCases tc;
     tc.runTests();
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -394,6 +429,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     operations_on_datastructures::inorder_traversal_of_bst::Node *root =
@@ -405,6 +441,7 @@ int main() {
     root = operations_on_datastructures::inorder_traversal_of_bst::makeBST(
         root, node_data);  ///< Making BST
 
+		std::cerr << "main(): root → " << root << std::endl;
     operations_on_datastructures::inorder_traversal_of_bst::Node
         *inorderSuccessor = operations_on_datastructures::
             inorder_traversal_of_bst::getInorderSuccessor(root, targetElement);
@@ -423,5 +460,6 @@ int main() {
 
     deallocate(root);  /// memory cleanup!
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/golden_search_extrema.dir/golden_search_extrema.o -o golden_search_extrema 

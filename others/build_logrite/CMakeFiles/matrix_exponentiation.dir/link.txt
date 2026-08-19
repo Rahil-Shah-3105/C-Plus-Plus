@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/matrix_exponentiation.dir/matrix_exponentiation.o -o matrix_exponentiation 

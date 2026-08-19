@@ -36,12 +36,15 @@ namespace sparse_table {
  */
 template <typename T>
 std::vector<T> computeLogs(const std::vector<T>& A) {
+	std::cerr << ">>> Entering computeLogs(A=" << A << ")" << std::endl;
     int n = A.size();
     std::vector<T> logs(n);
+	std::cerr << "computeLogs(A=" << A << "): n → " << n << std::endl;
     logs[1] = 0;
     for (int i = 2; i < n; i++) {
         logs[i] = logs[i / 2] + 1;
     }
+	std::cerr << "<<< Exiting computeLogs(A=" << A << ")" << std::endl;
     return logs;
 }
 
@@ -94,12 +97,15 @@ int getMinimum(int beg, int end, const std::vector<T>& logs,
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::vector<int> A{1, 2, 0, 3, 9};
     std::vector<int> logs = range_queries::sparse_table::computeLogs(A);
+	std::cerr << "main(): logs → " << logs << std::endl;
     std::vector<std::vector<int> > table =
         range_queries::sparse_table::buildTable(A, logs);
     assert(range_queries::sparse_table::getMinimum(0, 0, logs, table) == 1);
     assert(range_queries::sparse_table::getMinimum(0, 4, logs, table) == 0);
     assert(range_queries::sparse_table::getMinimum(2, 4, logs, table) == 0);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

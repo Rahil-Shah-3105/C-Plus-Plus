@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/iterative_factorial.dir/iterative_factorial.o -o iterative_factorial 

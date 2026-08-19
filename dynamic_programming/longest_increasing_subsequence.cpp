@@ -38,6 +38,7 @@ namespace dynamic_programming {
  * subsequence in the `a` array of size `n`
  */
 uint64_t LIS(const std::vector<uint64_t> &a, const uint32_t &n) {
+	std::cerr << ">>> Entering LIS(a=" << a << ",n=" << n << ")" << std::endl;
     std::vector<int> lis(n);
     for (int i = 0; i < n; ++i) {
         lis[i] = 1;
@@ -50,9 +51,11 @@ uint64_t LIS(const std::vector<uint64_t> &a, const uint32_t &n) {
         }
     }
     int res = 0;
+	std::cerr << "LIS(a=" << a << ",n=" << n << "): res → " << res << std::endl;
     for (int i = 0; i < n; ++i) {
         res = std::max(res, lis[i]);
     }
+	std::cerr << "<<< Exiting LIS(a=" << a << ",n=" << n << ")" << std::endl;
     return res;
 }
 }  // namespace dynamic_programming
@@ -62,14 +65,18 @@ uint64_t LIS(const std::vector<uint64_t> &a, const uint32_t &n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<uint64_t> a = {15, 21, 2, 3, 4, 5, 8, 4, 1, 1};
     uint32_t n = a.size();
+	std::cerr << "test(): n → " << n << std::endl;
 
     uint32_t result = dynamic_programming::LIS(a, n);
+	std::cerr << "test(): result → " << result << std::endl;
     assert(result ==
            5);  ///< The longest increasing subsequence is `{2,3,4,5,8}`
 
     std::cout << "Self-test implementations passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -77,6 +84,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     uint32_t n = 0;
 
     std::cout << "Enter size of array: ";
@@ -93,5 +101,6 @@ int main() {
               << std::endl;
     test();  // run self-test implementations
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

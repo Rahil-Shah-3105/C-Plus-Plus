@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/cut_rod.dir/cut_rod.o -o cut_rod 

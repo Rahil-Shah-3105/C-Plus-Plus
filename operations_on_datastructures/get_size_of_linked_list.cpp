@@ -9,7 +9,10 @@ class Node {
 };
 
 int getSize(Node *root) {
+	std::cerr << ">>> Entering getSize(root=" << root << ")" << std::endl;
     if (root == NULL) {
+		std::cerr << "Exception in getSize(root=" << root << "): " << e.what() << std::endl;
+	std::cerr << "<<< Exiting getSize(root=" << root << ")" << std::endl;
         return 0;
     }
     // Each node will return 1 so the total adds up to be the size
@@ -23,14 +26,18 @@ int getSize(Node *root) {
  * @warning Plese note that the memory for each node has to be alocated using new.
  */
 void deleteList(Node *const root) {
+	std::cerr << ">>> Entering deleteList(root=" << root << ")" << std::endl;
     if (root != NULL)
     {
+		std::cerr << "Exception in deleteList(root=" << root << "): " << e.what() << std::endl;
         deleteList(root->next);
         delete root;
     }
+	std::cerr << "<<< Exiting deleteList(root=" << root << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     Node *myList = new Node(0, NULL);  // Initializes the LinkedList
     Node *temp = myList;
     // Creates a linked lists of total size 10, numbered 1 - 10
@@ -48,5 +55,6 @@ int main() {
     deleteList(secondList);
     deleteList(myList);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -34,24 +34,32 @@ class MemorisedFactorial {
      * @returns factorial of n
      */
     std::uint64_t operator()(std::uint64_t n) {
+		std::cerr << ">>> Entering operator()" << std::endl;
         if (n >= this->known_values.size()) {
             this->known_values.push_back(n * this->operator()(n - 1));
         }
+		std::cerr << "<<< Exiting operator()" << std::endl;
         return this->known_values.at(n);
     }
 };
 
 void test_MemorisedFactorial_in_order() {
+	std::cerr << ">>> Entering test_MemorisedFactorial_in_order()" << std::endl;
     auto factorial = MemorisedFactorial();
     assert(factorial(0) == 1);
+	std::cerr << "test_MemorisedFactorial_in_order(): factorial → " << factorial << std::endl;
     assert(factorial(1) == 1);
     assert(factorial(5) == 120);
     assert(factorial(10) == 3628800);
+	std::cerr << "<<< Exiting test_MemorisedFactorial_in_order()" << std::endl;
 }
 
 void test_MemorisedFactorial_no_order() {
+	std::cerr << ">>> Entering test_MemorisedFactorial_no_order()" << std::endl;
     auto factorial = MemorisedFactorial();
     assert(factorial(10) == 3628800);
+	std::cerr << "test_MemorisedFactorial_no_order(): factorial → " << factorial << std::endl;
+	std::cerr << "<<< Exiting test_MemorisedFactorial_no_order()" << std::endl;
 }
 
 /**
@@ -59,7 +67,9 @@ void test_MemorisedFactorial_no_order() {
  * @returns 0 on program success
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test_MemorisedFactorial_in_order();
     test_MemorisedFactorial_no_order();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

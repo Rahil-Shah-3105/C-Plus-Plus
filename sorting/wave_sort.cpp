@@ -32,6 +32,7 @@ namespace wave_sort {
  */
 template <typename T>
 std::vector<T> waveSort(const std::vector<T> &in_arr, int64_t n) {
+	std::cerr << ">>> Entering waveSort(in_arr=" << in_arr << ",n=" << n << ")" << std::endl;
     std::vector<T> arr(in_arr);
 
     for (int64_t i = 0; i < n; i++) {
@@ -41,6 +42,7 @@ std::vector<T> waveSort(const std::vector<T> &in_arr, int64_t n) {
     for (int64_t i = 0; i < n - 1; i += 2) {  // swap all the adjacent elements
         std::swap(arr[i], arr[i + 1]);
     }
+	std::cerr << "<<< Exiting waveSort(in_arr=" << in_arr << ",n=" << n << ")" << std::endl;
     return arr;
 }
 }  // namespace wave_sort
@@ -51,10 +53,12 @@ std::vector<T> waveSort(const std::vector<T> &in_arr, int64_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // [10, 90, 49, 2, 1, 5, 23] return [2, 1, 10, 5, 49, 23, 90]
     std::vector<int64_t> array1 = {10, 90, 49, 2, 1, 5, 23};
     std::cout << "Test 1... ";
     std::vector<int64_t> arr1 = sorting::wave_sort::waveSort(array1, 7);
+	std::cerr << "test(): arr1 → " << arr1 << std::endl;
     const std::vector<int64_t> o1 = {2, 1, 10, 5, 49, 23, 90};
     assert(arr1 == o1);
     std::cout << "passed" << std::endl;
@@ -63,6 +67,7 @@ static void test() {
     std::vector<int64_t> array2 = {1, 3, 4, 2, 7, 8};
     std::cout << "Test 2... ";
     std::vector<int64_t> arr2 = sorting::wave_sort::waveSort(array2, 6);
+	std::cerr << "test(): arr2 → " << arr2 << std::endl;
     const std::vector<int64_t> o2 = {2, 1, 4, 3, 8, 7};
     assert(arr2 == o2);
     std::cout << "passed" << std::endl;
@@ -71,6 +76,7 @@ static void test() {
     std::vector<int64_t> array3 = {3, 3, 3, 3};
     std::cout << "Test 3... ";
     std::vector<int64_t> arr3 = sorting::wave_sort::waveSort(array3, 4);
+	std::cerr << "test(): arr3 → " << arr3 << std::endl;
     const std::vector<int64_t> o3 = {3, 3, 3, 3};
     assert(arr3 == o3);
     std::cout << "passed" << std::endl;
@@ -79,9 +85,11 @@ static void test() {
     std::vector<int64_t> array4 = {9, 4, 6, 8, 14, 3};
     std::cout << "Test 4... ";
     std::vector<int64_t> arr4 = sorting::wave_sort::waveSort(array4, 6);
+	std::cerr << "test(): arr4 → " << arr4 << std::endl;
     const std::vector<int64_t> o4 = {4, 3, 8, 6, 14, 9};
     assert(arr4 == o4);
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -89,6 +97,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

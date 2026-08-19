@@ -37,8 +37,10 @@ namespace subarray_sum {
  * @returns count of the number of subsets with required sum
  */
 uint64_t subarray_sum(int64_t sum, const std::vector<int64_t> &in_arr) {
+	std::cerr << ">>> Entering subarray_sum(sum=" << sum << ",in_arr=" << in_arr << ")" << std::endl;
     int64_t nelement = in_arr.size();
     int64_t count_of_subset = 0;
+	std::cerr << "subarray_sum(sum=" << sum << ",in_arr=" << in_arr << "): nelement → " << nelement << std::endl;
     int64_t current_sum = 0;
     std::unordered_map<int64_t, int64_t>
         sumarray;  // to store the subarrays count
@@ -56,6 +58,7 @@ uint64_t subarray_sum(int64_t sum, const std::vector<int64_t> &in_arr) {
         }
         sumarray[current_sum]++;
     }
+	std::cerr << "<<< Exiting subarray_sum(sum=" << sum << ",in_arr=" << in_arr << ")" << std::endl;
     return count_of_subset;
 }
 }  // namespace subarray_sum
@@ -66,6 +69,7 @@ uint64_t subarray_sum(int64_t sum, const std::vector<int64_t> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     std::cout << "1st test ";
     std::vector<int64_t> array1 = {-7, -3, -2, 5, 8};  // input array
@@ -106,6 +110,7 @@ static void test() {
            0);  // here we are expecting 0 subsets which sum up to 6 i.e. we
                 // cannot select anything from an empty array
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -113,6 +118,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

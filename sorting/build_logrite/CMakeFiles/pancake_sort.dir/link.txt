@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/pancake_sort.dir/pancake_sort.o -o pancake_sort 

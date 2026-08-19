@@ -59,6 +59,8 @@ class Graph {
      * @returns A reference to the adjacency list
      */
     const std::vector<std::vector<int>>& getAdjacencyList() const {
+		std::cerr << ">>> Entering getAdjacencyList()" << std::endl;
+		std::cerr << "<<< Exiting getAdjacencyList()" << std::endl;
         return adj;
     }
 
@@ -93,8 +95,10 @@ void dfs(int v, std::vector<int>& visited,
  * @returns A vector containing the topological order of nodes
  */
 std::vector<int> topologicalSort(const Graph& g) {
+	std::cerr << ">>> Entering topologicalSort(g=" << g << ")" << std::endl;
     int n = g.getNumNodes();
     const auto& adj = g.getAdjacencyList();
+	std::cerr << "topologicalSort(g=" << g << "): n → " << n << std::endl;
     std::vector<int> visited(n, 0);
     std::stack<int> s;
 
@@ -107,11 +111,14 @@ std::vector<int> topologicalSort(const Graph& g) {
     std::vector<int> ans;
     while (!s.empty()) {
         int elem = s.top();
+		std::cerr << "topologicalSort(g=" << g << "): elem → " << elem << std::endl;
         s.pop();
         ans.push_back(elem);
     }
 
     if (ans.size() < n) {  // Cycle detected
+		std::cerr << "Throwing std from topologicalSort(g=" << g << ")" << std::endl;
+	std::cerr << "<<< Exiting topologicalSort(g=" << g << ")" << std::endl;
         throw std::invalid_argument("cycle detected in graph");
     }
     return ans;
@@ -124,6 +131,7 @@ std::vector<int> topologicalSort(const Graph& g) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     std::cout << "Testing for graph 1\n";
     int n_1 = 6;
@@ -135,6 +143,7 @@ static void test() {
     graph1.addEdge(3, 1);
     graph1.addEdge(4, 1);
     std::vector<int> ans_1 = graph::topological_sort::topologicalSort(graph1);
+	std::cerr << "test(): ans_1 → " << ans_1 << std::endl;
     std::vector<int> expected_1 = {5, 4, 2, 3, 1, 0};
     std::cout << "Topological Sorting Order: ";
     for (int i : ans_1) {
@@ -155,6 +164,7 @@ static void test() {
     graph2.addEdge(1, 3);
     graph2.addEdge(2, 4);
     std::vector<int> ans_2 = graph::topological_sort::topologicalSort(graph2);
+	std::cerr << "test(): ans_2 → " << ans_2 << std::endl;
     std::vector<int> expected_2 = {0, 1, 2, 4, 3};
     std::cout << "Topological Sorting Order: ";
     for (int i : ans_2) {
@@ -174,9 +184,11 @@ static void test() {
     try {
         graph::topological_sort::topologicalSort(graph3);
     } catch (std::invalid_argument& err) {
+		std::cerr << "Exception in test(): " << e.what() << std::endl;
         assert(std::string(err.what()) == "cycle detected in graph");
     }
     std::cout << "Test Passed\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -184,6 +196,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

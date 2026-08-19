@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/trie_modern.dir/trie_modern.o -o trie_modern 

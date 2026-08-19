@@ -112,6 +112,7 @@ std::vector<std::uint32_t> gale_shapley(
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // Test Case 1
     std::vector<std::vector<std::uint32_t>> primary_preferences = {
         {0, 1, 2, 3}, {2, 1, 3, 0}, {1, 2, 0, 3}, {3, 0, 1, 2}};
@@ -124,8 +125,10 @@ static void tests() {
     // Test Case 2
     primary_preferences = {
         {0, 2, 1, 3}, {2, 3, 0, 1}, {3, 1, 2, 0}, {2, 1, 0, 3}};
+		std::cerr << "tests(): primary_preferences → " << primary_preferences << std::endl;
     secondary_preferences = {
         {1, 0, 2, 3}, {3, 0, 1, 2}, {0, 2, 1, 3}, {1, 2, 0, 3}};
+		std::cerr << "tests(): secondary_preferences → " << secondary_preferences << std::endl;
     assert(greedy_algorithms::stable_matching::gale_shapley(
                secondary_preferences, primary_preferences) ==
            std::vector<std::uint32_t>({0, 3, 1, 2}));
@@ -143,6 +146,7 @@ static void tests() {
     assert(greedy_algorithms::stable_matching::gale_shapley(
                secondary_preferences, primary_preferences) ==
            std::vector<std::uint32_t>({}));
+		std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -150,6 +154,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // Run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

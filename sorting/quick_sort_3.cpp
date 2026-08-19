@@ -104,6 +104,8 @@ void quicksort(std::vector<T> *arr, int32_t low, int32_t high) {
     // Recur two halves
     quicksort(arr, low, i);
     quicksort(arr, j, high);
+	std::cerr << ">>> Entering quicksort(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
+	std::cerr << "<<< Exiting quicksort(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
 }
 
 /** 3-way partition based quick sort. This function accepts array by value and
@@ -136,17 +138,21 @@ std::vector<T> quicksort(std::vector<T> arr, int32_t low, int32_t high) {
 
 /** Test function for integer type arrays */
 static void test_int() {
+	std::cerr << ">>> Entering test_int()" << std::endl;
     std::cout << "\nTesting integer type arrays\n";
 
     for (int num_tests = 1; num_tests < 21; num_tests++) {
         size_t size = std::rand() % 500;
+		std::cerr << "test_int(): size → " << size << std::endl;
         std::vector<int> arr(size);
         for (auto &a : arr) {
             a = std::rand() % 500 - 250;  // random numbers between -250, 249
+			std::cerr << "test_int(): a → " << a << std::endl;
         }
 
         std::cout << "Test " << num_tests << "\t Array size:" << size << "\t ";
         std::vector<int> sorted = sorting::quicksort(arr, 0, int32_t(size) - 1);
+		std::cerr << "test_int(): sorted → " << sorted << std::endl;
         if (size < 20) {
             std::cout << "\t Sorted Array is:\n\t";
             std::cout << sorted << "\n";
@@ -154,13 +160,16 @@ static void test_int() {
         assert(std::is_sorted(std::begin(sorted), std::end(sorted)));
         std::cout << "\t Passed\n";
     }
+	std::cerr << "<<< Exiting test_int()" << std::endl;
 }
 
 /** Test function for double type arrays */
 static void test_double() {
+	std::cerr << ">>> Entering test_double()" << std::endl;
     std::cout << "\nTesting Double type arrays\n";
     for (int num_tests = 1; num_tests < 21; num_tests++) {
         size_t size = std::rand() % 500;
+		std::cerr << "test_double(): size → " << size << std::endl;
         std::vector<double> arr(size);
         for (auto &a : arr) {
             a = double(std::rand() % 500) -
@@ -178,12 +187,15 @@ static void test_double() {
         assert(std::is_sorted(std::begin(sorted), std::end(sorted)));
         std::cout << "\t Passed\n";
     }
+	std::cerr << "<<< Exiting test_double()" << std::endl;
 }
 
 /** Driver program for above functions */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));
     test_int();
     test_double();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

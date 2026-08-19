@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/test_stack_students.dir/test_stack_students.o -o test_stack_students 

@@ -47,10 +47,13 @@ namespace string {
  */
 template <typename T>
 size_t duval(const T& s) {
+	std::cerr << ">>> Entering duval(s=" << s << ")" << std::endl;
     size_t n = s.size();
     size_t i = 0, ans = 0;
+	std::cerr << "duval(s=" << s << "): n → " << n << std::endl;
     while (i < n) {
         ans = i;
+		std::cerr << "duval(s=" << s << "): ans → " << ans << std::endl;
         size_t j = i + 1, k = i;
         while (j < (n + n) && s[j % n] >= s[k % n]) {
             if (s[k % n] < s[j % n]) {
@@ -64,6 +67,7 @@ size_t duval(const T& s) {
             i += j - k;
         }
     }
+	std::cerr << "<<< Exiting duval(s=" << s << ")" << std::endl;
     return ans;
     // returns 0-indexed position of the least cyclic shift
 }
@@ -75,14 +79,17 @@ size_t duval(const T& s) {
  * returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     using namespace string;
 
     // Test 1
     std::string s1 = "abcab";
+	std::cerr << "test(): s1 → " << s1 << std::endl;
     assert(duval(s1) == 3);
 
     // Test 2
     std::string s2 = "011100";
+	std::cerr << "test(): s2 → " << s2 << std::endl;
     assert(duval(s2) == 4);
 
     // Test 3
@@ -95,6 +102,7 @@ static void test() {
 
     // Test 5
     std::deque<char> d = {'a', 'z', 'c', 'a', 'b'};
+	std::cerr << "test(): d → " << d << std::endl;
     assert(duval(d) == 3);
 
     // Test 6
@@ -106,6 +114,7 @@ static void test() {
     assert(duval(v2) == 4);
 
     std::cout << "All tests passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -113,6 +122,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

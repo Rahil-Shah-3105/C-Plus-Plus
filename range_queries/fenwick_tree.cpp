@@ -48,10 +48,12 @@ class fenwick_tree {
      */
     template <typename T>
     explicit fenwick_tree(const std::vector<T>& arr) : n(arr.size()) {
+		std::cerr << ">>> Entering fenwick_tree(arr=" << arr << ")" << std::endl;
         bit.assign(n + 1, 0);
         for (int i = 0; i < n; ++i) {
             update(i, arr[i]);
         }
+		std::cerr << "<<< Exiting fenwick_tree(arr=" << arr << ")" << std::endl;
     }
 
     /**
@@ -73,11 +75,13 @@ class fenwick_tree {
      */
     template <typename T>
     void update(T id, T val) {
+		std::cerr << ">>> Entering update(id=" << id << ",val=" << val << ")" << std::endl;
         id++;
         while (id <= n) {
             bit[id] += val;
             id += offset(id);
         }
+		std::cerr << "<<< Exiting update(id=" << id << ",val=" << val << ")" << std::endl;
     }
 
     /**
@@ -88,12 +92,14 @@ class fenwick_tree {
      */
     template <typename T>
     int sum(T id) {
+		std::cerr << ">>> Entering sum(id=" << id << ")" << std::endl;
         id++;
         T res = 0;
         while (id > 0) {
             res += bit[id];
             id -= offset(id);
         }
+		std::cerr << "<<< Exiting sum(id=" << id << ")" << std::endl;
         return res;
     }
 
@@ -112,6 +118,7 @@ class fenwick_tree {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::vector<int> arr = {1, 2, 3, 4, 5};
     range_queries::fenwick_tree fenwick_tree(arr);
 
@@ -123,6 +130,7 @@ static void tests() {
 
     fenwick_tree.update(0, 6);
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -130,6 +138,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

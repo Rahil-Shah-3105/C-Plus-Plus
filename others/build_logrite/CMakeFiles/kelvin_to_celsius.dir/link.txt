@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/kelvin_to_celsius.dir/kelvin_to_celsius.o -o kelvin_to_celsius 

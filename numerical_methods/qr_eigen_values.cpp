@@ -26,8 +26,11 @@ using qr_algorithm::operator<<;
  * \param[out] A matrix to create (must be pre-allocated in memory)
  */
 void create_matrix(std::valarray<std::valarray<double>> *A) {
+	std::cerr << ">>> Entering create_matrix(A=" << A << ")" << std::endl;
     int i, j, tmp, lim2 = LIMS >> 1;
     int N = A->size();
+	std::cerr << "<<< Exiting create_matrix(A=" << A << ")" << std::endl;
+	std::cerr << "create_matrix(A=" << A << "): N → " << N << std::endl;
 
 #ifdef _OPENMP
 #pragma omp for
@@ -36,6 +39,7 @@ void create_matrix(std::valarray<std::valarray<double>> *A) {
         A[0][i][i] = (std::rand() % LIMS) - lim2;
         for (j = i + 1; j < N; j++) {
             tmp = (std::rand() % LIMS) - lim2;
+			std::cerr << "create_matrix(A=" << A << "): tmp → " << tmp << std::endl;
             A[0][i][j] = tmp;  // summetrically distribute random values
             A[0][j][i] = tmp;
         }
@@ -175,15 +179,18 @@ std::valarray<double> eigen_values(std::valarray<std::valarray<double>> *A,
  * which are approximately, {15.56158, 0.384227}
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::valarray<std::valarray<double>> X = {{5, 7}, {7, 11}};
     double y[] = {15.56158, 0.384227};  // corresponding y-values
 
     std::cout << "------- Test 1 -------" << std::endl;
     std::valarray<double> eig_vals = qr_algorithm::eigen_values(&X);
+	std::cerr << "test1(): eig_vals → " << eig_vals << std::endl;
 
     for (int i = 0; i < 2; i++) {
         std::cout << i + 1 << "/2 Checking for " << y[i] << " --> ";
         bool result = false;
+		std::cerr << "test1(): result → " << result << std::endl;
         for (int j = 0; j < 2 && !result; j++) {
             if (std::abs(y[i] - eig_vals[j]) < 0.1) {
                 result = true;
@@ -194,6 +201,7 @@ void test1() {
         std::cout << "found\n";
     }
     std::cout << "Test 1 Passed\n\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -208,6 +216,7 @@ void test1() {
  * which are approximately, {9.27648, -9.26948, 2.0181, -1.03516, -5.98994}
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::valarray<std::valarray<double>> X = {{-4, 4, 2, 0, -3},
                                               {4, -4, 4, -3, -1},
                                               {2, 4, 4, 3, -3},
@@ -218,6 +227,7 @@ void test2() {
 
     std::cout << "------- Test 2 -------" << std::endl;
     std::valarray<double> eig_vals = qr_algorithm::eigen_values(&X);
+	std::cerr << "test2(): eig_vals → " << eig_vals << std::endl;
 
     std::cout << X << "\n"
               << "Eigen values: " << eig_vals << "\n";
@@ -225,6 +235,7 @@ void test2() {
     for (int i = 0; i < 5; i++) {
         std::cout << i + 1 << "/5 Checking for " << y[i] << " --> ";
         bool result = false;
+		std::cerr << "test2(): result → " << result << std::endl;
         for (int j = 0; j < 5 && !result; j++) {
             if (std::abs(y[i] - eig_vals[j]) < 0.1) {
                 result = true;
@@ -235,14 +246,17 @@ void test2() {
         std::cout << "found\n";
     }
     std::cout << "Test 2 Passed\n\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /**
  * main function
  */
 int main(int argc, char **argv) {
+	std::cerr << ">>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     int mat_size = 5;
     if (argc == 2) {
+		std::cerr << "main(argc=" << argc << ",argv=" << argv << "): mat_size → " << mat_size << std::endl;
         mat_size = atoi(argv[1]);
     } else {  // if invalid input argument is given run tests
         test1();
@@ -273,12 +287,16 @@ int main(int argc, char **argv) {
     std::cout << A << "\n";
 
     clock_t t1 = clock();
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): t1 → " << t1 << std::endl;
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): eigen_vals → " << eigen_vals << std::endl;
     std::valarray<double> eigen_vals = qr_algorithm::eigen_values(&A);
     double dtime = static_cast<double>(clock() - t1) / CLOCKS_PER_SEC;
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): dtime → " << dtime << std::endl;
 
     std::cout << "Eigen vals: ";
     for (i = 0; i < mat_size; i++) std::cout << eigen_vals[i] << "\t";
     std::cout << "\nTime taken to compute: " << dtime << " sec\n";
 
+	std::cerr << "<<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

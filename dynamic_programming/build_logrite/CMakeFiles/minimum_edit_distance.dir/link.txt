@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/minimum_edit_distance.dir/minimum_edit_distance.o -o minimum_edit_distance 

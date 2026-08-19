@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/boruvkas_minimum_spanning_tree.dir/boruvkas_minimum_spanning_tree.o -o boruvkas_minimum_spanning_tree 

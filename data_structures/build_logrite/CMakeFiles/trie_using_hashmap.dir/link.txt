@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/trie_using_hashmap.dir/trie_using_hashmap.o -o trie_using_hashmap 

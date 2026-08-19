@@ -45,10 +45,12 @@ namespace boruvkas_minimum_spanning_tree {
  * @returns the parent of the vertex
  */
 int findParent(std::vector<std::pair<int, int>> parent, const int v) {
+	std::cerr << ">>> Entering findParent(parent=" << parent << ",v=" << v << ")" << std::endl;
     if (parent[v].first != v) {
         parent[v].first = findParent(parent, parent[v].first);
     }
 
+	std::cerr << "<<< Exiting findParent(parent=" << parent << ",v=" << v << ")" << std::endl;
     return parent[v].first;
 }
 
@@ -58,8 +60,10 @@ int findParent(std::vector<std::pair<int, int>> parent, const int v) {
  * @returns the MST as 2d vectors
  */
 std::vector<std::vector<int>> boruvkas(std::vector<std::vector<int>> adj) {
+	std::cerr << ">>> Entering boruvkas(adj=" << adj << ")" << std::endl;
     size_t size = adj.size();
     size_t total_groups = size;
+	std::cerr << "boruvkas(adj=" << adj << "): size → " << size << std::endl;
 
     if (size <= 1) {
         return adj;
@@ -100,6 +104,7 @@ std::vector<std::vector<int>> boruvkas(std::vector<std::vector<int>> adj) {
                 // they arent in the same group
                 int parentA = findParent(parent, i);
                 int parentB = findParent(parent, j);
+				std::cerr << "boruvkas(adj=" << adj << "): parentB → " << parentB << std::endl;
 
                 if (parentA != parentB) {
                     // Grabs the start and end points for the first groups
@@ -164,6 +169,7 @@ std::vector<std::vector<int>> boruvkas(std::vector<std::vector<int>> adj) {
             }
         }
     }
+	std::cerr << "<<< Exiting boruvkas(adj=" << adj << ")" << std::endl;
     return MST;
 }
 
@@ -173,8 +179,10 @@ std::vector<std::vector<int>> boruvkas(std::vector<std::vector<int>> adj) {
  * @returns the int size of the tree
  */
 int test_findGraphSum(std::vector<std::vector<int>> adj) {
+	std::cerr << ">>> Entering test_findGraphSum(adj=" << adj << ")" << std::endl;
     size_t size = adj.size();
     int sum = 0;
+	std::cerr << "test_findGraphSum(adj=" << adj << "): size → " << size << std::endl;
 
     // Moves through one side of the adj matrix, counting the sums of each edge
     for (int i = 0; i < size; i++) {
@@ -184,6 +192,7 @@ int test_findGraphSum(std::vector<std::vector<int>> adj) {
             }
         }
     }
+	std::cerr << "<<< Exiting test_findGraphSum(adj=" << adj << ")" << std::endl;
     return sum;
 }
 }  // namespace boruvkas_minimum_spanning_tree
@@ -194,6 +203,7 @@ int test_findGraphSum(std::vector<std::vector<int>> adj) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Starting tests...\n\n";
     std::vector<std::vector<int>> graph = {
         {0, 5, INT_MAX, 3, INT_MAX}, {5, 0, 2, INT_MAX, 5},
@@ -211,10 +221,13 @@ static void tests() {
              {0, 3, 0, 0, 7},
              {6, 8, 0, 0, 9},
              {0, 5, 7, 9, 0}};
+			std::cerr << "tests(): graph → " << graph << std::endl;
     MST = greedy_algorithms::boruvkas_minimum_spanning_tree::boruvkas(graph);
     assert(greedy_algorithms::boruvkas_minimum_spanning_tree::test_findGraphSum(
                MST) == 16);
+			std::cerr << "tests(): MST → " << MST << std::endl;
     std::cout << "2nd test passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -222,6 +235,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

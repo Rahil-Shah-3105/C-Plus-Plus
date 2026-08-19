@@ -32,6 +32,7 @@ namespace sorting {
  */
 int partition(std::vector<int> &arr, int start, int end)
 {
+	std::cerr << ">>> Entering partition(arr=" << arr << ",start=" << start << ",end=" << end << ")" << std::endl;
     int pivot = arr[end];
     int index = start - 1;
 
@@ -42,6 +43,7 @@ int partition(std::vector<int> &arr, int start, int end)
     }
 
     std::swap(arr[index + 1], arr[end]);
+	std::cerr << "<<< Exiting partition(arr=" << arr << ",start=" << start << ",end=" << end << ")" << std::endl;
     return index + 1;
 }
 
@@ -57,9 +59,11 @@ int partition(std::vector<int> &arr, int start, int end)
  */
 void iterativeQuickSort(std::vector<int> &arr)
 {
+	std::cerr << ">>> Entering iterativeQuickSort(arr=" << arr << ")" << std::endl;
     std::stack<int> stack;
     int start = 0;
     int end = arr.size()-1;
+	std::cerr << "iterativeQuickSort(arr=" << arr << "): end → " << end << std::endl;
     stack.push(start);
     stack.push(end);
 
@@ -71,6 +75,7 @@ void iterativeQuickSort(std::vector<int> &arr)
         stack.pop();
 
         int pivotIndex = partition(arr,start,end);
+		std::cerr << "iterativeQuickSort(arr=" << arr << "): pivotIndex → " << pivotIndex << std::endl;
 
         if(pivotIndex -1 > start)
         {
@@ -84,6 +89,7 @@ void iterativeQuickSort(std::vector<int> &arr)
             stack.push(end);
         }
     }
+	std::cerr << "<<< Exiting iterativeQuickSort(arr=" << arr << ")" << std::endl;
 }
 
 } // namespace sorting
@@ -93,6 +99,7 @@ void iterativeQuickSort(std::vector<int> &arr)
  */
 void tests()
 {
+	std::cerr << ">>> Entering tests()" << std::endl;
     //TEST 1 - Positive numbers
     std::vector<int> case1={100,534,1000000,553,10,61,2000,238,2756,9,12,56,30};
     std::cout<<"TEST 1\n";
@@ -118,6 +125,7 @@ void tests()
     std::cout<<"After: \n";
     for(auto x : case2) std::cout<<x<<",";
     std::cout<<"\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 
@@ -127,6 +135,8 @@ void tests()
  */
 int main()
 {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests(); // run self test implementation
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

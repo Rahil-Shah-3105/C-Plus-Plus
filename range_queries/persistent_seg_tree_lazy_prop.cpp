@@ -64,11 +64,14 @@ class perSegTree {
      * @returns the new node
      */
     std::shared_ptr<Node> newKid(std::shared_ptr<Node> const &curr) {
+		std::cerr << ">>> Entering newKid(curr=" << curr << ")" << std::endl;
         auto newNode = std::make_shared<Node>(Node());
         newNode->left = curr->left;
+		std::cerr << "newKid(curr=" << curr << "): newNode → " << newNode << std::endl;
         newNode->right = curr->right;
         newNode->prop = curr->prop;
         newNode->val = curr->val;
+		std::cerr << "<<< Exiting newKid(curr=" << curr << ")" << std::endl;
         return newNode;
     }
 
@@ -105,17 +108,23 @@ class perSegTree {
      * @returns pointer to the newly created node
      */
     std::shared_ptr<Node> construct(const uint32_t &i, const uint32_t &j) {
+		std::cerr << ">>> Entering construct(i=" << i << ",j=" << j << ")" << std::endl;
         auto newNode = std::make_shared<Node>(Node());
         if (i == j) {
+			std::cerr << "construct(i=" << i << ",j=" << j << "): newNode → " << newNode << std::endl;
             newNode->val = vec[i];
         } else {
             uint32_t mid = i + (j - i) / 2;
+			std::cerr << "construct(i=" << i << ",j=" << j << "): mid → " << mid << std::endl;
+			std::cerr << "construct(i=" << i << ",j=" << j << "): leftt → " << leftt << std::endl;
             auto leftt = construct(i, mid);
             auto right = construct(mid + 1, j);
+			std::cerr << "construct(i=" << i << ",j=" << j << "): right → " << right << std::endl;
             newNode->val = leftt->val + right->val;
             newNode->left = leftt;
             newNode->right = right;
         }
+		std::cerr << "<<< Exiting construct(i=" << i << ",j=" << j << ")" << std::endl;
         return newNode;
     }
 
@@ -267,6 +276,7 @@ class perSegTree {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<int64_t> arr = {-5, 2, 3, 11, -2, 7, 0, 1};
     range_queries::perSegTree tree;
     std::cout << "Elements before any updates are {";
@@ -310,6 +320,7 @@ static void test() {
               << tree.query(3, 5, 0) << '\n';
     std::cout << "Querying range sum on version 1 from index 3 to 5 = 4-9+0 = "
               << tree.query(3, 5, 1) << '\n';
+			std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -317,6 +328,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
