@@ -194,6 +194,7 @@ int test_findGraphSum(std::vector<std::vector<int>> adj) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Starting tests...\n\n";
     std::vector<std::vector<int>> graph = {
         {0, 5, INT_MAX, 3, INT_MAX}, {5, 0, 2, INT_MAX, 5},
@@ -215,6 +216,7 @@ static void tests() {
     assert(greedy_algorithms::boruvkas_minimum_spanning_tree::test_findGraphSum(
                MST) == 16);
     std::cout << "2nd test passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -222,6 +224,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

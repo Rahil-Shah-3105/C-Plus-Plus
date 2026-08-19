@@ -39,10 +39,12 @@ namespace manacher {
  * @returns the largest palindromic substring
  */
 std::string manacher(const std::string &prototype) {
+	std::cerr << ">>> Entering manacher(prototype=" << prototype << ")" << std::endl;
     if (prototype.size() > 0) {
         // stuffing characters between the input string to handle cases with
         // even length palindrome
         std::string stuffed_string = "";
+		std::cerr << "manacher(prototype=" << prototype << "): stuffed_string → " << stuffed_string << std::endl;
         for (auto str : prototype) {
             stuffed_string += str;
             stuffed_string += "#";
@@ -62,6 +64,7 @@ std::string manacher(const std::string &prototype) {
                 // palindrome, having symmetric halves
 
         uint64_t right = 0;  // this is the maximum length of the palindrome
+							std::cerr << "manacher(prototype=" << prototype << "): right → " << right << std::endl;
                              // from 'bigger_center' to the rightmost end
 
         // i is considered as center lying within one half of the palindrone
@@ -101,7 +104,9 @@ std::string manacher(const std::string &prototype) {
 
         // now extracting the first largest palindrome
         uint64_t half_length = 0;   // half length of the largest palindrome
+		std::cerr << "manacher(prototype=" << prototype << "): half_length → " << half_length << std::endl;
         uint64_t center_index = 0;  // index of center of the largest palindrome
+		std::cerr << "manacher(prototype=" << prototype << "): center_index → " << center_index << std::endl;
 
         for (uint64_t i = 1; i < stuffed_string.size() - 1; i++) {
             if (palindrome_max_half_length[i] > half_length) {
@@ -137,6 +142,7 @@ std::string manacher(const std::string &prototype) {
 
     } else {
         // handling case when string is empty
+		std::cerr << "<<< Exiting manacher(prototype=" << prototype << ")" << std::endl;
         return "";
     }
 }
@@ -149,6 +155,7 @@ std::string manacher(const std::string &prototype) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     assert(strings::manacher::manacher("") == "");
     assert(strings::manacher::manacher("abababc") == "ababa");
     assert(strings::manacher::manacher("cbaabd") == "baab");
@@ -163,6 +170,7 @@ static void test() {
     assert(strings::manacher::manacher("abced") == "a");
 
     std::cout << "All tests have passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -170,6 +178,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

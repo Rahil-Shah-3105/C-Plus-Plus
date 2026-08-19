@@ -33,8 +33,11 @@ namespace math {
  * @return a raised to power b modulo c
  */
 uint64_t power(uint64_t a, uint64_t b, uint64_t c) {
+	std::cerr << ">>> Entering power(a=" << a << ",b=" << b << ",c=" << c << ")" << std::endl;
     uint64_t ans = 1;  /// Initialize the answer to be returned
     a = a % c;         /// Update a if it is more than or equal to c
+	std::cerr << "power(a=" << a << ",b=" << b << ",c=" << c << "): a → " << a << std::endl;
+	std::cerr << "power(a=" << a << ",b=" << b << ",c=" << c << "): ans → " << ans << std::endl;
     if (a == 0) {
         return 0;  /// In case a is divisible by c;
     }
@@ -47,6 +50,7 @@ uint64_t power(uint64_t a, uint64_t b, uint64_t c) {
         b = b >> 1;  /// b = b/2
         a = ((a % c) * (a % c)) % c;
     }
+	std::cerr << "<<< Exiting power(a=" << a << ",b=" << b << ",c=" << c << ")" << std::endl;
     return ans;
 }
 
@@ -58,25 +62,32 @@ uint64_t power(uint64_t a, uint64_t b, uint64_t c) {
  * @returns `void`
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     uint32_t test_case_1 = math::power(2, 5, 13);
     assert(test_case_1 == 6);
+	std::cerr << "test(): test_case_1 → " << test_case_1 << std::endl;
     std::cout << "Test 1 Passed!" << std::endl;
 
     uint32_t test_case_2 = math::power(14, 7, 15);
+	std::cerr << "test(): test_case_2 → " << test_case_2 << std::endl;
     assert(test_case_2 == 14);
     std::cout << "Test 2 Passed!" << std::endl;
 
     uint64_t test_case_3 = math::power(8, 15, 41);
+	std::cerr << "test(): test_case_3 → " << test_case_3 << std::endl;
     assert(test_case_3 == 32);
     std::cout << "Test 3 Passed!" << std::endl;
 
     uint64_t test_case_4 = math::power(27, 2, 5);
+	std::cerr << "test(): test_case_4 → " << test_case_4 << std::endl;
     assert(test_case_4 == 4);
     std::cout << "Test 4 Passed!" << std::endl;
 
     uint16_t test_case_5 = math::power(7, 3, 6);
+	std::cerr << "test(): test_case_5 → " << test_case_5 << std::endl;
     assert(test_case_5 == 1);
     std::cout << "Test 5 Passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -84,6 +95,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

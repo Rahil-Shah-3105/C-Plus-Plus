@@ -76,6 +76,7 @@ std::pair<uint32_t, uint32_t> saddleback(
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<std::vector<int32_t>> matrix = {{1, 10, 100, 1000, 10000},
                                                 {2, 20, 200, 2000, 20000},
                                                 {3, 30, 300, 3000, 30000},
@@ -103,6 +104,7 @@ static void test() {
     answer1 = search::saddleback::saddleback(matrix, 300);
     test_answer = std::make_pair(3, 3);
     assert(test_answer == answer1);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -110,6 +112,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

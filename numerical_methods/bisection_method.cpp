@@ -24,23 +24,31 @@
 /** define \f$f(x)\f$ to find root for
  */
 static double eq(double i) {
+	std::cerr << ">>> Entering eq(i=" << i << ")" << std::endl;
+	std::cerr << "<<< Exiting eq(i=" << i << ")" << std::endl;
     return (std::pow(i, 3) - (4 * i) - 9);  // original equation
 }
 
 /** get the sign of any given number */
 template <typename T>
 int sgn(T val) {
+	std::cerr << ">>> Entering sgn(val=" << val << ")" << std::endl;
+	std::cerr << "<<< Exiting sgn(val=" << val << ")" << std::endl;
     return (T(0) < val) - (val < T(0));
 }
 
 /** main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     double a = -1, b = 1, x, z;
     int i;
+	std::cerr << "main(): a → " << a << std::endl;
 
     // loop to find initial intervals a, b
     for (int i = 0; i < MAX_ITERATIONS; i++) {
         z = eq(a);
+		std::cerr << "main(): z → " << z << std::endl;
+		std::cerr << "main(): x → " << x << std::endl;
         x = eq(b);
         if (sgn(z) == sgn(x)) {  // same signs, increase interval
             b++;

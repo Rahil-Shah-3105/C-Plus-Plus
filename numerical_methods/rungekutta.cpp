@@ -98,6 +98,7 @@ double rungeKutta(double init_x, const double &init_y, const double &x,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::cout << "The Runge Kutta function will be tested on the basis of "
                  "precomputed values\n";
 
@@ -121,6 +122,7 @@ static void test() {
         -1, 3, 4, 0.1);  // Tested with negative value
     assert(valthird == 2.49251005860244268);
     std::cout << "Passed Test 3\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -128,6 +130,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // Execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

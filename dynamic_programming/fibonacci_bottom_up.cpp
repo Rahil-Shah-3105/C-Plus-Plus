@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 int fib(int n) {
+	std::cerr << ">>> Entering fib(n=" << n << ")" << std::endl;
     int res[3];
     res[0] = 0;
     res[1] = 1;
@@ -9,13 +10,16 @@ int fib(int n) {
         res[0] = res[1];
         res[1] = res[2];
     }
+	std::cerr << "<<< Exiting fib(n=" << n << ")" << std::endl;
     return res[1];
 }
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int n;
     cout << "Enter n: ";
     cin >> n;
     cout << "Fibonacci number is ";
     cout << fib(n) << endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

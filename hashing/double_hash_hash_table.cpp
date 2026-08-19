@@ -45,7 +45,9 @@ struct Entry {
  * @return hash value of the key
  */
 size_t hashFxn(int key) {
+	std::cerr << ">>> Entering hashFxn(key=" << key << ")" << std::endl;
     std::hash<int> hash;
+	std::cerr << "<<< Exiting hashFxn(key=" << key << ")" << std::endl;
     return hash(key);
 }
 
@@ -56,7 +58,9 @@ size_t hashFxn(int key) {
  * @return  hash value of the key
  */
 size_t otherHashFxn(int key) {
+	std::cerr << ">>> Entering otherHashFxn(key=" << key << ")" << std::endl;
     std::hash<int> hash;
+	std::cerr << "<<< Exiting otherHashFxn(key=" << key << ")" << std::endl;
     return 1 + (7 - (hash(key) % 7));
 }
 
@@ -69,8 +73,10 @@ size_t otherHashFxn(int key) {
  * @return new hash if no conflicts present
  */
 int doubleHash(int key, bool searching) {
+	std::cerr << ">>> Entering doubleHash(key=" << key << ",searching=" << searching << ")" << std::endl;
     int hash = static_cast<int>(hashFxn(key));
     int i = 0;
+	std::cerr << "doubleHash(key=" << key << ",searching=" << searching << "): hash → " << hash << std::endl;
     Entry entry;
     do {
         int index =
@@ -108,6 +114,7 @@ int doubleHash(int key, bool searching) {
             return notPresent;
         }
     } while (entry.key != notPresent);
+	std::cerr << "<<< Exiting doubleHash(key=" << key << ",searching=" << searching << ")" << std::endl;
     return notPresent;
 }
 
@@ -141,6 +148,7 @@ bool searchingProber(const Entry& entry, int key) {
  * @returns None
  */
 void display() {
+	std::cerr << ">>> Entering display()" << std::endl;
     for (int i = 0; i < totalSize; i++) {
         if (table[i].key == notPresent) {
             std::cout << " Empty ";
@@ -153,15 +161,18 @@ void display() {
         }
     }
     std::cout << std::endl;
+	std::cerr << "<<< Exiting display()" << std::endl;
 }
 
 /** Rehashes the table into a bigger table
  * @returns None
  */
 void rehash() {
+	std::cerr << ">>> Entering rehash()" << std::endl;
     // Necessary so wall of add info isn't printed all at once
     rehashing = true;
     int oldSize = totalSize;
+	std::cerr << "rehash(): rehashing → " << rehashing << std::endl;
     std::vector<Entry> oldTable(table);
     // Really this should use the next prime number greater than totalSize * 2
     table = std::vector<Entry>(totalSize * 2);
@@ -177,12 +188,14 @@ void rehash() {
 
     rehashing = false;
     std::cout << "Table was rehashed, new size is: " << totalSize << std::endl;
+	std::cerr << "<<< Exiting rehash()" << std::endl;
 }
 
 /** Checks for load factor here
  * @param key key value to add to the table
  */
 void add(int key) {
+	std::cerr << ">>> Entering add(key=" << key << ")" << std::endl;
     // auto* entry = new Entry();
     // entry->key = key;
     int index = doubleHash(key, false);
@@ -191,12 +204,14 @@ void add(int key) {
     if (++size / static_cast<double>(totalSize) >= 0.5) {
         rehash();
     }
+	std::cerr << "<<< Exiting add(key=" << key << ")" << std::endl;
 }
 
 /** Removes key. Leaves tombstone upon removal.
  * @param key key value to remove
  */
 void remove(int key) {
+	std::cerr << ">>> Entering remove(key=" << key << ")" << std::endl;
     int index = doubleHash(key, true);
     if (index == notPresent) {
         std::cout << "key not found" << std::endl;
@@ -204,12 +219,14 @@ void remove(int key) {
     table[index].key = tomb;
     std::cout << "Removal successful, leaving tombstone" << std::endl;
     size--;
+	std::cerr << "<<< Exiting remove(key=" << key << ")" << std::endl;
 }
 
 /** Information about the adding process
  * @param key key value to add to table
  */
 void addInfo(int key) {
+	std::cerr << ">>> Entering addInfo(key=" << key << ")" << std::endl;
     std::cout << "Initial table: ";
     display();
     std::cout << std::endl;
@@ -219,12 +236,14 @@ void addInfo(int key) {
     add(key);
     std::cout << "New table: ";
     display();
+	std::cerr << "<<< Exiting addInfo(key=" << key << ")" << std::endl;
 }
 
 /** Information about removal process
  * @param key key value to remove from table
  */
 void removalInfo(int key) {
+	std::cerr << ">>> Entering removalInfo(key=" << key << ")" << std::endl;
     std::cout << "Initial table: ";
     display();
     std::cout << std::endl;
@@ -234,6 +253,7 @@ void removalInfo(int key) {
     remove(key);
     std::cout << "New table: ";
     display();
+	std::cerr << "<<< Exiting removalInfo(key=" << key << ")" << std::endl;
 }
 }  // namespace double_hashing
 /**
@@ -248,11 +268,13 @@ using double_hashing::totalSize;
  * @returns 0 on success
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int cmd = 0, key = 0;
     std::cout << "Enter the initial size of Hash Table. = ";
     std::cin >> totalSize;
     table = std::vector<Entry>(totalSize);
     bool loop = true;
+	std::cerr << "main(): loop → " << loop << std::endl;
     while (loop) {
         std::cout << std::endl;
         std::cout << "PLEASE CHOOSE -" << std::endl;
@@ -271,6 +293,7 @@ int main() {
                 break;
             case 2:
                 std::cout << "Enter key to remove = ";
+				std::cerr << "main(): remove → " << remove << std::endl;
                 std::cin >> key;
                 double_hashing::removalInfo(key);
                 break;

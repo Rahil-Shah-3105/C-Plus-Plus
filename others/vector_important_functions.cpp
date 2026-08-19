@@ -9,9 +9,11 @@
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Initializing vector with array values
     int arr[] = {10, 20, 5, 23, 42, 15};
     int n = sizeof(arr) / sizeof(arr[0]);
+	std::cerr << "main(): n → " << n << std::endl;
     std::vector<int> vect(arr, arr + n);
 
     std::cout << "Vector is: ";
@@ -39,5 +41,6 @@ int main() {
     std::cout << "\nThe summation of vector elements is: ";
     std::cout << accumulate(vect.begin(), vect.end(), 0);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

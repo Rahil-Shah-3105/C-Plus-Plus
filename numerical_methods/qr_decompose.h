@@ -74,6 +74,8 @@ std::ostream &operator<<(std::ostream &out, std::valarray<T> const &v) {
  */
 template <typename T>
 inline double vector_dot(const std::valarray<T> &a, const std::valarray<T> &b) {
+	fprintf(stderr, ">>> Entering vector_dot(a=%d,b=%d)\n", a, b);
+    fprintf(stderr, "<<< Exiting vector_dot(a=%d,b=%d)\n", a, b);
     return (a * b).sum();
     // could also use following
     // return std::inner_product(std::begin(a), std::end(a), std::begin(b),
@@ -90,7 +92,10 @@ inline double vector_dot(const std::valarray<T> &a, const std::valarray<T> &b) {
  */
 template <typename T>
 inline double vector_mag(const std::valarray<T> &a) {
+	fprintf(stderr, ">>> Entering vector_mag(a=%d)\n", a);
     double dot = vector_dot(a, a);
+	fprintf(stderr, "vector_mag(a=%d): dot → %d\n", a, dot);
+    fprintf(stderr, "<<< Exiting vector_mag(a=%d)\n", a);
     return std::sqrt(dot);
 }
 

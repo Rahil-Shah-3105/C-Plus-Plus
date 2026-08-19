@@ -44,7 +44,9 @@ struct Entry {
  * @returns hash of the key
  */
 size_t hashFxn(int key) {
+	std::cerr << ">>> Entering hashFxn(key=" << key << ")" << std::endl;
     std::hash<int> hash;
+	std::cerr << "<<< Exiting hashFxn(key=" << key << ")" << std::endl;
     return hash(key);
 }
 

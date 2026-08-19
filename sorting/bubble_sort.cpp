@@ -94,6 +94,7 @@ std::vector<T> bubble_sort(std::vector<T>& array) {
  * @return void
  */
 static void test() {
+std::cerr << ">>> Entering test()" << std::endl;
   std::vector<int> vec_1 = {3, 1, -9, 0};
   std::vector<int> sorted_1 = sorting::bubble_sort::bubble_sort(vec_1);
 
@@ -122,6 +123,7 @@ static void test() {
   assert(std::is_sorted(sorted_5.begin(), sorted_5.end()));
   assert(std::is_sorted(sorted_6.begin(), sorted_6.end()));
   assert(std::is_sorted(sorted_7.begin(), sorted_7.end()));
+std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -129,6 +131,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+std::cerr << ">>> Entering main()" << std::endl;
   test();
+std::cerr << "<<< Exiting main()" << std::endl;
   return 0;
 }

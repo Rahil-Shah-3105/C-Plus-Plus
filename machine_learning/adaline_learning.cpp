@@ -222,6 +222,7 @@ using machine_learning::adaline;
  * \param[in] eta learning rate (optional, default=0.01)
  */
 void test1(double eta = 0.01) {
+	std::cerr << ">>> Entering test1(eta=" << eta << ")" << std::endl;
     adaline ada(2, eta);  // 2 features
 
     const int N = 10;  // number of sample points
@@ -242,6 +243,7 @@ void test1(double eta = 0.01) {
     std::cout << "Model after fit: " << ada << std::endl;
 
     int predict = ada.predict({5, -3});
+	std::cerr << "test1(eta=" << eta << "): predict → " << predict << std::endl;
     std::cout << "Predict for x=(5,-3): " << predict;
     assert(predict == -1);
     std::cout << " ...passed" << std::endl;
@@ -250,6 +252,7 @@ void test1(double eta = 0.01) {
     std::cout << "Predict for x=(5,8): " << predict;
     assert(predict == 1);
     std::cout << " ...passed" << std::endl;
+	std::cerr << "<<< Exiting test1(eta=" << eta << ")" << std::endl;
 }
 
 /**
@@ -260,6 +263,7 @@ void test1(double eta = 0.01) {
  * \param[in] eta learning rate (optional, default=0.01)
  */
 void test2(double eta = 0.01) {
+	std::cerr << ">>> Entering test2(eta=" << eta << ")" << std::endl;
     adaline ada(2, eta);  // 2 features
 
     const int N = 50;  // number of sample points
@@ -273,7 +277,9 @@ void test2(double eta = 0.01) {
     int range2 = range >> 1;  // sample points half-range
     for (int i = 0; i < N; i++) {
         double x0 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
+		std::cerr << "test2(eta=" << eta << "): x0 → " << x0 << std::endl;
         double x1 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
+		std::cerr << "test2(eta=" << eta << "): x1 → " << x1 << std::endl;
         X[i] = std::vector<double>({x0, x1});
         Y[i] = (x0 + 3. * x1) > -1 ? 1 : -1;
     }
@@ -290,13 +296,16 @@ void test2(double eta = 0.01) {
         double x1 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
 
         int predict = ada.predict({x0, x1});
+		std::cerr << "test2(eta=" << eta << "): predict → " << predict << std::endl;
 
         std::cout << "Predict for x=(" << x0 << "," << x1 << "): " << predict;
 
         int expected_val = (x0 + 3. * x1) > -1 ? 1 : -1;
+		std::cerr << "test2(eta=" << eta << "): expected_val → " << expected_val << std::endl;
         assert(predict == expected_val);
         std::cout << " ...passed" << std::endl;
     }
+	std::cerr << "<<< Exiting test2(eta=" << eta << ")" << std::endl;
 }
 
 /**
@@ -311,6 +320,7 @@ void test2(double eta = 0.01) {
  * \param[in] eta learning rate (optional, default=0.01)
  */
 void test3(double eta = 0.01) {
+	std::cerr << ">>> Entering test3(eta=" << eta << ")" << std::endl;
     adaline ada(6, eta);  // 2 features
 
     const int N = 100;  // number of sample points
@@ -324,8 +334,11 @@ void test3(double eta = 0.01) {
     int range2 = range >> 1;  // sample points half-range
     for (int i = 0; i < N; i++) {
         double x0 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
+		std::cerr << "test3(eta=" << eta << "): x0 → " << x0 << std::endl;
         double x1 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
+		std::cerr << "test3(eta=" << eta << "): x1 → " << x1 << std::endl;
         double x2 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
+		std::cerr << "test3(eta=" << eta << "): x2 → " << x2 << std::endl;
         X[i] = std::vector<double>({x0, x1, x2, x0 * x0, x1 * x1, x2 * x2});
         Y[i] = ((x0 * x0) + (x1 * x1) + (x2 * x2)) <= 1.f ? 1 : -1;
     }
@@ -343,6 +356,7 @@ void test3(double eta = 0.01) {
         double x2 = (static_cast<double>(std::rand() % range) - range2) / 100.f;
 
         int predict = ada.predict({x0, x1, x2, x0 * x0, x1 * x1, x2 * x2});
+		std::cerr << "test3(eta=" << eta << "): predict → " << predict << std::endl;
 
         std::cout << "Predict for x=(" << x0 << "," << x1 << "," << x2
                   << "): " << predict;

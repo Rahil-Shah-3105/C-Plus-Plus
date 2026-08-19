@@ -105,6 +105,7 @@ int median_of_medians(const std::vector<int>& A,  const int& idx) {
  * Function to test above algorithm
  */
 void test(){
+	std::cerr << ">>> Entering test()" << std::endl;
 	std::vector<int> A{25,21,98,100,76,22,43,60,89,87};
 	int i = 3;
 	assert(A[6] == search::median_search::median_of_medians(A, i));		// A[6]  = 43, is the fourth smallest element.
@@ -120,6 +121,7 @@ void test(){
 	assert(C[3] == search::median_search::median_of_medians(C, k)); 	// C[3] = 4, is the fourth smallest element.
 	std::cout << "test case:3 passed\n";
 	std::cout << "--All tests passed--\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -127,6 +129,7 @@ void test(){
  */
 int main()
 {
+	std::cerr << ">>> Entering main()" << std::endl;
 	test();
 	int n = 0;
 	std::cout << "Enter Size of Array: ";
@@ -138,8 +141,10 @@ int main()
 	}
 	std::cout << "Median: ";			// Median defination: https://en.wikipedia.org/wiki/Median
 	int x = search::median_search::median_of_medians(a,  (n - 1) / 2);
+	std::cerr << "main(): x → " << x << std::endl;
 	if(n % 2 == 0){
 		int y = search::median_search::median_of_medians(a, n / 2);
+		std::cerr << "main(): y → " << y << std::endl;
 		std::cout << (float(x) + float(y))/2.0;
 	}
 	else{
@@ -151,6 +156,7 @@ int main()
 	std::cin >> idx;
 	idx--;
 	std::cout << idx + 1<< "-th smallest element: " << search::median_search::median_of_medians(a, idx) << '\n';
+	std::cerr << "<<< Exiting main()" << std::endl;
 	return 0;
 }
 

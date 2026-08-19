@@ -21,17 +21,22 @@ Node AvailArray[100];  ///< array that will act as nodes of a linked list.
 int head = -1;
 int avail = 0;
 void initialise_list() {
+	std::cerr << ">>> Entering initialise_list()" << std::endl;
     for (int i = 0; i <= 98; i++) {
         AvailArray[i].next = i + 1;
     }
     AvailArray[99].next = -1;  // indicating the end of the linked list.
+	std::cerr << "<<< Exiting initialise_list()" << std::endl;
 }
 
 /** This will return the index of the first free node present in the avail list
  */
 int getnode() {
+	std::cerr << ">>> Entering getnode()" << std::endl;
     int NodeIndexToBeReturned = avail;
     avail = AvailArray[avail].next;
+	std::cerr << "getnode(): avail → " << avail << std::endl;
+	std::cerr << "<<< Exiting getnode()" << std::endl;
     return NodeIndexToBeReturned;
 }
 
@@ -40,23 +45,32 @@ int getnode() {
  * back that node into the array.
  */
 void freeNode(int nodeToBeDeleted) {
+	std::cerr << ">>> Entering freeNode(nodeToBeDeleted=" << nodeToBeDeleted << ")" << std::endl;
     AvailArray[nodeToBeDeleted].next = avail;
     avail = nodeToBeDeleted;
+	std::cerr << "freeNode(nodeToBeDeleted=" << nodeToBeDeleted << "): avail → " << avail << std::endl;
+	std::cerr << "<<< Exiting freeNode(nodeToBeDeleted=" << nodeToBeDeleted << ")" << std::endl;
 }
 
 /** The function will insert the given data
  * into the front of the linked list.
  */
 void insertAtTheBeginning(int data) {
+	std::cerr << ">>> Entering insertAtTheBeginning(data=" << data << ")" << std::endl;
     int newNode = getnode();
     AvailArray[newNode].data = data;
+	std::cerr << "insertAtTheBeginning(data=" << data << "): newNode → " << newNode << std::endl;
     AvailArray[newNode].next = head;
     head = newNode;
+	std::cerr << "insertAtTheBeginning(data=" << data << "): head → " << head << std::endl;
+	std::cerr << "<<< Exiting insertAtTheBeginning(data=" << data << ")" << std::endl;
 }
 
 void insertAtTheEnd(int data) {
+	std::cerr << ">>> Entering insertAtTheEnd(data=" << data << ")" << std::endl;
     int newNode = getnode();
     int temp = head;
+	std::cerr << "insertAtTheEnd(data=" << data << "): newNode → " << newNode << std::endl;
     while (AvailArray[temp].next != -1) {
         temp = AvailArray[temp].next;
     }
@@ -64,19 +78,23 @@ void insertAtTheEnd(int data) {
     AvailArray[newNode].data = data;
     AvailArray[newNode].next = -1;
     AvailArray[temp].next = newNode;
+	std::cerr << "<<< Exiting insertAtTheEnd(data=" << data << ")" << std::endl;
 }
 
 void display() {
+	std::cerr << ">>> Entering display()" << std::endl;
     int temp = head;
     while (temp != -1) {
         std::cout << AvailArray[temp].data << "->";
         temp = AvailArray[temp].next;
     }
     std::cout << "-1" << std::endl;
+	std::cerr << "<<< Exiting display()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     initialise_list();
     int x, y, z;
     for (;;) {
@@ -110,5 +128,6 @@ int main() {
         }
     }
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

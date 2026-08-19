@@ -15,6 +15,7 @@ class Graph {
 
     // Constructs a graph with V vertices and E edges
     Graph(int V) {
+		std::cerr << ">>> Entering Graph(V=" << V << ")" << std::endl;
         this->vertexNum = V;
         this->edges = new int *[V];
         for (int i = 0; i < V; i++) {
@@ -22,18 +23,23 @@ class Graph {
             for (int j = 0; j < V; j++) this->edges[i][j] = INT_MAX;
             this->edges[i][i] = 0;
         }
+		std::cerr << "<<< Exiting Graph(V=" << V << ")" << std::endl;
     }
 
     ~Graph() {
+		std::cerr << ">>> Entering ~Graph()" << std::endl;
         for (int i = 0; i < vertexNum; i++) {
             delete[] edges[i];
         }
         delete[] edges;
+		std::cerr << "<<< Exiting ~Graph()" << std::endl;
     }
 
     // Adds the given edge to the graph
     void addEdge(int src, int dst, int weight) {
+		std::cerr << ">>> Entering addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
         this->edges[src][dst] = weight;
+		std::cerr << "<<< Exiting addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
     }
 };
 
@@ -88,6 +94,7 @@ void FloydWarshall(Graph graph) {
 
 // Driver Function
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int V, E;
     int src, dst, weight;
     cout << "Enter number of vertices: ";
@@ -106,5 +113,6 @@ int main() {
     }
     FloydWarshall(G);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
