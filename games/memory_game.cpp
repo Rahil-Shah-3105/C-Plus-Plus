@@ -29,6 +29,8 @@ template <typename T>
 constexpr typename std::enable_if<std::is_integral<T>::value, void>::type SLEEP(
     T milliseconds) {
     Sleep(milliseconds * 1000);
+	std::cerr << ">>> Entering SLEEP(seconds=" << seconds << ")" << std::endl;
+	std::cerr << "<<< Exiting SLEEP(seconds=" << seconds << ")" << std::endl;
 }
 #else
 #include <unistd.h>  /// for sleep()
@@ -60,10 +62,12 @@ namespace memory_game {
  */
 template <typename T>
 bool is_number(const T &input) {
+	std::cerr << ">>> Entering is_number(input=" << input << ")" << std::endl;
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(256, '\n');
 
+	std::cerr << "<<< Exiting is_number(input=" << input << ")" << std::endl;
         return false;
     }
 
@@ -78,6 +82,7 @@ bool is_number(const T &input) {
  */
 template <typename T>
 void init(std::vector<T> *table) {
+	std::cerr << ">>> Entering init(table=" << table << ")" << std::endl;
     std::vector<char> letters(7);
 
     // Decrease / increase the number of letters depending on the size.
@@ -111,6 +116,7 @@ void init(std::vector<T> *table) {
             std::cout << letters[i] << ", ";
         }
     }
+	std::cerr << "<<< Exiting init(table=" << table << ")" << std::endl;
 }
 
 /**
@@ -358,13 +364,16 @@ void assign_results(std::vector<T> *table_empty, std::vector<T> *table,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Start randomizer. This changes the values every time.
     std::srand(std::time(nullptr));
 
     int size = 0;       ///< Size of the table.
+	std::cerr << "main(): size → " << size << std::endl;
     int selection = 0;  ///< Selection of the size (4x2, 5x2, 7x2).
 
     int response = 0;    ///< The answer (number index) that the user chose.
+	std::cerr << "main(): response → " << response << std::endl;
     int old_answer = 0;  ///< Previous answer (number index).
 
     int memory_count =
@@ -410,5 +419,6 @@ int main() {
     games::memory_game::assign_results(&table_empty, &table, &response,
                                        &first_time, &old_answer, &memory_count);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

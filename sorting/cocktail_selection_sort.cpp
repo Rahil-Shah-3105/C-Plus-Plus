@@ -10,11 +10,16 @@
 // Iterative Version
 
 void CocktailSelectionSort(std::vector<int> *vec, int low, int high) {
+	std::cerr << ">>> Entering CocktailSelectionSort(vec=" << vec << ",low=" << low << ",high=" << high << ")" << std::endl;
     while (low <= high) {
         int minimum = (*vec)[low];
+		std::cerr << "CocktailSelectionSort(vec=" << vec << ",low=" << low << ",high=" << high << "): minimum → " << minimum << std::endl;
         int minimumindex = low;
+		std::cerr << "CocktailSelectionSort(vec=" << vec << ",low=" << low << ",high=" << high << "): minimumindex → " << minimumindex << std::endl;
         int maximum = (*vec)[high];
+		std::cerr << "CocktailSelectionSort(vec=" << vec << ",low=" << low << ",high=" << high << "): maximum → " << maximum << std::endl;
         int maximumindex = high;
+		std::cerr << "CocktailSelectionSort(vec=" << vec << ",low=" << low << ",high=" << high << "): maximumindex → " << maximumindex << std::endl;
 
         for (int i = low; i <= high; i++) {
             if ((*vec)[i] >= maximum) {
@@ -36,18 +41,24 @@ void CocktailSelectionSort(std::vector<int> *vec, int low, int high) {
         low++;
         high--;
     }
+	std::cerr << "<<< Exiting CocktailSelectionSort(vec=" << vec << ",low=" << low << ",high=" << high << ")" << std::endl;
 }
 
 // Recursive Version
 
 void CocktailSelectionSort_v2(std::vector<int> *vec, int low, int high) {
+	std::cerr << ">>> Entering CocktailSelectionSort_v2(vec=" << vec << ",low=" << low << ",high=" << high << ")" << std::endl;
     if (low >= high)
         return;
 
     int minimum = (*vec)[low];
+	std::cerr << "CocktailSelectionSort_v2(vec=" << vec << ",low=" << low << ",high=" << high << "): minimum → " << minimum << std::endl;
     int minimumindex = low;
+	std::cerr << "CocktailSelectionSort_v2(vec=" << vec << ",low=" << low << ",high=" << high << "): minimumindex → " << minimumindex << std::endl;
     int maximum = (*vec)[high];
+	std::cerr << "CocktailSelectionSort_v2(vec=" << vec << ",low=" << low << ",high=" << high << "): maximum → " << maximum << std::endl;
     int maximumindex = high;
+	std::cerr << "CocktailSelectionSort_v2(vec=" << vec << ",low=" << low << ",high=" << high << "): maximumindex → " << maximumindex << std::endl;
 
     for (int i = low; i <= high; i++) {
         if ((*vec)[i] >= maximum) {
@@ -67,11 +78,13 @@ void CocktailSelectionSort_v2(std::vector<int> *vec, int low, int high) {
     }
 
     CocktailSelectionSort(vec, low + 1, high - 1);
+	std::cerr << "<<< Exiting CocktailSelectionSort_v2(vec=" << vec << ",low=" << low << ",high=" << high << ")" << std::endl;
 }
 
 // main function, select any one of iterative or recursive version
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int n;
     std::cout << "Enter number of elements\n";
     std::cin >> n;
@@ -98,5 +111,6 @@ int main() {
         std::cout << v[i] << " ";
     }
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

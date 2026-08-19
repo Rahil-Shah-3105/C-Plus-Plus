@@ -26,6 +26,7 @@
   * @returns void
   */
 void stoogeSort(std::vector<int>* L, size_t i, size_t j) {
+	std::cerr << ">>> Entering stoogeSort(L=" << L << ",i=" << i << ",j=" << j << ")" << std::endl;
     if (i >= j) {
         return;
     }
@@ -34,10 +35,12 @@ void stoogeSort(std::vector<int>* L, size_t i, size_t j) {
     }
     if (j - i > 1) {
         size_t third = (j - i + 1) / 3;
+		std::cerr << "stoogeSort(L=" << L << ",i=" << i << ",j=" << j << "): third → " << third << std::endl;
         stoogeSort(L, i, j - third);
         stoogeSort(L, i + third, j);
         stoogeSort(L, i, j - third);
     }
+	std::cerr << "<<< Exiting stoogeSort(L=" << L << ",i=" << i << ",j=" << j << ")" << std::endl;
 }
 
 /**
@@ -45,9 +48,11 @@ void stoogeSort(std::vector<int>* L, size_t i, size_t j) {
  * @returns void
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
 	std::vector<int> L = { 8, 9, 10, 4, 3, 5, 1 };
 	stoogeSort(&L, 0, L.size() - 1);
 	assert(std::is_sorted(std::begin(L), std::end(L)));
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -55,9 +60,11 @@ void test1() {
  * @returns void
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
 	std::vector<int> L = { -1 };
 	stoogeSort(&L, 0, L.size() - 1);
 	assert(std::is_sorted(std::begin(L), std::end(L)));
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /**
@@ -65,9 +72,11 @@ void test2() {
  * @returns void
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
 	std::vector<int> L = { 1, 2, 5, 4, 1, 5 };
 	stoogeSort(&L, 0, L.size() - 1);
 	assert(std::is_sorted(std::begin(L), std::end(L)));
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 
 /**
@@ -75,10 +84,12 @@ void test3() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
 	test1();
 	test2();
 	test3();
     
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting main()" << std::endl;
 	return 0;
 }

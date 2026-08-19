@@ -94,6 +94,7 @@ int getMinimum(int beg, int end, const std::vector<T>& logs,
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::vector<int> A{1, 2, 0, 3, 9};
     std::vector<int> logs = range_queries::sparse_table::computeLogs(A);
     std::vector<std::vector<int> > table =
@@ -101,5 +102,6 @@ int main() {
     assert(range_queries::sparse_table::getMinimum(0, 0, logs, table) == 1);
     assert(range_queries::sparse_table::getMinimum(0, 4, logs, table) == 0);
     assert(range_queries::sparse_table::getMinimum(2, 4, logs, table) == 0);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -44,8 +44,10 @@ namespace graph {
  * @param v any node or vertex of graph.
  */
 void addEdge(std::vector<std::vector<int>> *adj, int u, int v) {
+	std::cerr << ">>> Entering addEdge(adj=" << adj << ",u=" << u << ",v=" << v << ")" << std::endl;
     (*adj)[u - 1].push_back(v - 1);
     (*adj)[v - 1].push_back(u - 1);
+	std::cerr << "<<< Exiting addEdge(adj=" << adj << ",u=" << u << ",v=" << v << ")" << std::endl;
 }
 
 /**
@@ -75,8 +77,10 @@ void explore(const std::vector<std::vector<int>> *adj, int u,
  * @return connected_components number of connected components in graph.
  */
 int getConnectedComponents(const std::vector<std::vector<int>> *adj) {
+	std::cerr << ">>> Entering getConnectedComponents(adj=" << adj << ")" << std::endl;
     int n = adj->size();
     int connected_components = 0;
+	std::cerr << "getConnectedComponents(adj=" << adj << "): n → " << n << std::endl;
     std::vector<bool> visited(n, false);
 
     for (int i = 0; i < n; i++) {
@@ -85,12 +89,14 @@ int getConnectedComponents(const std::vector<std::vector<int>> *adj) {
             connected_components++;
         }
     }
+	std::cerr << "<<< Exiting getConnectedComponents(adj=" << adj << ")" << std::endl;
     return connected_components;
 }
 }  // namespace graph
 
 /** Function to test the algorithm */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Running predefined tests..." << std::endl;
     std::cout << "Initiating Test 1..." << std::endl;
     std::vector<std::vector<int>> adj1(9, std::vector<int>());
@@ -121,14 +127,17 @@ void tests() {
 
     assert(graph::getConnectedComponents(&adj2) == 2);
     std::cout << "Test 2 Passed..." << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     /// running predefined tests
     tests();
 
     int vertices = int(), edges = int();
+	std::cerr << "main(): vertices → " << vertices << std::endl;
     std::cout << "Enter the number of vertices : ";
     std::cin >> vertices;
     std::cout << "Enter the number of edges : ";
@@ -137,12 +146,15 @@ int main() {
     std::vector<std::vector<int>> adj(vertices, std::vector<int>());
 
     int u = int(), v = int();
+	std::cerr << "main(): u → " << u << std::endl;
     while (edges--) {
         std::cin >> u >> v;
         graph::addEdge(&adj, u, v);
     }
 
     int cc = graph::getConnectedComponents(&adj);
+	std::cerr << "main(): cc → " << cc << std::endl;
     std::cout << cc << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

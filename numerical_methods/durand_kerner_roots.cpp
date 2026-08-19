@@ -75,11 +75,13 @@ std::complex<double> poly_function(const std::valarray<double> &coeffs,
  * \returns pointer to converted string
  */
 const char *complex_str(const std::complex<double> &x) {
+std::cerr << ">>> Entering complex_str(x=" << x << ")" << std::endl;
 #define MAX_BUFF_SIZE 50
     static char msg[MAX_BUFF_SIZE];
 
     std::snprintf(msg, MAX_BUFF_SIZE, "% 7.04g%+7.04gj", x.real(), x.imag());
 
+	std::cerr << "<<< Exiting complex_str(x=" << x << ")" << std::endl;
     return msg;
 }
 
@@ -90,10 +92,12 @@ const char *complex_str(const std::complex<double> &x) {
  * \returns `true` if termination reached
  */
 bool check_termination(long double delta) {
+	std::cerr << ">>> Entering check_termination(delta=" << delta << ")" << std::endl;
     static long double past_delta = INFINITY;
     if (std::abs(past_delta - delta) <= ACCURACY || delta < ACCURACY)
         return true;
     past_delta = delta;
+	std::cerr << "<<< Exiting check_termination(delta=" << delta << ")" << std::endl;
     return false;
 }
 

@@ -72,6 +72,7 @@ std::vector<T> dnfSort(const std::vector<T> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     // [1, 0, 2, 1] return [0, 1, 1, 2]
     std::vector<uint64_t> array1 = {0, 1, 1, 2};
@@ -100,6 +101,7 @@ static void test() {
     std::vector<uint64_t> arr4 = sorting::dnf_sort::dnfSort(array4);
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -107,6 +109,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

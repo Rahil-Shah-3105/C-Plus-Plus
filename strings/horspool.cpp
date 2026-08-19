@@ -57,6 +57,7 @@ std::unordered_map<char, int> findShiftTable(const std::string &prototype) {
  * @returns false if text string does not contain prototype string
  */
 bool horspool(const std::string &text, const std::string &prototype) {
+	std::cerr << ">>> Entering horspool(text=" << text << ",prototype=" << prototype << ")" << std::endl;
     std::unordered_map<char, int> shiftTable = findShiftTable(
         prototype);  // Initialise shift table calling findShiftTable function
 
@@ -66,10 +67,12 @@ bool horspool(const std::string &text, const std::string &prototype) {
     while (i < text.size()) {
         int j = i, k = 0;
         bool flag = true;
+		std::cerr << "horspool(text=" << text << ",prototype=" << prototype << "): flag → " << flag << std::endl;
 
         for (int z = static_cast<int>(prototype.size() - 1); z >= 0 && flag;
              z--) {  // Checking if all characters of substring are equal with all characters of string
             if (text[j] == prototype[z]) {
+			std::cerr << "horspool(text=" << text << ",prototype=" << prototype << "): z → " << z << std::endl;
                 k++;
                 j--;
             } else {
@@ -88,6 +91,7 @@ bool horspool(const std::string &text, const std::string &prototype) {
             }
         }
     }
+	std::cerr << "<<< Exiting horspool(text=" << text << ",prototype=" << prototype << ")" << std::endl;
     return false;
 }
 } // namespace horspool
@@ -98,6 +102,7 @@ bool horspool(const std::string &text, const std::string &prototype) {
  * @returns void
  */
 static void test(){
+	std::cerr << ">>> Entering test()" << std::endl;
     assert(strings::horspool::horspool("Hello World","World") == true);
     assert(strings::horspool::horspool("Hello World"," World") == true);
     assert(strings::horspool::horspool("Hello World","ello") == true);
@@ -110,6 +115,7 @@ static void test(){
     assert(strings::horspool::horspool("c++","c") == true);
     assert(strings::horspool::horspool("3458934793","4793") == true);
     assert(strings::horspool::horspool("3458934793","123") == false);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -117,6 +123,8 @@ static void test(){
  * @returns 0 on exit
  */
 int main(){
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

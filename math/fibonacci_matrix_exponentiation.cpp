@@ -23,6 +23,7 @@
  * @param mod  modulo number
  */
 uint64_t fibo(uint64_t n, uint64_t mod) {
+	std::cerr << ">>> Entering fibo(n=" << n << ",mod=" << mod << ")" << std::endl;
     std::vector<uint64_t> result(2, 0);
     std::vector<std::vector<uint64_t>> transition(2,
                                                   std::vector<uint64_t>(2, 0));
@@ -80,6 +81,7 @@ uint64_t fibo(uint64_t n, uint64_t mod) {
             n = n / 2;
         }
     }
+	std::cerr << "<<< Exiting fibo(n=" << n << ",mod=" << mod << ")" << std::endl;
     return ((result[0] % mod * Identity[0][0] % mod) % mod +
             (result[1] % mod * Identity[1][0] % mod) % mod) %
            mod;
@@ -89,6 +91,7 @@ uint64_t fibo(uint64_t n, uint64_t mod) {
  * Function to test above algorithm
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     assert(fibo(6, 1000000007) == 8);
     std::cout << "test case:1 passed\n";
     assert(fibo(5, 1000000007) == 5);
@@ -100,12 +103,14 @@ static void test() {
     assert(fibo(500, 10000) == 4125);
     std::cout << "test case:3 passed\n";
     std::cout << "--All tests passed--\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
     uint64_t mod = 1000000007;
     std::cout << "Enter the value of N: ";
@@ -113,4 +118,5 @@ int main() {
     std::cin >> n;
     std::cout << n << "th Fibonacci number in modulo " << mod << ": "
               << fibo(n, mod) << std::endl;
+			std::cerr << "<<< Exiting main()" << std::endl;
 }

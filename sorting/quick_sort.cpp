@@ -68,8 +68,10 @@ namespace quick_sort {
 
 template <typename T>
 int partition(std::vector<T> *arr, const int &low, const int &high) {
+	std::cerr << ">>> Entering partition(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
     T pivot = (*arr)[high];  // taking the last element as pivot
     int i = (low - 1);       // Index of smaller element
+	std::cerr << "partition(arr=" << arr << ",low=" << low << ",high=" << high << "): pivot → " << pivot << std::endl;
 
     for (int j = low; j < high; j++) {
         // If current element is smaller than or
@@ -81,6 +83,7 @@ int partition(std::vector<T> *arr, const int &low, const int &high) {
     }
 
     std::swap((*arr)[i + 1], (*arr)[high]);
+	std::cerr << "<<< Exiting partition(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
     return (i + 1);
 }
 
@@ -102,6 +105,8 @@ void quick_sort(std::vector<T> *arr, const int &low, const int &high) {
         quick_sort(arr, low, p - 1);
         quick_sort(arr, p + 1, high);
     }
+	std::cerr << ">>> Entering quick_sort(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
+	std::cerr << "<<< Exiting quick_sort(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
 }
 
 /**
@@ -145,6 +150,7 @@ void show(const std::vector<T> &arr, const int &size) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // 1st test (normal numbers)
     std::vector<uint64_t> arr = {5, 3, 8, 12, 14, 16, 28, 96, 2, 5977};
     std::vector<uint64_t> arr_sorted = sorting::quick_sort::quick_sort(
@@ -173,6 +179,7 @@ static void tests() {
 
     // 4th test (random decimal and negative numbers)
     size_t size = std::rand() % 750 + 100;
+	std::cerr << "tests(): size → " << size << std::endl;
 
     std::vector<float> arr4(size);
     for (uint64_t i = 0; i < size; i++) {
@@ -204,6 +211,7 @@ static void tests() {
     sorting::quick_sort::show(
         arr4_sorted, int(std::end(arr4_sorted) - std::begin(arr4_sorted)) - 1);
     std::cout << "\nEnd: 4th array.\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -211,6 +219,7 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int choice = 0;
 
     std::cout << "\tAvailable modes\t\n\n";
@@ -246,5 +255,6 @@ int main() {
         std::cout << "\nSorted array: \n";
         sorting::quick_sort::show(arr, size);
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -16,12 +16,16 @@
  */
 template <class T>
 void show_data(T *arr, size_t LEN) {
+	std::cerr << ">>> Entering show_data(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
     size_t i;
 
     for (i = 0; i < LEN; i++) {
         std::cout << arr[i] << ", ";
     }
     std::cout << std::endl;
+	std::cerr << "<<< Exiting show_data(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
+	std::cerr << ">>> Entering show_data()" << std::endl;
+	std::cerr << "<<< Exiting show_data()" << std::endl;
 }
 
 /** pretty print array
@@ -43,6 +47,7 @@ namespace sorting {
  **/
 template <typename T>
 void shell_sort(T *arr, size_t LEN) {
+	std::cerr << ">>> Entering shell_sort(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
     const unsigned int gaps[] = {701, 301, 132, 57, 23, 10, 4, 1};
     const unsigned int gap_len = 8;
     size_t i, j, g;
@@ -59,6 +64,9 @@ void shell_sort(T *arr, size_t LEN) {
             arr[j] = tmp;
         }
     }
+	std::cerr << "<<< Exiting shell_sort(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
+	std::cerr << ">>> Entering shell_sort()" << std::endl;
+	std::cerr << "<<< Exiting shell_sort()" << std::endl;
 }
 
 /** function overload - when input array is of a known length array type
@@ -66,6 +74,8 @@ void shell_sort(T *arr, size_t LEN) {
 template <typename T, size_t N>
 void shell_sort(T (&arr)[N]) {
     shell_sort(arr, N);
+	std::cerr << ">>> Entering shell_sort(arr=" << arr << ")" << std::endl;
+	std::cerr << "<<< Exiting shell_sort(arr=" << arr << ")" << std::endl;
 }
 
 /** function overload - when input array is of type std::vector,
@@ -85,8 +95,11 @@ using sorting::shell_sort;
  **/
 template <typename T>
 int compare(const void *a, const void *b) {
+	std::cerr << ">>> Entering compare(a=" << a << ",b=" << b << ")" << std::endl;
     T arg1 = *static_cast<const T *>(a);
     T arg2 = *static_cast<const T *>(b);
+	std::cerr << "compare(a=" << a << ",b=" << b << "): arg2 → " << arg2 << std::endl;
+	std::cerr << "compare(a=" << a << ",b=" << b << "): arg1 → " << arg1 << std::endl;
 
     if (arg1 < arg2)
         return -1;
@@ -103,6 +116,7 @@ int compare(const void *a, const void *b) {
  * against std::qsort.
  */
 void test_int(const int NUM_DATA) {
+	std::cerr << ">>> Entering test_int(NUM_DATA=" << NUM_DATA << ")" << std::endl;
     // int array = new int[NUM_DATA];
     int *data = new int[NUM_DATA];
     int *data2 = new int[NUM_DATA];
@@ -116,7 +130,9 @@ void test_int(const int NUM_DATA) {
     std::clock_t start = std::clock();
     shell_sort(data, NUM_DATA);
     std::clock_t end = std::clock();
+	std::cerr << "test_int(NUM_DATA=" << NUM_DATA << "): end → " << end << std::endl;
     double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::cerr << "test_int(NUM_DATA=" << NUM_DATA << "): elapsed_time → " << elapsed_time << std::endl;
     std::cout << "Time spent sorting using shell_sort2: " << elapsed_time
               << "s\n";
 

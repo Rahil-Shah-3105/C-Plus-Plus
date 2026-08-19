@@ -27,8 +27,11 @@
  *
  */
 int FindNextGap(int gap) {
+	std::cerr << ">>> Entering FindNextGap(gap=" << gap << ")" << std::endl;
     gap = (gap * 10) / 13;
 
+	std::cerr << "FindNextGap(gap=" << gap << "): gap → " << gap << std::endl;
+	std::cerr << "<<< Exiting FindNextGap(gap=" << gap << ")" << std::endl;
     return std::max(1, gap);
 }
 
@@ -40,6 +43,7 @@ int FindNextGap(int gap) {
  *
  */
 void CombSort(int *arr, int l, int r) {
+	std::cerr << ">>> Entering CombSort(arr=" << arr << ",l=" << l << ",r=" << r << ")" << std::endl;
     /**
      *
      * initial gap will be maximum and the maximum possible value is
@@ -49,9 +53,11 @@ void CombSort(int *arr, int l, int r) {
      *
      */
     int gap = r;
+	std::cerr << "CombSort(arr=" << arr << ",l=" << l << ",r=" << r << "): gap → " << gap << std::endl;
 
     /// Initialize swapped as true to make sure that loop runs
     bool swapped = true;
+	std::cerr << "CombSort(arr=" << arr << ",l=" << l << ",r=" << r << "): swapped → " << swapped << std::endl;
 
     /// Keep running until gap = 1 or none elements were swapped
     while (gap != 1 || swapped) {
@@ -68,9 +74,11 @@ void CombSort(int *arr, int l, int r) {
             }
         }
     }
+	std::cerr << "<<< Exiting CombSort(arr=" << arr << ",l=" << l << ",r=" << r << ")" << std::endl;
 }
 
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     /// Test 1
     int arr1[10] = {34, 56, 6, 23, 76, 34, 76, 343, 4, 76};
     CombSort(arr1, 0, 10);
@@ -82,10 +90,12 @@ void tests() {
     CombSort(arr2, 0, 8);
     assert(std::is_sorted(arr2, arr2 + 8));
     std::cout << "Test 2 Passed\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     /// Running predefined tests
     tests();
 
@@ -97,5 +107,6 @@ int main() {
     CombSort(arr, 0, n);
     for (int i = 0; i < n; ++i) std::cout << arr[i] << ' ';
     delete[] arr;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

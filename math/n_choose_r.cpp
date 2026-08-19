@@ -33,6 +33,7 @@ namespace math {
  */
 template <class T>
 T n_choose_r(T n, T r) {
+	std::cerr << ">>> Entering n_choose_r(n=" << n << ",r=" << r << ")" << std::endl;
     if (r > n / 2) {
         r = n - r;  // Because of the fact that  nCr(n, r) == nCr(n, n - r)
     }
@@ -41,6 +42,7 @@ T n_choose_r(T n, T r) {
         ans *= n - r + i;
         ans /= i;
     }
+	std::cerr << "<<< Exiting n_choose_r(n=" << n << ",r=" << r << ")" << std::endl;
     return ans;
 }
 }  // namespace math
@@ -50,8 +52,10 @@ T n_choose_r(T n, T r) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // First test on 5 choose 2
     uint8_t t = math::n_choose_r(5, 2);
+	std::cerr << "test(): t → " << t << std::endl;
     assert(((void)"10 is the answer but function says otherwise.\n", t == 10));
     std::cout << "First test passes." << std::endl;
     // Second test on 5 choose 3
@@ -69,6 +73,7 @@ static void test() {
     assert(((void)"210 is the answer but the function says otherwise.\n",
             t == 210));
     std::cout << "Fourth test passes." << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -76,6 +81,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // executing tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

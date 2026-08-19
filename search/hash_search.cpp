@@ -97,8 +97,11 @@ int hash_search(int key, int* counter) {  // Hash lookup function
 
 /** main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     link p;
     int key = 0, index, i, counter;  // Key is the value to be found
+	std::cerr << "main(): key → " << key << std::endl;
+	std::cerr << "main(): index → " << index << std::endl;
     index = 0;
 
     // You can write the input mode here
@@ -111,6 +114,7 @@ int main() {
         std::cout << "hashtab [" << i << "]\n";
 
         p = hashtab[i].next;
+		std::cerr << "main(): p → " << p << std::endl;
 
         while (p != NULL) {
             std::cout << "please int key:";
@@ -135,5 +139,6 @@ int main() {
          * successful. There are 10 in this set of data */
     }
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

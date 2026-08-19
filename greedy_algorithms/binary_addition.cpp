@@ -38,6 +38,7 @@ class BinaryAddition {
      * string if either input string contains non-binary characters.
      */
     std::string addBinary(const std::string& a, const std::string& b) {
+		std::cerr << ">>> Entering addBinary(a=" << a << ",b=" << b << ")" << std::endl;
         if (!isValidBinaryString(a) || !isValidBinaryString(b)) {
             return "";  // Return empty string if input contains non-binary
                         // characters
@@ -45,13 +46,17 @@ class BinaryAddition {
 
         std::string result;
         int carry = 0;
+		std::cerr << "addBinary(a=" << a << ",b=" << b << "): carry → " << carry << std::endl;
         int maxLength = std::max(a.size(), b.size());
+		std::cerr << "addBinary(a=" << a << ",b=" << b << "): maxLength → " << maxLength << std::endl;
 
         // Traverse both strings from the end to the beginning
         for (int i = 0; i < maxLength; ++i) {
             // Get the current bits from both strings, if available
             int bitA = (i < a.size()) ? (a[a.size() - 1 - i] - '0') : 0;
+			std::cerr << "addBinary(a=" << a << ",b=" << b << "): bitA → " << bitA << std::endl;
             int bitB = (i < b.size()) ? (b[b.size() - 1 - i] - '0') : 0;
+			std::cerr << "addBinary(a=" << a << ",b=" << b << "): bitB → " << bitB << std::endl;
 
             // Calculate the sum of bits and carry
             int sum = bitA + bitB + carry;
@@ -63,6 +68,7 @@ class BinaryAddition {
             result.push_back('1');
         }
         std::reverse(result.begin(), result.end());
+		std::cerr << "<<< Exiting addBinary(a=" << a << ",b=" << b << ")" << std::endl;
         return result;
     }
 
@@ -73,6 +79,8 @@ class BinaryAddition {
      * @return true if the string is binary, false otherwise.
      */
     bool isValidBinaryString(const std::string& str) const {
+		std::cerr << ">>> Entering isValidBinaryString(str=" << str << ")" << std::endl;
+		std::cerr << "<<< Exiting isValidBinaryString(str=" << str << ")" << std::endl;
         return std::all_of(str.begin(), str.end(),
                            [](char c) { return c == '0' || c == '1'; });
     }
@@ -84,6 +92,7 @@ class BinaryAddition {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     greedy_algorithms::BinaryAddition binaryAddition;
 
     // Valid binary string tests
@@ -107,6 +116,7 @@ static void tests() {
     assert(binaryAddition.addBinary("111", "1x1") == "");
     assert(binaryAddition.addBinary("1x1", "111") == "");
     assert(binaryAddition.addBinary("1234", "1101") == "");
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -114,6 +124,8 @@ static void tests() {
  * @returns 0 on successful exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests(); /// To execute tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -79,6 +79,7 @@ bool hamilton_cycle(const std::vector<std::vector<bool>> &routes) {
  * @return None
  */
 static void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::vector<std::vector<bool>> arr{
         std::vector<bool>({true, true, false, false}),
         std::vector<bool>({false, true, true, false}),
@@ -86,9 +87,11 @@ static void test1() {
         std::vector<bool>({false, false, false, true})};
 
     bool ans = hamilton_cycle(arr);
+	std::cerr << "test1(): ans → " << ans << std::endl;
     std::cout << "Test 1... ";
     assert(ans);
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -101,6 +104,7 @@ static void test1() {
  * @return None
  */
 static void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::vector<std::vector<bool>> arr{
         std::vector<bool>({true, true, false, false}),
         std::vector<bool>({false, true, true, true}),
@@ -108,10 +112,12 @@ static void test2() {
         std::vector<bool>({false, false, false, true})};
 
     bool ans = hamilton_cycle(arr);
+	std::cerr << "test2(): ans → " << ans << std::endl;
 
     std::cout << "Test 2... ";
     assert(!ans);  // not a cycle
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /**
@@ -120,6 +126,7 @@ static void test2() {
  * @return None
  */
 static void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     std::vector<std::vector<bool>> arr{
         std::vector<bool>({true, true, true, true}),
         std::vector<bool>({true, true, true, true}),
@@ -127,10 +134,12 @@ static void test3() {
         std::vector<bool>({true, true, true, true})};
 
     bool ans = hamilton_cycle(arr);
+	std::cerr << "test3(): ans → " << ans << std::endl;
 
     std::cout << "Test 3... ";
     assert(ans);
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 
 /**
@@ -138,8 +147,10 @@ static void test3() {
  *
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test1();
     test2();
     test3();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

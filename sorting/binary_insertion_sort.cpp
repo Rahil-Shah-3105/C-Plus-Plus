@@ -102,6 +102,7 @@ void insertionSort_binsrch(std::vector<T> &arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /* descriptions of the following test */
     /* 1st test:
        [5, -3, -1, -2, 7] returns [-3, -2, -1, 5, 7] */
@@ -134,6 +135,7 @@ static void test() {
     sorting::insertionSort_binsrch(arr4);
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -141,6 +143,8 @@ static void test() {
  * @return 0 on exit.
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -43,6 +43,7 @@ namespace sieve_of_eratosthenes {
  * a prime or not
  */
 std::vector<bool> sieve(uint32_t N) {
+	std::cerr << ">>> Entering sieve(N=" << N << ")" << std::endl;
     std::vector<bool> is_prime(N + 1, true);  // Initialize all as prime numbers
     is_prime[0] = is_prime[1] = false;        // 0 and 1 are not prime numbers
 
@@ -53,6 +54,7 @@ std::vector<bool> sieve(uint32_t N) {
             }
         }
     }
+	std::cerr << "<<< Exiting sieve(N=" << N << ")" << std::endl;
     return is_prime;
 }
 
@@ -79,6 +81,7 @@ void print(uint32_t N, const std::vector<bool> &is_prime) {
  * @return void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::vector<bool> is_prime_1 =
         math::sieve_of_eratosthenes::sieve(static_cast<uint32_t>(10));
     std::vector<bool> is_prime_2 =
@@ -108,6 +111,7 @@ static void tests() {
         false, false, false, true,  false, false, false, false, false, true,
         false, false, false, false, false, false, false, true,  false, false,
         false};
+	std::cerr << "<<< Exiting tests()" << std::endl;
     assert(is_prime_3 == expected_3);
 
 }
@@ -117,6 +121,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

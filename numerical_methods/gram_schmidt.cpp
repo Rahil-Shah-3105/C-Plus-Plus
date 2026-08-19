@@ -179,12 +179,14 @@ void gram_schmidt(int r, const int& c,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::array<std::array<double, 10>, 20> a1 = {
         {{1, 0, 1, 0}, {1, 1, 1, 1}, {0, 1, 2, 1}}};
     std::array<std::array<double, 10>, 20> b1 = {{0}};
     double dot1 = 0;
     numerical_methods::gram_schmidt::gram_schmidt(3, 4, a1, b1);
     int flag = 1;
+	std::cerr << "test(): flag → " << flag << std::endl;
     for (int i = 0; i < 2; ++i) {
         for (int j = i + 1; j < 3; ++j) {
             dot1 = fabs(
@@ -239,6 +241,7 @@ static void test() {
         std::cout << "Vectors are linearly dependent\n";
     assert(flag == 1);
     std::cout << "Passed Test Case 3\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -246,6 +249,7 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int r = 0, c = 0;
     test();  // perform self tests
     std::cout << "Enter the dimension of your vectors\n";
@@ -272,6 +276,7 @@ int main() {
 
     double dot = 0;
     int flag = 1;  /// To check whether vectors are orthogonal or  not
+	std::cerr << "main(): flag → " << flag << std::endl;
     for (int i = 0; i < r - 1; ++i) {
         for (int j = i + 1; j < r; ++j) {
             dot = fabs(
@@ -286,5 +291,6 @@ int main() {
     }
     if (flag == 0)
         std::cout << "Vectors are linearly dependent\n";
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

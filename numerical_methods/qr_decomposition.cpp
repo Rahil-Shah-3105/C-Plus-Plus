@@ -21,6 +21,7 @@ using qr_algorithm::operator<<;
  * main function
  */
 int main(void) {
+	std::cerr << ">>> Entering main()" << std::endl;
     unsigned int ROWS, COLUMNS;
 
     std::cout << "Enter the number of rows and columns: ";
@@ -47,12 +48,15 @@ int main(void) {
     std::cout << A << "\n";
 
     clock_t t1 = clock();
+	std::cerr << "main(): t1 → " << t1 << std::endl;
     qr_decompose(A, &Q, &R);
     double dtime = static_cast<double>(clock() - t1) / CLOCKS_PER_SEC;
+	std::cerr << "main(): dtime → " << dtime << std::endl;
 
     std::cout << Q << "\n";
     std::cout << R << "\n";
     std::cout << "Time taken to compute: " << dtime << " sec\n ";
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
