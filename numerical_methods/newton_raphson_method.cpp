@@ -28,6 +28,8 @@ constexpr int16_t MAX_ITERATIONS = INT16_MAX;  ///< Maximum number of iterations
  * \f]
  */
 static double eq(double i) {
+	std::cerr << ">>> Entering eq(i=" << i << ")" << std::endl;
+	std::cerr << "<<< Exiting eq(i=" << i << ")" << std::endl;
     return (std::pow(i, 3) - (4 * i) - 9);  // original equation
 }
 
@@ -38,14 +40,20 @@ static double eq(double i) {
  * \f]
  */
 static double eq_der(double i) {
+	std::cerr << ">>> Entering eq_der(i=" << i << ")" << std::endl;
+	std::cerr << "<<< Exiting eq_der(i=" << i << ")" << std::endl;
     return ((3 * std::pow(i, 2)) - 4);  // derivative of equation
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));  // initialize randomizer
 
     double z = NAN, c = std::rand() % 100, m = NAN, n = NAN;
+	std::cerr << "main(): z → " << z << std::endl;
+	std::cerr << "main(): m → " << m << std::endl;
+	std::cerr << "main(): n → " << n << std::endl;
     int i = 0;
 
     std::cout << "\nInitial approximation: " << c;
@@ -64,5 +72,6 @@ int main() {
     }
 
     std::cout << "\n\nRoot: " << z << "\t\tSteps: " << i << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

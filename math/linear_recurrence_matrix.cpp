@@ -191,6 +191,7 @@ T get_nth_term_of_recurrence_series(
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /*
      * Example 1: [Fibonacci
      * series](https://en.wikipedia.org/wiki/Fibonacci_number);
@@ -368,6 +369,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

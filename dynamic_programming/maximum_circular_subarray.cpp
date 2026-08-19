@@ -62,6 +62,7 @@ int maxCircularSum(std::vector<int>& arr)
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Description of the test
     // Input: arr[] = {8, -8, 9, -9, 10, -11, 12}
     // Output: 22 
@@ -74,6 +75,7 @@ static void test() {
     assert(dynamic_programming::maxCircularSum(arr) == 23);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 
@@ -82,6 +84,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
      test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
      return 0;
 }

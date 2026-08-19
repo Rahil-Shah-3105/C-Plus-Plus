@@ -90,6 +90,7 @@ struct SegmentIntersection {
  * working well.
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     SegmentIntersection segment;
     Point first_point, second_point, third_point, forth_point;
 
@@ -101,4 +102,5 @@ int main() {
     printf("%d", segment.intersect(first_point, second_point, third_point,
                                    forth_point));
     std::cout << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
 }

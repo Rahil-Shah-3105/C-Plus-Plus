@@ -99,6 +99,7 @@ bool MyQueue<T>::empty() const {
  * Testing function
  */
 void queue_test() {
+	std::cerr << ">>> Entering queue_test()" << std::endl;
     MyQueue<int> que;
     std::cout << "Test #1\n";
     que.push(2);
@@ -133,12 +134,15 @@ void queue_test() {
     assert(que2.peek() == 2.92);
     assert(que2.pop() == 2.92);
     std::cout << "PASSED\n";
+	std::cerr << "<<< Exiting queue_test()" << std::endl;
 }
 
 /**
  * Main function, calls testing function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     queue_test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

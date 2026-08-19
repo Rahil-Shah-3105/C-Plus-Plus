@@ -31,6 +31,7 @@ namespace gray_code {
  * @return A vector that stores the n-bit Gray code
  */
 std::vector<std::bitset<32>> gray_code_generation(int n) {
+	std::cerr << ">>> Entering gray_code_generation(n=" << n << ")" << std::endl;
     std::vector<std::bitset<32>> gray_code = {};  // Initialise empty vector
 
     // No Gray codes for non-positive values of n
@@ -42,9 +43,11 @@ std::vector<std::bitset<32>> gray_code_generation(int n) {
 
     for (int i = 0; i < total_codes; i++) {
         int gray_num = i ^ (i >> 1);  // Gray code formula
+		std::cerr << "gray_code_generation(n=" << n << "): gray_num → " << gray_num << std::endl;
         gray_code.push_back(std::bitset<32>(gray_num));  // Store the value
     }
 
+	std::cerr << "<<< Exiting gray_code_generation(n=" << n << ")" << std::endl;
     return gray_code;
 } 
 }  // namespace gray_code
@@ -56,6 +59,7 @@ std::vector<std::bitset<32>> gray_code_generation(int n) {
  * @returns void
  */
 static void test() { 
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<std::bitset<32>> gray_code_negative_1 = {};
 
     std::vector<std::bitset<32>> gray_code_0 = {};
@@ -101,6 +105,7 @@ static void test() {
     assert(bit_manipulation::gray_code::gray_code_generation(3) == gray_code_3);
     assert(bit_manipulation::gray_code::gray_code_generation(4) == gray_code_4);
     assert(bit_manipulation::gray_code::gray_code_generation(5) == gray_code_5);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -108,6 +113,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  //Run self-test implementation
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

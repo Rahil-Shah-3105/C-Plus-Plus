@@ -43,8 +43,10 @@ namespace palindrome_partitioning {
  * @returns minimum number of partitions
  */
 int pal_part(const std::string &str) {
+	std::cerr << ">>> Entering pal_part(str=" << str << ")" << std::endl;
     int n = str.size();
 
+	std::cerr << "pal_part(str=" << str << "): n → " << n << std::endl;
     // creating lookup table for minimum number of cuts
     std::vector<std::vector<int> > cuts(n, std::vector<int>(n, 0));
 
@@ -86,6 +88,7 @@ int pal_part(const std::string &str) {
         }
     }
 
+	std::cerr << "<<< Exiting pal_part(str=" << str << ")" << std::endl;
     return cuts[0][n - 1];
 }
 }  // namespace palindrome_partitioning
@@ -96,6 +99,7 @@ int pal_part(const std::string &str) {
  * @return void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // custom input vector
     std::vector<std::string> custom_input{"nitik", "ababbbabbababa", "abdc"};
 
@@ -119,6 +123,7 @@ static void test() {
     }
 
     std::cout << "All tests passed successfully!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -126,6 +131,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

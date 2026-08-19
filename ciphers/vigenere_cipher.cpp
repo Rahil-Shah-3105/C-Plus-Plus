@@ -49,8 +49,10 @@ namespace ciphers {
              * @return  corresponding character for perticular value
              */        
             inline char get_char(const int x) {
+				std::cerr << ">>> Entering get_char(x=" << x << ")" << std::endl;
                 // By adding 65 we are scaling 0-25 to 65-90. 
                 // Which are in fact ASCII values of A-Z. 
+				std::cerr << "<<< Exiting get_char(x=" << x << ")" << std::endl;
                 return char(x + 65); 
             }
             /**
@@ -59,8 +61,10 @@ namespace ciphers {
              * @return returns corresponding value for perticular character
              */  
             inline int get_value(const char c) {
+				std::cerr << ">>> Entering get_value(c=" << c << ")" << std::endl;
                 // A-Z have ASCII values in range 65-90.
                 // Hence subtracting 65 will scale them to 0-25.
+				std::cerr << "<<< Exiting get_value(c=" << c << ")" << std::endl;
                 return int(c - 65);
             }
         } // Unnamed namespace
@@ -71,16 +75,22 @@ namespace ciphers {
          * @return new encrypted text
          */
         std::string encrypt (const std::string &text, const std::string &key) {
+			std::cerr << ">>> Entering encrypt(text=" << text << ",key=" << key << ")" << std::endl;
             std::string encrypted_text = ""; // Empty string to store encrypted text
             // Going through each character of text and key
+			std::cerr << "encrypt(text=" << text << ",key=" << key << "): encrypted_text → " << encrypted_text << std::endl;
             // Note that key is visited in circular way hence  j = (j + 1) % |key|
             for(size_t i = 0, j = 0; i < text.length(); i++, j = (j + 1) % key.length()) {
                 int place_value_text = get_value(text[i]); // Getting value of character in text
+				std::cerr << "encrypt(text=" << text << ",key=" << key << "): place_value_text → " << place_value_text << std::endl;
                 int place_value_key = get_value(key[j]); // Getting value of character in key
+				std::cerr << "encrypt(text=" << text << ",key=" << key << "): place_value_key → " << place_value_key << std::endl;
                 place_value_text = (place_value_text + place_value_key) % 26; // Applying encryption
                 char encrypted_char = get_char(place_value_text); // Getting new character from encrypted value
+				std::cerr << "encrypt(text=" << text << ",key=" << key << "): encrypted_char → " << encrypted_char << std::endl;
                 encrypted_text += encrypted_char; // Appending encrypted character
             }
+			std::cerr << "<<< Exiting encrypt(text=" << text << ",key=" << key << ")" << std::endl;
             return encrypted_text; // Returning encrypted text
         }
         /**
@@ -90,16 +100,22 @@ namespace ciphers {
          * @return new decrypted text
          */        
         std::string decrypt (const std::string &text, const std::string &key) {
+			std::cerr << ">>> Entering decrypt(text=" << text << ",key=" << key << ")" << std::endl;
             // Going through each character of text and key
             // Note that key is visited in circular way hence  j = (j + 1) % |key|
             std::string decrypted_text = ""; // Empty string to store decrypted text
+			std::cerr << "decrypt(text=" << text << ",key=" << key << "): decrypted_text → " << decrypted_text << std::endl;
             for(size_t i = 0, j = 0; i < text.length(); i++, j = (j + 1) % key.length()) {
                 int place_value_text = get_value(text[i]); // Getting value of character in text
+				std::cerr << "decrypt(text=" << text << ",key=" << key << "): place_value_text → " << place_value_text << std::endl;
                 int place_value_key = get_value(key[j]); // Getting value of character in key
+				std::cerr << "decrypt(text=" << text << ",key=" << key << "): place_value_key → " << place_value_key << std::endl;
                 place_value_text = (place_value_text - place_value_key + 26) % 26; // Applying decryption
                 char decrypted_char = get_char(place_value_text); // Getting new character from decrypted value
+				std::cerr << "decrypt(text=" << text << ",key=" << key << "): decrypted_char → " << decrypted_char << std::endl;
                 decrypted_text += decrypted_char; // Appending decrypted character
             }        
+			std::cerr << "<<< Exiting decrypt(text=" << text << ",key=" << key << ")" << std::endl;
             return decrypted_text; // Returning decrypted text
         }
     } // namespace vigenere
@@ -109,27 +125,37 @@ namespace ciphers {
  * Function to test above algorithm
  */
 void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     std::string text1 = "NIKOLATESLA";
+	std::cerr << "test(): text1 → " << text1 << std::endl;
     std::string encrypted1 = ciphers::vigenere::encrypt(text1, "TESLA");
+	std::cerr << "test(): encrypted1 → " << encrypted1 << std::endl;
     std::string decrypted1 = ciphers::vigenere::decrypt(encrypted1, "TESLA");
+	std::cerr << "test(): decrypted1 → " << decrypted1 << std::endl;
     assert(text1 == decrypted1);
     std::cout << "Original text : " << text1;
     std::cout << " , Encrypted text (with key = TESLA) : " << encrypted1;
     std::cout << " , Decrypted text : "<< decrypted1 << std::endl;
     // Test 2
     std::string text2 = "GOOGLEIT";
+	std::cerr << "test(): text2 → " << text2 << std::endl;
     std::string encrypted2 = ciphers::vigenere::encrypt(text2, "REALLY");
+	std::cerr << "test(): encrypted2 → " << encrypted2 << std::endl;
     std::string decrypted2 = ciphers::vigenere::decrypt(encrypted2, "REALLY");
+	std::cerr << "test(): decrypted2 → " << decrypted2 << std::endl;
     assert(text2 == decrypted2);
     std::cout << "Original text : " << text2;
     std::cout << " , Encrypted text (with key = REALLY) : " << encrypted2;
     std::cout << " , Decrypted text : "<< decrypted2 << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Testing
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

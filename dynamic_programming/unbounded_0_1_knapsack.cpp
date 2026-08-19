@@ -109,6 +109,7 @@ std::uint16_t unboundedKnapsack(std::uint16_t N, std::uint16_t W,
  * @return void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // Test Case 1
     std::uint16_t N1 = 4;                            // Number of items
     std::vector<std::uint16_t> wt1 = {1, 3, 4, 5};   // Weights of the items
@@ -161,6 +162,7 @@ static void tests() {
               << std::endl;
 
     std::cout << "All test cases passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -168,6 +170,8 @@ static void tests() {
  * @return 0 on successful exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // Run self test implementation
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

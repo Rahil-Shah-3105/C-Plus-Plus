@@ -19,6 +19,7 @@
  * \returns -1 if key-value not found
  */
 int LinearSearch(int *array, int size, int key) {
+	std::cerr << ">>> Entering LinearSearch(array=" << array << ",size=" << size << ",key=" << key << ")" << std::endl;
     for (int i = 0; i < size; ++i) {
         if (array[i] == key) {
             return i;
@@ -27,6 +28,7 @@ int LinearSearch(int *array, int size, int key) {
 
     /* We reach here only in case element is not present in array, return an
      * invalid entry in that case*/
+	std::cerr << "<<< Exiting LinearSearch(array=" << array << ",size=" << size << ",key=" << key << ")" << std::endl;
     return -1;
 }
 
@@ -35,8 +37,10 @@ int LinearSearch(int *array, int size, int key) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     int size = 4;
     int *array = new int[size];
+	std::cerr << "tests(): size → " << size << std::endl;
     for (int i = 0; i < size; i++) {
         array[i] = i;
     }
@@ -49,6 +53,7 @@ static void tests() {
 
     size = 6;
     array = new int[size];
+	std::cerr << "tests(): array → " << array << std::endl;
     for (int i = 0; i < size; i++) {
         array[i] = i;
     }
@@ -59,6 +64,7 @@ static void tests() {
 
     std::cout << "All tests have successfully passed!\n";
     delete[] array;  // free memory up
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -66,6 +72,7 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int mode = 0;
 
     std::cout << "Choose mode\n";
@@ -85,6 +92,7 @@ int main() {
 
         int *array = new int[size];
         int key = 0;
+		std::cerr << "main(): key → " << key << std::endl;
 
         // Input for the array elements
         std::cout << "Enter the array of " << size << " numbers: ";
@@ -105,5 +113,6 @@ int main() {
     } else {
         tests();  // run self-test implementations
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

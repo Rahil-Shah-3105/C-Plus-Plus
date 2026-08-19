@@ -76,11 +76,13 @@ namespace geometry {
              * which enclose all given points thus forming a hull
              */
             std::vector<Point> getConvexHull() const {
+				std::cerr << ">>> Entering getConvexHull()" << std::endl;
                 // Initialize Result
                 std::vector<Point> hull;
 
                 // Find the leftmost point
                 int leftmost_point = 0;
+				std::cerr << "getConvexHull(): leftmost_point → " << leftmost_point << std::endl;
                 for (int i = 1; i < size; i++) {
                     if (points[i].x < points[leftmost_point].x) {
                         leftmost_point = i;
@@ -90,6 +92,8 @@ namespace geometry {
                 // until reach the start point again.  This loop runs O(h)
                 // times where h is number of points in result or output.
                 int p = leftmost_point, q = 0;
+				std::cerr << "getConvexHull(): p → " << p << std::endl;
+				std::cerr << "getConvexHull(): q → " << q << std::endl;
                 do {
                     // Add current point to result
                     hull.push_back(points[p]);
@@ -115,6 +119,7 @@ namespace geometry {
 
                 } while (p != leftmost_point);        // While we don't come to first point
 
+				std::cerr << "<<< Exiting getConvexHull()" << std::endl;
                 return hull;
             }
 
@@ -149,6 +154,7 @@ namespace geometry {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<geometry::jarvis::Point> points = {{0, 3},
                                                    {2, 2},
                                                    {1, 1},
@@ -170,10 +176,13 @@ static void test() {
         assert(actualPoint[i].y == expectedPoint[i].y);
     }
     std::cout << "Test implementations passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

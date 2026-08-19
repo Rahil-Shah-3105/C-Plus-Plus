@@ -13,8 +13,11 @@
  * @note This can probably be replace by `memcpy` function.
  */
 std::string fill(char c, int n) {
+	std::cerr << ">>> Entering fill(c=" << c << ",n=" << n << ")" << std::endl;
     std::string s = "";
     while (n--) s += c;
+	std::cerr << "fill(c=" << c << ",n=" << n << "): s → " << s << std::endl;
+	std::cerr << "<<< Exiting fill(c=" << c << ",n=" << n << ")" << std::endl;
     return s;
 }
 
@@ -22,6 +25,7 @@ std::string fill(char c, int n) {
  * the function works recursively
  */
 std::string tolowerRoman(int n) {
+	std::cerr << ">>> Entering tolowerRoman(n=" << n << ")" << std::endl;
     if (n < 4)
         return fill('i', n);
     if (n < 6)
@@ -48,6 +52,7 @@ std::string tolowerRoman(int n) {
     if (n < 1100)
         return fill('c', 10 - n / 100) + "m" + tolowerRoman(n % 100);
     if (n < 4000)
+	std::cerr << "<<< Exiting tolowerRoman(n=" << n << ")" << std::endl;
         return fill('m', n / 1000) + tolowerRoman(n % 1000);
     return "?";
 }
@@ -56,6 +61,7 @@ std::string tolowerRoman(int n) {
  * the function works recursively
  */
 std::string toupperRoman(int n) {
+	std::cerr << ">>> Entering toupperRoman(n=" << n << ")" << std::endl;
     if (n < 4)
         return fill('I', n);
     if (n < 6)
@@ -82,17 +88,20 @@ std::string toupperRoman(int n) {
     if (n < 1100)
         return fill('C', 10 - n / 100) + "M" + toupperRoman(n % 100);
     if (n < 4000)
+	std::cerr << "<<< Exiting toupperRoman(n=" << n << ")" << std::endl;
         return fill('M', n / 1000) + toupperRoman(n % 1000);
     return "?";
 }
 
 /** main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int n;
     std::cout << "\t\tRoman numbers converter\n\n";
     std::cout << "Type in decimal number between 0 up to 4000 (exclusive): ";
     std::cin >> n;
     std::cout << n << " in Upper Roman Numerals is " << toupperRoman(n) << "\n";
     std::cout << n << " in Lower Roman Numerals is " << tolowerRoman(n) << "\n";
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

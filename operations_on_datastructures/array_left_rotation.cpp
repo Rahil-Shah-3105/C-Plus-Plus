@@ -73,6 +73,7 @@ using operations_on_datastructures::shift_left;
  * @returns void
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {3, 4, 5, 1, 2}\n";
@@ -82,12 +83,14 @@ void test1() {
     assert(res == expected);
     print(res);  ///< Should print 3 4 5 1 2
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an empty vector
  * @returns void
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Initialized arr = {}\n";
     std::cout << "Expected result: {}\n";
@@ -97,12 +100,14 @@ void test2() {
     assert(res == expected);
     print(res);  ///< Should print empty newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check an invalid shift value
  * @returns void
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {}\n";
@@ -112,12 +117,14 @@ void test3() {
     assert(res == expected);
     print(res);  ///< Should print empty newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check a very large input
  * @returns void
  */
 void test4() {
+	std::cerr << ">>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Initialized arr = {2, 4, ..., 420}\n";
     std::cout << "Expected result: {4, 6, ..., 420, 2}\n";
@@ -135,12 +142,14 @@ void test4() {
     assert(res == expected);
     print(res);  ///< Should print {4, 6, ..., 420, 2}
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test4()" << std::endl;
 }
 /**
  * @brief A Test to check a shift of zero
  * @returns void
  */
 void test5() {
+	std::cerr << ">>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {1, 2, 3, 4, 5}\n";
@@ -149,6 +158,7 @@ void test5() {
     assert(res == arr);
     print(res);  ///< Should print 1 2 3 4 5
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test5()" << std::endl;
 }
 }  // namespace tests
 
@@ -157,11 +167,13 @@ void test5() {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -169,6 +181,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

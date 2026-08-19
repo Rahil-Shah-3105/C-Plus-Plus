@@ -76,10 +76,14 @@ Point p0;
  * @returns @param Point Co-ordinates of the Point <int, int>
  *******************************************************************************/
 Point nextToTop(std::stack<Point> *S) {
+	std::cerr << ">>> Entering nextToTop(S=" << S << ")" << std::endl;
     Point p = S->top();
     S->pop();
+	std::cerr << "nextToTop(S=" << S << "): p → " << p << std::endl;
     Point res = S->top();
+	std::cerr << "nextToTop(S=" << S << "): res → " << res << std::endl;
     S->push(p);
+	std::cerr << "<<< Exiting nextToTop(S=" << S << ")" << std::endl;
     return res;
 }
 
@@ -90,6 +94,8 @@ Point nextToTop(std::stack<Point> *S) {
  * @returns @param int distance between p1 and p2.
  *******************************************************************************/
 int distSq(Point p1, Point p2) {
+	std::cerr << ">>> Entering distSq(p1=" << p1 << ",p2=" << p2 << ")" << std::endl;
+	std::cerr << "<<< Exiting distSq(p1=" << p1 << ",p2=" << p2 << ")" << std::endl;
     return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
 }
 
@@ -102,9 +108,12 @@ int distSq(Point p1, Point p2) {
  * 2 --> Counterclockwise
  *******************************************************************************/
 int orientation(Point p, Point q, Point r) {
+	std::cerr << ">>> Entering orientation(p=" << p << ",q=" << q << ",r=" << r << ")" << std::endl;
     int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
 
+	std::cerr << "orientation(p=" << p << ",q=" << q << ",r=" << r << "): val → " << val << std::endl;
     if (val == 0) {
+	std::cerr << "<<< Exiting orientation(p=" << p << ",q=" << q << ",r=" << r << ")" << std::endl;
         return 0;  // collinear
     }
     return (val > 0) ? 1 : 2;  // clock or counter-clock wise
@@ -118,12 +127,15 @@ int orientation(Point p, Point q, Point r) {
  * @returns @param int distance between p1 and p2.
  *******************************************************************************/
 int compare(const void *vp1, const void *vp2) {
+	std::cerr << ">>> Entering compare(vp1=" << vp1 << ",vp2=" << vp2 << ")" << std::endl;
     auto *p1 = static_cast<const Point *>(vp1);
     auto *p2 = static_cast<const Point *>(vp2);
 
     // Find orientation
     int o = orientation(p0, *p1, *p2);
+	std::cerr << "compare(vp1=" << vp1 << ",vp2=" << vp2 << "): o → " << o << std::endl;
     if (o == 0) {
+	std::cerr << "<<< Exiting compare(vp1=" << vp1 << ",vp2=" << vp2 << ")" << std::endl;
         return (distSq(p0, *p2) >= distSq(p0, *p1)) ? -1 : 1;
     }
 
@@ -137,8 +149,10 @@ int compare(const void *vp1, const void *vp2) {
  * @returns @param vector vector of Conver Hull.
  *******************************************************************************/
 std::vector<Point> convexHull(std::vector<Point> points, uint64_t size) {
+	std::cerr << ">>> Entering convexHull(points=" << points << ",size=" << size << ")" << std::endl;
     // Find the bottom-most point
     int ymin = points[0].y, min = 0;
+	std::cerr << "convexHull(points=" << points << ",size=" << size << "): ymin → " << ymin << std::endl;
     for (int i = 1; i < size; i++) {
         int y = points[i].y;
 
@@ -200,10 +214,12 @@ std::vector<Point> convexHull(std::vector<Point> points, uint64_t size) {
     // Now stack has the output points, push them into the resultant vector
     while (!St.empty()) {
         Point p = St.top();
+		std::cerr << "convexHull(points=" << points << ",size=" << size << "): p → " << p << std::endl;
         result.push_back(p);
         St.pop();
     }
 
+	std::cerr << "<<< Exiting convexHull(points=" << points << ",size=" << size << ")" << std::endl;
     return result;  // return resultant vector with Convex Hull co-ordinates.
 }
 }  // namespace grahamscan

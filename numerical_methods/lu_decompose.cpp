@@ -34,6 +34,7 @@ std::ostream &operator<<(std::ostream &out, matrix<T> const &v) {
  * \todo better ways to self-check a matrix output?
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     int mat_size = 3;  // default matrix size
     const int range = 50;
     const int range2 = range >> 1;
@@ -50,20 +51,24 @@ void test1() {
     }
 
     std::clock_t start_t = std::clock();
+	std::cerr << "test1(): start_t → " << start_t << std::endl;
     lu_decomposition(A, &L, &U);
     std::clock_t end_t = std::clock();
+	std::cerr << "test1(): end_t → " << end_t << std::endl;
     std::cout << "Time taken: "
               << static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC << "\n";
 
     std::cout << "A = \n" << A << "\n";
     std::cout << "L = \n" << L << "\n";
     std::cout << "U = \n" << U << "\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 
 /**
  * Test determinant computation using LU decomposition
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::cout << "Determinant test 1...";
     matrix<int> A1({{1, 2, 3}, {4, 9, 6}, {7, 8, 9}});
     assert(determinant_lu(A1) == -48);
@@ -78,13 +83,16 @@ void test2() {
     matrix<float> A3({{1.2, 2.3, 3.4}, {4.5, 5.6, 6.7}, {7.8, 8.9, 9.0}});
     assert(determinant_lu(A3) == 3.63);
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::srand(std::time(NULL));  // random number initializer
 
     test1();
     test2();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

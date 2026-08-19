@@ -48,8 +48,11 @@ namespace modular_division {
  * @return a raised to power b modulo c
  */
 uint64_t power(uint64_t a, uint64_t b, uint64_t c) {
+	std::cerr << ">>> Entering power(a=" << a << ",b=" << b << ",c=" << c << ")" << std::endl;
     uint64_t ans = 1;  /// Initialize the answer to be returned
     a = a % c;         /// Update a if it is more than or equal to c
+	std::cerr << "power(a=" << a << ",b=" << b << ",c=" << c << "): a → " << a << std::endl;
+	std::cerr << "power(a=" << a << ",b=" << b << ",c=" << c << "): ans → " << ans << std::endl;
     if (a == 0) {
         return 0;  /// In case a is divisible by c;
     }
@@ -62,6 +65,7 @@ uint64_t power(uint64_t a, uint64_t b, uint64_t c) {
         b = b >> 1;  /// b = b/2
         a = ((a % c) * (a % c)) % c;
     }
+	std::cerr << "<<< Exiting power(a=" << a << ",b=" << b << ",c=" << c << ")" << std::endl;
     return ans;
 }
 
@@ -73,9 +77,12 @@ uint64_t power(uint64_t a, uint64_t b, uint64_t c) {
  * @return a/b modulo c
  */
 uint64_t mod_division(uint64_t a, uint64_t b, uint64_t p) {
+	std::cerr << ">>> Entering mod_division(a=" << a << ",b=" << b << ",p=" << p << ")" << std::endl;
     uint64_t inverse = power(b, p - 2, p) % p;  /// Calculate the inverse of b
     uint64_t result =
         ((a % p) * (inverse % p)) % p;  /// Calculate the final result
+		std::cerr << "mod_division(a=" << a << ",b=" << b << ",p=" << p << "): inverse → " << inverse << std::endl;
+	std::cerr << "<<< Exiting mod_division(a=" << a << ",b=" << b << ",p=" << p << ")" << std::endl;
     return result;
 }
 }  // namespace modular_division
@@ -87,21 +94,28 @@ uint64_t mod_division(uint64_t a, uint64_t b, uint64_t p) {
  * @returns `void`
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     uint64_t test_case_1 = math::modular_division::mod_division(8, 2, 2);
     assert(test_case_1 == 0);
+	std::cerr << "test(): test_case_1 → " << test_case_1 << std::endl;
     std::cout << "Test 1 Passed!" << std::endl;
     uint64_t test_case_2 = math::modular_division::mod_division(15, 3, 7);
+	std::cerr << "test(): test_case_2 → " << test_case_2 << std::endl;
     assert(test_case_2 == 5);
     std::cout << "Test 2 Passed!" << std::endl;
     uint64_t test_case_3 = math::modular_division::mod_division(10, 5, 2);
+	std::cerr << "test(): test_case_3 → " << test_case_3 << std::endl;
     assert(test_case_3 == 0);
     std::cout << "Test 3 Passed!" << std::endl;
     uint64_t test_case_4 = math::modular_division::mod_division(81, 3, 5);
+	std::cerr << "test(): test_case_4 → " << test_case_4 << std::endl;
     assert(test_case_4 == 2);
     std::cout << "Test 4 Passed!" << std::endl;
     uint64_t test_case_5 = math::modular_division::mod_division(12848, 73, 29);
+	std::cerr << "test(): test_case_5 → " << test_case_5 << std::endl;
     assert(test_case_5 == 2);
     std::cout << "Test 5 Passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -109,6 +123,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
