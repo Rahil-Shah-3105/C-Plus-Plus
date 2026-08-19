@@ -34,6 +34,8 @@ double binomial_variance(double n, double p) { return n * p * (1 - p); }
  * \returns \f$\sigma = \sqrt{\sigma^2} = \sqrt{n\cdot p\cdot (1-p)}\f$
  */
 double binomial_standard_deviation(double n, double p) {
+	std::cerr << ">>> Entering binomial_standard_deviation(n=" << n << ",p=" << p << ")" << std::endl;
+	std::cerr << "<<< Exiting binomial_standard_deviation(n=" << n << ",p=" << p << ")" << std::endl;
     return std::sqrt(binomial_variance(n, p));
 }
 
@@ -45,6 +47,7 @@ double binomial_standard_deviation(double n, double p) {
  * \f$
  */
 double nCr(double n, double r) {
+	std::cerr << ">>> Entering nCr(n=" << n << ",r=" << r << ")" << std::endl;
     double numerator = n;
     double denominator = r;
 
@@ -56,6 +59,7 @@ double nCr(double n, double r) {
         denominator *= i;
     }
 
+	std::cerr << "<<< Exiting nCr(n=" << n << ",r=" << r << ")" << std::endl;
     return numerator / denominator;
 }
 
@@ -63,6 +67,8 @@ double nCr(double n, double r) {
  * \returns \f$\displaystyle P(n,p,x) = {n\choose x} p^x (1-p)^{n-x}\f$
  */
 double binomial_x_successes(double n, double p, double x) {
+	std::cerr << ">>> Entering binomial_x_successes(n=" << n << ",p=" << p << ",x=" << x << ")" << std::endl;
+	std::cerr << "<<< Exiting binomial_x_successes(n=" << n << ",p=" << p << ",x=" << x << ")" << std::endl;
     return nCr(n, x) * std::pow(p, x) * std::pow(1 - p, n - x);
 }
 
@@ -82,6 +88,7 @@ double binomial_range_successes(double n, double p, double lower_bound,
 
 /** main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::cout << "expected value : " << binomial_expected(100, 0.5)
               << std::endl;
 
@@ -96,5 +103,6 @@ int main() {
     std::cout << "45 or more successes : "
               << binomial_range_successes(100, 0.5, 45, 100) << std::endl;
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

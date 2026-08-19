@@ -41,14 +41,18 @@ class Complex {
      * first two parameters (optional).
      */
     explicit Complex(double x = 0.f, double y = 0.f, bool is_polar = false) {
+		std::cerr << ">>> Entering Complex(x=" << x << ",y=" << y << ",is_polar=" << is_polar << ")" << std::endl;
         if (!is_polar) {
             re = x;
+			std::cerr << "Complex(x=" << x << ",y=" << y << ",is_polar=" << is_polar << "): re → " << re << std::endl;
+			std::cerr << "Complex(x=" << x << ",y=" << y << ",is_polar=" << is_polar << "): im → " << im << std::endl;
             im = y;
             return;
         }
 
         re = x * std::cos(y);
         im = x * std::sin(y);
+		std::cerr << "<<< Exiting Complex(x=" << x << ",y=" << y << ",is_polar=" << is_polar << ")" << std::endl;
     }
 
     /**
@@ -77,6 +81,8 @@ class Complex {
      * number.
      */
     double abs() const {
+		std::cerr << ">>> Entering abs()" << std::endl;
+		std::cerr << "<<< Exiting abs()" << std::endl;
         return std::sqrt(this->re * this->re + this->im * this->im);
     }
 
@@ -204,19 +210,23 @@ double get_rand() { return (std::rand() % 100 - 50) / 100.f; }
  * Tests Function
  */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::srand(std::time(nullptr));
     double x1 = get_rand(), y1 = get_rand(), x2 = get_rand(), y2 = get_rand();
+	std::cerr << "tests(): x1 → " << x1 << std::endl;
     Complex num1(x1, y1), num2(x2, y2);
     std::complex<double> cnum1(x1, y1), cnum2(x2, y2);
     Complex result;
     std::complex<double> expected;
     // Test for addition
     result = num1 + num2;
+	std::cerr << "tests(): result → " << result << std::endl;
     expected = cnum1 + cnum2;
     assert(((void)"1 + 1i + 1 + 1i is equal to 2 + 2i but the addition doesn't "
                   "add up \n",
             (result.real() == expected.real() &&
              result.imag() == expected.imag())));
+			std::cerr << "tests(): expected → " << expected << std::endl;
     std::cout << "First test passes." << std::endl;
     // Test for subtraction
     result = num1 - num2;
@@ -260,12 +270,15 @@ void tests() {
                   "from the std::complex result. \n",
             (num1.abs() == std::abs(cnum1))));
     std::cout << "Seventh test passes.\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

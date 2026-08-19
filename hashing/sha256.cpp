@@ -56,6 +56,8 @@ class Hash {
  * @return uint32_t The rotated integer
  */
 uint32_t right_rotate(uint32_t n, size_t rotate) {
+	std::cerr << ">>> Entering right_rotate(n=" << n << ",rotate=" << rotate << ")" << std::endl;
+	std::cerr << "<<< Exiting right_rotate(n=" << n << ",rotate=" << rotate << ")" << std::endl;
     return (n >> rotate) | (n << (32 - rotate));
 }
 
@@ -128,10 +130,12 @@ void Hash::update(const std::array<uint32_t, 64> &blocks) {
  * @return std::string Final hash value
  */
 std::string Hash::to_string() const {
+	std::cerr << ">>> Entering Hash::to_string()" << std::endl;
     std::stringstream ss;
     for (size_t i = 0; i < 8; ++i) {
         ss << std::hex << std::setfill('0') << std::setw(8) << hash[i];
     }
+	std::cerr << "<<< Exiting Hash::to_string()" << std::endl;
     return ss.str();
 }
 
@@ -141,7 +145,9 @@ std::string Hash::to_string() const {
  * @return size_t Size of the padded input
  */
 std::size_t compute_padded_size(const std::size_t input_size) {
+	std::cerr << ">>> Entering compute_padded_size(input_size=" << input_size << ")" << std::endl;
     if (input_size % 64 < 56) {
+	std::cerr << "<<< Exiting compute_padded_size(input_size=" << input_size << ")" << std::endl;
         return input_size + 64 - (input_size % 64);
     }
     return input_size + 128 - (input_size % 64);
@@ -155,7 +161,10 @@ std::size_t compute_padded_size(const std::size_t input_size) {
  */
 template <typename T>
 uint8_t extract_byte(const T in_value, const std::size_t byte_num) {
+	std::cerr << ">>> Entering extract_byte(in_value=" << in_value << ",byte_num=" << byte_num << ")" << std::endl;
     if (sizeof(in_value) <= byte_num) {
+		std::cerr << "Throwing std from extract_byte(in_value=" << in_value << ",byte_num=" << byte_num << ")" << std::endl;
+	std::cerr << "<<< Exiting extract_byte(in_value=" << in_value << ",byte_num=" << byte_num << ")" << std::endl;
         throw std::out_of_range("Byte at index byte_num does not exist");
     }
     return (in_value >> (byte_num * 8)) & 0xFF;
@@ -168,18 +177,23 @@ uint8_t extract_byte(const T in_value, const std::size_t byte_num) {
  * @return char Character at the index pos in the padded string
  */
 char get_char(const std::string &input, std::size_t pos) {
+	std::cerr << ">>> Entering get_char(input=" << input << ",pos=" << pos << ")" << std::endl;
     const auto input_size = input.length();
     if (pos < input_size) {
+		std::cerr << "get_char(input=" << input << ",pos=" << pos << "): input_size → " << input_size << std::endl;
         return input[pos];
     }
     if (pos == input_size) {
         return '\x80';
     }
     const auto padded_input_size = compute_padded_size(input_size);
+	std::cerr << "get_char(input=" << input << ",pos=" << pos << "): padded_input_size → " << padded_input_size << std::endl;
     if (pos < padded_input_size - 8) {
         return '\x00';
     }
     if (padded_input_size <= pos) {
+		std::cerr << "Throwing std from get_char(input=" << input << ",pos=" << pos << ")" << std::endl;
+	std::cerr << "<<< Exiting get_char(input=" << input << ",pos=" << pos << ")" << std::endl;
         throw std::out_of_range("pos is out of range");
     }
     return static_cast<char>(
@@ -230,12 +244,15 @@ std::array<uint32_t, 64> create_message_schedule_array(const std::string &input,
  * @return std::string The final hash value
  */
 std::string sha256(const std::string &input) {
+	std::cerr << ">>> Entering sha256(input=" << input << ")" << std::endl;
     Hash h;
     // Process message in successive 512-bit (64-byte) chunks
     for (size_t byte_num = 0; byte_num < compute_padded_size(input.length());
          byte_num += 64) {
+		std::cerr << "sha256(input=" << input << "): byte_num → " << byte_num << std::endl;
         h.update(create_message_schedule_array(input, byte_num));
     }
+	std::cerr << "<<< Exiting sha256(input=" << input << ")" << std::endl;
     return h.to_string();
 }
 }  // namespace sha256
@@ -246,44 +263,55 @@ std::string sha256(const std::string &input) {
  * @returns void
  */
 static void test_compute_padded_size() {
+	std::cerr << ">>> Entering test_compute_padded_size()" << std::endl;
     assert(hashing::sha256::compute_padded_size(55) == 64);
     assert(hashing::sha256::compute_padded_size(56) == 128);
     assert(hashing::sha256::compute_padded_size(130) == 192);
+	std::cerr << "<<< Exiting test_compute_padded_size()" << std::endl;
 }
 
 static void test_extract_byte() {
+	std::cerr << ">>> Entering test_extract_byte()" << std::endl;
     assert(hashing::sha256::extract_byte<uint32_t>(512, 0) == 0);
     assert(hashing::sha256::extract_byte<uint32_t>(512, 1) == 2);
     bool exception = false;
+	std::cerr << "test_extract_byte(): exception → " << exception << std::endl;
     try {
         hashing::sha256::extract_byte<uint32_t>(512, 5);
     } catch (const std::out_of_range &) {
         exception = true;
     }
     assert(exception);
+	std::cerr << "<<< Exiting test_extract_byte()" << std::endl;
 }
 
 static void test_get_char() {
+	std::cerr << ">>> Entering test_get_char()" << std::endl;
     assert(hashing::sha256::get_char("test", 3) == 't');
     assert(hashing::sha256::get_char("test", 4) == '\x80');
     assert(hashing::sha256::get_char("test", 5) == '\x00');
     assert(hashing::sha256::get_char("test", 63) == 32);
     bool exception = false;
+	std::cerr << "test_get_char(): exception → " << exception << std::endl;
     try {
         hashing::sha256::get_char("test", 64);
     } catch (const std::out_of_range &) {
         exception = true;
     }
     assert(exception);
+	std::cerr << "<<< Exiting test_get_char()" << std::endl;
 }
 
 static void test_right_rotate() {
+	std::cerr << ">>> Entering test_right_rotate()" << std::endl;
     assert(hashing::sha256::right_rotate(128, 3) == 16);
     assert(hashing::sha256::right_rotate(1, 30) == 4);
     assert(hashing::sha256::right_rotate(6, 30) == 24);
+	std::cerr << "<<< Exiting test_right_rotate()" << std::endl;
 }
 
 static void test_sha256() {
+	std::cerr << ">>> Entering test_sha256()" << std::endl;
     struct TestCase {
         const std::string input;
         const std::string expected_hash;
@@ -310,6 +338,7 @@ static void test_sha256() {
 }
 
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     test_compute_padded_size();
     test_extract_byte();
     test_get_char();
@@ -317,6 +346,7 @@ static void test() {
     test_sha256();
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -324,6 +354,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // Run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

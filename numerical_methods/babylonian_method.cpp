@@ -28,6 +28,7 @@ namespace numerical_methods {
  */
 
 double babylonian_method(double radicand) {
+	std::cerr << ">>> Entering babylonian_method(radicand=" << radicand << ")" << std::endl;
     int i = 1;  /// To find initial root or rough approximation
 
     while (i * i <= radicand) {
@@ -37,6 +38,7 @@ double babylonian_method(double radicand) {
     i--;  /// Real Initial value will be i-1 as loop stops on +1 value
 
     double x0 = i;  /// Storing previous value for comparison
+	std::cerr << "babylonian_method(radicand=" << radicand << "): x0 → " << x0 << std::endl;
     double x1 =
         (radicand / x0 + x0) / 2;  /// Storing calculated value for comparison
     double temp = NAN;             /// Temp variable to x0 and x1
@@ -47,6 +49,7 @@ double babylonian_method(double radicand) {
         x1 = temp;
     }
 
+	std::cerr << "<<< Exiting babylonian_method(radicand=" << radicand << ")" << std::endl;
     return x1;  /// Returning final root
 }
 
@@ -60,6 +63,7 @@ double babylonian_method(double radicand) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /* descriptions of the following test */
 
     auto testcase1 = 125348;  /// Testcase 1
@@ -69,8 +73,10 @@ static void test() {
     auto real_output2 = 867.225460881;  /// Real Output 2
 
     auto test_result1 = numerical_methods::babylonian_method(testcase1);
+	std::cerr << "test(): test_result1 → " << test_result1 << std::endl;
     /// Test result for testcase 1
     auto test_result2 = numerical_methods::babylonian_method(testcase2);
+	std::cerr << "test(): test_result2 → " << test_result2 << std::endl;
     /// Test result for testcase 2
 
     assert(std::max(test_result1, real_output1) -
@@ -83,6 +89,7 @@ static void test() {
     /// Testing for test Case 2
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -92,7 +99,9 @@ static void test() {
  */
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  //  run self-test implementations
              //  with 2 defined test cases
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

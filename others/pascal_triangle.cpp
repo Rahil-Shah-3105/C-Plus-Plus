@@ -16,6 +16,7 @@
  * \param [in] n    depth of Pascal triangle to print
  */
 void show_pascal(int **arr, int n) {
+	std::cerr << ">>> Entering show_pascal(arr=" << arr << ",n=" << n << ")" << std::endl;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n + i; ++j) {
             if (arr[i][j] == 0)
@@ -25,6 +26,7 @@ void show_pascal(int **arr, int n) {
         }
         std::cout << std::endl;
     }
+	std::cerr << "<<< Exiting show_pascal(arr=" << arr << ",n=" << n << ")" << std::endl;
 }
 
 /**
@@ -34,6 +36,7 @@ void show_pascal(int **arr, int n) {
  * \result arr pointer returned
  */
 int **pascal_triangle(int **arr, int n) {
+	std::cerr << ">>> Entering pascal_triangle(arr=" << arr << ",n=" << n << ")" << std::endl;
     for (int i = 0; i < n; ++i) {
         for (int j = n - i - 1; j < n + i; ++j) {
             if (j == n - i - 1 || j == n + i - 1)
@@ -43,6 +46,7 @@ int **pascal_triangle(int **arr, int n) {
         }
     }
 
+	std::cerr << "<<< Exiting pascal_triangle(arr=" << arr << ",n=" << n << ")" << std::endl;
     return arr;
 }
 
@@ -50,6 +54,7 @@ int **pascal_triangle(int **arr, int n) {
  * main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int n = 0;
 
     std::cout << "Set Pascal's Triangle Height" << std::endl;
@@ -71,5 +76,6 @@ int main() {
     }
     delete[] arr;
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

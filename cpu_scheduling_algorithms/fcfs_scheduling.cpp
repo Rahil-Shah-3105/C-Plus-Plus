@@ -128,6 +128,7 @@ class FCFS {
      *
      */
     void addProcess(S id, T arrival, E burst) {
+		std::cerr << ">>> Entering addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
         // Add if a process with process ID as id is not found in idList.
         if (idList.find(id) == idList.end()) {
             tuple<S, T, E, double, double, double> t =
@@ -135,6 +136,7 @@ class FCFS {
             schedule.push(t);
             idList.insert(id);
         }
+		std::cerr << "<<< Exiting addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
     }
 
     /**
@@ -190,6 +192,7 @@ class FCFS {
      * @returns void
      */
     void printResult() {
+		std::cerr << ">>> Entering printResult()" << std::endl;
         cout << "Status of all the proceses post completion is as follows:"
              << endl;
 

@@ -27,6 +27,7 @@ void enqueue(node *n) { queue.t[queue.rear++] = n; }
 node *dequeue() { return (queue.t[queue.front++]); }
 
 void Insert(node *n, int x) {
+	std::cerr << ">>> Entering Insert(n=" << n << ",x=" << x << ")" << std::endl;
     if (x < n->val) {
         if (n->left == NULL) {
             node *temp = new node;
@@ -48,16 +49,20 @@ void Insert(node *n, int x) {
             Insert(n->right, x);
         }
     }
+	std::cerr << "<<< Exiting Insert(n=" << n << ",x=" << x << ")" << std::endl;
 }
 
 int findMaxInLeftST(node *n) {
+	std::cerr << ">>> Entering findMaxInLeftST(n=" << n << ")" << std::endl;
     while (n->right != NULL) {
         n = n->right;
     }
+	std::cerr << "<<< Exiting findMaxInLeftST(n=" << n << ")" << std::endl;
     return n->val;
 }
 
 void Remove(node *p, node *n, int x) {
+	std::cerr << ">>> Entering Remove(p=" << p << ",n=" << n << ",x=" << x << ")" << std::endl;
     if (n->val == x) {
         if (n->right == NULL && n->left == NULL) {
             if (x < p->val) {
@@ -79,6 +84,7 @@ void Remove(node *p, node *n, int x) {
             }
         } else {
             int y = findMaxInLeftST(n->left);
+			std::cerr << "Remove(p=" << p << ",n=" << n << ",x=" << x << "): y → " << y << std::endl;
             n->val = y;
             Remove(n, n->right, y);
         }
@@ -87,44 +93,56 @@ void Remove(node *p, node *n, int x) {
     } else {
         Remove(n, n->right, x);
     }
+	std::cerr << "<<< Exiting Remove(p=" << p << ",n=" << n << ",x=" << x << ")" << std::endl;
 }
 
 void BFT(node *n) {
+	std::cerr << ">>> Entering BFT(n=" << n << ")" << std::endl;
     if (n != NULL) {
         std::cout << n->val << "  ";
         enqueue(n->left);
         enqueue(n->right);
         BFT(dequeue());
     }
+	std::cerr << "<<< Exiting BFT(n=" << n << ")" << std::endl;
 }
 
 void Pre(node *n) {
+	std::cerr << ">>> Entering Pre(n=" << n << ")" << std::endl;
     if (n != NULL) {
         std::cout << n->val << "  ";
         Pre(n->left);
         Pre(n->right);
     }
+	std::cerr << "<<< Exiting Pre(n=" << n << ")" << std::endl;
 }
 
 void In(node *n) {
+	std::cerr << ">>> Entering In(n=" << n << ")" << std::endl;
     if (n != NULL) {
         In(n->left);
         std::cout << n->val << "  ";
         In(n->right);
     }
+	std::cerr << "<<< Exiting In(n=" << n << ")" << std::endl;
 }
 
 void Post(node *n) {
+	std::cerr << ">>> Entering Post(n=" << n << ")" << std::endl;
     if (n != NULL) {
         Post(n->left);
         Post(n->right);
         std::cout << n->val << "  ";
     }
+	std::cerr << "<<< Exiting Post(n=" << n << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     queue.front = 0;
     queue.rear = 0;
+	std::cerr << "main(): queue.rear → " << queue.rear << std::endl;
+	std::cerr << "main(): queue.front → " << queue.front << std::endl;
     int value;
     int ch;
     node *root = new node;
@@ -170,5 +188,6 @@ int main() {
         }
     } while (ch != 0);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

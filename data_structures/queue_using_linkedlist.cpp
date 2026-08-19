@@ -18,6 +18,7 @@ class stack_linkedList {
     void display();
 };
 void stack_linkedList::enqueue(int ele) {
+	std::cerr << ">>> Entering stack_linkedList::enqueue(ele=" << ele << ")" << std::endl;
     linkedlist *temp = new linkedlist();
     temp->data = ele;
     temp->next = NULL;
@@ -28,8 +29,10 @@ void stack_linkedList::enqueue(int ele) {
         rear->next = temp;
         rear = temp;
     }
+	std::cerr << "<<< Exiting stack_linkedList::enqueue(ele=" << ele << ")" << std::endl;
 }
 int stack_linkedList::dequeue() {
+	std::cerr << ">>> Entering stack_linkedList::dequeue()" << std::endl;
     linkedlist *temp;
     int ele;
     if (front == NULL)
@@ -37,14 +40,17 @@ int stack_linkedList::dequeue() {
     else {
         temp = front;
         ele = temp->data;
+		std::cerr << "stack_linkedList::dequeue(): ele → " << ele << std::endl;
         if (front == rear)  // if length of queue is 1;
             rear = rear->next;
         front = front->next;
         delete (temp);
     }
+	std::cerr << "<<< Exiting stack_linkedList::dequeue()" << std::endl;
     return ele;
 }
 void stack_linkedList::display() {
+	std::cerr << ">>> Entering stack_linkedList::display()" << std::endl;
     if (front == NULL)
         std::cout << "\nStack is empty";
 
@@ -56,9 +62,11 @@ void stack_linkedList::display() {
             temp = temp->next;
         }
     }
+	std::cerr << "<<< Exiting stack_linkedList::display()" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int op, data;
     stack_linkedList ob;
     std::cout << "\n1. enqueue(Insertion) ";
@@ -82,5 +90,6 @@ int main() {
         else
             std::cout << "\nWrong choice ";
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

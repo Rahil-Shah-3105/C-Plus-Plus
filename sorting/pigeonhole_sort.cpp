@@ -66,6 +66,7 @@ std::array<int, N> pigeonSort(std::array<int, N> arr) {
  * @returns none
  */
 static void test_1() {
+	std::cerr << ">>> Entering test_1()" << std::endl;
     const int n = 7;
     std::array<int, n> test_array = {8, 3, 2, 7, 4, 6, 8};
 
@@ -78,6 +79,7 @@ static void test_1() {
         std::cout << test_array.at(i) << " ";
     }
     std::cout << "\nPassed\n";
+	std::cerr << "<<< Exiting test_1()" << std::endl;
 }
 
 /**
@@ -86,6 +88,7 @@ static void test_1() {
  * @returns none
  */
 static void test_2() {
+	std::cerr << ">>> Entering test_2()" << std::endl;
     const int n = 10;
     std::array<int, n> test_array = {802, 630, 20,  745, 52,
                                      300, 612, 932, 78,  187};
@@ -99,6 +102,7 @@ static void test_2() {
         std::cout << test_array.at(i) << " ";
     }
     std::cout << "\nPassed\n";
+	std::cerr << "<<< Exiting test_2()" << std::endl;
 }
 
 /**
@@ -107,6 +111,7 @@ static void test_2() {
  * @returns none
  */
 static void test_3() {
+	std::cerr << ">>> Entering test_3()" << std::endl;
     const int n = 4;
     std::array<int, n> test_array = {11, 13, 12, 14};
 
@@ -119,15 +124,18 @@ static void test_3() {
         std::cout << test_array.at(i) << " ";
     }
     std::cout << "\nPassed\n";
+	std::cerr << "<<< Exiting test_3()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test_1();
     test_2();
     test_3();
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

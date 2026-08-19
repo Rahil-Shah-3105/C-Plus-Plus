@@ -46,6 +46,7 @@ void get_input() {}
  * \returns -1 if target value not found
  */
 int it_ternary_search(int left, int right, int A[], int target) {
+	std::cerr << ">>> Entering it_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << ")" << std::endl;
     while (1) {
         if (left < right) {
             if (right - left < absolutePrecision) {
@@ -57,7 +58,9 @@ int it_ternary_search(int left, int right, int A[], int target) {
             }
 
             int oneThird = (left + right) / 3 + 1;
+			std::cerr << "it_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << "): oneThird → " << oneThird << std::endl;
             int twoThird = (left + right) * 2 / 3 + 1;
+			std::cerr << "it_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << "): twoThird → " << twoThird << std::endl;
 
             if (A[oneThird] == target)
                 return oneThird;
@@ -75,6 +78,7 @@ int it_ternary_search(int left, int right, int A[], int target) {
             return -1;
         }
     }
+	std::cerr << "<<< Exiting it_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << ")" << std::endl;
 }
 
 /**
@@ -88,6 +92,7 @@ int it_ternary_search(int left, int right, int A[], int target) {
  * \returns -1 if target value not found
  */
 int rec_ternary_search(int left, int right, int A[], int target) {
+	std::cerr << ">>> Entering rec_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << ")" << std::endl;
     if (left < right) {
         if (right - left < absolutePrecision) {
             for (int i = left; i <= right; i++)
@@ -98,7 +103,9 @@ int rec_ternary_search(int left, int right, int A[], int target) {
         }
 
         int oneThird = (left + right) / 3 + 1;
+		std::cerr << "rec_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << "): oneThird → " << oneThird << std::endl;
         int twoThird = (left + right) * 2 / 3 + 1;
+		std::cerr << "rec_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << "): twoThird → " << twoThird << std::endl;
 
         if (A[oneThird] == target)
             return oneThird;
@@ -112,6 +119,7 @@ int rec_ternary_search(int left, int right, int A[], int target) {
 
         return rec_ternary_search(oneThird + 1, twoThird - 1, A, target);
     } else {
+		std::cerr << "<<< Exiting rec_ternary_search(left=" << left << ",right=" << right << ",A=" << A << ",target=" << target << ")" << std::endl;
         return -1;
     }
 }
@@ -132,9 +140,11 @@ void ternary_search(int N, int A[], int target) {
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int N = 21;
     int A[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 10};
     get_input();
     ternary_search(N, A, _target);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -117,6 +117,7 @@ bool abbreviation_recursion(std::vector<std::vector<bool>> *memo,
  * @returns `true` if string `str` can be converted to `result`
  */
 bool abbreviation(const std::string &str, const std::string &result) {
+	std::cerr << ">>> Entering abbreviation(str=" << str << ",result=" << result << ")" << std::endl;
     std::vector<std::vector<bool>> memo(
         str.size() + 1, std::vector<bool>(result.size() + 1, false));
 
@@ -141,6 +142,7 @@ bool abbreviation(const std::string &str, const std::string &result) {
             }
         }
     }
+	std::cerr << "<<< Exiting abbreviation(str=" << str << ",result=" << result << ")" << std::endl;
     return memo.back().back();
 }
 }  // namespace abbreviation
@@ -151,10 +153,13 @@ bool abbreviation(const std::string &str, const std::string &result) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::string s = "daBcd", t = "ABC";
     std::vector<std::vector<bool>> memo(s.size() + 1,
                                         std::vector<bool>(t.size() + 1, false)),
         visited(s.size() + 1, std::vector<bool>(t.size() + 1, false));
+		std::cerr << "test(): t → " << t << std::endl;
+		std::cerr << "test(): s → " << s << std::endl;
 
     assert(dynamic_programming::abbreviation::abbreviation_recursion(
                &memo, &visited, s, t) == true);
@@ -183,6 +188,7 @@ static void test() {
     assert(dynamic_programming::abbreviation::abbreviation_recursion(
                &memo, &visited, s, t) == true);
     assert(dynamic_programming::abbreviation::abbreviation(s, t) == true);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -190,6 +196,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

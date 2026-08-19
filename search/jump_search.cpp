@@ -10,12 +10,15 @@
 /** jump search implementation
  */
 int jumpSearch(int arr[], int x, int n) {
+	std::cerr << ">>> Entering jumpSearch(arr=" << arr << ",x=" << x << ",n=" << n << ")" << std::endl;
     // Finding block size to be jumped
     int step = std::sqrt(n);
+	std::cerr << "jumpSearch(arr=" << arr << ",x=" << x << ",n=" << n << "): step → " << step << std::endl;
 
     // Finding the block where element is
     // present (if it is present)
     int prev = 0;
+	std::cerr << "jumpSearch(arr=" << arr << ",x=" << x << ",n=" << n << "): prev → " << prev << std::endl;
     while (arr[std::min(step, n) - 1] < x) {
         prev = step;
         step += std::sqrt(n);
@@ -42,14 +45,17 @@ int jumpSearch(int arr[], int x, int n) {
 
 // Driver program to test function
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int arr[] = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610};
     int x = 55;
     int n = sizeof(arr) / sizeof(arr[0]);
+	std::cerr << "main(): n → " << n << std::endl;
 
     // Find the index of 'x' using Jump Search
     int index = jumpSearch(arr, x, n);
 
     // Print the index where 'x' is located
     std::cout << "\nNumber " << x << " is at index " << index;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

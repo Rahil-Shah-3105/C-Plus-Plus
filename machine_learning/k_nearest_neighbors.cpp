@@ -138,6 +138,7 @@ class Knn {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::cout << "------- Test 1 -------" << std::endl;
     std::vector<std::vector<double>> X1 = {{0.0, 0.0}, {0.25, 0.25},
                                            {0.0, 0.5}, {0.5, 0.5},
@@ -182,6 +183,7 @@ static void test() {
     assert(model3.predict(sample11, 3) == 2);
     assert(model3.predict(sample12, 3) == 2);
     std::cout << "... Passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -189,6 +191,8 @@ static void test() {
  * @return int 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

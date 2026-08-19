@@ -102,6 +102,7 @@ std::vector<uint64_t> radix(const std::vector<uint64_t>& ar) {
  * @returns none
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     /// Test 1
     std::vector<uint64_t> ar1 = {432, 234, 143, 332, 123};
     ar1 = sorting::radix_sort::radix(ar1);
@@ -111,12 +112,15 @@ static void tests() {
                                  133, 132,  32,  12,  113};
     ar2 = sorting::radix_sort::radix(ar2);
     assert(std::is_sorted(ar2.begin(), ar2.end()));
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

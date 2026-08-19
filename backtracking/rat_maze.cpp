@@ -84,6 +84,7 @@ bool solveMaze(int currposrow, int currposcol,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     const int size = 4;
     std::array<std::array<int, size>, size> maze = {
         std::array<int, size>{1, 0, 1, 0}, std::array<int, size>{1, 0, 1, 1},
@@ -103,6 +104,7 @@ static void test() {
 
     assert(backtracking::rat_maze::solveMaze<size>(currposrow, currposcol, maze,
                                                    soln) == 1);
+												std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -110,6 +112,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

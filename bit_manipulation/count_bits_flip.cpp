@@ -63,6 +63,7 @@ std::uint64_t countBitsFlip(
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // A = 10, B = 20 return 4
     assert(bit_manipulation::count_bits_flip::countBitsFlip(10, 20) == 4);
     // A = 20, B = 25 return 3
@@ -78,12 +79,15 @@ static void test() {
     // A = 7, B = 786 return 5
     assert(bit_manipulation::count_bits_flip::countBitsFlip(7, 786) == 5);
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

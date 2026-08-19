@@ -62,6 +62,7 @@ namespace depth_first_search {
  *
  */
 void addEdge(std::vector<std::vector<size_t>> *adj, size_t u, size_t v) {
+	std::cerr << ">>> Entering addEdge(adj=" << adj << ",u=" << u << ",v=" << v << ")" << std::endl;
 	/*
 	*
 	* Here we are considering undirected graph that's the
@@ -70,6 +71,7 @@ void addEdge(std::vector<std::vector<size_t>> *adj, size_t u, size_t v) {
 	*
 	*/
 	(*adj)[u - 1].push_back(v - 1);
+	std::cerr << "<<< Exiting addEdge(adj=" << adj << ",u=" << u << ",v=" << v << ")" << std::endl;
 }
 
 /**
@@ -121,12 +123,14 @@ std::vector<size_t> dfs(const std::vector<std::vector<size_t> > &graph, size_t s
  * @returns none
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
 	size_t start_pos;
 
 	/// Test 1
 	std::cout << "Case 1: " << std::endl;
 	start_pos = 1;
 	std::vector<std::vector<size_t> > g1(3, std::vector<size_t>());
+	std::cerr << "tests(): start_pos → " << start_pos << std::endl;
 
 	graph::depth_first_search::addEdge(&g1, 1, 2);
 	graph::depth_first_search::addEdge(&g1, 2, 3);
@@ -162,6 +166,7 @@ static void tests() {
 
 	std::vector<size_t> expected3 {2, 4, 1, 3}; /// for the above sample data, this is the expected output
 	assert(graph::depth_first_search::dfs(g3, start_pos - 1) == expected3);
+	std::cerr << "<<< Exiting tests()" << std::endl;
 	std::cout << "Passed" << std::endl;
 
 }
@@ -171,6 +176,7 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // execute the tests
 
     size_t vertices = 0, edges = 0, start_pos = 1;
@@ -203,5 +209,6 @@ int main() {
 		std::cout << x << ' ';
 	}
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

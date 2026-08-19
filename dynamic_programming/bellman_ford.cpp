@@ -18,21 +18,28 @@ class Graph {
 
     // Constructs a graph with V vertices and E edges
     Graph(int V, int E) {
+		std::cerr << ">>> Entering Graph(V=" << V << ",E=" << E << ")" << std::endl;
         this->vertexNum = V;
         this->edgeNum = E;
         this->edges.reserve(E);
+		std::cerr << "<<< Exiting Graph(V=" << V << ",E=" << E << ")" << std::endl;
     }
 
     // Adds the given edge to the graph
     void addEdge(int src, int dst, int weight) {
+		std::cerr << ">>> Entering addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
         static int edgeInd = 0;
         if (edgeInd < this->edgeNum) {
             Edge newEdge;
             newEdge.src = src;
+			std::cerr << "addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << "): newEdge.src → " << newEdge.src << std::endl;
+			std::cerr << "addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << "): newEdge.dst → " << newEdge.dst << std::endl;
+			std::cerr << "addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << "): newEdge.weight → " << newEdge.weight << std::endl;
             newEdge.dst = dst;
             newEdge.weight = weight;
             this->edges[edgeInd++] = newEdge;
         }
+		std::cerr << "<<< Exiting addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
     }
 };
 
@@ -94,6 +101,7 @@ void BellmanFord(Graph graph, int src) {
 
 // Driver Function
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int V, E, gsrc;
     int src, dst, weight;
     cout << "Enter number of vertices: ";
@@ -114,5 +122,6 @@ int main() {
     cin >> gsrc;
     BellmanFord(G, gsrc);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

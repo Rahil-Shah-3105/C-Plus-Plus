@@ -46,11 +46,13 @@ int max_subarray_sum(std::array<int64_t, SIZE> arr, uint64_t length) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::array<int64_t, 4> arr = {1, 2, 3, 4};
     std::array<int64_t, 5> arr1 = {-1, -2, -4, -6, 7};
     assert(max_subarray_sum(arr, 4) == 10);
     assert(max_subarray_sum(arr1, 5) == 7);
     std::cout << "All test cases have passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -58,6 +60,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Below is the code for accepting array from the user and then
     // calling the function for the required output.
     // It has been commented for now so that the test() function can run
@@ -82,5 +85,6 @@ int main() {
     //           << std::endl;
 
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

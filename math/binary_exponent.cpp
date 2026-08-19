@@ -26,13 +26,16 @@
 /// Recursive function to calculate exponent in \f$O(\log(n))\f$ using binary
 /// exponent.
 int binExpo(int a, int b) {
+	std::cerr << ">>> Entering binExpo(a=" << a << ",b=" << b << ")" << std::endl;
     if (b == 0) {
         return 1;
     }
     int res = binExpo(a, b / 2);
+	std::cerr << "binExpo(a=" << a << ",b=" << b << "): res → " << res << std::endl;
     if (b % 2) {
         return res * res * a;
     } else {
+		std::cerr << "<<< Exiting binExpo(a=" << a << ",b=" << b << ")" << std::endl;
         return res * res;
     }
 }
@@ -40,19 +43,23 @@ int binExpo(int a, int b) {
 /// Iterative function to calculate exponent in \f$O(\log(n))\f$ using binary
 /// exponent.
 int binExpo_alt(int a, int b) {
+	std::cerr << ">>> Entering binExpo_alt(a=" << a << ",b=" << b << ")" << std::endl;
     int res = 1;
     while (b > 0) {
+		std::cerr << "binExpo_alt(a=" << a << ",b=" << b << "): res → " << res << std::endl;
         if (b % 2) {
             res = res * a;
         }
         a = a * a;
         b /= 2;
     }
+	std::cerr << "<<< Exiting binExpo_alt(a=" << a << ",b=" << b << ")" << std::endl;
     return res;
 }
 
 /// Main function
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int a, b;
     /// Give two numbers a, b
     std::cin >> a >> b;
@@ -62,10 +69,12 @@ int main() {
         std::cout << "Exponent must be positive !!" << std::endl;
     } else {
         int resRecurse = binExpo(a, b);
+		std::cerr << "main(): resRecurse → " << resRecurse << std::endl;
         /// int resIterate = binExpo_alt(a, b);
 
         /// Result of a^b (where '^' denotes exponentiation)
         std::cout << resRecurse << std::endl;
         /// std::cout << resIterate << std::endl;
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
 }

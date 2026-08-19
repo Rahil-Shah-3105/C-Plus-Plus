@@ -35,6 +35,7 @@
  * @param r - end index or right index of second half array
  */
 void merge(int *arr, int l, int m, int r) {
+	std::cerr << ">>> Entering merge(arr=" << arr << ",l=" << l << ",m=" << m << ",r=" << r << ")" << std::endl;
     int n1 = m - l + 1;
     int n2 = r - m;
 
@@ -67,6 +68,7 @@ void merge(int *arr, int l, int m, int r) {
         j++;
         k++;
     }
+	std::cerr << "<<< Exiting merge(arr=" << arr << ",l=" << l << ",m=" << m << ",r=" << r << ")" << std::endl;
 }
 
 /**
@@ -80,12 +82,15 @@ void merge(int *arr, int l, int m, int r) {
  *
  */
 void mergeSort(int *arr, int l, int r) {
+	std::cerr << ">>> Entering mergeSort(arr=" << arr << ",l=" << l << ",r=" << r << ")" << std::endl;
     if (l < r) {
         int m = l + (r - l) / 2;
+		std::cerr << "mergeSort(arr=" << arr << ",l=" << l << ",r=" << r << "): m → " << m << std::endl;
         mergeSort(arr, l, m);
         mergeSort(arr, m + 1, r);
         merge(arr, l, m, r);
     }
+	std::cerr << "<<< Exiting mergeSort(arr=" << arr << ",l=" << l << ",r=" << r << ")" << std::endl;
 }
 
 /**
@@ -93,12 +98,15 @@ void mergeSort(int *arr, int l, int r) {
  * sorting
  */
 void show(int *arr, int size) {
+	std::cerr << ">>> Entering show(arr=" << arr << ",size=" << size << ")" << std::endl;
     for (int i = 0; i < size; i++) std::cout << arr[i] << " ";
     std::cout << "\n";
+	std::cerr << "<<< Exiting show(arr=" << arr << ",size=" << size << ")" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int size;
     std::cout << "Enter the number of elements: ";
     std::cin >> size;
@@ -118,6 +126,7 @@ int main() {
     std::cout << "Sorted array: ";
     show(arr, size);
     delete[] arr;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
 /** @} */

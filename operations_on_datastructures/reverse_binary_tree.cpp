@@ -39,9 +39,12 @@ struct Node {
      * @brief Creates a new Node with some initial data
      */
     explicit Node(int64_t _data) {
+		std::cerr << ">>> Entering Node(_data=" << _data << ")" << std::endl;
         data = _data;     ///< Set value of Node data
         left = nullptr;   ///< Initialize left child to NULL
+		std::cerr << "Node(_data=" << _data << "): data → " << data << std::endl;
         right = nullptr;  ///< Initialize right child to NULL
+		std::cerr << "<<< Exiting Node(_data=" << _data << ")" << std::endl;
     }
 };
 
@@ -63,6 +66,7 @@ class BinaryTree {
      * @returns Node pointer to the root
      */
     Node* insert(int64_t data, Node* pivot) {
+		std::cerr << ">>> Entering insert(data=" << data << ",pivot=" << pivot << ")" << std::endl;
         if (pivot == nullptr) {
             return new Node(data);  ///< Create new node
         }
@@ -73,6 +77,7 @@ class BinaryTree {
             pivot->right =
                 insert(data, pivot->right);  ///< Insert node to the right
         }
+		std::cerr << "<<< Exiting insert(data=" << data << ",pivot=" << pivot << ")" << std::endl;
         return pivot;
     }
     /**
@@ -82,12 +87,14 @@ class BinaryTree {
      * @returns Node pointer to root node
      */
     Node* reverseBinaryTree(Node* pivot) {
+		std::cerr << ">>> Entering reverseBinaryTree(pivot=" << pivot << ")" << std::endl;
         if (pivot == nullptr) {
             return pivot;  ///< Base case
         }
         Node* temp = pivot->left;  ///< pointer to the left subtree
         pivot->left = reverseBinaryTree(pivot->right);  ///< Swap
         pivot->right = reverseBinaryTree(temp);         ///< Swap
+		std::cerr << "<<< Exiting reverseBinaryTree(pivot=" << pivot << ")" << std::endl;
         return pivot;
     }
 
@@ -105,10 +112,12 @@ class BinaryTree {
     explicit BinaryTree(int64_t data) { root = new Node(data); }
 
     ~BinaryTree() {
+		std::cerr << ">>> Entering ~BinaryTree()" << std::endl;
         std::vector<Node*> nodes;
         nodes.emplace_back(root);
         while (!nodes.empty()) {
             const auto cur_node = nodes.back();
+			std::cerr << "~BinaryTree(): cur_node → " << cur_node << std::endl;
             nodes.pop_back();
             if (cur_node) {
                 nodes.emplace_back(cur_node->left);
@@ -116,6 +125,7 @@ class BinaryTree {
                 delete cur_node;
             }
         }
+		std::cerr << "<<< Exiting ~BinaryTree()" << std::endl;
     }
 
     /**
@@ -137,6 +147,7 @@ class BinaryTree {
      * @returns vector<int64_t> of nodes of the tree.
      */
     std::vector<int64_t> get_level_order() {
+		std::cerr << ">>> Entering get_level_order()" << std::endl;
         std::vector<int64_t> data;  ///< Result vector of int
         if (root == nullptr) {
             return data;  ///< Return empty vector if root is Invalid
@@ -154,6 +165,7 @@ class BinaryTree {
                 nodes.push(temp->right);  ///< Insert right node
             }
         }  /// Add nodes while Tree is not empty
+		std::cerr << "<<< Exiting get_level_order()" << std::endl;
         return data;
     }
     /**
@@ -162,10 +174,12 @@ class BinaryTree {
      * @returns void
      */
     void print() {
+		std::cerr << ">>> Entering print()" << std::endl;
         for (int i : get_level_order()) {
             std::cout << i << " ";  /// Print each element in the tree
         }
         std::cout << "\n";  /// Print newline
+		std::cerr << "<<< Exiting print()" << std::endl;
     }
 };
 
@@ -183,6 +197,7 @@ using operations_on_datastructures::reverse_binary_tree::
  * @brief A Test to check an edge case (single element reversal)
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     BinaryTree bst;
     std::vector<int64_t> pre_reversal, post_reversal;
     std::cout << "TEST CASE 1\n";
@@ -202,11 +217,13 @@ void test1() {
            post_reversal[0]);  ///< Check if both elements are same
     bst.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an edge case (NULL root element)
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     BinaryTree bst;
     std::vector<int64_t> pre_reversal, post_reversal;
     std::cout << "TEST CASE 2\n";
@@ -223,11 +240,13 @@ void test2() {
            0);  ///< Ensure that there is only one element
     bst.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check correct reversal of a Binary Tree
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     BinaryTree bst;
     std::vector<int64_t> pre_reversal, post_reversal;
     std::vector<int64_t> pre_res = {4, 3, 6, 2, 5, 7, 1};
@@ -251,6 +270,7 @@ void test3() {
     assert(post_reversal == post_res);  ///< Check for equality
     bst.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 }  // namespace tests
 
@@ -258,9 +278,11 @@ void test3() {
  * @brief Function to test the correctness of the Tree Reversal
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     tests::test1();  ///< Single element test
     tests::test2();  ///< No element test
     tests::test3();  ///< Correct reversal test
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -268,6 +290,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
