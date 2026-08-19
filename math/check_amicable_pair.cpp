@@ -29,6 +29,7 @@ namespace math {
  * @return Sum of the proper divisor of the number.
  */
 int sum_of_divisor(int num) {
+	std::cerr << ">>> Entering sum_of_divisor(num=" << num << ")" << std::endl;
     // Variable to store the sum of all proper divisors.
     int sum = 1;
     // Below loop condition helps to reduce Time complexity by a factor of
@@ -45,6 +46,7 @@ int sum_of_divisor(int num) {
             }
         }
     }
+	std::cerr << "<<< Exiting sum_of_divisor(num=" << num << ")" << std::endl;
     return sum;
 }
 
@@ -56,6 +58,8 @@ int sum_of_divisor(int num) {
  * @return `false` if the pair is not amicable
  */
 bool are_amicable(int x, int y) {
+	std::cerr << ">>> Entering are_amicable(x=" << x << ",y=" << y << ")" << std::endl;
+	std::cerr << "<<< Exiting are_amicable(x=" << x << ",y=" << y << ")" << std::endl;
     return (sum_of_divisor(x) == y) && (sum_of_divisor(y) == x);
 }
 }  // namespace math
@@ -65,6 +69,7 @@ bool are_amicable(int x, int y) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     assert(math::are_amicable(220, 284) == true);
     assert(math::are_amicable(6368, 6232) == true);
     assert(math::are_amicable(458, 232) == false);
@@ -72,6 +77,7 @@ static void tests() {
     assert(math::are_amicable(18416, 17296) == true);
 
     std::cout << "All tests have successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -79,6 +85,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // perform self-tests implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

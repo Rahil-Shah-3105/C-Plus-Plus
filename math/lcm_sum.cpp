@@ -28,6 +28,7 @@ namespace math {
  * @returns int Sum of LCMs, i.e. ∑LCM(i, num) from i = 1 to num
  */
 uint64_t lcmSum(const uint16_t& num) {
+	std::cerr << ">>> Entering lcmSum(num=" << num << ")" << std::endl;
     uint64_t i = 0, j = 0;
     std::vector<uint64_t> eulerTotient(num + 1);
     std::vector<uint64_t> sumOfEulerTotient(num + 1);
@@ -54,6 +55,7 @@ uint64_t lcmSum(const uint16_t& num) {
         }
     }
 
+	std::cerr << "<<< Exiting lcmSum(num=" << num << ")" << std::endl;
     return ((sumOfEulerTotient[num] + 1) * num) / 2;
 }
 }  // namespace math
@@ -64,30 +66,38 @@ uint64_t lcmSum(const uint16_t& num) {
  * @returns `void`
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     uint64_t n = 2;
     uint64_t test_1 = math::lcmSum(n);
+	std::cerr << "test(): test_1 → " << test_1 << std::endl;
     assert(test_1 == 4);
     std::cout << "Passed Test 1!" << std::endl;
+	std::cerr << "test(): n → " << n << std::endl;
 
     n = 5;
     uint64_t test_2 = math::lcmSum(n);
+	std::cerr << "test(): test_2 → " << test_2 << std::endl;
     assert(test_2 == 55);
     std::cout << "Passed Test 2!" << std::endl;
 
     n = 10;
     uint64_t test_3 = math::lcmSum(n);
+	std::cerr << "test(): test_3 → " << test_3 << std::endl;
     assert(test_3 == 320);
     std::cout << "Passed Test 3!" << std::endl;
 
     n = 11;
     uint64_t test_4 = math::lcmSum(n);
+	std::cerr << "test(): test_4 → " << test_4 << std::endl;
     assert(test_4 == 616);
     std::cout << "Passed Test 4!" << std::endl;
 
     n = 15;
     uint64_t test_5 = math::lcmSum(n);
+	std::cerr << "test(): test_5 → " << test_5 << std::endl;
     assert(test_5 == 1110);
     std::cout << "Passed Test 5!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -95,6 +105,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -99,6 +99,7 @@ std::complex<double> *InverseFastFourierTransform(std::complex<double> *p,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /* descriptions of the following test */
 
     auto *t1 = new std::complex<double>[2];  /// Test case 1
@@ -144,6 +145,7 @@ static void test() {
     delete[] o1;
     delete[] o2;
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -153,7 +155,9 @@ static void test() {
  */
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  //  run self-test implementations
              //  with 2 defined test cases
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

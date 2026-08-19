@@ -17,12 +17,14 @@
  */
 template <typename T>
 std::vector<T> reverse_binary(T num) {
+	std::cerr << ">>> Entering reverse_binary(num=" << num << ")" << std::endl;
     std::vector<T> result;
     T temp = num;
     while (temp > 0) {
         result.push_back(temp % 2);
         temp = temp / 2;
     }
+	std::cerr << "<<< Exiting reverse_binary(num=" << num << ")" << std::endl;
     return result;
 }
 
@@ -71,6 +73,7 @@ T modular_exponentiation(T base, const std::vector<T> &rev_binary_exponent,
  */
 template <typename T>
 bool miller_test(T d, T num) {
+	std::cerr << ">>> Entering miller_test(d=" << d << ",num=" << num << ")" << std::endl;
     // random number seed
     std::random_device rd_seed;
     // random number generator
@@ -79,10 +82,12 @@ bool miller_test(T d, T num) {
     std::uniform_int_distribution<> distribution(2, num - 2);
     // Random number generated in the range [2, num -2].
     T random = distribution(gen);
+	std::cerr << "miller_test(d=" << d << ",num=" << num << "): random → " << random << std::endl;
     // vector for reverse binary of the power
     std::vector<T> power = reverse_binary(d);
     // x = random ^ d % num
     T x = modular_exponentiation(random, power, num);
+	std::cerr << "miller_test(d=" << d << ",num=" << num << "): x → " << x << std::endl;
     // miller conditions
     if (x == 1 || x == num - 1) {
         return true;
@@ -98,6 +103,7 @@ bool miller_test(T d, T num) {
             return true;
         }
     }
+	std::cerr << "<<< Exiting miller_test(d=" << d << ",num=" << num << ")" << std::endl;
     return false;
 }
 
@@ -123,6 +129,7 @@ bool miller_test(T d, T num) {
  */
 template <typename T>
 bool miller_rabin_primality_test(T num, T repeats) {
+	std::cerr << ">>> Entering miller_rabin_primality_test(num=" << num << ",repeats=" << repeats << ")" << std::endl;
     if (num <= 4) {
         // If num == 2 or num == 3 then prime
         if (num == 2 || num == 3) {
@@ -137,6 +144,7 @@ bool miller_rabin_primality_test(T num, T repeats) {
     }
     // Finding d and r in num = 2^r * d + 1
     T d = num - 1, r = 0;
+	std::cerr << "miller_rabin_primality_test(num=" << num << ",repeats=" << repeats << "): d → " << d << std::endl;
     while (d % 2 == 0) {
         d = d / 2;
         r++;
@@ -147,6 +155,7 @@ bool miller_rabin_primality_test(T num, T repeats) {
             return false;
         }
     }
+	std::cerr << "<<< Exiting miller_rabin_primality_test(num=" << num << ",repeats=" << repeats << ")" << std::endl;
     return true;
 }
 
@@ -155,6 +164,7 @@ bool miller_rabin_primality_test(T num, T repeats) {
  * assert statements.
  */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // First test on 2
     assert(((void)"2 is prime but function says otherwise.\n",
             miller_rabin_primality_test(2, 1) == true));
@@ -175,12 +185,15 @@ void tests() {
     assert(((void)"27 is not a prime but the function says otherwise.\n",
             miller_rabin_primality_test(27, 3) == false));
     std::cout << "Fifth test passes." << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

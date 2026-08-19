@@ -31,11 +31,16 @@ namespace bit_manipulation {
  * @returns a number
  */
 uint64_t next_higher_number(uint64_t x) {
+	std::cerr << ">>> Entering next_higher_number(x=" << x << ")" << std::endl;
     uint64_t rightOne = 0;
     uint64_t nextHigherOneBit = 0;
+	std::cerr << "next_higher_number(x=" << x << "): nextHigherOneBit → " << nextHigherOneBit << std::endl;
+	std::cerr << "next_higher_number(x=" << x << "): rightOne → " << rightOne << std::endl;
     uint64_t rightOnesPattern = 0;
+	std::cerr << "next_higher_number(x=" << x << "): rightOnesPattern → " << rightOnesPattern << std::endl;
 
     uint64_t next = 0;
+	std::cerr << "next_higher_number(x=" << x << "): next → " << next << std::endl;
 
     if (x) {
         // right most set bit
@@ -62,6 +67,7 @@ uint64_t next_higher_number(uint64_t x) {
         next = nextHigherOneBit | rightOnesPattern;
     }
 
+	std::cerr << "<<< Exiting next_higher_number(x=" << x << ")" << std::endl;
     return next;
 }
 
@@ -72,6 +78,7 @@ uint64_t next_higher_number(uint64_t x) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // x = 4 return 8
     assert(bit_manipulation::next_higher_number(4) == 8);
     // x = 6 return 9
@@ -90,12 +97,15 @@ static void test() {
     assert(bit_manipulation::next_higher_number(1024) == 2048);
 
     std::cout << "All test cases have successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

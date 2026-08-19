@@ -35,8 +35,10 @@
  */
 template <typename T>
 void printArray(T *arr, int sz) {
+	std::cerr << ">>> Entering printArray(arr=" << arr << ",sz=" << sz << ")" << std::endl;
     for (int i = 0; i < sz; i++) std::cout << arr[i] << "  ";
     std::cout << "\n";
+	std::cerr << "<<< Exiting printArray(arr=" << arr << ",sz=" << sz << ")" << std::endl;
 }
 
 /**
@@ -56,8 +58,10 @@ void printArray(T *arr, int sz) {
  */
 template <typename T>
 void heapify(T *arr, int n, int i) {
+	std::cerr << ">>> Entering heapify(arr=" << arr << ",n=" << n << ",i=" << i << ")" << std::endl;
     int largest = i;
     int l = 2 * i + 1;
+	std::cerr << "heapify(arr=" << arr << ",n=" << n << ",i=" << i << "): largest → " << largest << std::endl;
     int r = 2 * i + 2;
 
     if (l < n && arr[l] > arr[largest])
@@ -70,6 +74,7 @@ void heapify(T *arr, int n, int i) {
         std::swap(arr[i], arr[largest]);
         heapify(arr, n, largest);
     }
+	std::cerr << "<<< Exiting heapify(arr=" << arr << ",n=" << n << ",i=" << i << ")" << std::endl;
 }
 
 /**
@@ -82,12 +87,14 @@ void heapify(T *arr, int n, int i) {
  */
 template <typename T>
 void heapSort(T *arr, int n) {
+	std::cerr << ">>> Entering heapSort(arr=" << arr << ",n=" << n << ")" << std::endl;
     for (int i = n - 1; i >= 0; i--) heapify(arr, n, i);
 
     for (int i = n - 1; i >= 0; i--) {
         std::swap(arr[0], arr[i]);
         heapify(arr, i, 0);
     }
+	std::cerr << "<<< Exiting heapSort(arr=" << arr << ",n=" << n << ")" << std::endl;
 }
 
 /**
@@ -97,9 +104,11 @@ void heapSort(T *arr, int n) {
  *
  */
 void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::cout << "Test 1\n";
     int arr[] = {-10, 78, -1, -6, 7, 4, 94, 5, 99, 0};
     int sz = sizeof(arr) / sizeof(arr[0]);  // sz - size of array
+	std::cerr << "test(): sz → " << sz << std::endl;
     printArray(arr, sz);  // displaying the array before sorting
     heapSort(arr, sz);    // calling heapsort to sort the array
     printArray(arr, sz);  // display array after sorting
@@ -114,10 +123,13 @@ void test() {
     printArray(arr2, sz);
     assert(std::is_sorted(arr2, arr2 + sz));
     std::cout << "Test 2 passed\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

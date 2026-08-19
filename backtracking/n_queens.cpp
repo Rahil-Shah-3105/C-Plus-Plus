@@ -118,11 +118,13 @@ void solveNQ(std::array<std::array<int, n>, n> board, const int &col) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     const int n = 4;
     std::array<std::array<int, n>, n> board = {
         std::array<int, n>({0, 0, 0, 0}), std::array<int, n>({0, 0, 0, 0}),
         std::array<int, n>({0, 0, 0, 0}), std::array<int, n>({0, 0, 0, 0})};
 
     backtracking::n_queens::solveNQ<n>(board, 0);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

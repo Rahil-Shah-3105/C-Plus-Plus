@@ -74,10 +74,12 @@ std::vector<uint64_t> selectionSort(const std::vector<uint64_t> &arr,
  * @returns void
  *******************************************************************************/
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // testcase #1
     // [1, 0, 0, 1, 1, 0, 2, 1] returns [0, 0, 0, 1, 1, 1, 1, 2]
     std::vector<uint64_t> vector1 = {1, 0, 0, 1, 1, 0, 2, 1};
     uint64_t vector1size = vector1.size();
+	std::cerr << "test(): vector1size → " << vector1size << std::endl;
     std::cout << "1st test... ";
     std::vector<uint64_t> result_test1;
     result_test1 = sorting::selectionSort(vector1, vector1size);
@@ -89,6 +91,7 @@ static void test() {
     // 241,540]
     std::vector<uint64_t> vector2 = {19, 22, 540, 241, 156, 140, 12, 1};
     uint64_t vector2size = vector2.size();
+	std::cerr << "test(): vector2size → " << vector2size << std::endl;
     std::cout << "2nd test... ";
     std::vector<uint64_t> result_test2;
     result_test2 = sorting::selectionSort(vector2, vector2size);
@@ -99,6 +102,7 @@ static void test() {
     // [11, 20, 30, 41, 15, 60, 82, 15] returns [11, 15, 15, 20, 30, 41, 60, 82]
     std::vector<uint64_t> vector3 = {11, 20, 30, 41, 15, 60, 82, 15};
     uint64_t vector3size = vector3.size();
+	std::cerr << "test(): vector3size → " << vector3size << std::endl;
     std::cout << "3rd test... ";
     std::vector<uint64_t> result_test3;
     result_test3 = sorting::selectionSort(vector3, vector3size);
@@ -110,11 +114,13 @@ static void test() {
     // 212, 546]
     std::vector<uint64_t> vector4 = {1, 9, 11, 546, 26, 65, 212, 14};
     uint64_t vector4size = vector2.size();
+	std::cerr << "test(): vector4size → " << vector4size << std::endl;
     std::cout << "4th test... ";
     std::vector<uint64_t> result_test4;
     result_test4 = sorting::selectionSort(vector4, vector4size);
     assert(std::is_sorted(result_test4.begin(), result_test4.end()));
     std::cout << "Passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /*******************************************************************************
@@ -122,6 +128,8 @@ static void test() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

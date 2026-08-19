@@ -16,12 +16,14 @@
  * \returns true if prime else false
  */
 bool IsPrime(int number) {
+	std::cerr << ">>> Entering IsPrime(number=" << number << ")" << std::endl;
     if (((!(number & 1)) && number != 2) || (number < 2) ||
         (number % 3 == 0 && number != 3))
         return false;
 
     for (int k = 1; 36 * k * k - 12 * k < number; ++k) {
         if ((number % (6 * k + 1) == 0) || (number % (6 * k - 1) == 0))
+	std::cerr << "<<< Exiting IsPrime(number=" << number << ")" << std::endl;
             return false;
     }
     return true;
@@ -29,6 +31,7 @@ bool IsPrime(int number) {
 
 /** main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Main Function
     std::cout << "Enter the value of n to check if Prime\n";
     int n;
@@ -38,5 +41,6 @@ int main() {
     else
         std::cout << n << " is not Prime" << std::endl;
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

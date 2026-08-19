@@ -72,6 +72,7 @@ int64_t mincoins(const T &n, const std::vector<T> &coins, const int16_t &t,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // example 1: number of coins=3 and minimum coins required=3(7,7,1)
     const int64_t n1 = 15;
     const int8_t t1 = 3, a1 = 0;
@@ -82,6 +83,7 @@ static void test() {
     assert(dynamic_programming::mincoins_topdown::mincoins(n1, arr1, t1, dp1) ==
            3);
     std::cout << "Passed\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -89,6 +91,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

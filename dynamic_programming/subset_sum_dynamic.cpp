@@ -80,6 +80,7 @@ bool subset_sum_problem(const std::vector<int> &arr, const int targetSum) {
  * @return void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // custom input vector
     std::vector<std::vector<int>> custom_input_arr(3);
     custom_input_arr[0] = std::vector<int>{1, -10, 2, 31, -6};
@@ -111,6 +112,7 @@ static void test() {
     }
 
     std::cout << "All tests passed successfully!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -118,6 +120,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

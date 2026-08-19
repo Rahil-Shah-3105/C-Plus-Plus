@@ -19,14 +19,17 @@
  * @returns the modular inverse
  */
 uint64_t imod(uint64_t x, uint64_t y) {
+	std::cerr << ">>> Entering imod(x=" << x << ",y=" << y << ")" << std::endl;
     uint64_t aux = 0;  // auxiliary variable
     uint64_t itr = 0;  // iteration counter
+	std::cerr << "imod(x=" << x << ",y=" << y << "): aux → " << aux << std::endl;
 
     do {  // run the algorithm while not find the inverse
         aux = y * itr + 1;
         itr++;
     } while (aux % x);  // while module aux % x non-zero
 
+	std::cerr << "<<< Exiting imod(x=" << x << ",y=" << y << ")" << std::endl;
     return aux / x;
 }
 
@@ -35,6 +38,7 @@ uint64_t imod(uint64_t x, uint64_t y) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::cout << "First case testing... \n";
     // for a = 3 and b = 11 return 4
     assert(imod(3, 11) == 4);
@@ -51,11 +55,14 @@ static void test() {
     std::cout << "\nPassed!\n";
 
     std::cout << "\nAll test cases have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
 };
