@@ -84,6 +84,7 @@ int pancakeSort(std::vector<T> &arr, int size) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // example 1: vector of int
     const int size1 = 7;
     std::cout << "\nTest 1- as std::vector<int>...";
@@ -120,12 +121,15 @@ static void test() {
         std::cout << arr3[i] << ", ";
     }
     std::cout << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

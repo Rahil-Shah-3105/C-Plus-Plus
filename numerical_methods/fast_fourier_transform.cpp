@@ -40,11 +40,13 @@ namespace numerical_methods {
  * @returns y if n!=1
  */
 std::complex<double> *FastFourierTransform(std::complex<double> *p, uint8_t n) {
+	std::cerr << ">>> Entering FastFourierTransform(p=" << p << ",n=" << n << ")" << std::endl;
     if (n == 1) {
         return p;  /// Base Case To return
     }
 
     double pi = 2 * asin(1.0);  /// Declaring value of pi
+	std::cerr << "FastFourierTransform(p=" << p << ",n=" << n << "): pi → " << pi << std::endl;
 
     std::complex<double> om = std::complex<double>(
         cos(2 * pi / n), sin(2 * pi / n));  /// Calculating value of omega
@@ -54,6 +56,7 @@ std::complex<double> *FastFourierTransform(std::complex<double> *p, uint8_t n) {
     auto *po = new std::complex<double>[n / 2];  /// Coefficients of odd power
 
     int k1 = 0, k2 = 0;
+	std::cerr << "FastFourierTransform(p=" << p << ",n=" << n << "): k1 → " << k1 << std::endl;
     for (int j = 0; j < n; j++) {
         if (j % 2 == 0) {
             pe[k1++] = p[j];  /// Assigning values of even Coefficients
@@ -90,6 +93,7 @@ std::complex<double> *FastFourierTransform(std::complex<double> *p, uint8_t n) {
 
     delete[] ye;  /// Deleting dynamic array ye
     delete[] yo;  /// Deleting dynamic array yo
+	std::cerr << "<<< Exiting FastFourierTransform(p=" << p << ",n=" << n << ")" << std::endl;
     return y;
 }
 
@@ -103,6 +107,7 @@ std::complex<double> *FastFourierTransform(std::complex<double> *p, uint8_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /* descriptions of the following test */
 
     auto *t1 = new std::complex<double>[2];  /// Test case 1
@@ -150,6 +155,7 @@ static void test() {
     delete[] t3;
     delete[] t4;
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -159,7 +165,9 @@ static void test() {
  */
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  //  run self-test implementations
              //  with 2 defined test cases
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

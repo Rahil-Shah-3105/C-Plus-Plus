@@ -54,6 +54,7 @@ namespace graph {
  *
  */
 void addEdge(std::vector<std::vector<size_t>> *adj, size_t u, size_t v) {
+	std::cerr << ">>> Entering addEdge(adj=" << adj << ",u=" << u << ",v=" << v << ")" << std::endl;
     /*
      *
      * Here we are considering undirected graph that's the
@@ -63,6 +64,7 @@ void addEdge(std::vector<std::vector<size_t>> *adj, size_t u, size_t v) {
      */
     (*adj)[u - 1].push_back(v - 1);
     (*adj)[v - 1].push_back(u - 1);
+	std::cerr << "<<< Exiting addEdge(adj=" << adj << ",u=" << u << ",v=" << v << ")" << std::endl;
 }
 
 /**
@@ -107,6 +109,7 @@ void depth_first_search(const std::vector<std::vector<size_t>> &adj,
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     size_t vertices = 0, edges = 0;
     std::cout << "Enter the Vertices : ";
     std::cin >> vertices;
@@ -129,5 +132,6 @@ int main() {
     graph::depth_first_search(adj, 2);
 
     std::cout << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

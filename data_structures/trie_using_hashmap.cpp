@@ -60,8 +60,10 @@ class Trie {
      * @param word string to insert in the trie
      */
     void insert(const std::string& word) {
+		std::cerr << ">>> Entering insert(word=" << word << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         for (char ch : word) {
+			std::cerr << "insert(word=" << word << "): curr → " << curr << std::endl;
             if (curr->children.find(ch) == curr->children.end()) {
                 curr->children[ch] = std::make_shared<Node>();
             }
@@ -71,6 +73,7 @@ class Trie {
         if (!curr->word_end && curr != root_node) {
             curr->word_end = true;
         }
+		std::cerr << "<<< Exiting insert(word=" << word << ")" << std::endl;
     }
 
     /**
@@ -80,8 +83,10 @@ class Trie {
      * @returns `false` if not found
      */
     bool search(const std::string& word) {
+		std::cerr << ">>> Entering search(word=" << word << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         for (char ch : word) {
+			std::cerr << "search(word=" << word << "): curr → " << curr << std::endl;
             if (curr->children.find(ch) == curr->children.end()) {
                 return false;
             }
@@ -94,6 +99,7 @@ class Trie {
         if (curr->word_end) {
             return true;
         } else {
+		std::cerr << "<<< Exiting search(word=" << word << ")" << std::endl;
             return false;
         }
     }
@@ -105,13 +111,16 @@ class Trie {
      * @returns `false` if not found
      */
     bool startwith(const std::string& prefix) {
+		std::cerr << ">>> Entering startwith(prefix=" << prefix << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         for (char ch : prefix) {
+			std::cerr << "startwith(prefix=" << prefix << "): curr → " << curr << std::endl;
             if (curr->children.find(ch) == curr->children.end()) {
                 return false;
             }
             curr = curr->children[ch];
         }
+		std::cerr << "<<< Exiting startwith(prefix=" << prefix << ")" << std::endl;
         return true;
     }
 
@@ -120,8 +129,10 @@ class Trie {
      * @param word string to delete from trie
      */
     void delete_word(std::string word) {
+		std::cerr << ">>> Entering delete_word(word=" << word << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         std::stack<std::shared_ptr<Node>> nodes;
+		std::cerr << "delete_word(word=" << word << "): curr → " << curr << std::endl;
         int cnt = 0;
         for (char ch : word) {
             if (curr->children.find(ch) == curr->children.end()) {
@@ -146,6 +157,7 @@ class Trie {
             nodes.top()->children.erase(word.back());
             word.pop_back();
         }
+		std::cerr << "<<< Exiting delete_word(word=" << word << ")" << std::endl;
     }
 
     /**
@@ -186,8 +198,10 @@ class Trie {
      * @returns list of recommended words
      */
     std::vector<std::string> predict_words(const std::string& prefix) {
+		std::cerr << ">>> Entering predict_words(prefix=" << prefix << ")" << std::endl;
         std::vector<std::string> result;
         std::shared_ptr<Node> curr = root_node;
+		std::cerr << "predict_words(prefix=" << prefix << "): curr → " << curr << std::endl;
         // traversing until the end of the given prefix in trie
 
         for (char ch : prefix) {
@@ -208,6 +222,7 @@ class Trie {
             result, curr,
             prefix);  ///< iteratively and recursively get the recommended words
 
+		std::cerr << "<<< Exiting predict_words(prefix=" << prefix << ")" << std::endl;
         return result;
     }
 };
@@ -219,6 +234,7 @@ class Trie {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     data_structures::trie_using_hashmap::Trie obj;
     // Inserting data into trie using the insert
     // method and testing it with search method
@@ -333,6 +349,7 @@ static void test() {
     std::cout << "No word starts with prefix h in trie" << std::endl;
 
     std::cout << "All tests passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -340,6 +357,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementaions
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

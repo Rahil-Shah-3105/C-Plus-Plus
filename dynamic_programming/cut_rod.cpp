@@ -70,6 +70,7 @@ int maxProfitByCuttingRod(const std::array<int, T> &price, const uint64_t &n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     const int16_t n1 = 8;                                         // size of rod
     std::array<int32_t, n1> price1 = {1, 2, 4, 6, 8, 45, 21, 9};  // price array

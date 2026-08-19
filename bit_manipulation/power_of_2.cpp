@@ -47,6 +47,7 @@ bool isPowerOfTwo(std ::int64_t n) {  // int64_t is preferred over int so that
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // n = 4 return true
     assert(bit_manipulation::isPowerOfTwo(4) == true);
     // n = 6 return false
@@ -64,12 +65,15 @@ static void test() {
     // n = 1024 return true
     assert(bit_manipulation::isPowerOfTwo(1024) == true);
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

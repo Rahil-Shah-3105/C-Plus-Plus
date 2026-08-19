@@ -65,8 +65,10 @@ namespace modular_inverse_fermat {
  * @return The result of \f$a^{b} % m\f$
  */
 std::int64_t binExpo(std::int64_t a, std::int64_t b, std::int64_t m) {
+std::cerr << ">>> Entering binExpo(a=" << a << ",b=" << b << ",m=" << m << ")" << std::endl;
   a %= m;
   std::int64_t res = 1;
+std::cerr << "binExpo(a=" << a << ",b=" << b << ",m=" << m << "): res → " << res << std::endl;
   while (b > 0) {
     if (b % 2 != 0) {
       res = res * a % m;
@@ -75,6 +77,7 @@ std::int64_t binExpo(std::int64_t a, std::int64_t b, std::int64_t m) {
     // Dividing b by 2 is similar to right shift by 1 bit
     b >>= 1;
   }
+std::cerr << "<<< Exiting binExpo(a=" << a << ",b=" << b << ",m=" << m << ")" << std::endl;
   return res;
 }
 /**
@@ -84,6 +87,7 @@ std::int64_t binExpo(std::int64_t a, std::int64_t b, std::int64_t m) {
  * @return false if the number is not prime
  */
 bool isPrime(std::int64_t m) {
+std::cerr << ">>> Entering isPrime(m=" << m << ")" << std::endl;
   if (m <= 1) {
     return false;
   } 
@@ -92,6 +96,7 @@ bool isPrime(std::int64_t m) {
       return false;
     }
   }
+std::cerr << "<<< Exiting isPrime(m=" << m << ")" << std::endl;
   return true;
 }
 /**
@@ -101,12 +106,14 @@ bool isPrime(std::int64_t m) {
  * @return The result that is the modular inverse of a modulo m
  */
 std::int64_t modular_inverse(std::int64_t a, std::int64_t m) {
+std::cerr << ">>> Entering modular_inverse(a=" << a << ",m=" << m << ")" << std::endl;
   while (a < 0) {
     a += m;
   }
 
   // Check for invalid cases
   if (!isPrime(m) || a == 0) {
+std::cerr << "<<< Exiting modular_inverse(a=" << a << ",m=" << m << ")" << std::endl;
     return -1; // Invalid input
   }
 
@@ -120,6 +127,7 @@ std::int64_t modular_inverse(std::int64_t a, std::int64_t m) {
  * @return void
  */
 static void test() {
+std::cerr << ">>> Entering test()" << std::endl;
   assert(math::modular_inverse_fermat::modular_inverse(0, 97) == -1);
   assert(math::modular_inverse_fermat::modular_inverse(15, -2) == -1);
   assert(math::modular_inverse_fermat::modular_inverse(3, 10) == -1);
@@ -128,6 +136,7 @@ static void test() {
   assert(math::modular_inverse_fermat::modular_inverse(-1337, 285179) == 165519);
   assert(math::modular_inverse_fermat::modular_inverse(123456789, 998244353) == 25170271);
   assert(math::modular_inverse_fermat::modular_inverse(-9876543210, 1000000007) == 784794281);
+std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -135,6 +144,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+std::cerr << ">>> Entering main()" << std::endl;
   test();  // run self-test implementation
+std::cerr << "<<< Exiting main()" << std::endl;
   return 0;
 }

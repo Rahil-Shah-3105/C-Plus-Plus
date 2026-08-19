@@ -26,9 +26,11 @@
  */
 template <typename T = double, char iterations = 2>
 inline T Fast_InvSqrt(T x) {
+	std::cerr << ">>> Entering Fast_InvSqrt(x=" << x << ")" << std::endl;
     using Tint = typename std::conditional<sizeof(T) == 8, std::int64_t,
                                            std::int32_t>::type;
     T y = x;
+	std::cerr << "Fast_InvSqrt(x=" << x << "): y → " << y << std::endl;
     T x2 = y * 0.5;
 
     Tint i =
@@ -43,6 +45,7 @@ inline T Fast_InvSqrt(T x) {
     if (iterations == 2) {
         y = y * (1.5 - (x2 * y * y));  // 2nd iteration, the more exact result
     }
+	std::cerr << "<<< Exiting Fast_InvSqrt(x=" << x << ")" << std::endl;
     return y;
 }
 
@@ -57,7 +60,10 @@ inline T Fast_InvSqrt(T x) {
  */
 template <typename T = double>
 T Standard_InvSqrt(T number) {
+	std::cerr << ">>> Entering Standard_InvSqrt(number=" << number << ")" << std::endl;
     T squareRoot = sqrt(number);
+	std::cerr << "Standard_InvSqrt(number=" << number << "): squareRoot → " << squareRoot << std::endl;
+	std::cerr << "<<< Exiting Standard_InvSqrt(number=" << number << ")" << std::endl;
     return 1.0f / squareRoot;
 }
 
@@ -66,6 +72,7 @@ T Standard_InvSqrt(T number) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     const float epsilon = 1e-3f;
 
     /* Tests with multiple values */
@@ -78,6 +85,7 @@ static void test() {
     assert(std::fabs(Fast_InvSqrt<double, 1>(36.0f) - 0.166667f) < epsilon);
     assert(std::fabs(Fast_InvSqrt(12.0f) - 0.288423) < epsilon);
     assert(std::fabs(Fast_InvSqrt<double>(5.0f) - 0.447141) < epsilon);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -85,6 +93,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
     std::cout << "The Fast inverse square root of 36 is: "
               << Fast_InvSqrt<float, 1>(36.0f) << std::endl;
@@ -100,4 +109,5 @@ int main() {
     std::cout << "The Standard inverse square root of 100 is: "
               << Standard_InvSqrt(100.0f)
               << " (With default template type: double)" << std::endl;
+			std::cerr << "<<< Exiting main()" << std::endl;
 }

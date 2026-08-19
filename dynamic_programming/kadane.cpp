@@ -58,6 +58,7 @@ int maxSubArray(const std::array<int, N> &n) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     const int N = 5;
     std::array<int, N> n{};  // declaring array
                              // taking values of elements from user
@@ -70,5 +71,6 @@ int main() {
         n);  // calling maxSubArray function
     std::cout << "Maximum subarray sum is " << max_sum;  // Printing the answer
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

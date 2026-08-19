@@ -30,12 +30,14 @@ class stats_computer1 {
      * \param[in] x new data sample
      */
     void new_val(T x) {
+		std::cerr << ">>> Entering new_val(x=" << x << ")" << std::endl;
         if (n == 0)
             K = x;
         n++;
         T tmp = x - K;
         Ex += tmp;
         Ex2 += static_cast<double>(tmp) * tmp;
+		std::cerr << "<<< Exiting new_val(x=" << x << ")" << std::endl;
     }
 
     /** return sample mean computed till last sample */
@@ -116,6 +118,7 @@ using statistics::stats_computer2;
  * \param[in] test_data array of data to test the algorithms
  */
 void test_function(const float *test_data, const int number_of_samples) {
+	std::cerr << ">>> Entering test_function(test_data=" << test_data << ",number_of_samples=" << number_of_samples << ")" << std::endl;
     float mean = 0.f, variance = 0.f;
 
     stats_computer1<float> stats01;

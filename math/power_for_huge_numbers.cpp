@@ -23,8 +23,10 @@
  * @param res_size number of digits in `res`
  */
 int multiply(int x, int res[], int res_size) {
+	std::cerr << ">>> Entering multiply(x=" << x << ",res=" << res << ",res_size=" << res_size << ")" << std::endl;
     // Initialize carry
     int carry = 0;
+	std::cerr << "multiply(x=" << x << ",res=" << res << ",res_size=" << res_size << "): carry → " << carry << std::endl;
 
     // One by one multiply n with
     // individual digits of res[]
@@ -46,6 +48,7 @@ int multiply(int x, int res[], int res_size) {
         carry = carry / 10;
         res_size++;
     }
+	std::cerr << "<<< Exiting multiply(x=" << x << ",res=" << res << ",res_size=" << res_size << ")" << std::endl;
     return res_size;
 }
 
@@ -54,6 +57,7 @@ int multiply(int x, int res[], int res_size) {
  * @param n exponent
  */
 void power(int x, int n) {
+	std::cerr << ">>> Entering power(x=" << x << ",n=" << n << ")" << std::endl;
     // printing value "1" for power = 0
     if (n == 0) {
         std::cout << "1";
@@ -76,15 +80,18 @@ void power(int x, int n) {
 
     std::cout << x << "^" << n << " = ";
     for (int i = res_size - 1; i >= 0; i--) std::cout << res[i];
+	std::cerr << "<<< Exiting power(x=" << x << ",n=" << n << ")" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int exponent, base;
     std::cout << "Enter base ";
     std::cin >> base;
     std::cout << "Enter exponent ";
     std::cin >> exponent;
     power(base, exponent);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

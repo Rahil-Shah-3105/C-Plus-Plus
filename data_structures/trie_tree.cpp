@@ -36,6 +36,7 @@ class trie {
      * @return unsigned integer index
      */
     uint8_t char_to_int(const char& ch) const {
+		std::cerr << ">>> Entering char_to_int(ch=" << ch << ")" << std::endl;
         if (ch >= 'A' && ch <= 'Z') {
             return ch - 'A';
         } else if (ch >= 'a' && ch <= 'z') {
@@ -63,6 +64,7 @@ class trie {
         }
         int j = char_to_int(str[index]);
         if (!root->arr[j]) {
+		std::cerr << "<<< Exiting search(str=" << str << ",index=" << index << ")" << std::endl;
             return false;
         }
         return search(root->arr[j], str, index + 1);
@@ -75,6 +77,7 @@ class trie {
      * @param str String to insert in the tree
      */
     void insert(const std::string& str) {
+		std::cerr << ">>> Entering insert(str=" << str << ")" << std::endl;
         std::shared_ptr<trie> root(nullptr);
 
         for (const char& ch : str) {
@@ -82,6 +85,7 @@ class trie {
             if (root) {
                 if (root->arr[j]) {
                     root = root->arr[j];
+					std::cerr << "insert(str=" << str << "): root → " << root << std::endl;
                 } else {
                     std::shared_ptr<trie> temp(new trie());
                     root->arr[j] = temp;
@@ -96,6 +100,7 @@ class trie {
             }
         }
         root->isEndofWord = true;
+		std::cerr << "<<< Exiting insert(str=" << str << ")" << std::endl;
     }
 
     /** search a string exists inside the trie
@@ -132,11 +137,13 @@ class trie {
      * @returns `false` if unsuccessful
      */
     bool deleteString(const std::string& str, int index) {
+		std::cerr << ">>> Entering deleteString(str=" << str << ",index=" << index << ")" << std::endl;
         if (index == str.length()) {
             if (!isEndofWord) {
                 return false;
             }
             isEndofWord = false;
+			std::cerr << "deleteString(str=" << str << ",index=" << index << "): isEndofWord → " << isEndofWord << std::endl;
             // following lines - possible source of error?
             // for (int i = 0; i < NUM_CHARS; i++)
             //     if (!arr[i])
@@ -148,6 +155,7 @@ class trie {
             return false;
         }
         bool var = deleteString(str, index + 1);
+		std::cerr << "deleteString(str=" << str << ",index=" << index << "): var → " << var << std::endl;
         if (var) {
             arr[j].reset();
             if (isEndofWord) {

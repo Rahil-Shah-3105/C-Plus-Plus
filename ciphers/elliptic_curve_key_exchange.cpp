@@ -76,20 +76,24 @@ typedef struct Point {
  * @return number raised to power modulo mod
  */
 uint256_t exp(uint256_t number, uint256_t power, const uint256_t &mod) {
+	std::cerr << ">>> Entering exp(number=" << number << ",power=" << power << ",mod=" << mod << ")" << std::endl;
     if (!power) {
         return uint256_t(1);
     }
     uint256_t ans(1);
     number = number % mod;
+	std::cerr << "exp(number=" << number << ",power=" << power << ",mod=" << mod << "): number → " << number << std::endl;
     while (power) {
         if ((power & 1)) {
             ans = (ans * number) % mod;
         }
+		std::cerr << "exp(number=" << number << ",power=" << power << ",mod=" << mod << "): ans → " << ans << std::endl;
         power >>= 1;
         if (power) {
             number = (number * number) % mod;
         }
     }
+	std::cerr << "<<< Exiting exp(number=" << number << ",power=" << power << ",mod=" << mod << ")" << std::endl;
     return ans;
 }
 
@@ -195,9 +199,12 @@ Point multiply(const Point &a, const uint256_t &curve_a_coeff, uint256_t p,
  * @returns void
  */
 static void uint128_t_tests() {
+	std::cerr << ">>> Entering uint128_t_tests()" << std::endl;
     // 1st test: Operations test
     uint128_t a("122"), b("2312");
     assert(a + b == 2434);
+	std::cerr << "uint128_t_tests(): b → " << b << std::endl;
+	std::cerr << "uint128_t_tests(): a → " << a << std::endl;
     assert(b - a == 2190);
     assert(a * b == 282064);
     assert(b / a == 18);
@@ -220,6 +227,7 @@ static void uint128_t_tests() {
     assert((a | b) == uint128_t("12321421424236352814"));
     assert((a ^ b) == uint128_t("12321421424217440294"));
     assert((a << 64) == uint128_t("227290107637132170748078080907806769152"));
+	std::cerr << "<<< Exiting uint128_t_tests()" << std::endl;
 }
 
 /**
@@ -228,9 +236,12 @@ static void uint128_t_tests() {
  * @returns void
  */
 static void uint256_t_tests() {
+	std::cerr << ">>> Entering uint256_t_tests()" << std::endl;
     // 1st test: Operations test
     uint256_t a("122"), b("2312");
     assert(a + b == 2434);
+	std::cerr << "uint256_t_tests(): b → " << b << std::endl;
+	std::cerr << "uint256_t_tests(): a → " << a << std::endl;
     assert(b - a == 2190);
     assert(a * b == 282064);
     assert(b / a == 18);
@@ -257,6 +268,7 @@ static void uint256_t_tests() {
     assert((a ^ b) == uint256_t("23124312443564659232065395170132430646"));
     assert((a << 128) == uint256_t("4192763024643754272961909047609369343091683"
                                    "376561852756163540549632"));
+								std::cerr << "<<< Exiting uint256_t_tests()" << std::endl;
 }
 
 /**
@@ -265,6 +277,7 @@ static void uint256_t_tests() {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // demonstration of key exchange using curve secp112r1
 
     // Equation of the form y^2 = (x^3 + ax + b) % P (here p is mod)
@@ -304,6 +317,7 @@ static void test() {
                                                 bob_shared_key = multiply(
                                                     alice_public_key, a,
                                                     bob_private_key, mod);
+													std::cerr << "test(): bob_shared_key → " << bob_shared_key << std::endl;
 
     std::cout << "Shared keys:\n";
     std::cout << alice_shared_key << std::endl;
@@ -311,6 +325,7 @@ static void test() {
 
     // Check whether shared keys are equal
     assert(alice_shared_key == bob_shared_key);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -318,8 +333,10 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     uint128_t_tests();  // running predefined 128-bit unsigned integer tests
     uint256_t_tests();  // running predefined 256-bit unsigned integer tests
     test();             // running self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

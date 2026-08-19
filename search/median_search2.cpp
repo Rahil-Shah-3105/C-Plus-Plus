@@ -37,6 +37,7 @@ struct ListNode {
     ListNode(int x, ListNode* next)
         : val(x),
           next(next) {
+		std::cerr << ">>> Entering ListNode(x=" << x << ",next=" << next << ")" << std::endl;
     }  ///< constructor with values provided for node->val and node->next
 };
 
@@ -57,6 +58,7 @@ namespace median_search2 {
  * @returns Median node of the linked list.
  */
 ListNode* middleNode(ListNode* head) {
+	std::cerr << ">>> Entering middleNode(head=" << head << ")" << std::endl;
     if (!head) {
         return nullptr;
     }
@@ -71,14 +73,17 @@ ListNode* middleNode(ListNode* head) {
         fastptr = fastptr->next->next;
     }
 
+	std::cerr << "<<< Exiting middleNode(head=" << head << ")" << std::endl;
     return (fastptr->next) ? slowptr->next : slowptr;
 }
 
 void deleteAll(const ListNode* const head) {
+	std::cerr << ">>> Entering deleteAll(head=" << head << ")" << std::endl;
     if (head) {
         deleteAll(head->next);
         delete head;
     }
+	std::cerr << "<<< Exiting deleteAll(head=" << head << ")" << std::endl;
 }
 }  // namespace median_search2
 }  // namespace search
@@ -88,6 +93,7 @@ void deleteAll(const ListNode* const head) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     auto* head1 = new ListNode;
     head1->val = 1;
 
@@ -104,6 +110,7 @@ static void test() {
     temp->next = nullptr;
 
     const ListNode* const median = search::median_search2::middleNode(head1);
+	std::cerr << "test(): median → " << median << std::endl;
     assert(3 == median->val);  // 3 is the value of the median node.
     search::median_search2::deleteAll(head1);
     std::cout << "test case:1 passed\n";
@@ -125,11 +132,13 @@ static void test() {
     temp2->next = nullptr;
 
     const ListNode* const median1 = search::median_search2::middleNode(head2);
+	std::cerr << "test(): median1 → " << median1 << std::endl;
     assert(4 == median1->val);  // 4 is the value of the median node.
     search::median_search2::deleteAll(head2);
     std::cout << "test case:2 passed\n";
 
     std::cout << "--All tests passed--\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -137,6 +146,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -32,6 +32,7 @@ namespace sorting {
  */
 template <typename T>
 void gnomeSort(T *arr, int size) {
+	std::cerr << ">>> Entering gnomeSort(arr=" << arr << ",size=" << size << ")" << std::endl;
     // few easy cases
     if (size <= 1) {
         return;
@@ -47,6 +48,7 @@ void gnomeSort(T *arr, int size) {
             index--;
         }
     }
+	std::cerr << "<<< Exiting gnomeSort(arr=" << arr << ",size=" << size << ")" << std::endl;
 }
 
 /**
@@ -83,6 +85,7 @@ std::array<T, size> gnomeSort(std::array<T, size> arr) {
  * Test function
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Example 1. Creating array of int,
     std::cout << "Test 1 - as a C-array...";
     const int size = 6;
@@ -115,6 +118,7 @@ static void test() {
     for (auto &a : rand_arr) {
         // generate random numbers between -5.0 and 4.99
         a = float(std::rand() % 1000 - 500) / 100.f;
+		std::cerr << "test(): a → " << a << std::endl;
     }
 
     std::array<float, size2> float_arr = sorting::gnomeSort(rand_arr);
@@ -122,12 +126,15 @@ static void test() {
     std::cout << " Passed\n";
     // for (int i = 0; i < size; i++) std::cout << double_arr[i] << ", ";
     std::cout << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
  * Our main function with example of sort method.
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

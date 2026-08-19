@@ -31,9 +31,13 @@ class EasterYearMonthDay {
     uint64_t day;    ///< day Easter is on
 
     EasterYearMonthDay(uint64_t newYear, uint64_t newMonth, uint64_t newDay) {
+		std::cerr << ">>> Entering EasterYearMonthDay(newYear=" << newYear << ",newMonth=" << newMonth << ",newDay=" << newDay << ")" << std::endl;
         year = newYear;  // Assigns year to class
         month = newMonth;
+		std::cerr << "EasterYearMonthDay(newYear=" << newYear << ",newMonth=" << newMonth << ",newDay=" << newDay << "): month → " << month << std::endl;
+		std::cerr << "EasterYearMonthDay(newYear=" << newYear << ",newMonth=" << newMonth << ",newDay=" << newDay << "): day → " << day << std::endl;
         day = newDay;
+		std::cerr << "<<< Exiting EasterYearMonthDay(newYear=" << newYear << ",newMonth=" << newMonth << ",newDay=" << newDay << ")" << std::endl;
     }
 };
 
@@ -45,6 +49,7 @@ class EasterYearMonthDay {
  * information (Ex. 420 - 4/20 or April 20th)
  */
 EasterYearMonthDay findEaster(uint64_t y) {
+	std::cerr << ">>> Entering findEaster(y=" << y << ")" << std::endl;
     if (y > 1582) {
         uint64_t a = y % 19;   // Year's location on Metonic Calendar
         uint64_t b = y / 100;  // Century index
@@ -52,6 +57,7 @@ EasterYearMonthDay findEaster(uint64_t y) {
         uint64_t d = b / 4;
         uint64_t e = b % 4;  // Takes into account leap years
         uint64_t f = (b + 8) / 25;
+		std::cerr << "findEaster(y=" << y << "): f → " << f << std::endl;
         uint64_t g = (b - f + 1) / 3;
         uint64_t h = (19 * a + b - d - g + 15) %
                      30;  // Days from Mar. 21st until the full moon
@@ -61,6 +67,7 @@ EasterYearMonthDay findEaster(uint64_t y) {
             (32 + 2 * e + 2 * i - h - k) %
             7;  // The number of days from Paschal full moon to next Sunday
         uint64_t m = (a + 11 * h + 22 * r) / 451;
+		std::cerr << "findEaster(y=" << y << "): m → " << m << std::endl;
         uint64_t n = (h + r - 7 * m + 114) / 31;  // Month of Easter
         uint64_t p = (h + r - 7 * m + 114) % 31;  // p + 1 is the day of Easter
 
@@ -74,6 +81,7 @@ EasterYearMonthDay findEaster(uint64_t y) {
         EasterYearMonthDay date(0, 0, 0);
 
         // Return date
+		std::cerr << "<<< Exiting findEaster(y=" << y << ")" << std::endl;
         return date;
     }
 }
@@ -83,6 +91,7 @@ EasterYearMonthDay findEaster(uint64_t y) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 2003 | April 20th
     assert(findEaster(2003).month == 4);  // Should return true
     assert(findEaster(2003).day == 20);   // Should return true
@@ -98,6 +107,7 @@ static void test() {
     // 1400 | Invalid date
     assert(findEaster(1400).month == 0);  // Should return true
     assert(findEaster(1400).day == 0);    // Should return true
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -105,6 +115,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

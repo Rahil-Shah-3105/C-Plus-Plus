@@ -57,13 +57,16 @@ std::ostream &operator<<(std::ostream &out, std::vector<T> const &v) {
  */
 template <typename T>
 inline bool is_square(std::vector<std::vector<T>> const &A) {
+	std::cerr << ">>> Entering is_square(A=" << A << ")" << std::endl;
     // Assuming A is square matrix
     size_t N = A.size();
+	std::cerr << "is_square(A=" << A << "): N → " << N << std::endl;
     for (size_t i = 0; i < N; i++) {
         if (A[i].size() != N) {
             return false;
         }
     }
+	std::cerr << "<<< Exiting is_square(A=" << A << ")" << std::endl;
     return true;
 }
 
@@ -367,6 +370,7 @@ std::vector<float> predict_OLS_regressor(std::vector<std::vector<T>> const &X,
 
 /** Self test checks */
 void ols_test() {
+	std::cerr << ">>> Entering ols_test()" << std::endl;
     /* test function = x^2 -5 */
     std::cout << "Test 1 (quadratic function)....";
     // create training data set with features = x, x^2, x^3
@@ -376,6 +380,7 @@ void ols_test() {
     std::vector<float> Y1({20, -4, -5, -4, 31});
     // perform regression modelling
     std::vector<float> beta1 = fit_OLS_regressor(data1, Y1);
+	std::cerr << "ols_test(): beta1 → " << beta1 << std::endl;
     // create test data set with same features = x, x^2, x^3
     std::vector<std::vector<float>> test_data1(
         {{-2, 4, -8}, {2, 4, 8}, {-10, 100, -1000}, {10, 100, 1000}});
@@ -383,8 +388,10 @@ void ols_test() {
     std::vector<float> expected1({-1, -1, 95, 95});
     // predicted regression outputs
     std::vector<float> out1 = predict_OLS_regressor(test_data1, beta1);
+	std::cerr << "ols_test(): out1 → " << out1 << std::endl;
     // compare predicted results are within +-0.01 limit of expected
     for (size_t rows = 0; rows < out1.size(); rows++) {
+		std::cerr << "ols_test(): rows → " << rows << std::endl;
         assert(std::abs(out1[rows] - expected1[rows]) < 0.01);
     }
     std::cout << "passed\n";
@@ -398,6 +405,7 @@ void ols_test() {
     std::vector<float> Y2({-200, -100, -100, 98, 152});
     // perform regression modelling
     std::vector<float> beta2 = fit_OLS_regressor(data2, Y2);
+	std::cerr << "ols_test(): beta2 → " << beta2 << std::endl;
     // create test data set with same features = x, x^2, x^3
     std::vector<std::vector<float>> test_data2(
         {{-2, 4, -8}, {2, 4, 8}, {-10, 100, -1000}, {10, 100, 1000}});
@@ -405,6 +413,7 @@ void ols_test() {
     std::vector<float> expected2({-104, -88, -1000, 1000});
     // predicted regression outputs
     std::vector<float> out2 = predict_OLS_regressor(test_data2, beta2);
+	std::cerr << "ols_test(): out2 → " << out2 << std::endl;
     // compare predicted results are within +-0.01 limit of expected
     for (size_t rows = 0; rows < out2.size(); rows++) {
         assert(std::abs(out2[rows] - expected2[rows]) < 0.01);
@@ -413,12 +422,14 @@ void ols_test() {
 
     std::cout << std::endl;  // ensure test results are displayed on screen
                              // (flush stdout)
+							std::cerr << "<<< Exiting ols_test()" << std::endl;
 }
 
 /**
  * main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     ols_test();
 
     size_t N = 0, F = 0;
@@ -450,6 +461,7 @@ int main() {
     }
 
     std::vector<float> beta = fit_OLS_regressor(data, Y);
+	std::cerr << "main(): beta → " << beta << std::endl;
     std::cout << std::endl << std::endl << "beta:" << beta << std::endl;
 
     size_t T = 0;
@@ -467,7 +479,9 @@ int main() {
     }
 
     std::vector<float> out = predict_OLS_regressor(data2, beta);
+	std::cerr << "main(): out → " << out << std::endl;
     for (size_t rows = 0; rows < T; rows++) std::cout << out[rows] << std::endl;
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -17,9 +17,14 @@ class MinHeap {
      * \param[in] capacity initial heap capacity
      */
     explicit MinHeap(int cap) {
+		std::cerr << ">>> Entering MinHeap(cap=" << cap << ")" << std::endl;
         heap_size = 0;
         capacity = cap;
+		std::cerr << "MinHeap(cap=" << cap << "): capacity → " << capacity << std::endl;
+		std::cerr << "MinHeap(cap=" << cap << "): heap_size → " << heap_size << std::endl;
+		std::cerr << "MinHeap(cap=" << cap << "): harr → " << harr << std::endl;
         harr = new int[cap];
+		std::cerr << "<<< Exiting MinHeap(cap=" << cap << ")" << std::endl;
     }
 
     /** to heapify a subtree with the root at given index */
@@ -53,6 +58,7 @@ class MinHeap {
 
 // Inserts a new key 'k'
 void MinHeap::insertKey(int k) {
+	std::cerr << ">>> Entering MinHeap::insertKey(k=" << k << ")" << std::endl;
     if (heap_size == capacity) {
         std::cout << "\nOverflow: Could not insertKey\n";
         return;
@@ -68,21 +74,25 @@ void MinHeap::insertKey(int k) {
         std::swap(harr[i], harr[parent(i)]);
         i = parent(i);
     }
+	std::cerr << "<<< Exiting MinHeap::insertKey(k=" << k << ")" << std::endl;
 }
 
 /** Decreases value of key at index 'i' to new_val.  It is assumed that new_val
  * is smaller than harr[i].
  */
 void MinHeap::decreaseKey(int i, int new_val) {
+	std::cerr << ">>> Entering MinHeap::decreaseKey(i=" << i << ",new_val=" << new_val << ")" << std::endl;
     harr[i] = new_val;
     while (i != 0 && harr[parent(i)] > harr[i]) {
         std::swap(harr[i], harr[parent(i)]);
         i = parent(i);
     }
+	std::cerr << "<<< Exiting MinHeap::decreaseKey(i=" << i << ",new_val=" << new_val << ")" << std::endl;
 }
 
 // Method to remove minimum element (or root) from min heap
 int MinHeap::extractMin() {
+	std::cerr << ">>> Entering MinHeap::extractMin()" << std::endl;
     if (heap_size <= 0)
         return INT_MAX;
     if (heap_size == 1) {
@@ -96,6 +106,7 @@ int MinHeap::extractMin() {
     heap_size--;
     MinHeapify(0);
 
+	std::cerr << "<<< Exiting MinHeap::extractMin()" << std::endl;
     return root;
 }
 
@@ -103,17 +114,23 @@ int MinHeap::extractMin() {
  * infinite, then calls extractMin()
  */
 void MinHeap::deleteKey(int i) {
+	std::cerr << ">>> Entering MinHeap::deleteKey(i=" << i << ")" << std::endl;
     decreaseKey(i, INT_MIN);
     extractMin();
+	std::cerr << "<<< Exiting MinHeap::deleteKey(i=" << i << ")" << std::endl;
 }
 
 /** A recursive method to heapify a subtree with the root at given index
  *  This method assumes that the subtrees are already heapified
  */
 void MinHeap::MinHeapify(int i) {
+	std::cerr << ">>> Entering MinHeap::MinHeapify(i=" << i << ")" << std::endl;
     int l = left(i);
     int r = right(i);
+	std::cerr << "MinHeap::MinHeapify(i=" << i << "): r → " << r << std::endl;
+	std::cerr << "MinHeap::MinHeapify(i=" << i << "): l → " << l << std::endl;
     int smallest = i;
+	std::cerr << "MinHeap::MinHeapify(i=" << i << "): smallest → " << smallest << std::endl;
     if (l < heap_size && harr[l] < harr[i])
         smallest = l;
     if (r < heap_size && harr[r] < harr[smallest])
@@ -122,10 +139,12 @@ void MinHeap::MinHeapify(int i) {
         std::swap(harr[i], harr[smallest]);
         MinHeapify(smallest);
     }
+	std::cerr << "<<< Exiting MinHeap::MinHeapify(i=" << i << ")" << std::endl;
 }
 
 // Driver program to test above functions
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     MinHeap h(11);
     h.insertKey(3);
     h.insertKey(2);
@@ -138,5 +157,6 @@ int main() {
     std::cout << h.getMin() << " ";
     h.decreaseKey(2, 1);
     std::cout << h.getMin();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

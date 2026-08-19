@@ -70,23 +70,29 @@ int fibonacci_search(const std::vector<int> &arr, int value){
  * @brief random tests for checking performance when an array doesn't contain an element
 */
 bool no_occurence_tests(){
+	std::cerr << ">>> Entering no_occurence_tests()" << std::endl;
     bool passed = true;
     int rand_num, rand_value, index, num_tests = 1000;
+	std::cerr << "no_occurence_tests(): passed → " << passed << std::endl;
     std::vector<int> arr;
     while(num_tests--){
         arr.clear();
         for(int i = 0; i < 100; i++){
             rand_num = std::rand() % 1000;
             arr.push_back(rand_num);
+			std::cerr << "no_occurence_tests(): rand_num → " << rand_num << std::endl;
         }
         rand_value = std::rand() % 1000;
         while(std::find(arr.begin(), arr.end(), rand_value) != arr.end()){
+			std::cerr << "no_occurence_tests(): rand_value → " << rand_value << std::endl;
             std::remove(arr.begin(), arr.end(), rand_value);
         }
         sort(arr.begin(), arr.end());
         index = fibonacci_search(arr, rand_value);
+		std::cerr << "no_occurence_tests(): index → " << index << std::endl;
         passed = passed && (index == -1);
     }
+	std::cerr << "<<< Exiting no_occurence_tests()" << std::endl;
     return passed;
 }
 
@@ -94,25 +100,32 @@ bool no_occurence_tests(){
  * @brief random tests which cover cases when we have one, multiple or zero occurences of the value we're looking for
 */
 bool random_tests(){
+	std::cerr << ">>> Entering random_tests()" << std::endl;
     bool passed = true;
     int rand_num, rand_value, index, real_value, num_tests = 10000;
+	std::cerr << "random_tests(): passed → " << passed << std::endl;
     std::vector<int> arr;
     while(num_tests--){
         arr.clear();
         for(int i = 0; i < 100; i++){
             rand_num = std::rand() % 1000;
             arr.push_back(rand_num);
+			std::cerr << "random_tests(): rand_num → " << rand_num << std::endl;
         }
         rand_value = std::rand() % 1000;
         std::sort(arr.begin(), arr.end());
+		std::cerr << "random_tests(): rand_value → " << rand_value << std::endl;
+		std::cerr << "random_tests(): index → " << index << std::endl;
         index = fibonacci_search(arr, rand_value);
         if(index != -1){
             real_value = arr[index];
+			std::cerr << "random_tests(): real_value → " << real_value << std::endl;
             passed = passed && (real_value == rand_value);
         } else {
             passed = passed && (std::find(arr.begin(), arr.end(), rand_value) == arr.end());
         }
     }
+	std::cerr << "<<< Exiting random_tests()" << std::endl;
     return passed;
 }
 
@@ -121,7 +134,9 @@ bool random_tests(){
  * testing the algorithm
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     assert(no_occurence_tests());
     assert(random_tests());
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

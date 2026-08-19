@@ -105,11 +105,13 @@ static void displayElements(const std::vector<T> &arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::srand(std::time(nullptr));  // initialize random number generator
 
     std::vector<float> data1(100);
     for (auto &d : data1) {  // generate random numbers between -5.0 and 4.99
         d = float(std::rand() % 1000 - 500) / 100.f;
+		std::cerr << "test(): d → " << d << std::endl;
     }
 
     std::vector<float> sorted = sorting::wiggle_sort::wiggleSort<float>(data1);
@@ -122,11 +124,14 @@ static void test() {
     }
 
     std::cout << "Test 1 passed\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
 

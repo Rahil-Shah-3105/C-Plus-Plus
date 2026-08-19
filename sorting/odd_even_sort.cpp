@@ -32,6 +32,7 @@ void show(vector<int> A, int size) {
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int size, temp;
     cout << "\nEnter the number of elements : ";
     cin >> size;
@@ -49,5 +50,6 @@ int main() {
 
     cout << "Sorted array\n";
     show(arr, size);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
