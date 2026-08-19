@@ -23,9 +23,11 @@
  */
 template <typename T, typename T2>
 inline void update_step(T *r, T *r0, const T2 quotient) {
+	std::cerr << ">>> Entering update_step(r=" << r << ",r0=" << r0 << ",quotient=" << quotient << ")" << std::endl;
     T temp = *r;
     *r = *r0 - (quotient * temp);
     *r0 = temp;
+	std::cerr << "<<< Exiting update_step(r=" << r << ",r0=" << r0 << ",quotient=" << quotient << ")" << std::endl;
 }
 
 /**
@@ -40,6 +42,7 @@ inline void update_step(T *r, T *r0, const T2 quotient) {
  */
 template <typename T1, typename T2>
 void extendedEuclid_1(T1 A, T1 B, T1 *GCD, T2 *x, T2 *y) {
+	std::cerr << ">>> Entering extendedEuclid_1(A=" << A << ",B=" << B << ",GCD=" << GCD << ",x=" << x << ",y=" << y << ")" << std::endl;
     if (B > A)
         std::swap(A, B);  // Ensure that A >= B
 
@@ -56,6 +59,7 @@ void extendedEuclid_1(T1 A, T1 B, T1 *GCD, T2 *x, T2 *y) {
     *GCD = r0;
     *x = s0;
     *y = t0;
+	std::cerr << "<<< Exiting extendedEuclid_1(A=" << A << ",B=" << B << ",GCD=" << GCD << ",x=" << x << ",y=" << y << ")" << std::endl;
 }
 
 /**
@@ -69,6 +73,7 @@ void extendedEuclid_1(T1 A, T1 B, T1 *GCD, T2 *x, T2 *y) {
  */
 template <typename T, typename T2>
 void extendedEuclid(T A, T B, T *GCD, T2 *x, T2 *y) {
+	std::cerr << ">>> Entering extendedEuclid(A=" << A << ",B=" << B << ",GCD=" << GCD << ",x=" << x << ",y=" << y << ")" << std::endl;
     if (B > A)
         std::swap(A, B);  // Ensure that A >= B
 
@@ -82,10 +87,12 @@ void extendedEuclid(T A, T B, T *GCD, T2 *x, T2 *y) {
         *x = *y;
         *y = temp - (A / B) * (*y);
     }
+	std::cerr << "<<< Exiting extendedEuclid(A=" << A << ",B=" << B << ",GCD=" << GCD << ",x=" << x << ",y=" << y << ")" << std::endl;
 }
 
 /// Main function
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     uint32_t a, b, gcd;
     int32_t x, y;
     std::cin >> a >> b;
@@ -93,5 +100,6 @@ int main() {
     std::cout << gcd << " " << x << " " << y << std::endl;
     extendedEuclid_1(a, b, &gcd, &x, &y);
     std::cout << gcd << " " << x << " " << y << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

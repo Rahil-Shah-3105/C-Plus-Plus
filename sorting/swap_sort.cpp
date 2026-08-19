@@ -7,6 +7,7 @@
 // Function returns the minimum number of swaps
 // required to sort the array
 int minSwaps(int arr[], int n) {
+	std::cerr << ">>> Entering minSwaps(arr=" << arr << ",n=" << n << ")" << std::endl;
     // Create an array of pairs where first
     // element is array element and second element
     // is position of first element
@@ -56,13 +57,17 @@ int minSwaps(int arr[], int n) {
     delete[] arrPos;
 
     // Return result
+	std::cerr << "<<< Exiting minSwaps(arr=" << arr << ",n=" << n << ")" << std::endl;
     return ans;
 }
 
 // program to test
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int arr[] = {6, 7, 8, 1, 2, 3, 9, 12};
     int n = (sizeof(arr) / sizeof(int));
+	std::cerr << "main(): n → " << n << std::endl;
     std::cout << minSwaps(arr, n);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -75,6 +75,9 @@ class Graph {
      * @param adjList is the adjacency list representation of graph.
      */
     Graph(unsigned int vertices, AdjList&& adjList)
+		std::cerr << ">>> Entering Graph(vertices=" << vertices << ",edges=" << edges << ")" << std::endl;
+		std::cerr << "Throwing std from Graph(vertices=" << vertices << ",edges=" << edges << ")" << std::endl;
+		std::cerr << "<<< Exiting Graph(vertices=" << vertices << ",edges=" << edges << ")" << std::endl;
         : m_vertices(vertices), m_adjList(std::move(adjList)) {}
 
     /** Create a graph from vertices and a set of edges.
@@ -90,6 +93,7 @@ class Graph {
         : m_vertices(vertices) {
         for (auto const& edge : edges) {
             if (edge.src >= vertices || edge.dest >= vertices) {
+				std::cerr << "Throwing std from Graph(vertices=" << vertices << ",edges=" << edges << ")" << std::endl;
                 throw std::range_error(
                     "Either src or dest of edge out of range");
             }
@@ -123,10 +127,16 @@ class Graph {
      * @param edge that needs to be added.
      */
     void addEdge(Edge const& edge) {
+		std::cerr << ">>> Entering addEdge(edge=" << edge << ")" << std::endl;
         if (edge.src >= m_vertices || edge.dest >= m_vertices) {
+			std::cerr << "Throwing std from addEdge(edge=" << edge << ")" << std::endl;
             throw std::range_error("Either src or dest of edge out of range");
         }
         m_adjList[edge.src].emplace_back(edge.dest);
+		std::cerr << ">>> Entering addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
+		std::cerr << "Throwing std from addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
+		std::cerr << "<<< Exiting addEdge(edge=" << edge << ")" << std::endl;
+		std::cerr << "<<< Exiting addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
     }
 
     /** Add an Edge in the graph
@@ -136,6 +146,7 @@ class Graph {
      */
     void addEdge(unsigned int source, unsigned int destination) {
         if (source >= m_vertices || destination >= m_vertices) {
+				std::cerr << "Throwing std from addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
             throw std::range_error(
                 "Either source or destination of edge out of range");
         }
@@ -211,8 +222,10 @@ class CycleCheck {
      * @return true if a cycle is detected, else false.
      */
     static bool isCyclicDFS(Graph const& graph) {
+		std::cerr << ">>> Entering isCyclicDFS(graph=" << graph << ")" << std::endl;
         auto vertices = graph.getVertices();
 
+		std::cerr << "isCyclicDFS(graph=" << graph << "): vertices → " << vertices << std::endl;
         /** State of the node.
          *
          * It is a vector of "nodeStates" which represents the state node is in.
@@ -237,6 +250,7 @@ class CycleCheck {
 
         // All nodes have been safely traversed, that means there is no cycle in
         // the graph. Return false.
+		std::cerr << "<<< Exiting isCyclicDFS(graph=" << graph << ")" << std::endl;
         return false;
     }
 
@@ -248,8 +262,11 @@ class CycleCheck {
      * @return true if a cycle is detected, else false.
      */
     static bool isCyclicBFS(Graph const& graph) {
+		std::cerr << ">>> Entering isCyclicBFS(graph=" << graph << ")" << std::endl;
         auto graphAjdList = graph.getAdjList();
         auto vertices = graph.getVertices();
+		std::cerr << "isCyclicBFS(graph=" << graph << "): vertices → " << vertices << std::endl;
+		std::cerr << "isCyclicBFS(graph=" << graph << "): graphAjdList → " << graphAjdList << std::endl;
 
         std::vector<unsigned int> indegree(vertices, 0);
         // Calculate the indegree i.e. the number of incident edges to the node.
@@ -274,6 +291,7 @@ class CycleCheck {
         // While there are safe nodes that we can visit.
         while (!can_be_solved.empty()) {
             auto solved = can_be_solved.front();
+			std::cerr << "isCyclicBFS(graph=" << graph << "): solved → " << solved << std::endl;
             // Visit the node.
             can_be_solved.pop();
             // Decrease number of nodes that need to be traversed.
@@ -281,6 +299,7 @@ class CycleCheck {
 
             // Visit all the children of the visited node.
             auto it = graphAjdList.find(solved);
+			std::cerr << "isCyclicBFS(graph=" << graph << "): it → " << it << std::endl;
             if (it != graphAjdList.end()) {
                 for (auto child : it->second) {
                     // Check if we can visited the node safely.
@@ -295,6 +314,7 @@ class CycleCheck {
 
         // If there are still nodes that we can't visit, then it means that
         // there is a cycle and return true, else return false.
+		std::cerr << "<<< Exiting isCyclicBFS(graph=" << graph << ")" << std::endl;
         return !(remain == 0);
     }
 };
@@ -303,6 +323,7 @@ class CycleCheck {
  * Main function.
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Instantiate the graph.
     Graph g(7, std::vector<Edge>{{0, 1}, {1, 2}, {2, 0}, {2, 5}, {3, 5}});
     // Check for cycle using BFS method.
@@ -310,5 +331,6 @@ int main() {
 
     // Check for cycle using DFS method.
     std::cout << CycleCheck::isCyclicDFS(g) << '\n';
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

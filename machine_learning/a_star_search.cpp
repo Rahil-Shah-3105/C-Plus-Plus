@@ -102,7 +102,9 @@ class EightPuzzle {
      * @returns -1 if invalid i or j position
      */
     uint32_t get(size_t i, size_t j) const {
+		std::cerr << ">>> Entering get(i=" << i << ",j=" << j << ")" << std::endl;
         if (in_range(i) && in_range(j)) {
+		std::cerr << "<<< Exiting get(i=" << i << ",j=" << j << ")" << std::endl;
             return board[i][j];
         }
         return -1;
@@ -121,11 +123,13 @@ class EightPuzzle {
      * @brief Default constructor for EightPuzzle
      */
     EightPuzzle() {
+		std::cerr << ">>> Entering EightPuzzle()" << std::endl;
         for (size_t i = 0; i < N; ++i) {
             for (size_t j = 0; j < N; ++j) {
                 board[i][j] = ((i * 3 + j + 1) % (N * N));
             }
         }
+		std::cerr << "<<< Exiting EightPuzzle()" << std::endl;
     }
     /**
      * @brief Parameterized Constructor for EightPuzzle
@@ -176,8 +180,10 @@ class EightPuzzle {
      * @note the implementation is compulsory to create A* search
      */
     std::vector<EightPuzzle<N>> generate_possible_moves() {
+		std::cerr << ">>> Entering generate_possible_moves()" << std::endl;
         auto zero_pos = find_zero();
         // vector which will contain all possible state from current state
+		std::cerr << "generate_possible_moves(): zero_pos → " << zero_pos << std::endl;
         std::vector<EightPuzzle<N>> NewStates;
         for (auto &move : moves) {
             if (in_range(zero_pos.first + move.first) &&
@@ -192,6 +198,7 @@ class EightPuzzle {
                 NewStates.emplace_back(new_state);
             }
         }
+		std::cerr << "<<< Exiting generate_possible_moves()" << std::endl;
         return NewStates;
     }
     /**
@@ -392,8 +399,12 @@ class AyStarSearch {
      * @param final denoting final state of the puzzle
      */
     AyStarSearch(const Puzzle &initial, const Puzzle &final) {
+		std::cerr << ">>> Entering AyStarSearch(initial=" << initial << ",final=" << final << ")" << std::endl;
         Initial = std::make_shared<Info>(initial);
         Final = std::make_shared<Info>(final);
+		std::cerr << "AyStarSearch(initial=" << initial << ",final=" << final << "): Final → " << Final << std::endl;
+		std::cerr << "AyStarSearch(initial=" << initial << ",final=" << final << "): Initial → " << Initial << std::endl;
+		std::cerr << "<<< Exiting AyStarSearch(initial=" << initial << ",final=" << final << ")" << std::endl;
     }
     /**
      * @brief A helper solution: launches when a solution for AyStarSearch
@@ -534,6 +545,7 @@ class AyStarSearch {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Renaming for simplicity
     using matrix3 = std::array<std::array<uint32_t, 3>, 3>;
     using row3 = std::array<uint32_t, 3>;
@@ -560,9 +572,12 @@ static void test() {
             for (size_t i = 0; i < first.get_size(); ++i) {
                 for (size_t j = 0; j < first.get_size(); ++j) {
                     uint32_t find = first.get(i, j);
+					std::cerr << "test(): find → " << find << std::endl;
+					std::cerr << "test(): m → " << m << std::endl;
                     size_t m = first.get_size(), n = first.get_size();
                     for (size_t k = 0; k < second.get_size(); ++k) {
                         for (size_t l = 0; l < second.get_size(); ++l) {
+							std::cerr << "test(): l → " << l << std::endl;
                             if (find == second.get(k, l)) {
                                 std::tie(m, n) = std::make_pair(k, l);
                                 break;
@@ -601,12 +616,14 @@ static void test() {
         matrix3({row3({1, 2, 3}), row3({4, 5, 6}), row3({7, 8, 0})}));
 
     auto Solution = search.a_star_search(manhattan_distance);
+	std::cerr << "test(): Solution → " << Solution << std::endl;
     std::cout << Solution.size() << std::endl;
 
     assert(Solution.size() == answer.size());
 
     uint32_t i = 0;
     for (auto it = Solution.rbegin(); it != Solution.rend(); ++it) {
+		std::cerr << "test(): it → " << it << std::endl;
         assert(it->get_state() == answer[i]);
         ++i;
     }
@@ -624,6 +641,9 @@ static void test() {
     Puzzle = machine_learning::aystar_search::EightPuzzle<>(puzzle);
     Ideal = machine_learning::aystar_search::EightPuzzle<>(ideal);
 
+	std::cerr << "test(): Puzzle → " << Puzzle << std::endl;
+	std::cerr << "test(): Ideal → " << Ideal << std::endl;
+	std::cerr << "test(): search → " << search << std::endl;
     // Initialize the search object
     search = machine_learning::aystar_search::AyStarSearch<
         machine_learning::aystar_search::EightPuzzle<3>>(Puzzle, Ideal);
@@ -691,6 +711,7 @@ static void test() {
         };
 
     auto sol2 = search2.a_star_search(manhattan_distance2);
+	std::cerr << "test(): sol2 → " << sol2 << std::endl;
     std::cout << sol2.size() << std::endl;
 
     // Static assertion due to large solution
@@ -701,12 +722,15 @@ static void test() {
     for (auto it = sol2.rbegin(); it != sol2.rend(); ++it) {
         std::cout << *it << std::endl;
     }
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

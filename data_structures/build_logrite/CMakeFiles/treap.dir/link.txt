@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/treap.dir/treap.o -o treap 

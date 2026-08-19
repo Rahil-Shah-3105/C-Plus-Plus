@@ -49,6 +49,7 @@
  * @returns void
  *******************************************************************************/
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<geometry::grahamscan::Point> points = {
         {0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}};
     std::vector<geometry::grahamscan::Point> expected_result = {
@@ -58,12 +59,14 @@ static void test() {
 
     derived_result = geometry::grahamscan::convexHull(points, points.size());
 
+	std::cerr << "test(): derived_result → " << derived_result << std::endl;
     std::cout << "1st test: ";
     for (int i = 0; i < expected_result.size(); i++) {
         assert(derived_result[i].x == expected_result[i].x);
         assert(derived_result[i].y == expected_result[i].y);
     }
     std::cout << "passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /*******************************************************************************
@@ -71,6 +74,8 @@ static void test() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

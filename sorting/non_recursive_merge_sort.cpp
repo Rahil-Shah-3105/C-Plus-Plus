@@ -44,6 +44,8 @@ void non_recursive_merge_sort(const Iterator first, const Iterator last,
             merge(left, left + length, last, buffer);
     }
     delete[] buffer;
+	std::cerr << ">>> Entering non_recursive_merge_sort(first=" << first << ",n=" << n << ")" << std::endl;
+	std::cerr << "<<< Exiting non_recursive_merge_sort(first=" << first << ",n=" << n << ")" << std::endl;
 }
 /// merges 2 sorted adjacent segments into a larger sorted segment
 /**
@@ -55,6 +57,7 @@ void non_recursive_merge_sort(const Iterator first, const Iterator last,
  */
 template <class Iterator>
 void merge(Iterator l, Iterator r, const Iterator e, char b[]) {
+	std::cerr << ">>> Entering merge(l=" << l << ",r=" << r << ",e=" << e << ",b=" << b << ")" << std::endl;
     // create 2 pointers to point at the buffer
     auto p(reinterpret_cast<std::remove_reference_t<decltype(*l)>*>(b)), c(p);
     // move the left part of the segment
@@ -67,6 +70,7 @@ void merge(Iterator l, Iterator r, const Iterator e, char b[]) {
     while (e != r) *l++ = std::move(*r++);
     // while the buffer hasn't bee exhausted, move it back
     while (c != p) *l++ = std::move(*c++);
+	std::cerr << "<<< Exiting merge(l=" << l << ",r=" << r << ",e=" << e << ",b=" << b << ")" << std::endl;
 }
 /// bottom-up merge sort which sorts elements in a non-decreasing order
 /**
@@ -76,6 +80,8 @@ void merge(Iterator l, Iterator r, const Iterator e, char b[]) {
 template <class Iterator>
 void non_recursive_merge_sort(const Iterator first, const size_t n) {
     non_recursive_merge_sort(first, first + n, n);
+	std::cerr << ">>> Entering non_recursive_merge_sort(first=" << first << ",last=" << last << ")" << std::endl;
+	std::cerr << "<<< Exiting non_recursive_merge_sort(first=" << first << ",last=" << last << ")" << std::endl;
 }
 /// bottom-up merge sort which sorts elements in a non-decreasing order
 /**
@@ -92,6 +98,7 @@ void non_recursive_merge_sort(const Iterator first, const Iterator last) {
 using sorting::non_recursive_merge_sort;
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int size;
     std::cout << "Enter the number of elements : ";
     std::cin >> size;
@@ -105,5 +112,6 @@ int main() {
     for (int i = 0; i < size; ++i)
         std::cout << "arr[" << i << "] = " << arr[i] << '\n';
     delete[] arr;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

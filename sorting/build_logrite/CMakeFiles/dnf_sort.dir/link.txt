@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/dnf_sort.dir/dnf_sort.o -o dnf_sort 

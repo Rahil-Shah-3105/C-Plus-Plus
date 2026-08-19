@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/wave_sort.dir/wave_sort.o -o wave_sort 

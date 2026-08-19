@@ -15,6 +15,9 @@ class RBtree
 	node *root;
 	node *q;
 public:
+	std::cerr << ">>> Entering RBtree()" << std::endl;
+	std::cerr << "RBtree(): root → " << root << std::endl;
+	std::cerr << "<<< Exiting RBtree()" << std::endl;
 	RBtree()
 	{
 		q = NULL;
@@ -33,6 +36,7 @@ public:
 };
 void RBtree::insert()
 {
+	std::cerr << ">>> Entering RBtree::insert()" << std::endl;
 	int z;
 	cout << "\nEnter key of the node to be inserted: ";
 	cin >> z;
@@ -43,9 +47,13 @@ void RBtree::insert()
 	t->right = NULL;
 	t->color = 'r';
 	p = root;
+	std::cerr << "RBtree::insert(): p → " << p << std::endl;
+	std::cerr << "RBtree::insert(): q → " << q << std::endl;
 	q = NULL;
 	if (root == NULL)
 	{
+		std::cerr << "Exception in RBtree::insert(): " << e.what() << std::endl;
+		std::cerr << "RBtree::insert(): root → " << root << std::endl;
 		root = t;
 		t->parent = NULL;
 	}
@@ -66,9 +74,11 @@ void RBtree::insert()
 			q->left = t;
 	}
 	insertfix(t);
+	std::cerr << "<<< Exiting RBtree::insert()" << std::endl;
 }
 void RBtree::insertfix(node *t)
 {
+	std::cerr << ">>> Entering RBtree::insertfix(t=" << t << ")" << std::endl;
 	node *u;
 	if (root == t)
 	{
@@ -82,6 +92,8 @@ void RBtree::insertfix(node *t)
 		{
 			if (g->right != NULL)
 			{
+				std::cerr << "Exception in RBtree::insertfix(t=" << t << "): " << e.what() << std::endl;
+				std::cerr << "RBtree::insertfix(t=" << t << "): u → " << u << std::endl;
 				u = g->right;
 				if (u->color == 'r')
 				{
@@ -89,6 +101,7 @@ void RBtree::insertfix(node *t)
 					u->color = 'b';
 					g->color = 'r';
 					t = g;
+					std::cerr << "RBtree::insertfix(t=" << t << "): t → " << t << std::endl;
 				}
 			}
 			else
@@ -130,12 +143,15 @@ void RBtree::insertfix(node *t)
 		}
 		root->color = 'b';
 	}
+	std::cerr << "<<< Exiting RBtree::insertfix(t=" << t << ")" << std::endl;
 }
 
 void RBtree::del()
 {
+	std::cerr << ">>> Entering RBtree::del()" << std::endl;
 	if (root == NULL)
 	{
+		std::cerr << "Exception in RBtree::del(): " << e.what() << std::endl;
 		cout << "\nEmpty Tree.";
 		return;
 	}
@@ -144,9 +160,13 @@ void RBtree::del()
 	cin >> x;
 	node *p;
 	p = root;
+	std::cerr << "RBtree::del(): p → " << p << std::endl;
+	std::cerr << "RBtree::del(): y → " << y << std::endl;
+	std::cerr << "RBtree::del(): q → " << q << std::endl;
 	node *y = NULL;
 	node *q = NULL;
 	int found = 0;
+	std::cerr << "RBtree::del(): found → " << found << std::endl;
 	while (p != NULL && found == 0)
 	{
 		if (p->key == x)
@@ -203,6 +223,7 @@ void RBtree::del()
 			q->parent = y->parent;
 		if (y->parent == NULL)
 			root = q;
+			std::cerr << "RBtree::del(): root → " << root << std::endl;
 		else
 		{
 			if (y == y->parent->left)
@@ -218,16 +239,19 @@ void RBtree::del()
 		if (y->color == 'b')
 			delfix(q);
 	}
+	std::cerr << "<<< Exiting RBtree::del()" << std::endl;
 }
 
 void RBtree::delfix(node *p)
 {
+	std::cerr << ">>> Entering RBtree::delfix(p=" << p << ")" << std::endl;
 	node *s;
 	while (p != root && p->color == 'b')
 	{
 		if (p->parent->left == p)
 		{
 			s = p->parent->right;
+			std::cerr << "RBtree::delfix(p=" << p << "): s → " << s << std::endl;
 			if (s->color == 'r')
 			{
 				s->color = 'b';
@@ -239,6 +263,7 @@ void RBtree::delfix(node *p)
 			{
 				s->color = 'r';
 				p = p->parent;
+				std::cerr << "RBtree::delfix(p=" << p << "): p → " << p << std::endl;
 			}
 			else
 			{
@@ -290,13 +315,16 @@ void RBtree::delfix(node *p)
 		p->color = 'b';
 		root->color = 'b';
 	}
+	std::cerr << "<<< Exiting RBtree::delfix(p=" << p << ")" << std::endl;
 }
 
 void RBtree::leftrotate(node *p)
 {
+	std::cerr << ">>> Entering RBtree::leftrotate(p=" << p << ")" << std::endl;
 	if (p->right == NULL)
 		return;
 	else
+	std::cerr << "Exception in RBtree::leftrotate(p=" << p << "): " << e.what() << std::endl;
 	{
 		node *y = p->right;
 		if (y->left != NULL)
@@ -310,6 +338,7 @@ void RBtree::leftrotate(node *p)
 			y->parent = p->parent;
 		if (p->parent == NULL)
 			root = y;
+			std::cerr << "RBtree::leftrotate(p=" << p << "): root → " << root << std::endl;
 		else
 		{
 			if (p == p->parent->left)
@@ -320,12 +349,15 @@ void RBtree::leftrotate(node *p)
 		y->left = p;
 		p->parent = y;
 	}
+	std::cerr << "<<< Exiting RBtree::leftrotate(p=" << p << ")" << std::endl;
 }
 void RBtree::rightrotate(node *p)
 {
+	std::cerr << ">>> Entering RBtree::rightrotate(p=" << p << ")" << std::endl;
 	if (p->left == NULL)
 		return;
 	else
+	std::cerr << "Exception in RBtree::rightrotate(p=" << p << "): " << e.what() << std::endl;
 	{
 		node *y = p->left;
 		if (y->right != NULL)
@@ -339,6 +371,7 @@ void RBtree::rightrotate(node *p)
 			y->parent = p->parent;
 		if (p->parent == NULL)
 			root = y;
+			std::cerr << "RBtree::rightrotate(p=" << p << "): root → " << root << std::endl;
 		else
 		{
 			if (p == p->parent->left)
@@ -349,13 +382,19 @@ void RBtree::rightrotate(node *p)
 		y->right = p;
 		p->parent = y;
 	}
+	std::cerr << "<<< Exiting RBtree::rightrotate(p=" << p << ")" << std::endl;
 }
 
+std::cerr << ">>> Entering RBtree::successor(p=" << p << ")" << std::endl;
+std::cerr << "RBtree::successor(p=" << p << "): y → " << y << std::endl;
+std::cerr << "Exception in RBtree::successor(p=" << p << "): " << e.what() << std::endl;
+std::cerr << "<<< Exiting RBtree::successor(p=" << p << ")" << std::endl;
 node* RBtree::successor(node *p)
 {
 	node *y = NULL;
 	if (p->left != NULL)
 	{
+		std::cerr << "Exception in RBtree::successor(p=" << p << "): " << e.what() << std::endl;
 		y = p->left;
 		while (y->right != NULL)
 			y = y->right;
@@ -371,12 +410,16 @@ node* RBtree::successor(node *p)
 
 void RBtree::disp()
 {
+	std::cerr << ">>> Entering RBtree::disp()" << std::endl;
 	display(root);
+	std::cerr << "<<< Exiting RBtree::disp()" << std::endl;
 }
 void RBtree::display(node *p)
 {
+	std::cerr << ">>> Entering RBtree::display(p=" << p << ")" << std::endl;
 	if (root == NULL)
 	{
+		std::cerr << "Exception in RBtree::display(p=" << p << "): " << e.what() << std::endl;
 		cout << "\nEmpty Tree.";
 		return;
 	}
@@ -417,11 +460,14 @@ void RBtree::display(node *p)
 		/*else
 		 cout<<"\nNo Right Child.\n"*/
 	}
+	std::cerr << "<<< Exiting RBtree::display(p=" << p << ")" << std::endl;
 }
 void RBtree::search()
 {
+	std::cerr << ">>> Entering RBtree::search()" << std::endl;
 	if (root == NULL)
 	{
+		std::cerr << "Exception in RBtree::search(): " << e.what() << std::endl;
 		cout << "\nEmpty Tree\n";
 		return;
 	}
@@ -429,7 +475,9 @@ void RBtree::search()
 	cout << "\n Enter key of the node to be searched: ";
 	cin >> x;
 	node *p = root;
+	std::cerr << "RBtree::search(): p → " << p << std::endl;
 	int found = 0;
+	std::cerr << "RBtree::search(): found → " << found << std::endl;
 	while (p != NULL && found == 0)
 	{
 		if (p->key == x)
@@ -468,15 +516,18 @@ void RBtree::search()
 		cout << endl;
 
 	}
+	std::cerr << "<<< Exiting RBtree::search()" << std::endl;
 }
 int main()
 {
+	std::cerr << ">>> Entering main()" << std::endl;
 	int ch, y = 0;
 	RBtree obj;
 	do
 	{
 		cout << "\n\t RED BLACK TREE ";
 		cout << "\n 1. Insert in the tree ";
+		auto __logStart = std::chrono::steady_clock::now();
 		cout << "\n 2. Delete a node from the tree";
 		cout << "\n 3. Search for an element in the tree";
 		cout << "\n 4. Display the tree ";
@@ -501,5 +552,6 @@ int main()
 		cout << endl;
 
 	} while (y != 1);
+	std::cerr << "<<< Exiting main()" << std::endl;
 	return 1;
 }

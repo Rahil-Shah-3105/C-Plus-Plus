@@ -37,9 +37,11 @@ namespace dnf_sort {
  */
 template <typename T>
 std::vector<T> dnfSort(const std::vector<T> &in_arr) {
+	std::cerr << ">>> Entering dnfSort(in_arr=" << in_arr << ")" << std::endl;
     std::vector<T> arr(in_arr);
     uint64_t lo = 0;
     uint64_t hi = arr.size() - 1;
+	std::cerr << "dnfSort(in_arr=" << in_arr << "): hi → " << hi << std::endl;
     uint64_t mid = 0;
 
     // Iterate till all the elements
@@ -62,6 +64,7 @@ std::vector<T> dnfSort(const std::vector<T> &in_arr) {
                 break;
         }
     }
+	std::cerr << "<<< Exiting dnfSort(in_arr=" << in_arr << ")" << std::endl;
     return arr;
 }
 }  // namespace dnf_sort
@@ -72,11 +75,13 @@ std::vector<T> dnfSort(const std::vector<T> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     // [1, 0, 2, 1] return [0, 1, 1, 2]
     std::vector<uint64_t> array1 = {0, 1, 1, 2};
     std::cout << "Test 1... ";
     std::vector<uint64_t> arr1 = sorting::dnf_sort::dnfSort(array1);
+	std::cerr << "test(): arr1 → " << arr1 << std::endl;
     assert(std::is_sorted(std::begin(arr1), std::end(arr1)));
     std::cout << "passed" << std::endl;
     // 2nd test
@@ -84,6 +89,7 @@ static void test() {
     std::vector<uint64_t> array2 = {1, 0, 0, 1, 1, 0, 2, 1};
     std::cout << "Test 2... ";
     std::vector<uint64_t> arr2 = sorting::dnf_sort::dnfSort(array2);
+	std::cerr << "test(): arr2 → " << arr2 << std::endl;
     assert(std::is_sorted(std::begin(arr2), std::end(arr2)));
     std::cout << "passed" << std::endl;
     // 3rd test
@@ -91,6 +97,7 @@ static void test() {
     std::vector<uint64_t> array3 = {1, 1, 0, 0, 1, 2, 2, 0, 2, 1};
     std::cout << "Test 3... ";
     std::vector<uint64_t> arr3 = sorting::dnf_sort::dnfSort(array3);
+	std::cerr << "test(): arr3 → " << arr3 << std::endl;
     assert(std::is_sorted(std::begin(arr3), std::end(arr3)));
     std::cout << "passed" << std::endl;
     // 4th test
@@ -98,8 +105,10 @@ static void test() {
     std::vector<uint64_t> array4 = {2, 2, 2, 0, 0, 1, 1};
     std::cout << "Test 4... ";
     std::vector<uint64_t> arr4 = sorting::dnf_sort::dnfSort(array4);
+	std::cerr << "test(): arr4 → " << arr4 << std::endl;
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -107,6 +116,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

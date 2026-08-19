@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/jarvis_algorithm.dir/jarvis_algorithm.o -o jarvis_algorithm 

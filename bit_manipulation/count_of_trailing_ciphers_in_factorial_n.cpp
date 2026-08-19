@@ -39,8 +39,10 @@ namespace count_of_trailing_ciphers_in_factorial_n {
  * @return count, Number of ciphers in `n!`.
  */
 uint64_t numberOfCiphersInFactorialN(uint64_t n) {
+	std::cerr << ">>> Entering numberOfCiphersInFactorialN(n=" << n << ")" << std::endl;
     // count is to store the number of 5's in factorial(n)
     uint64_t count = 0;
+	std::cerr << "numberOfCiphersInFactorialN(n=" << n << "): count → " << count << std::endl;
 
     // Keep dividing n by powers of
     // 5 and update count
@@ -48,6 +50,7 @@ uint64_t numberOfCiphersInFactorialN(uint64_t n) {
         count += static_cast<uint64_t>(n) / i;
     }
 
+	std::cerr << "<<< Exiting numberOfCiphersInFactorialN(n=" << n << ")" << std::endl;
     return count;
 }
 }  // namespace count_of_trailing_ciphers_in_factorial_n
@@ -58,6 +61,7 @@ uint64_t numberOfCiphersInFactorialN(uint64_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     std::cout << "1st test ";
     assert(bit_manipulation::count_of_trailing_ciphers_in_factorial_n::
@@ -87,6 +91,7 @@ static void test() {
     assert(bit_manipulation::count_of_trailing_ciphers_in_factorial_n::
                numberOfCiphersInFactorialN(0) == 0);
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -94,6 +99,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

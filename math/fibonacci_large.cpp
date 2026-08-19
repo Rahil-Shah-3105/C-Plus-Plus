@@ -22,6 +22,7 @@
  * and returns the result as a large_number type.
  */
 large_number fib(uint64_t n) {
+	std::cerr << ">>> Entering fib(n=" << n << ")" << std::endl;
     large_number f0(1);
     large_number f1(1);
 
@@ -32,13 +33,16 @@ large_number fib(uint64_t n) {
         n--;
     } while (n > 2);  // since we start from 2
 
+	std::cerr << "<<< Exiting fib(n=" << n << ")" << std::endl;
     return f1;
 }
 
 int main(int argc, char *argv[]) {
+	std::cerr << ">>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     uint64_t N;
     if (argc == 2) {
         N = strtoull(argv[1], NULL, 10);
+		std::cerr << "main(argc=" << argc << ",argv=" << argv << "): N → " << N << std::endl;
     } else {
         std::cout << "Enter N: ";
         std::cin >> N;
@@ -46,6 +50,8 @@ int main(int argc, char *argv[]) {
 
     clock_t start_time = std::clock();
     large_number result = fib(N);
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): result → " << result << std::endl;
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): end_time → " << end_time << std::endl;
     clock_t end_time = std::clock();
     double time_taken = static_cast<double>(end_time - start_time) /
                         static_cast<double>(CLOCKS_PER_SEC);
@@ -81,5 +87,6 @@ int main(int argc, char *argv[]) {
         std::cerr << "Test for " << N << "^th Fibonacci number failed!"
                   << std::endl;
 
+	std::cerr << "<<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

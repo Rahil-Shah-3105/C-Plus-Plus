@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/geometric_dist.dir/geometric_dist.o -o geometric_dist 

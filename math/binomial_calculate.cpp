@@ -30,6 +30,7 @@ namespace binomial {
  * @return binomial coefficient for n and k
  */
 size_t calculate(int32_t n, int32_t k) {
+	std::cerr << ">>> Entering calculate(n=" << n << ",k=" << k << ")" << std::endl;
     // basic cases
     if (k > (n / 2))
         k = n - k;
@@ -39,11 +40,13 @@ size_t calculate(int32_t n, int32_t k) {
         return 1;
 
     size_t result = 1;
+	std::cerr << "calculate(n=" << n << ",k=" << k << "): result → " << result << std::endl;
     for (int32_t i = 1; i <= k; ++i) {
         result *= n - k + i;
         result /= i;
     }
 
+	std::cerr << "<<< Exiting calculate(n=" << n << ",k=" << k << ")" << std::endl;
     return result;
 }
 }  // namespace binomial
@@ -54,6 +57,7 @@ size_t calculate(int32_t n, int32_t k) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // tests for calculate function
     assert(math::binomial::calculate(1, 1) == 1);
     assert(math::binomial::calculate(57, 57) == 1);
@@ -68,6 +72,7 @@ static void tests() {
 
     std::cout << "[+] Binomial coefficients calculate test completed"
               << std::endl;
+			std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -77,6 +82,7 @@ static void tests() {
  * @returns 0 on exit
  */
 int main(int argc, const char* argv[]) {
+	std::cerr << ">>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     tests();  // run self-test implementations
 
     if (argc < 3) {
@@ -85,8 +91,10 @@ int main(int argc, const char* argv[]) {
     }
 
     int32_t n = atoi(argv[1]);
+	std::cerr << "main(argc=" << argc << ",argv=" << argv << "): n → " << n << std::endl;
     int32_t k = atoi(argv[2]);
 
     std::cout << math::binomial::calculate(n, k) << std::endl;
+	std::cerr << "<<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

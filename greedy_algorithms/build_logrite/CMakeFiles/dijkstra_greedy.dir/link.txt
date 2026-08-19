@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/dijkstra_greedy.dir/dijkstra_greedy.o -o dijkstra_greedy 

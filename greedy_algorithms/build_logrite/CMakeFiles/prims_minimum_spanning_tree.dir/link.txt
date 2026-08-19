@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/prims_minimum_spanning_tree.dir/prims_minimum_spanning_tree.o -o prims_minimum_spanning_tree 

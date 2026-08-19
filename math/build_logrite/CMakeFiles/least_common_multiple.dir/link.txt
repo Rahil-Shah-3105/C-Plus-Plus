@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/least_common_multiple.dir/least_common_multiple.o -o least_common_multiple 

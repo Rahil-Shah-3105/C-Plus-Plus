@@ -1,0 +1,7 @@
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/non_preemptive_sjf_scheduling.dir
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/edit_cache.dir
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/rebuild_cache.dir
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/list_install_components.dir
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/install.dir
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/install/local.dir
+/root/logrite/scans/r3/p4853/cpu_scheduling_algorithms/build_logrite/CMakeFiles/install/strip.dir

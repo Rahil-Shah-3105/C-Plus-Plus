@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/bucket_sort.dir/bucket_sort.o -o bucket_sort 

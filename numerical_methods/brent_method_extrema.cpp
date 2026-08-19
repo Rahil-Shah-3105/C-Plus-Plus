@@ -142,8 +142,10 @@ double get_minima(const std::function<double(double)> &f, double lim_a,
  * \n Expected result = 2
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     // define the function to minimize as a lambda function
     std::function<double(double)> f1 = [](double x) {
+		std::cerr << "<<< Exiting test1()" << std::endl;
         return (x - 2) * (x - 2);
     };
 
@@ -164,6 +166,7 @@ void test1() {
  * \n Expected result: \f$e\approx 2.71828182845904509\f$
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     // define the function to maximize as a lambda function
     // since we are maximixing, we negated the function return value
     std::function<double(double)> func = [](double x) {
@@ -173,11 +176,13 @@ void test2() {
     std::cout << "Test 2.... ";
 
     double minima = get_minima(func, -2, 5);
+	std::cerr << "test2(): minima → " << minima << std::endl;
 
     std::cout << minima << " (" << M_E << ")...";
 
     assert(std::abs(minima - M_E) < EPSILON);
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /**
@@ -187,22 +192,27 @@ void test2() {
  * \n Expected result: \f$\pi\approx 3.14159265358979312\f$
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     // define the function to maximize as a lambda function
     // since we are maximixing, we negated the function return value
     std::function<double(double)> func = [](double x) { return std::cos(x); };
+	std::cerr << "test3(): func → " << func << std::endl;
 
     std::cout << "Test 3.... ";
 
     double minima = get_minima(func, -4, 12);
+	std::cerr << "test3(): minima → " << minima << std::endl;
 
     std::cout << minima << " (" << M_PI << ")...";
 
     assert(std::abs(minima - M_PI) < EPSILON);
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::cout.precision(18);
 
     std::cout << "Computations performed with machine epsilon: " << EPSILON

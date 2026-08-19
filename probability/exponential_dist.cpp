@@ -35,7 +35,10 @@ namespace geometric_dist {
  * @returns \f[\mu = \frac{1}{\lambda}\f]
  */
 double exponential_expected(double lambda) {
+	std::cerr << ">>> Entering exponential_expected(lambda=" << lambda << ")" << std::endl;
     if (lambda <= 0) {
+		std::cerr << "Throwing std from exponential_expected(lambda=" << lambda << ")" << std::endl;
+	std::cerr << "<<< Exiting exponential_expected(lambda=" << lambda << ")" << std::endl;
         throw std::invalid_argument("lambda must be greater than 0");
     }
     return 1 / lambda;
@@ -46,7 +49,10 @@ double exponential_expected(double lambda) {
  * @returns \f[\sigma^2 = \frac{1}{\lambda^2}\f]
  */
 double exponential_var(double lambda) {
+	std::cerr << ">>> Entering exponential_var(lambda=" << lambda << ")" << std::endl;
     if (lambda <= 0) {
+		std::cerr << "Throwing std from exponential_var(lambda=" << lambda << ")" << std::endl;
+	std::cerr << "<<< Exiting exponential_var(lambda=" << lambda << ")" << std::endl;
         throw std::invalid_argument("lambda must be greater than 0");
     }
     return 1 / pow(lambda, 2);
@@ -57,7 +63,10 @@ double exponential_var(double lambda) {
  * @returns \f[\sigma = \frac{1}{\lambda}\f]
  */
 double exponential_std(double lambda) {
+	std::cerr << ">>> Entering exponential_std(lambda=" << lambda << ")" << std::endl;
     if (lambda <= 0) {
+		std::cerr << "Throwing std from exponential_std(lambda=" << lambda << ")" << std::endl;
+	std::cerr << "<<< Exiting exponential_std(lambda=" << lambda << ")" << std::endl;
         throw std::invalid_argument("lambda must be greater than 0");
     }
     return 1 / lambda;
@@ -70,6 +79,7 @@ double exponential_std(double lambda) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     double lambda_1 = 1;
     double expected_1 = 1;
     double var_1 = 1;
@@ -91,6 +101,7 @@ static void test() {
     const float threshold = 1e-3f;
 
     std::cout << "Test for lambda = 1 \n";
+	std::cerr << "test(): lambda → " << lambda << std::endl;
     assert(
         std::abs(expected_1 - probability::geometric_dist::exponential_expected(
                                   lambda_1)) < threshold);
@@ -126,6 +137,7 @@ static void test() {
         probability::geometric_dist::exponential_var(lambda_4);
         probability::geometric_dist::exponential_std(lambda_4);
     } catch (std::invalid_argument& err) {
+		std::cerr << "Exception in test(): " << e.what() << std::endl;
         assert(std::string(err.what()) == "lambda must be greater than 0");
     }
     std::cout << "ALL TEST PASSED\n\n";
@@ -139,6 +151,7 @@ static void test() {
         assert(std::string(err.what()) == "lambda must be greater than 0");
     }
     std::cout << "ALL TEST PASSED\n\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -146,6 +159,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // Self test implementation
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

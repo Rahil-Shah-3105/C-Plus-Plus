@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/shortest_common_supersequence.dir/shortest_common_supersequence.o -o shortest_common_supersequence 

@@ -33,7 +33,9 @@ class hash_chain {
      * @param mod modulus of the chain
      */
     explicit hash_chain(int mod) : _mod(mod) {
+		std::cerr << ">>> Entering hash_chain(mod=" << mod << ")" << std::endl;
         while (mod--) head.push_back(nullptr);
+		std::cerr << "<<< Exiting hash_chain(mod=" << mod << ")" << std::endl;
     }
 
     /**
@@ -43,6 +45,7 @@ class hash_chain {
      * @param h height of the node
      */
     void add(int x, int h) {
+		std::cerr << ">>> Entering add(x=" << x << ",h=" << h << ")" << std::endl;
         std::shared_ptr<Node> curr;
         std::shared_ptr<Node> temp(new Node);
         temp->data = x;
@@ -50,17 +53,20 @@ class hash_chain {
         if (!head[h]) {
             head[h] = temp;
             curr = head[h];
+			std::cerr << "add(x=" << x << ",h=" << h << "): curr → " << curr << std::endl;
         } else {
             curr = head[h];
             while (curr->next) curr = curr->next;
             curr->next = temp;
         }
+		std::cerr << "<<< Exiting add(x=" << x << ",h=" << h << ")" << std::endl;
     }
 
     /**
      * @brief Display the chain
      */
     void display() {
+		std::cerr << ">>> Entering display()" << std::endl;
         std::shared_ptr<Node> temp = nullptr;
         int i = 0;
         for (i = 0; i < _mod; i++) {
@@ -68,6 +74,7 @@ class hash_chain {
                 std::cout << "Key " << i << " is empty" << std::endl;
             } else {
                 std::cout << "Key " << i << " has values = " << std::endl;
+				std::cerr << "display(): values → " << values << std::endl;
                 temp = head[i];
                 while (temp->next) {
                     std::cout << temp->data << " " << std::endl;
@@ -77,6 +84,7 @@ class hash_chain {
                 std::cout << std::endl;
             }
         }
+		std::cerr << "<<< Exiting display()" << std::endl;
     }
 
     /**
@@ -99,6 +107,7 @@ class hash_chain {
      * @returns `false` if element not found
      */
     bool find(int x, int h) const {
+		std::cerr << ">>> Entering find(x=" << x << ",h=" << h << ")" << std::endl;
         std::shared_ptr<Node> temp = head[h];
         if (!head[h]) {
             // index does not exist!
@@ -123,6 +132,7 @@ class hash_chain {
 
         // further implicit else condition
         std::cout << "Element not found" << std::endl;
+		std::cerr << "<<< Exiting find(x=" << x << ",h=" << h << ")" << std::endl;
         return false;
     }
 };
@@ -131,13 +141,16 @@ class hash_chain {
  * @returns `0` always
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int c = 0, x = 0, mod = 0, h = 0;
     std::cout << "Enter the size of Hash Table. = " << std::endl;
+	std::cerr << "main(): h → " << h << std::endl;
     std::cin >> mod;
 
     hash_chain mychain(mod);
 
     bool loop = true;
+	std::cerr << "main(): loop → " << loop << std::endl;
     while (loop) {
         std::cout << std::endl;
         std::cout << "PLEASE CHOOSE -" << std::endl;
@@ -150,6 +163,7 @@ int main() {
         switch (c) {
             case 1:
                 std::cout << "Enter element to add = " << std::endl;
+				std::cerr << "main(): add → " << add << std::endl;
                 std::cin >> x;
                 h = mychain.hash(x);
                 h = std::abs(h);
@@ -157,12 +171,14 @@ int main() {
                 break;
             case 2:
                 std::cout << "Enter element to search = " << std::endl;
+				std::cerr << "main(): search → " << search << std::endl;
                 std::cin >> x;
                 h = mychain.hash(x);
                 mychain.find(x, h);
                 break;
             case 3:
                 std::cout << "Enter element to generate hash = " << std::endl;
+				std::cerr << "main(): hash → " << hash << std::endl;
                 std::cin >> x;
                 std::cout << "Hash of " << x << " is = " << mychain.hash(x)
                           << std::endl;
@@ -182,5 +198,6 @@ int main() {
     add(5,&head1);
     display(&head1);
     display(&head2);*/
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

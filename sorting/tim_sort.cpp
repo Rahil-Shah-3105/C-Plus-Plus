@@ -9,6 +9,7 @@ const int RUN = 32;
 // this function sorts array from left index to to right index which is of size
 // atmost RUN
 void insertionSort(int arr[], int left, int right) {
+	std::cerr << ">>> Entering insertionSort(arr=" << arr << ",left=" << left << ",right=" << right << ")" << std::endl;
     for (int i = left + 1; i <= right; i++) {
         const int temp = arr[i];
         int j = i - 1;
@@ -18,10 +19,12 @@ void insertionSort(int arr[], int left, int right) {
         }
         arr[j + 1] = temp;
     }
+	std::cerr << "<<< Exiting insertionSort(arr=" << arr << ",left=" << left << ",right=" << right << ")" << std::endl;
 }
 
 // merge function merges the sorted runs
 void merge(int arr[], int l, int m, int r) {
+	std::cerr << ">>> Entering merge(arr=" << arr << ",l=" << l << ",m=" << m << ",r=" << r << ")" << std::endl;
     // original array is broken in two parts, left and right array
     const int len1 = m - l + 1, len2 = r - m;
     int *left = new int[len1], *right = new int[len2];
@@ -59,10 +62,12 @@ void merge(int arr[], int l, int m, int r) {
     }
     delete[] left;
     delete[] right;
+	std::cerr << "<<< Exiting merge(arr=" << arr << ",l=" << l << ",m=" << m << ",r=" << r << ")" << std::endl;
 }
 
 // iterative Timsort function to sort the array[0...n-1] (similar to merge sort)
 void timSort(int arr[], int n) {
+	std::cerr << ">>> Entering timSort(arr=" << arr << ",n=" << n << ")" << std::endl;
     // Sort individual subarrays of size RUN
     for (int i = 0; i < n; i += RUN)
         insertionSort(arr, i, std::min((i + 31), (n - 1)));
@@ -77,18 +82,23 @@ void timSort(int arr[], int n) {
             // find ending point of left sub array
             // mid+1 is starting point of right sub array
             const int mid = std::min((left + size - 1), (n - 1));
+			std::cerr << "timSort(arr=" << arr << ",n=" << n << "): mid → " << mid << std::endl;
+			std::cerr << "timSort(arr=" << arr << ",n=" << n << "): right → " << right << std::endl;
             const int right = std::min((left + 2 * size - 1), (n - 1));
 
             // merge sub array arr[left.....mid] & arr[mid+1....right]
             merge(arr, left, mid, right);
         }
     }
+	std::cerr << "<<< Exiting timSort(arr=" << arr << ",n=" << n << ")" << std::endl;
 }
 
 // utility function to print the Array
 void printArray(int arr[], int n) {
+	std::cerr << ">>> Entering printArray(arr=" << arr << ",n=" << n << ")" << std::endl;
     for (int i = 0; i < n; i++) printf("%d  ", arr[i]);
     std::cout << std::endl;
+	std::cerr << "<<< Exiting printArray(arr=" << arr << ",n=" << n << ")" << std::endl;
 }
 
 /**
@@ -96,6 +106,7 @@ void printArray(int arr[], int n) {
  * @returns void
  */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // Case: array of length 65
     constexpr int N = 65;
     int arr[N];
@@ -106,14 +117,17 @@ void tests() {
 
     timSort(arr, N);
     assert(std::is_sorted(arr, arr + N));
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 // Driver program to test above function
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self test implementations
 
     int arr[] = {5, 21, 7, 23, 19};
     const int n = sizeof(arr) / sizeof(arr[0]);
+	std::cerr << "main(): n → " << n << std::endl;
     printf("Given Array is\n");
     printArray(arr, n);
 
@@ -121,5 +135,6 @@ int main() {
 
     printf("After Sorting Array is\n");
     printArray(arr, n);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

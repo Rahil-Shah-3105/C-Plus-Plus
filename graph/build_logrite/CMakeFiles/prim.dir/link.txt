@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/prim.dir/prim.o -o prim 

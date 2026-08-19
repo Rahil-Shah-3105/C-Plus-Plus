@@ -44,7 +44,9 @@ struct Entry {
  * @return hash value of the key
  */
 size_t hashFxn(int key) {
+	std::cerr << ">>> Entering hashFxn(key=" << key << ")" << std::endl;
     std::hash<int> hash;
+	std::cerr << "<<< Exiting hashFxn(key=" << key << ")" << std::endl;
     return hash(key);
 }
 
@@ -53,12 +55,15 @@ size_t hashFxn(int key) {
  * @return hash value of the key
  */
 int linearProbe(int key, bool searching) {
+	std::cerr << ">>> Entering linearProbe(key=" << key << ",searching=" << searching << ")" << std::endl;
     int hash = static_cast<int>(hashFxn(key));
     int i = 0;
+	std::cerr << "linearProbe(key=" << key << ",searching=" << searching << "): hash → " << hash << std::endl;
     Entry entry;
     do {
         int index = static_cast<int>((hash + i) % totalSize);
         entry = table[index];
+		std::cerr << "linearProbe(key=" << key << ",searching=" << searching << "): entry → " << entry << std::endl;
         if (searching) {
             if (entry.key == notPresent) {
                 return notPresent;
@@ -87,6 +92,7 @@ int linearProbe(int key, bool searching) {
             return notPresent;
         }
     } while (entry.key != notPresent);
+	std::cerr << "<<< Exiting linearProbe(key=" << key << ",searching=" << searching << ")" << std::endl;
     return notPresent;
 }
 
@@ -96,7 +102,9 @@ int linearProbe(int key, bool searching) {
  * @return hash value of the key
  */
 bool putProber(const Entry& entry, int key) {
+	std::cerr << ">>> Entering putProber(entry=" << entry << ",key=" << key << ")" << std::endl;
     if (entry.key == notPresent || entry.key == tomb) {
+	std::cerr << "<<< Exiting putProber(entry=" << entry << ",key=" << key << ")" << std::endl;
         return true;
     }
     return false;
@@ -108,7 +116,9 @@ bool putProber(const Entry& entry, int key) {
  * @return hash value of the key
  */
 bool searchingProber(const Entry& entry, int key) {
+	std::cerr << ">>> Entering searchingProber(entry=" << entry << ",key=" << key << ")" << std::endl;
     if (entry.key == key) {
+	std::cerr << "<<< Exiting searchingProber(entry=" << entry << ",key=" << key << ")" << std::endl;
         return true;
     }
     return false;
@@ -118,6 +128,7 @@ bool searchingProber(const Entry& entry, int key) {
  * @returns none
  */
 void display() {
+	std::cerr << ">>> Entering display()" << std::endl;
     for (int i = 0; i < totalSize; i++) {
         if (table[i].key == notPresent) {
             std::cout << " Empty ";
@@ -130,21 +141,25 @@ void display() {
         }
     }
     std::cout << std::endl;
+	std::cerr << "<<< Exiting display()" << std::endl;
 }
 
 /** Rehashes the table into a bigger table
  * @returns None
  */
 void rehash() {
+	std::cerr << ">>> Entering rehash()" << std::endl;
     // Necessary so wall of add info isn't printed all at once
     rehashing = true;
     int oldSize = totalSize;
+	std::cerr << "rehash(): rehashing → " << rehashing << std::endl;
     std::vector<Entry> oldTable(table);
     // Really this should use the next prime number greater than totalSize *
     // 2
     totalSize *= 2;
     table = std::vector<Entry>(totalSize);
     for (int i = 0; i < oldSize; i++) {
+		std::cerr << "rehash(): table → " << table << std::endl;
         if (oldTable[i].key != -1 && oldTable[i].key != notPresent) {
             size--;  // Size stays the same (add increments size)
             add(oldTable[i].key);
@@ -153,24 +168,28 @@ void rehash() {
     // delete[] oldTable;
     rehashing = false;
     std::cout << "Table was rehashed, new size is: " << totalSize << std::endl;
+	std::cerr << "<<< Exiting rehash()" << std::endl;
 }
 
 /** Adds entry using linear probing. Checks for load factor here
  * @param key key value to hash and add
  */
 void add(int key) {
+	std::cerr << ">>> Entering add(key=" << key << ")" << std::endl;
     int index = linearProbe(key, false);
     table[index].key = key;
     // Load factor greater than 0.5 causes resizing
     if (++size / static_cast<double>(totalSize) >= 0.5) {
         rehash();
     }
+	std::cerr << "<<< Exiting add(key=" << key << ")" << std::endl;
 }
 
 /** Removes key. Leaves tombstone upon removal.
  * @param key key value to hash and remove
  */
 void remove(int key) {
+	std::cerr << ">>> Entering remove(key=" << key << ")" << std::endl;
     int index = linearProbe(key, true);
     if (index == notPresent) {
         std::cout << "key not found" << std::endl;
@@ -178,12 +197,14 @@ void remove(int key) {
     std::cout << "Removal Successful, leaving tomb" << std::endl;
     table[index].key = tomb;
     size--;
+	std::cerr << "<<< Exiting remove(key=" << key << ")" << std::endl;
 }
 
 /** Information about the adding process
  * @param key key value to hash and add
  */
 void addInfo(int key) {
+	std::cerr << ">>> Entering addInfo(key=" << key << ")" << std::endl;
     std::cout << "Initial table: ";
     display();
     std::cout << std::endl;
@@ -193,12 +214,14 @@ void addInfo(int key) {
     add(key);
     std::cout << "New table: ";
     display();
+	std::cerr << "<<< Exiting addInfo(key=" << key << ")" << std::endl;
 }
 
 /** Information about removal process
  * @param key key value to hash and remove
  */
 void removalInfo(int key) {
+	std::cerr << ">>> Entering removalInfo(key=" << key << ")" << std::endl;
     std::cout << "Initial table: ";
     display();
     std::cout << std::endl;
@@ -208,6 +231,7 @@ void removalInfo(int key) {
     remove(key);
     std::cout << "New table: ";
     display();
+	std::cerr << "<<< Exiting removalInfo(key=" << key << ")" << std::endl;
 }
 }  // namespace linear_probing
 /**
@@ -222,11 +246,14 @@ using linear_probing::totalSize;
  * @returns 0 on success
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int cmd = 0, key = 0;
     std::cout << "Enter the initial size of Hash Table. = ";
     std::cin >> totalSize;
     table = std::vector<Entry>(totalSize);
     bool loop = true;
+	std::cerr << "main(): loop → " << loop << std::endl;
+	std::cerr << "main(): table → " << table << std::endl;
     while (loop) {
         std::cout << std::endl;
         std::cout << "PLEASE CHOOSE -" << std::endl;
@@ -240,11 +267,13 @@ int main() {
         switch (cmd) {
             case 1:
                 std::cout << "Enter key to add = ";
+				std::cerr << "main(): add → " << add << std::endl;
                 std::cin >> key;
                 linear_probing::addInfo(key);
                 break;
             case 2:
                 std::cout << "Enter key to remove = ";
+				std::cerr << "main(): remove → " << remove << std::endl;
                 std::cin >> key;
                 linear_probing::removalInfo(key);
                 break;
@@ -253,12 +282,15 @@ int main() {
                 std::cin >> key;
                 Entry entry = table[linear_probing::linearProbe(key, true)];
                 if (entry.key == linear_probing::notPresent) {
+					std::cerr << "main(): entry → " << entry << std::endl;
+					std::cerr << "main(): search → " << search << std::endl;
                     std::cout << "Key not present";
                 }
                 break;
             }
             case 4:
                 std::cout << "Enter element to generate hash = ";
+				std::cerr << "main(): hash → " << hash << std::endl;
                 std::cin >> key;
                 std::cout << "Hash of " << key
                           << " is = " << linear_probing::hashFxn(key);

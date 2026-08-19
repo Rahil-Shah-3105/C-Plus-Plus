@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/generate_parentheses.dir/generate_parentheses.o -o generate_parentheses 

@@ -69,25 +69,30 @@ std::array <T, N> randomized_bogosort (std::array <T, N> arr) {
  */
 template <typename T, size_t N>
 void show_array (const std::array <T, N> &arr) {
+	std::cerr << ">>> Entering show_array(arr=" << arr << ")" << std::endl;
     for (int x : arr) {
         std::cout << x << ' ';
     }
     std::cout << '\n';
+	std::cerr << "<<< Exiting show_array(arr=" << arr << ")" << std::endl;
 }
 
 /**
  * Function to test above algorithm
  */
 void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     std::array <int, 5> arr1;
     for (int &x : arr1) {
         x = std::rand() % 100;
+		std::cerr << "test(): x → " << x << std::endl;
     }
     std::cout << "Original Array : ";
     show_array(arr1);
     arr1 = sorting::randomized_bogosort(arr1);
     std::cout << "Sorted Array : ";
+	std::cerr << "test(): arr1 → " << arr1 << std::endl;
     show_array(arr1);
     assert(std::is_sorted(arr1.begin(), arr1.end()));
     // Test 2
@@ -99,20 +104,25 @@ void test() {
     show_array(arr2);
     arr2 = sorting::randomized_bogosort(arr2);
     std::cout << "Sorted Array : ";
+	std::cerr << "test(): arr2 → " << arr2 << std::endl;
     show_array(arr2);
     assert(std::is_sorted(arr2.begin(), arr2.end()));
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Testing
     test();
     // Example Usage
     std::array <int, 5> arr = {3, 7, 10, 4, 1}; // Defining array which we want to sort
+	std::cerr << "main(): arr → " << arr << std::endl;
     std::cout << "Original Array : ";
     show_array(arr);
     arr = sorting::randomized_bogosort(arr); // Callling bogo sort on it
     std::cout << "Sorted Array : ";
     show_array(arr); // Printing sorted array
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

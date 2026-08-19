@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/strassen_matrix_multiplication.dir/strassen_matrix_multiplication.o -o strassen_matrix_multiplication 

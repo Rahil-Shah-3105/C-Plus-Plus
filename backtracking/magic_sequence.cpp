@@ -40,8 +40,10 @@ using sequence_t =
  * @param s working memory for the sequence
  */
 void print(const sequence_t& s) {
+	std::cerr << ">>> Entering print(s=" << s << ")" << std::endl;
     for (const auto& item : s) std::cout << item << " ";
     std::cout << std::endl;
+	std::cerr << "<<< Exiting print(s=" << s << ")" << std::endl;
 }
 
 /**
@@ -51,11 +53,13 @@ void print(const sequence_t& s) {
  * @returns false if it's NOT a magic sequence
  */
 bool is_magic(const sequence_t& s) {
+	std::cerr << ">>> Entering is_magic(s=" << s << ")" << std::endl;
     for (unsigned int i = 0; i < s.size(); i++) {
         if (std::count(s.cbegin(), s.cend(), i) != s[i]) {
             return false;
         }
     }
+	std::cerr << "<<< Exiting is_magic(s=" << s << ")" << std::endl;
     return true;
 }
 
@@ -67,6 +71,8 @@ bool is_magic(const sequence_t& s) {
  * @returns false if the sub-solution is NOT valid
  */
 bool filtering(const sequence_t& s, unsigned int depth) {
+	std::cerr << ">>> Entering filtering(s=" << s << ",depth=" << depth << ")" << std::endl;
+	std::cerr << "<<< Exiting filtering(s=" << s << ",depth=" << depth << ")" << std::endl;
     return std::accumulate(s.cbegin(), s.cbegin() + depth,
                            static_cast<unsigned int>(0)) <= s.size();
 }
@@ -78,6 +84,7 @@ bool filtering(const sequence_t& s, unsigned int depth) {
  * @param depth current depth in the tree
  */
 void solve(sequence_t* s, std::list<sequence_t>* ret, unsigned int depth = 0) {
+	std::cerr << ">>> Entering solve(s=" << s << ",ret=" << ret << ",depth=" << depth << ")" << std::endl;
     if (depth == s->size()) {
         if (is_magic(*s)) {
             ret->push_back(*s);
@@ -90,6 +97,7 @@ void solve(sequence_t* s, std::list<sequence_t>* ret, unsigned int depth = 0) {
             }
         }
     }
+	std::cerr << "<<< Exiting solve(s=" << s << ",ret=" << ret << ",depth=" << depth << ")" << std::endl;
 }
 
 }  // namespace magic_sequence
@@ -100,6 +108,7 @@ void solve(sequence_t* s, std::list<sequence_t>* ret, unsigned int depth = 0) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // test a valid magic sequence
     backtracking::magic_sequence::sequence_t s_magic = {6, 2, 1, 0, 0,
                                                         0, 1, 0, 0, 0};
@@ -109,6 +118,7 @@ static void test() {
     backtracking::magic_sequence::sequence_t s_not_magic = {5, 2, 1, 0, 0,
                                                             0, 1, 0, 0, 0};
     assert(!backtracking::magic_sequence::is_magic(s_not_magic));
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -116,11 +126,13 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     // solve magic sequences of size 2 to 11 and print the solutions
     for (unsigned int i = 2; i < 12; i++) {
         std::cout << "Solution for n = " << i << std::endl;
+		std::cerr << "main(): n → " << n << std::endl;
         // valid magic sequence list
         std::list<backtracking::magic_sequence::sequence_t> list_of_solutions;
         // initialization of a sequence
@@ -132,5 +144,6 @@ int main() {
             backtracking::magic_sequence::print(item);
         }
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -27,17 +27,22 @@
  */
 template <std::size_t SIZE>
 int max_subarray_sum(std::array<int64_t, SIZE> arr, uint64_t length) {
+	std::cerr << ">>> Entering max_subarray_sum(arr=" << arr << ",length=" << length << ")" << std::endl;
     int64_t current_max = INT_MIN, current_sum = 0;
     for (int i = 0; i < length; i++) {
         current_sum = current_sum + arr[i];
         if (current_max < current_sum) {
+			std::cerr << "max_subarray_sum(arr=" << arr << ",length=" << length << "): current_sum → " << current_sum << std::endl;
+			std::cerr << "max_subarray_sum(arr=" << arr << ",length=" << length << "): current_max → " << current_max << std::endl;
             current_max = current_sum;
         }
 
         if (current_sum < 0) {
+			std::cerr << "Exception in max_subarray_sum(arr=" << arr << ",length=" << length << "): " << e.what() << std::endl;
             current_sum = 0;
         }
     }
+	std::cerr << "<<< Exiting max_subarray_sum(arr=" << arr << ",length=" << length << ")" << std::endl;
     return current_max;
 }
 
@@ -46,11 +51,13 @@ int max_subarray_sum(std::array<int64_t, SIZE> arr, uint64_t length) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::array<int64_t, 4> arr = {1, 2, 3, 4};
     std::array<int64_t, 5> arr1 = {-1, -2, -4, -6, 7};
     assert(max_subarray_sum(arr, 4) == 10);
     assert(max_subarray_sum(arr1, 5) == 7);
     std::cout << "All test cases have passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -58,6 +65,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Below is the code for accepting array from the user and then
     // calling the function for the required output.
     // It has been commented for now so that the test() function can run
@@ -82,5 +90,6 @@ int main() {
     //           << std::endl;
 
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

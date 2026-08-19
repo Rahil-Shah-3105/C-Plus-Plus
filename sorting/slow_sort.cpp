@@ -11,7 +11,9 @@
 #include <iostream>
 
 void SlowSort(int a[], int i, int j) {
+	std::cerr << ">>> Entering SlowSort(a=" << a << ",i=" << i << ",j=" << j << ")" << std::endl;
     if (i >= j)
+		std::cerr << "SlowSort(a=" << a << ",i=" << i << ",j=" << j << "): m → " << m << std::endl;
         return;
     int m = i + (j - i) / 2;  // midpoint, implemented this way to avoid
                               // overflow
@@ -24,11 +26,13 @@ void SlowSort(int a[], int i, int j) {
         a[m] = temp;
     }
     SlowSort(a, i, j - 1);
+	std::cerr << "<<< Exiting SlowSort(a=" << a << ",i=" << i << ",j=" << j << ")" << std::endl;
 }
 
 // Sample Main function
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int size;
     std::cout << "\nEnter the number of elements : ";
 
@@ -52,5 +56,6 @@ int main() {
     }
 
     delete[] arr;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

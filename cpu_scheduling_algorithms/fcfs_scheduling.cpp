@@ -44,9 +44,11 @@ using std::vector;
  */
 template <typename S, typename T, typename E>
 bool sortcol(tuple<S, T, E>& t1, tuple<S, T, E>& t2) {
+	std::cerr << ">>> Entering sortcol(t1=" << t1 << ",t2=" << t2 << ")" << std::endl;
     if (get<1>(t1) < get<1>(t2)) {
         return true;
     } else if (get<1>(t1) == get<1>(t2) && get<0>(t1) < get<0>(t2)) {
+	std::cerr << "<<< Exiting sortcol(t1=" << t1 << ",t2=" << t2 << ")" << std::endl;
         return true;
     }
     return false;
@@ -128,6 +130,7 @@ class FCFS {
      *
      */
     void addProcess(S id, T arrival, E burst) {
+		std::cerr << ">>> Entering addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
         // Add if a process with process ID as id is not found in idList.
         if (idList.find(id) == idList.end()) {
             tuple<S, T, E, double, double, double> t =
@@ -135,6 +138,7 @@ class FCFS {
             schedule.push(t);
             idList.insert(id);
         }
+		std::cerr << "<<< Exiting addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
     }
 
     /**
@@ -190,6 +194,7 @@ class FCFS {
      * @returns void
      */
     void printResult() {
+		std::cerr << ">>> Entering printResult()" << std::endl;
         cout << "Status of all the proceses post completion is as follows:"
              << endl;
 

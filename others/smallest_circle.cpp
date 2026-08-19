@@ -21,8 +21,10 @@ struct Point {
      * \param [in] b ordinate (default = 0.0)
      */
     explicit Point(double a = 0.f, double b = 0.f) {
+		std::cerr << ">>> Entering Point(a=" << a << ",b=" << b << ")" << std::endl;
         x = a;
         y = b;
+		std::cerr << "<<< Exiting Point(a=" << a << ",b=" << b << ")" << std::endl;
     }
 };
 
@@ -35,8 +37,10 @@ struct Point {
  * \return ditance
  */
 double LenghtLine(const Point &A, const Point &B) {
+	std::cerr << ">>> Entering LenghtLine(A=" << A << ",B=" << B << ")" << std::endl;
     double dx = B.x - A.x;
     double dy = B.y - A.y;
+	std::cerr << "<<< Exiting LenghtLine(A=" << A << ",B=" << B << ")" << std::endl;
     return std::sqrt((dx * dx) + (dy * dy));
 }
 
@@ -52,10 +56,16 @@ double LenghtLine(const Point &A, const Point &B) {
  * \returns area of triangle
  */
 double TriangleArea(const Point &A, const Point &B, const Point &C) {
+	std::cerr << ">>> Entering TriangleArea(A=" << A << ",B=" << B << ",C=" << C << ")" << std::endl;
     double a = LenghtLine(A, B);
     double b = LenghtLine(B, C);
+	std::cerr << "TriangleArea(A=" << A << ",B=" << B << ",C=" << C << "): b → " << b << std::endl;
+	std::cerr << "TriangleArea(A=" << A << ",B=" << B << ",C=" << C << "): a → " << a << std::endl;
     double c = LenghtLine(C, A);
+	std::cerr << "TriangleArea(A=" << A << ",B=" << B << ",C=" << C << "): c → " << c << std::endl;
     double p = (a + b + c) / 2;
+	std::cerr << "TriangleArea(A=" << A << ",B=" << B << ",C=" << C << "): p → " << p << std::endl;
+	std::cerr << "<<< Exiting TriangleArea(A=" << A << ",B=" << B << ",C=" << C << ")" << std::endl;
     return std::sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
@@ -70,8 +80,10 @@ double TriangleArea(const Point &A, const Point &B, const Point &C) {
  * \returns False if P lies outside the circle
  */
 bool PointInCircle(const std::vector<Point> &P, const Point &Center, double R) {
+	std::cerr << ">>> Entering PointInCircle(P=" << P << ",Center=" << Center << ",R=" << R << ")" << std::endl;
     for (size_t i = 0; i < P.size(); i++) {
         if (LenghtLine(P[i], Center) > R)
+	std::cerr << "<<< Exiting PointInCircle(P=" << P << ",Center=" << Center << ",R=" << R << ")" << std::endl;
             return false;
     }
     return true;
@@ -85,8 +97,10 @@ bool PointInCircle(const std::vector<Point> &P, const Point &Center, double R) {
  * \returns radius of the circle
  */
 double circle(const std::vector<Point> &P) {
+	std::cerr << ">>> Entering circle(P=" << P << ")" << std::endl;
     double minR = INFINITY;
     double R;
+	std::cerr << "circle(P=" << P << "): minR → " << minR << std::endl;
     Point C;
     Point minC;
 
@@ -128,6 +142,7 @@ double circle(const std::vector<Point> &P) {
                     minR = R;
                     minC = C;
                 }
+				std::cerr << "circle(P=" << P << "): minC → " << minC << std::endl;
             }
 
     // for each point in the list
@@ -138,6 +153,7 @@ double circle(const std::vector<Point> &P) {
             C.x = (P[i].x + P[j].x) / 2;
             C.y = (P[i].y + P[j].y) / 2;
             R = LenghtLine(C, P[i]);
+			std::cerr << "circle(P=" << P << "): R → " << R << std::endl;
             if (!PointInCircle(P, C, R)) {
                 continue;
             }
@@ -147,6 +163,7 @@ double circle(const std::vector<Point> &P) {
             }
         }
     std::cout << minC.x << " " << minC.y << std::endl;
+	std::cerr << "<<< Exiting circle(P=" << P << ")" << std::endl;
     return minR;
 }
 
@@ -156,6 +173,7 @@ double circle(const std::vector<Point> &P) {
  * \n centre at (3.0454545454545454, 1.3181818181818181)
  */
 void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<Point> Pv;
     Pv.push_back(Point(0, 0));
     Pv.push_back(Point(5, 4));
@@ -163,6 +181,7 @@ void test() {
     Pv.push_back(Point(4, 1));
     Pv.push_back(Point(3, -2));
     std::cout << circle(Pv) << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Test case: result should be:
@@ -171,12 +190,14 @@ void test() {
  * \n centre at (1.0, 1.0)
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::vector<Point> Pv;
     Pv.push_back(Point(0, 0));
     Pv.push_back(Point(0, 2));
     Pv.push_back(Point(2, 2));
     Pv.push_back(Point(2, 0));
     std::cout << circle(Pv) << std::endl;
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /** Test case: result should be:
@@ -186,20 +207,24 @@ void test2() {
  * @todo This test fails
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     std::vector<Point> Pv;
     Pv.push_back(Point(0.5, 1));
     Pv.push_back(Point(3.5, 3));
     Pv.push_back(Point(2.5, 0));
     Pv.push_back(Point(2, 1.5));
     std::cout << circle(Pv) << std::endl;
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 
 /** Main program */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
     std::cout << std::endl;
     test2();
     std::cout << std::endl;
     test3();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

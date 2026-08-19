@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/buzz_number.dir/buzz_number.o -o buzz_number 

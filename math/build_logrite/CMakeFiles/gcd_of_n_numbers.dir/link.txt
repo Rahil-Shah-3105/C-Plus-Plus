@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/gcd_of_n_numbers.dir/gcd_of_n_numbers.o -o gcd_of_n_numbers 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/slow_sort.dir/slow_sort.o -o slow_sort 

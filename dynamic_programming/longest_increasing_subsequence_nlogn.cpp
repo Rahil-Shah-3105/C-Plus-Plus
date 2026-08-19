@@ -8,11 +8,13 @@
 
 using namespace std;
 int LIS(const std::vector<int>& arr, int n) {
+	std::cerr << ">>> Entering LIS(arr=" << arr << ",n=" << n << ")" << std::endl;
     set<int> active;  // The current built LIS.
     active.insert(arr[0]);
     // Loop through every element.
     for (int i = 1; i < n; ++i) {
         auto get = active.lower_bound(arr[i]);
+		std::cerr << "LIS(arr=" << arr << ",n=" << n << "): get → " << get << std::endl;
         if (get == active.end()) {
             active.insert(arr[i]);
         }  // current element is the greatest so LIS increases by 1.
@@ -27,9 +29,11 @@ int LIS(const std::vector<int>& arr, int n) {
             }
         }
     }
+	std::cerr << "<<< Exiting LIS(arr=" << arr << ",n=" << n << ")" << std::endl;
     return active.size();  // size of the LIS.
 }
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int n;
     cout << "Enter size of array: ";
     cin >> n;
@@ -39,5 +43,6 @@ int main() {
         cin >> a[i];
     }
     cout << LIS(a, n) << endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

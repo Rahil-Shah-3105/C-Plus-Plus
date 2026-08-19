@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/modular_inverse_fermat_little_theorem.dir/modular_inverse_fermat_little_theorem.o -o modular_inverse_fermat_little_theorem 

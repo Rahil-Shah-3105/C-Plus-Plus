@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/boyer_moore.dir/boyer_moore.o -o boyer_moore 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/stooge_sort.dir/stooge_sort.o -o stooge_sort 

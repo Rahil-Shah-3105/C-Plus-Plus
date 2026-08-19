@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/gnome_sort.dir/gnome_sort.o -o gnome_sort 

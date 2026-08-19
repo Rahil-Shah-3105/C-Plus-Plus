@@ -37,11 +37,13 @@ class large_number {
 
     /**< initializer from an integer */
     explicit large_number(int n) {
+		fprintf(stderr, ">>> Entering large_number(n=%d)\n", n);
         int carry = n;
         do {
             add_digit(carry % 10);
             carry /= 10;
         } while (carry != 0);
+		fprintf(stderr, "<<< Exiting large_number(n=%d)\n", n);
     }
 
     /**< initializer from another large_number */
@@ -52,8 +54,11 @@ class large_number {
 
     /**< initializer from a string */
     explicit large_number(char const *number_str) {
+		fprintf(stderr, ">>> Entering large_number(number_str=%s)\n", number_str);
         for (size_t i = strlen(number_str); i > 0; i--) {
+			fprintf(stderr, "<<< Exiting large_number(n=%d)\n", n);
             char a = number_str[i - 1] - '0';
+			fprintf(stderr, "large_number(number_str=%d): a → %d\n", number_str, a);
             if (a >= 0 && a <= 9)
                 _digits.push_back(a);
         }
@@ -63,6 +68,7 @@ class large_number {
      * Function to check implementation
      **/
     static bool test() {
+		fprintf(stderr, ">>> Entering test()\n");
         std::cout << "------ Checking `large_number` class implementations\t"
                   << std::endl;
         large_number a(40);
@@ -103,6 +109,7 @@ class large_number {
         std::cout << "\tPassed 5/6...";
         // 6. test addition with another large number
         a = a + large_number("7000000000000000000000000000000");
+		fprintf(stderr, "test(): a → %d\n", a);
         if (a != large_number("7000000000000000000000000005202")) {
             std::cerr << "\tFailed 6/6 (" << a
                       << "!=7000000000000000000000000005202)" << std::endl;

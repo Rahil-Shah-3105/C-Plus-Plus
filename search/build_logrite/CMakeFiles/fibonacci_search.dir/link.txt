@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/fibonacci_search.dir/fibonacci_search.o -o fibonacci_search 

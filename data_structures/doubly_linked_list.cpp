@@ -19,8 +19,10 @@ class double_linked_list {
 };
 
 void double_linked_list::insert(int x) {
+	std::cerr << ">>> Entering double_linked_list::insert(x=" << x << ")" << std::endl;
     node *t = start;
     if (start != NULL) {
+		std::cerr << "Exception in double_linked_list::insert(x=" << x << "): " << e.what() << std::endl;
         while (t->next != NULL) {
             t = t->next;
         }
@@ -35,15 +37,19 @@ void double_linked_list::insert(int x) {
         n->prev = NULL;
         n->next = NULL;
         start = n;
+		std::cerr << "double_linked_list::insert(x=" << x << "): start → " << start << std::endl;
     }
+	std::cerr << "<<< Exiting double_linked_list::insert(x=" << x << ")" << std::endl;
 }
 
 void double_linked_list::remove(int x) {
+	std::cerr << ">>> Entering double_linked_list::remove(x=" << x << ")" << std::endl;
     node *t = start;
     while (t != NULL && t->val != x) {
         t = t->next;
     }
     if (t == NULL) {
+		std::cerr << "Exception in double_linked_list::remove(x=" << x << "): " << e.what() << std::endl;
         return;
     }
     if (t->prev == NULL) {
@@ -60,11 +66,14 @@ void double_linked_list::remove(int x) {
         t->next->prev = t->prev;
     }
     delete t;
+	std::cerr << "<<< Exiting double_linked_list::remove(x=" << x << ")" << std::endl;
 }
 
 void double_linked_list::search(int x) {
+	std::cerr << ">>> Entering double_linked_list::search(x=" << x << ")" << std::endl;
     node *t = start;
     int found = 0;
+	std::cerr << "double_linked_list::search(x=" << x << "): found → " << found << std::endl;
     while (t != NULL) {
         if (t->val == x) {
             std::cout << "\nFound";
@@ -76,28 +85,35 @@ void double_linked_list::search(int x) {
     if (found == 0) {
         std::cout << "\nNot Found";
     }
+	std::cerr << "<<< Exiting double_linked_list::search(x=" << x << ")" << std::endl;
 }
 
 void double_linked_list::show() {
+	std::cerr << ">>> Entering double_linked_list::show()" << std::endl;
     node *t = start;
     while (t != NULL) {
         std::cout << t->val << "\t";
         t = t->next;
     }
+	std::cerr << "<<< Exiting double_linked_list::show()" << std::endl;
 }
 
 void double_linked_list::reverseShow() {
+	std::cerr << ">>> Entering double_linked_list::reverseShow()" << std::endl;
     node *t = start;
     while (t != NULL && t->next != NULL) {
+		std::cerr << "double_linked_list::reverseShow(): t → " << t << std::endl;
         t = t->next;
     }
     while (t != NULL) {
         std::cout << t->val << "\t";
         t = t->prev;
     }
+	std::cerr << "<<< Exiting double_linked_list::reverseShow()" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int choice, x;
     double_linked_list ob;
     do {
@@ -132,5 +148,6 @@ int main() {
             break;
         }
     } while (choice != 0);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

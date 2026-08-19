@@ -30,8 +30,10 @@
  * @returns number of positive divisors of n (or 1 if n = 0)
  */
 int number_of_positive_divisors(int n) {
+	std::cerr << ">>> Entering number_of_positive_divisors(n=" << n << ")" << std::endl;
     if (n < 0) {
         n = -n; // take the absolute value of n
+		std::cerr << "Exception in number_of_positive_divisors(n=" << n << "): " << e.what() << std::endl;
     }
 
     int number_of_divisors = 1;
@@ -60,6 +62,7 @@ int number_of_positive_divisors(int n) {
         number_of_divisors *= 2;
     }
 
+	std::cerr << "<<< Exiting number_of_positive_divisors(n=" << n << ")" << std::endl;
     return number_of_divisors;
 }
 
@@ -67,17 +70,21 @@ int number_of_positive_divisors(int n) {
  * Test implementations
  */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     assert(number_of_positive_divisors(36) == 9);
     assert(number_of_positive_divisors(-36) == 9);
     assert(number_of_positive_divisors(1) == 1);
     assert(number_of_positive_divisors(2011) == 2); // 2011 is a prime
     assert(number_of_positive_divisors(756) == 24); // 756 = 2^2 * 3^3 * 7
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -56,6 +56,8 @@ namespace sha1 {
  * @return uint32_t The rotated integer
  */
 uint32_t leftRotate32bits(uint32_t n, std::size_t rotate) {
+	std::cerr << ">>> Entering leftRotate32bits(n=" << n << ",rotate=" << rotate << ")" << std::endl;
+	std::cerr << "<<< Exiting leftRotate32bits(n=" << n << ",rotate=" << rotate << ")" << std::endl;
     return (n << rotate) | (n >> (32 - rotate));
 }
 
@@ -65,13 +67,16 @@ uint32_t leftRotate32bits(uint32_t n, std::size_t rotate) {
  * @return std::string The hex signature
  */
 std::string sig2hex(void* sig) {
+	std::cerr << ">>> Entering sig2hex(sig=" << sig << ")" << std::endl;
     const char* hexChars = "0123456789abcdef";
     auto* intsig = static_cast<uint8_t*>(sig);
     std::string hex = "";
+	std::cerr << "sig2hex(sig=" << sig << "): hex → " << hex << std::endl;
     for (uint8_t i = 0; i < 20; i++) {
         hex.push_back(hexChars[(intsig[i] >> 4) & 0xF]);
         hex.push_back(hexChars[(intsig[i]) & 0xF]);
     }
+	std::cerr << "<<< Exiting sig2hex(sig=" << sig << ")" << std::endl;
     return hex;
 }
 
@@ -82,10 +87,16 @@ std::string sig2hex(void* sig) {
  * @return void* Pointer to the 160-bit signature
  */
 void* hash_bs(const void* input_bs, uint64_t input_size) {
+	std::cerr << ">>> Entering hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << ")" << std::endl;
     auto* input = static_cast<const uint8_t*>(input_bs);
 
     // Step 0: The initial 160-bit state
     uint32_t h0 = 0x67452301, a = 0;
+	std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): a → " << a << std::endl;
+	std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): b → " << b << std::endl;
+	std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): c → " << c << std::endl;
+	std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): d → " << d << std::endl;
+	std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): e → " << e << std::endl;
     uint32_t h1 = 0xEFCDAB89, b = 0;
     uint32_t h2 = 0x98BADCFE, c = 0;
     uint32_t h3 = 0x10325476, d = 0;
@@ -95,6 +106,7 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
     // First compute the size the padded message will have
     // so it is possible to allocate the right amount of memory
     uint64_t padded_message_size = 0;
+	std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): padded_message_size → " << padded_message_size << std::endl;
     if (input_size % 64 < 56) {
         padded_message_size = input_size + 64 - (input_size % 64);
     } else {
@@ -158,6 +170,8 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
         // Main "hashing" loop
         for (uint8_t i = 0; i < 80; i++) {
             uint32_t F = 0, g = 0;
+			std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): F → " << F << std::endl;
+			std::cerr << "hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): g → " << g << std::endl;
             if (i < 20) {
                 F = (b & c) | ((~b) & d);
                 g = 0x5A827999;
@@ -200,6 +214,7 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
         sig[i + 16] = (h4 >> (24 - 8 * i)) & 0xFF;
     }
 
+	std::cerr << "<<< Exiting hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << ")" << std::endl;
     return sig;
 }
 
@@ -209,6 +224,8 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
  * @return void* Pointer to the SHA-1 signature
  */
 void* hash(const std::string& message) {
+	std::cerr << ">>> Entering hash(message=" << message << ")" << std::endl;
+	std::cerr << "<<< Exiting hash(message=" << message << ")" << std::endl;
     return hash_bs(&message[0], message.size());
 }
 }  // namespace sha1
@@ -219,6 +236,7 @@ void* hash(const std::string& message) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Hashes empty string and stores signature
     void* sig = hashing::sha1::hash("");
     std::cout << "Hashing empty string" << std::endl;
@@ -265,6 +283,7 @@ static void test() {
     // Test with cassert wether sig is correct from expected value
     assert(hashing::sha1::sig2hex(sig4).compare(
                "761c457bf73b14d27e9e9265c46f4b4dda11f940") == 0);
+			std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -273,6 +292,7 @@ static void test() {
  * @returns void
  */
 static void interactive() {
+	std::cerr << ">>> Entering interactive()" << std::endl;
     while (true) {
         std::string input;
         std::cout << "Enter a message to be hashed (Ctrl-C to exit): "
@@ -287,6 +307,7 @@ static void interactive() {
             if (input.compare("y") == 0) {
                 break;
             } else if (input.compare("n") == 0) {
+				std::cerr << "<<< Exiting interactive()" << std::endl;
                 return;
             }
         }
@@ -298,10 +319,12 @@ static void interactive() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     // Launch interactive mode where user can input messages and see
     // their hash
     interactive();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

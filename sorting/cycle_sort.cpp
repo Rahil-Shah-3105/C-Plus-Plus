@@ -36,14 +36,17 @@ namespace cycle_sort {
  */
 template <typename T>
 std::vector<T> cycleSort(const std::vector<T> &in_arr) {
+	std::cerr << ">>> Entering cycleSort(in_arr=" << in_arr << ")" << std::endl;
     std::vector<T> arr(in_arr);
     for (int cycle_start = 0; cycle_start <= arr.size() - 1; cycle_start++) {
+		std::cerr << "cycleSort(in_arr=" << in_arr << "): cycle_start → " << cycle_start << std::endl;
         // initialize item
         T item = arr[cycle_start];
 
         // Count the number of elements smaller than item, this  number is the
         // correct index of item.
         int pos = cycle_start;
+		std::cerr << "cycleSort(in_arr=" << in_arr << "): pos → " << pos << std::endl;
         for (int i = cycle_start + 1; i < arr.size(); i++) {
             if (arr[i] < item) {
                 pos++;
@@ -80,6 +83,7 @@ std::vector<T> cycleSort(const std::vector<T> &in_arr) {
             }
         }
     }
+	std::cerr << "<<< Exiting cycleSort(in_arr=" << in_arr << ")" << std::endl;
     return arr;
 }
 }  // namespace cycle_sort
@@ -90,11 +94,13 @@ std::vector<T> cycleSort(const std::vector<T> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     // [4, 3, 2, 1] return [1, 2, 3, 4]
     std::vector<uint32_t> array1 = {4, 3, 2, 1};
     std::cout << "Test 1... ";
     std::vector<uint32_t> arr1 = sorting::cycle_sort::cycleSort(array1);
+	std::cerr << "test(): arr1 → " << arr1 << std::endl;
     assert(std::is_sorted(std::begin(arr1), std::end(arr1)));
     std::cout << "passed" << std::endl;
 
@@ -102,6 +108,7 @@ static void test() {
     std::vector<double> array2 = {4.3, -6.5, -7.4, 0, 2.7, 1.8};
     std::cout << "Test 2... ";
     std::vector<double> arr2 = sorting::cycle_sort::cycleSort(array2);
+	std::cerr << "test(): arr2 → " << arr2 << std::endl;
     assert(std::is_sorted(std::begin(arr2), std::end(arr2)));
     std::cout << "passed" << std::endl;
 
@@ -110,6 +117,7 @@ static void test() {
     std::vector<uint32_t> array3 = {3, 3, 3, 3};
     std::cout << "Test 3... ";
     std::vector<uint32_t> arr3 = sorting::cycle_sort::cycleSort(array3);
+	std::cerr << "test(): arr3 → " << arr3 << std::endl;
     assert(std::is_sorted(std::begin(arr3), std::end(arr3)));
     std::cout << "passed" << std::endl;
 
@@ -117,8 +125,10 @@ static void test() {
     std::vector<uint32_t> array4 = {3, 4, 6, 8, 9, 14};
     std::cout << "Test 4... ";
     std::vector<uint32_t> arr4 = sorting::cycle_sort::cycleSort(array4);
+	std::cerr << "test(): arr4 → " << arr4 << std::endl;
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -126,6 +136,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

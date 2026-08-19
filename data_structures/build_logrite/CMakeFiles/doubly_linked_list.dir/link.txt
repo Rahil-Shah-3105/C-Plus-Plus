@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/doubly_linked_list.dir/doubly_linked_list.o -o doubly_linked_list 

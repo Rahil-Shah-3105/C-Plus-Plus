@@ -2,6 +2,7 @@
 #include <iostream>
 
 void librarySort(int *index, int n) {
+	std::cerr << ">>> Entering librarySort(index=" << index << ",n=" << n << ")" << std::endl;
     int lib_size, index_pos,
         *gaps,        // gaps
         *library[2];  // libraries
@@ -11,12 +12,17 @@ void librarySort(int *index, int n) {
     for (int i = 0; i < 2; i++) library[i] = new int[n];
 
     gaps = new int[n + 1];
+	std::cerr << "librarySort(index=" << index << ",n=" << n << "): gaps → " << gaps << std::endl;
+	std::cerr << "librarySort(index=" << index << ",n=" << n << "): numbered → " << numbered << std::endl;
     numbered = new bool[n + 1];
 
     lib_size = 1;
     index_pos = 1;
+	std::cerr << "librarySort(index=" << index << ",n=" << n << "): lib_size → " << lib_size << std::endl;
     target_lib = 0;
     library[target_lib][0] = index[0];
+	std::cerr << "librarySort(index=" << index << ",n=" << n << "): index_pos → " << index_pos << std::endl;
+	std::cerr << "librarySort(index=" << index << ",n=" << n << "): target_lib → " << target_lib << std::endl;
 
     while (index_pos < n) {
         // binary search
@@ -74,12 +80,15 @@ void librarySort(int *index, int n) {
     for (int i = 0; i < 2; ++i) {
         delete[] library[i];
     }
+	std::cerr << "<<< Exiting librarySort(index=" << index << ",n=" << n << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // ---example--
     int index_ex[] = {-6, 5, 9, 1, 9, 1, 0, 1, -8, 4, -12};
     int n_ex = sizeof(index_ex) / sizeof(index_ex[0]);
+	std::cerr << "main(): n_ex → " << n_ex << std::endl;
 
     librarySort(index_ex, n_ex);
     std::cout << "sorted array :" << std::endl;
@@ -90,4 +99,5 @@ int main() {
     sorted array :
     -12 -8 -6 0 1 1 1 4 5 9 9
     */
+	std::cerr << "<<< Exiting main()" << std::endl;
 }

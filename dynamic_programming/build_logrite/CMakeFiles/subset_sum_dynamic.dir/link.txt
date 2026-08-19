@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/subset_sum_dynamic.dir/subset_sum_dynamic.o -o subset_sum_dynamic 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/elliptic_curve_key_exchange.dir/elliptic_curve_key_exchange.o -o elliptic_curve_key_exchange 

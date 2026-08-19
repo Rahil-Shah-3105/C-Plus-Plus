@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/bogo_sort.dir/bogo_sort.o -o bogo_sort 

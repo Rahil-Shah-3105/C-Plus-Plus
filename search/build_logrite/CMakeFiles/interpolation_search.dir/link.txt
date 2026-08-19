@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/interpolation_search.dir/interpolation_search.o -o interpolation_search 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/trie_tree.dir/trie_tree.o -o trie_tree 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/sqrt_double.dir/sqrt_double.o -o sqrt_double 

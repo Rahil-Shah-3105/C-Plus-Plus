@@ -27,8 +27,10 @@ using matrix = std::vector<std::valarray<T>>;
  */
 template <typename T>
 int lu_decomposition(const matrix<T> &A, matrix<double> *L, matrix<double> *U) {
+	fprintf(stderr, ">>> Entering lu_decomposition(A=%d,L=%f,U=%f)\n", A, L, U);
     int row, col, j;
     int mat_size = A.size();
+	fprintf(stderr, "lu_decomposition(A=%d,L=%d,U=%d): mat_size → %d\n", A, L, U, mat_size);
 
     if (mat_size != A[0].size()) {
         // check matrix is a square matrix
@@ -38,6 +40,7 @@ int lu_decomposition(const matrix<T> &A, matrix<double> *L, matrix<double> *U) {
 
     // regularize each row
     for (row = 0; row < mat_size; row++) {
+	fprintf(stderr, "<<< Exiting lu_decomposition(A=%d,L=%f,U=%f)\n", A, L, U);
         // Upper triangular matrix
 #ifdef _OPENMP
 #pragma omp for
@@ -88,6 +91,7 @@ int lu_decomposition(const matrix<T> &A, matrix<double> *L, matrix<double> *U) {
  */
 template <typename T>
 double determinant_lu(const matrix<T> &A) {
+	fprintf(stderr, ">>> Entering determinant_lu(A=%d)\n", A);
     matrix<double> L(A.size(), std::valarray<double>(A.size()));
     matrix<double> U(A.size(), std::valarray<double>(A.size()));
 
@@ -95,8 +99,10 @@ double determinant_lu(const matrix<T> &A) {
         return 0;
 
     double result = 1.f;
+	fprintf(stderr, "determinant_lu(A=%d): result → %d\n", A, result);
     for (size_t i = 0; i < A.size(); i++) {
         result *= L[i][i] * U[i][i];
     }
+	fprintf(stderr, "<<< Exiting determinant_lu(A=%d)\n", A);
     return result;
 }

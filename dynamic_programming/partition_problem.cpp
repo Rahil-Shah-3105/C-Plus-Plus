@@ -52,6 +52,7 @@ namespace partitionProblem {
  * @returns @param bool whether the vector can be partitioned or not.
  *******************************************************************************/
 bool findPartiion(const std::vector<uint64_t> &arr, uint64_t size) {
+	std::cerr << ">>> Entering findPartiion(arr=" << arr << ",size=" << size << ")" << std::endl;
     uint64_t sum = std::accumulate(arr.begin(), arr.end(),
                                    0);  // Calculate sum of all elements
 
@@ -76,6 +77,7 @@ bool findPartiion(const std::vector<uint64_t> &arr, uint64_t size) {
                 part[it2] = true;
             }
         }
+		std::cerr << "<<< Exiting findPartiion(arr=" << arr << ",size=" << size << ")" << std::endl;
     }
     return part[sum / 2];
 }
@@ -87,13 +89,18 @@ bool findPartiion(const std::vector<uint64_t> &arr, uint64_t size) {
  * @returns void
  *******************************************************************************/
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<uint64_t> arr = {{1, 3, 3, 2, 3, 2}};
     uint64_t n = arr.size();
+	std::cerr << "test(): n → " << n << std::endl;
+	std::cerr << "test(): expected_result → " << expected_result << std::endl;
+	std::cerr << "test(): derived_result → " << derived_result << std::endl;
     bool expected_result = true;
     bool derived_result = dp::partitionProblem::findPartiion(arr, n);
     std::cout << "1st test: ";
     assert(expected_result == derived_result);
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /*******************************************************************************
@@ -101,6 +108,8 @@ static void test() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -37,6 +37,7 @@ namespace find_non_repeating_integer {
  * @returns returns the integer that occurs only once
  */
 int64_t find_non_repeating_integer(const std::vector<int>& nums) {
+	std::cerr << ">>> Entering find_non_repeating_integer(nums=" << nums << ")" << std::endl;
     // The idea is based on the property of XOR.
     // We know that 'a' XOR 'a' is '0' and '0' XOR 'b'
     // is b.
@@ -50,6 +51,7 @@ int64_t find_non_repeating_integer(const std::vector<int>& nums) {
         _xor ^= num;
     }
 
+	std::cerr << "<<< Exiting find_non_repeating_integer(nums=" << nums << ")" << std::endl;
     return _xor;
 }
 }  // namespace find_non_repeating_integer
@@ -60,6 +62,7 @@ int64_t find_non_repeating_integer(const std::vector<int>& nums) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // n = 10,2 return 14
 
     std::vector<int> nums_one{1, 1, 2, 2, 4, 5, 5};
@@ -77,12 +80,15 @@ static void test() {
            1);  // 1 is non repeating
 
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

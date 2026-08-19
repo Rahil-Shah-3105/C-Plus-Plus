@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/miller_rabin.dir/miller_rabin.o -o miller_rabin 

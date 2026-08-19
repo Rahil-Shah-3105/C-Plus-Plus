@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/prefix_sum_array.dir/prefix_sum_array.o -o prefix_sum_array 

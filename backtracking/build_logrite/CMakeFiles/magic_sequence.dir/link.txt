@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/magic_sequence.dir/magic_sequence.o -o magic_sequence 

@@ -89,8 +89,10 @@ std::array<double, 3> cross(const std::array<double, 3> &A,
  * from the given direction ratios.
  */
 double mag(const std::array<double, 3> &vec) {
+	std::cerr << ">>> Entering mag(vec=" << vec << ")" << std::endl;
     double magnitude =
         sqrt((vec[0] * vec[0]) + (vec[1] * vec[1]) + (vec[2] * vec[2]));
+	std::cerr << "<<< Exiting mag(vec=" << vec << ")" << std::endl;
     return magnitude;
 }
 }  // namespace vector_cross
@@ -101,6 +103,7 @@ double mag(const std::array<double, 3> &vec) {
  * @details test the cross() and the mag() functions.
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /// Tests the cross() function.
     std::array<double, 3> t_vec =
         math::vector_cross::cross({1, 2, 3}, {4, 5, 6});
@@ -108,6 +111,7 @@ static void test() {
 
     /// Tests the mag() function.
     double t_mag = math::vector_cross::mag({6, 8, 0});
+	std::cerr << "test(): t_mag → " << t_mag << std::endl;
     assert(t_mag == 10);
 
     /// Tests A ⨯ A = 0
@@ -117,6 +121,7 @@ static void test() {
            t_vec2[2] == 0);  // checking each element
     assert(math::vector_cross::mag(t_vec2) ==
            0);  // checking the magnitude is also zero
+		std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -126,7 +131,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     /// Tests the functions with sample input before asking for user input.
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/insertion_sort.dir/insertion_sort.o -o insertion_sort 

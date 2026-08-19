@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/jump_game.dir/jump_game.o -o jump_game 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/gram_schmidt.dir/gram_schmidt.o -o gram_schmidt 

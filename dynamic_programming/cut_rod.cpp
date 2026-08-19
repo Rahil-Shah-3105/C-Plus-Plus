@@ -43,6 +43,7 @@ namespace cut_rod {
  */
 template <size_t T>
 int maxProfitByCuttingRod(const std::array<int, T> &price, const uint64_t &n) {
+	std::cerr << ">>> Entering maxProfitByCuttingRod(price=" << price << ",n=" << n << ")" << std::endl;
     int *profit =
         new int[n + 1];  // profit[i] will hold maximum profit for i inch rod
 
@@ -53,6 +54,7 @@ int maxProfitByCuttingRod(const std::array<int, T> &price, const uint64_t &n) {
     // making every possible cut on it and will store it in profit[i].
     for (size_t i = 1; i <= n; i++) {
         int q = INT_MIN;
+		std::cerr << "maxProfitByCuttingRod(price=" << price << ",n=" << n << "): q → " << q << std::endl;
         for (size_t j = 1; j <= i; j++) {
             q = std::max(q, price[j - 1] + profit[i - j]);
         }
@@ -60,6 +62,7 @@ int maxProfitByCuttingRod(const std::array<int, T> &price, const uint64_t &n) {
     }
     const int16_t ans = profit[n];
     delete[] profit;
+	std::cerr << "<<< Exiting maxProfitByCuttingRod(price=" << price << ",n=" << n << ")" << std::endl;
     return ans;  // returning maximum profit
 }
 }  // namespace cut_rod
@@ -70,6 +73,7 @@ int maxProfitByCuttingRod(const std::array<int, T> &price, const uint64_t &n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     const int16_t n1 = 8;                                         // size of rod
     std::array<int32_t, n1> price1 = {1, 2, 4, 6, 8, 45, 21, 9};  // price array

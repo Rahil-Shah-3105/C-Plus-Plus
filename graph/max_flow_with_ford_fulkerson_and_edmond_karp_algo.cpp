@@ -47,21 +47,28 @@ class Graph {
 
  public:
     void set_graph() {
+		std::cerr << ">>> Entering set_graph()" << std::endl;
         std::cin >> total_nodes >> total_edges >> source >> sink;
         parent = std::vector<int>(total_nodes, -1);
         capacity = residual_capacity = std::vector<std::vector<int> >(
             total_nodes, std::vector<int>(total_nodes));
+			std::cerr << "set_graph(): capacity → " << capacity << std::endl;
+			std::cerr << "set_graph(): parent → " << parent << std::endl;
         for (int start = 0, destination = 0, capacity_ = 0, i = 0;
              i < total_edges; ++i) {
             std::cin >> start >> destination >> capacity_;
             residual_capacity[start][destination] = capacity_;
             capacity[start][destination] = capacity_;
         }
+		std::cerr << "<<< Exiting set_graph()" << std::endl;
     }
     void ford_fulkerson() {
+		std::cerr << ">>> Entering ford_fulkerson()" << std::endl;
         while (bfs(source, sink)) {
             int current_node = sink;
+			std::cerr << "ford_fulkerson(): current_node → " << current_node << std::endl;
             int flow = std::numeric_limits<int>::max();
+			std::cerr << "ford_fulkerson(): flow → " << flow << std::endl;
             while (current_node != source) {
                 int parent_ = parent[current_node];
                 flow = std::min(flow, residual_capacity[parent_][current_node]);
@@ -76,8 +83,10 @@ class Graph {
                 current_node = parent_;
             }
         }
+		std::cerr << "<<< Exiting ford_fulkerson()" << std::endl;
     }
     void print_flow_info() {
+		std::cerr << ">>> Entering print_flow_info()" << std::endl;
         for (int i = 0; i < total_nodes; ++i) {
             for (int j = 0; j < total_nodes; ++j) {
                 if (capacity[i][j] &&

@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/non_preemptive_sjf_scheduling.dir/non_preemptive_sjf_scheduling.o -o non_preemptive_sjf_scheduling 

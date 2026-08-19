@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/ordinary_least_squares_regressor.dir/ordinary_least_squares_regressor.o -o ordinary_least_squares_regressor 

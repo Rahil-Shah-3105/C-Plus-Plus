@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/perimeter.dir/perimeter.o -o perimeter 

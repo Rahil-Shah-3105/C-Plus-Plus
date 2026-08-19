@@ -34,6 +34,7 @@ namespace sorting {
         */
         template <typename T>
         std::list<T> strand_sort(std::list<T> lst) {
+			std::cerr << ">>> Entering strand_sort(lst=" << lst << ")" << std::endl;
             if (lst.size() < 2) { // Returns list if empty or contains only one element
                 return lst; // Returns list
             }
@@ -43,6 +44,7 @@ namespace sorting {
                 sorted.push_back(lst.front()); // Adds the first element of "lst" list to the bottom of the "sorted" list.
                 lst.pop_front(); // Remove first element of "lst" list.
                 for (auto it = lst.begin(); it != lst.end(); ) { // Return the loop as long as the current iterator is not equal to the last literator of the "lst" list.
+					std::cerr << "strand_sort(lst=" << lst << "): it → " << it << std::endl;
                     if (sorted.back() <= *it) { // If the last reference of the "sorted" list is less than or equal to the current iterator reference.
                         sorted.push_back(*it); // Adds the iterator retrieved in the loop under the "sorted" list.
                         it = lst.erase(it); // Deletes the element with the current iterator and assigns the deleted element to the iterator.
@@ -50,8 +52,10 @@ namespace sorting {
                         it++; // Next iterator.
                     }
                 }
+				auto __logStart = std::chrono::steady_clock::now();
                 result.merge(sorted); // Merge "result" list with "sorted" list.
             }
+			std::cerr << "<<< Exiting strand_sort(lst=" << lst << ")" << std::endl;
             return result; // Returns sorted list
         }
     }  // namespace strand
@@ -62,8 +66,10 @@ namespace sorting {
  * @return N/A
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::list<int> lst = { -333, 525, 1, 0, 94, 52, 33 };
 
+	std::cerr << "test(): lst → " << lst << std::endl;
     std::cout << "Before: ";
     for(auto item: lst) {
         std::cout << item << " ";
@@ -75,6 +81,7 @@ static void test() {
     for(auto item: lst) {
         std::cout << item << " ";
     }
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -82,6 +89,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -116,9 +116,11 @@ class BT {
  * @return pointer to the newly created node with assigned data.
  */
 Node *BT::createNewNode(std::uint64_t data) {
+	std::cerr << ">>> Entering BT::createNewNode(data=" << data << ")" << std::endl;
     Node *node = new Node();
     node->data = data;
     node->left = node->right = nullptr;
+	std::cerr << "<<< Exiting BT::createNewNode(data=" << data << ")" << std::endl;
     return node;
 }
 
@@ -130,6 +132,7 @@ Node *BT::createNewNode(std::uint64_t data) {
  * @return result that is containing the inorder traversal of a tree
  **/
 std::vector<std::uint64_t> BT::inorder(Node *root) {
+	std::cerr << ">>> Entering BT::inorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {  // return if the current node is empty
         return {};
     }
@@ -139,6 +142,7 @@ std::vector<std::uint64_t> BT::inorder(Node *root) {
         root->data);  // Display the data part of the root (or current node)
     inorder(root->right);  // Traverse the right subtree
 
+	std::cerr << "<<< Exiting BT::inorder(root=" << root << ")" << std::endl;
     return inorder_result;
 }
 
@@ -150,6 +154,7 @@ std::vector<std::uint64_t> BT::inorder(Node *root) {
  * @return result that is containing the preorder traversal of a tree
  */
 std::vector<std::uint64_t> BT::preorder(Node *root) {
+	std::cerr << ">>> Entering BT::preorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {  // if the current node is empty
         return {};
     }
@@ -159,6 +164,7 @@ std::vector<std::uint64_t> BT::preorder(Node *root) {
     preorder(root->left);   // Traverse the left subtree
     preorder(root->right);  // Traverse the right subtree
 
+	std::cerr << "<<< Exiting BT::preorder(root=" << root << ")" << std::endl;
     return preorder_result;
 }
 
@@ -170,6 +176,7 @@ std::vector<std::uint64_t> BT::preorder(Node *root) {
  * @return result that is containing the postorder traversal of a tree
  */
 std::vector<std::uint64_t> BT::postorder(Node *root) {
+	std::cerr << ">>> Entering BT::postorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {  // if the current node is empty
         return {};
     }
@@ -179,15 +186,18 @@ std::vector<std::uint64_t> BT::postorder(Node *root) {
     BT::postorder_result.push_back(
         root->data);  // Display the data part of the root (or current node)
 
+	std::cerr << "<<< Exiting BT::postorder(root=" << root << ")" << std::endl;
     return postorder_result;
 }
 
 void deleteAll(const Node *const root) {
+	std::cerr << ">>> Entering deleteAll(root=" << root << ")" << std::endl;
     if (root) {
         deleteAll(root->left);
         deleteAll(root->right);
         delete root;
     }
+	std::cerr << "<<< Exiting deleteAll(root=" << root << ")" << std::endl;
 }
 
 }  // namespace recursive_tree_traversals
@@ -199,6 +209,7 @@ void deleteAll(const Node *const root) {
  * @returns void
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     others::recursive_tree_traversals::BT obj1;
     others::recursive_tree_traversals::Node *root = obj1.createNewNode(2);
     root->left = obj1.createNewNode(7);
@@ -227,11 +238,13 @@ void test1() {
                            ///< traversal of the binary tree
 
     std::uint64_t size = actual_result_inorder.size();
+	std::cerr << "test1(): size → " << size << std::endl;
 
     // Calling inorder() function by passing a root node,
     // and storing the inorder traversal in result_inorder.
     result_inorder = obj1.inorder(root);
     std::cout << "Testcase #1: Inorder Traversal...";
+	std::cerr << "test1(): result_inorder → " << result_inorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_inorder[i] == result_inorder[i]);
     }
@@ -241,6 +254,7 @@ void test1() {
     // and storing the preorder traversal in result_preorder.
     result_preorder = obj1.preorder(root);
     std::cout << "Testcase #1: Preorder Traversal...";
+	std::cerr << "test1(): result_preorder → " << result_preorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_preorder[i] == result_preorder[i]);
     }
@@ -250,6 +264,7 @@ void test1() {
     // and storing the postorder traversal in result_postorder.
     result_postorder = obj1.postorder(root);
     std::cout << "Testcase #1: Postorder Traversal...";
+	std::cerr << "test1(): result_postorder → " << result_postorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_postorder[i] == result_postorder[i]);
     }
@@ -257,6 +272,7 @@ void test1() {
 
     std::cout << std::endl;
     deleteAll(root);
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -264,6 +280,7 @@ void test1() {
  * @returns void
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     others::recursive_tree_traversals::BT obj2;
     others::recursive_tree_traversals::Node *root = obj2.createNewNode(1);
     root->left = obj2.createNewNode(2);
@@ -288,11 +305,13 @@ void test2() {
                            ///< traversal of the binary tree
 
     std::uint64_t size = actual_result_inorder.size();
+	std::cerr << "test2(): size → " << size << std::endl;
 
     // Calling inorder() function by passing a root node,
     // and storing the inorder traversal in result_inorder.
     result_inorder = obj2.inorder(root);
     std::cout << "Testcase #2: Inorder Traversal...";
+	std::cerr << "test2(): result_inorder → " << result_inorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_inorder[i] == result_inorder[i]);
     }
@@ -302,6 +321,7 @@ void test2() {
     // and storing the preorder traversal in result_preorder.
     result_preorder = obj2.preorder(root);
     std::cout << "Testcase #2: Preorder Traversal...";
+	std::cerr << "test2(): result_preorder → " << result_preorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_preorder[i] == result_preorder[i]);
     }
@@ -311,6 +331,7 @@ void test2() {
     // and storing the postorder traversal in result_postorder.
     result_postorder = obj2.postorder(root);
     std::cout << "Testcase #2: Postorder Traversal...";
+	std::cerr << "test2(): result_postorder → " << result_postorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_postorder[i] == result_postorder[i]);
     }
@@ -318,6 +339,7 @@ void test2() {
 
     std::cout << std::endl;
     deleteAll(root);
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /**
@@ -325,6 +347,7 @@ void test2() {
  * @returns void
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     others::recursive_tree_traversals::BT obj3;
     others::recursive_tree_traversals::Node *root = obj3.createNewNode(1);
     root->left = obj3.createNewNode(2);
@@ -346,12 +369,14 @@ void test3() {
                            ///< traversal of the binary tree
 
     std::uint64_t size = actual_result_inorder.size();
+	std::cerr << "test3(): size → " << size << std::endl;
 
     // Calling inorder() function by passing a root node,
     // and storing the inorder traversal in result_inorder.
 
     result_inorder = obj3.inorder(root);
     std::cout << "Testcase #3: Inorder Traversal...";
+	std::cerr << "test3(): result_inorder → " << result_inorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_inorder[i] == result_inorder[i]);
     }
@@ -361,6 +386,7 @@ void test3() {
     // and storing the preorder traversal in result_preorder.
     result_preorder = obj3.preorder(root);
     std::cout << "Testcase #3: Preorder Traversal...";
+	std::cerr << "test3(): result_preorder → " << result_preorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_preorder[i] == result_preorder[i]);
     }
@@ -370,6 +396,7 @@ void test3() {
     // and storing the postorder traversal in result_postorder.
     result_postorder = obj3.postorder(root);
     std::cout << "Testcase #3: Postorder Traversal...";
+	std::cerr << "test3(): result_postorder → " << result_postorder << std::endl;
     for (auto i = 0; i < size; ++i) {
         assert(actual_result_postorder[i] == result_postorder[i]);
     }
@@ -377,6 +404,7 @@ void test3() {
 
     std::cout << std::endl;
     deleteAll(root);
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 
 /**
@@ -384,18 +412,22 @@ void test3() {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "1st test-case" << std::endl;
     test1();  // run 1st test-case
     std::cout << "2nd test-case" << std::endl;
     test2();  // run 2nd test-case
     std::cout << "3rd test-case" << std::endl;
     test3();  // run 3rd test-case
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -76,6 +76,7 @@ std::pair<uint32_t, uint32_t> saddleback(
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<std::vector<int32_t>> matrix = {{1, 10, 100, 1000, 10000},
                                                 {2, 20, 200, 2000, 20000},
                                                 {3, 30, 300, 3000, 30000},
@@ -83,6 +84,7 @@ static void test() {
                                                 {5, 50, 500, 5000, 50000}};
 
     std::pair<uint32_t, uint32_t> not_found = std::make_pair(0, 0);
+	std::cerr << "test(): not_found → " << not_found << std::endl;
     std::pair<uint32_t, uint32_t> test_answer;
     // Test 1
     std::pair<uint32_t, uint32_t> answer1 =
@@ -90,12 +92,14 @@ static void test() {
     assert(not_found == answer1);
     // Test 2
     answer1 = search::saddleback::saddleback(matrix, 0);
+	std::cerr << "test(): answer1 → " << answer1 << std::endl;
     assert(not_found == answer1);
     // Test 3
     answer1 = search::saddleback::saddleback(matrix, 1);
     test_answer = std::make_pair(1, 1);
     assert(test_answer == answer1);
     // Test 4
+	std::cerr << "test(): test_answer → " << test_answer << std::endl;
     answer1 = search::saddleback::saddleback(matrix, 50000);
     test_answer = std::make_pair(5, 5);
     assert(test_answer == answer1);
@@ -103,6 +107,7 @@ static void test() {
     answer1 = search::saddleback::saddleback(matrix, 300);
     test_answer = std::make_pair(3, 3);
     assert(test_answer == answer1);
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -110,6 +115,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

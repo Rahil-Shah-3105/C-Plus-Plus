@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/binomial_dist.dir/binomial_dist.o -o binomial_dist 

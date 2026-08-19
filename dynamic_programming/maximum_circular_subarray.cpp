@@ -25,6 +25,7 @@ namespace dynamic_programming {
  */
 int maxCircularSum(std::vector<int>& arr)
 {
+	std::cerr << ">>> Entering maxCircularSum(arr=" << arr << ")" << std::endl;
     // Edge Case
     if (arr.size() == 1)
         return arr[0];
@@ -37,6 +38,7 @@ int maxCircularSum(std::vector<int>& arr)
   
     // Every variable stores first value of the array.
     int current_max = arr[0], max_so_far = arr[0], current_min = arr[0], min_so_far = arr[0];
+	std::cerr << "maxCircularSum(arr=" << arr << "): current_max → " << current_max << std::endl;
   
     // Concept of Kadane's Algorithm
     for (int i = 1; i < arr.size(); i++) {
@@ -44,12 +46,16 @@ int maxCircularSum(std::vector<int>& arr)
         current_max = std::max(current_max + arr[i], arr[i]);
         max_so_far = std::max(max_so_far, current_max);
   
+		std::cerr << "maxCircularSum(arr=" << arr << "): max_so_far → " << max_so_far << std::endl;
         // Kadane's Algorithm to find Minimum subarray sum.
         current_min = std::min(current_min + arr[i], arr[i]);
         min_so_far = std::min(min_so_far, current_min);
     }
+	std::cerr << "maxCircularSum(arr=" << arr << "): current_min → " << current_min << std::endl;
+	std::cerr << "maxCircularSum(arr=" << arr << "): min_so_far → " << min_so_far << std::endl;
   
     if (min_so_far == sum)
+	std::cerr << "<<< Exiting maxCircularSum(arr=" << arr << ")" << std::endl;
         return max_so_far;
   
     // Return the maximum value
@@ -62,18 +68,21 @@ int maxCircularSum(std::vector<int>& arr)
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Description of the test
     // Input: arr[] = {8, -8, 9, -9, 10, -11, 12}
     // Output: 22 
     // Explanation: Subarray 12, 8, -8, 9, -9, 10 gives the maximum sum, that is 22.
 
     std::vector<int> arr = {8, -8, 9, -9, 10, -11, 12}; 
+	std::cerr << "test(): arr → " << arr << std::endl;
     assert(dynamic_programming::maxCircularSum(arr) == 22); // this ensures that the algorithm works as expected
 
     arr = {8, -8, 10, -9, 10, -11, 12};
     assert(dynamic_programming::maxCircularSum(arr) == 23);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 
@@ -82,6 +91,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
      test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
      return 0;
 }

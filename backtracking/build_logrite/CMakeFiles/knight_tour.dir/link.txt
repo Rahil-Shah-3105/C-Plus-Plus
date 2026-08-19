@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/knight_tour.dir/knight_tour.o -o knight_tour 

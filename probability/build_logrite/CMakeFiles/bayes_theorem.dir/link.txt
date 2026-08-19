@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/bayes_theorem.dir/bayes_theorem.o -o bayes_theorem 

@@ -129,6 +129,7 @@ bool check(const std::string &s, const std::unordered_set<std::string> &strSet,
  * @return `false` otherwise
  */
 bool wordBreak(const std::string &s, const std::vector<std::string> &wordDict) {
+	std::cerr << ">>> Entering wordBreak(s=" << s << ",wordDict=" << wordDict << ")" << std::endl;
     // unordered set to store words in the dictionary for constant time
     // search
     std::unordered_set<std::string> strSet;
@@ -143,6 +144,7 @@ bool wordBreak(const std::string &s, const std::vector<std::string> &wordDict) {
     // calling check method with position = 0, to check from left
     // from where can be start segmenting the complete string in correct
     // manner
+	std::cerr << "<<< Exiting wordBreak(s=" << s << ",wordDict=" << wordDict << ")" << std::endl;
     return check(s, strSet, 0, &dp);
 }
 
@@ -154,10 +156,13 @@ bool wordBreak(const std::string &s, const std::vector<std::string> &wordDict) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // the complete string
     const std::string s = "applepenapple";
+	std::cerr << "test(): s → " << s << std::endl;
     // the dictionary to be used
     const std::vector<std::string> wordDict = {"apple", "pen"};
+	std::cerr << "test(): wordDict → " << wordDict << std::endl;
 
     assert(dynamic_programming::word_break::wordBreak(s, wordDict));
 
@@ -166,21 +171,26 @@ static void test() {
     std::cout << dynamic_programming::word_break::wordBreak(s, wordDict)
               << std::endl;
     std::cout << "Test implementation passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // call the test function :)
 
     // the complete string
     const std::string s = "applepenapple";
+	std::cerr << "main(): s → " << s << std::endl;
     // the dictionary to be used
     const std::vector<std::string> wordDict = {"apple", "pen"};
+	std::cerr << "main(): wordDict → " << wordDict << std::endl;
 
     // should return true, as applepenapple can be segmented as apple + pen +
     // apple
     std::cout << dynamic_programming::word_break::wordBreak(s, wordDict)
               << std::endl;
+			std::cerr << "<<< Exiting main()" << std::endl;
 }

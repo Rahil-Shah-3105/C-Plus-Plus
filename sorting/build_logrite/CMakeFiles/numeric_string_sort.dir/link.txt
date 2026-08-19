@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/numeric_string_sort.dir/numeric_string_sort.o -o numeric_string_sort 

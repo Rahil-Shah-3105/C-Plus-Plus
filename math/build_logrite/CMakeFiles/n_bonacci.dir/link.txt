@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/n_bonacci.dir/n_bonacci.o -o n_bonacci 

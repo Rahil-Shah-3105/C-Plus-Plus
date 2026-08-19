@@ -64,8 +64,11 @@ namespace geometry {
              * @param n number of points in space
              */
             explicit Convexhull(const std::vector<Point> &pointList) {
+				std::cerr << ">>> Entering Convexhull(pointList=" << pointList << ")" << std::endl;
                 points = pointList;
                 size = points.size();
+				std::cerr << "Convexhull(pointList=" << pointList << "): size → " << size << std::endl;
+				std::cerr << "<<< Exiting Convexhull(pointList=" << pointList << ")" << std::endl;
             }
 
             /**
@@ -76,11 +79,13 @@ namespace geometry {
              * which enclose all given points thus forming a hull
              */
             std::vector<Point> getConvexHull() const {
+				std::cerr << ">>> Entering getConvexHull()" << std::endl;
                 // Initialize Result
                 std::vector<Point> hull;
 
                 // Find the leftmost point
                 int leftmost_point = 0;
+				std::cerr << "getConvexHull(): leftmost_point → " << leftmost_point << std::endl;
                 for (int i = 1; i < size; i++) {
                     if (points[i].x < points[leftmost_point].x) {
                         leftmost_point = i;
@@ -90,6 +95,8 @@ namespace geometry {
                 // until reach the start point again.  This loop runs O(h)
                 // times where h is number of points in result or output.
                 int p = leftmost_point, q = 0;
+				std::cerr << "getConvexHull(): p → " << p << std::endl;
+				std::cerr << "getConvexHull(): q → " << q << std::endl;
                 do {
                     // Add current point to result
                     hull.push_back(points[p]);
@@ -115,6 +122,7 @@ namespace geometry {
 
                 } while (p != leftmost_point);        // While we don't come to first point
 
+				std::cerr << "<<< Exiting getConvexHull()" << std::endl;
                 return hull;
             }
 
@@ -131,9 +139,12 @@ namespace geometry {
              * @returns 2 -> Anti Clock Wise
              */
             static int orientation(const Point &p, const Point &q, const Point &r) {
+				std::cerr << ">>> Entering orientation(p=" << p << ",q=" << q << ",r=" << r << ")" << std::endl;
                 int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
 
+				std::cerr << "orientation(p=" << p << ",q=" << q << ",r=" << r << "): val → " << val << std::endl;
                 if (val == 0) {
+				std::cerr << "<<< Exiting orientation(p=" << p << ",q=" << q << ",r=" << r << ")" << std::endl;
                     return 0;
                 }
                 return (val > 0) ? 1 : 2;
@@ -149,6 +160,7 @@ namespace geometry {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<geometry::jarvis::Point> points = {{0, 3},
                                                    {2, 2},
                                                    {1, 1},
@@ -161,6 +173,7 @@ static void test() {
     std::vector<geometry::jarvis::Point> actualPoint;
     actualPoint = hull.getConvexHull();
 
+	std::cerr << "test(): actualPoint → " << actualPoint << std::endl;
     std::vector<geometry::jarvis::Point> expectedPoint = {{0, 3},
                                                           {0, 0},
                                                           {3, 0},
@@ -170,10 +183,13 @@ static void test() {
         assert(actualPoint[i].y == expectedPoint[i].y);
     }
     std::cout << "Test implementations passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

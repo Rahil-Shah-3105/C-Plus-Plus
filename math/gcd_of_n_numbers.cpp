@@ -33,11 +33,13 @@ namespace gcd_of_n_numbers {
  * @return GCD of x and y via recursion
  */
 int gcd_two(int x, int y) {
+std::cerr << ">>> Entering gcd_two(x=" << x << ",y=" << y << ")" << std::endl;
   // base cases
   if (y == 0) {
     return x;
   }
   if (x == 0) {
+std::cerr << "<<< Exiting gcd_two(x=" << x << ",y=" << y << ")" << std::endl;
     return y;
   }
   return gcd_two(y, x % y); // Euclidean method
@@ -51,7 +53,9 @@ int gcd_two(int x, int y) {
  */
 template <std::size_t n>
 bool check_all_zeros(const std::array<int, n> &a) {
+std::cerr << ">>> Entering check_all_zeros(a=" << a << ")" << std::endl;
   // Use std::all_of to simplify zero-checking
+std::cerr << "<<< Exiting check_all_zeros(a=" << a << ")" << std::endl;
   return std::all_of(a.begin(), a.end(), [](int x) { return x == 0; });
 }
 
@@ -62,6 +66,7 @@ bool check_all_zeros(const std::array<int, n> &a) {
  */
 template <std::size_t n>
 int gcd(const std::array<int, n> &a) {
+std::cerr << ">>> Entering gcd(a=" << a << ")" << std::endl;
   // GCD is undefined if all elements in the array are 0
   if (check_all_zeros(a)) {
     return -1; // Use std::optional to represent undefined GCD
@@ -69,12 +74,14 @@ int gcd(const std::array<int, n> &a) {
 
   // divisors can be negative, we only want the positive value
   int result = std::abs(a[0]);
+std::cerr << "gcd(a=" << a << "): result → " << result << std::endl;
   for (std::size_t i = 1; i < n; ++i) {
     result = gcd_two(result, std::abs(a[i]));
     if (result == 1) {
       break; // Further computations still result in gcd of 1
     }
   }
+std::cerr << "<<< Exiting gcd(a=" << a << ")" << std::endl;
   return result;
 }
 } // namespace gcd_of_n_numbers
@@ -85,6 +92,7 @@ int gcd(const std::array<int, n> &a) {
  * @return void
  */
 static void test() {
+std::cerr << ">>> Entering test()" << std::endl;
   std::array<int, 1> array_1 = {0};
   std::array<int, 1> array_2 = {1};
   std::array<int, 2> array_3 = {0, 2};
@@ -102,6 +110,7 @@ static void test() {
   assert(math::gcd_of_n_numbers::gcd(array_6) == -1);
   assert(math::gcd_of_n_numbers::gcd(array_7) == 3450);
   assert(math::gcd_of_n_numbers::gcd(array_8) == 1);
+std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -109,6 +118,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+std::cerr << ">>> Entering main()" << std::endl;
   test(); // run self-test implementation
+std::cerr << "<<< Exiting main()" << std::endl;
   return 0;
 }

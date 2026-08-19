@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/trie_multiple_search.dir/trie_multiple_search.o -o trie_multiple_search 
