@@ -40,6 +40,8 @@ private:
      * @return Some associative operation applied to these two values. In this case, I used addition
      */
     T comb(T x, T y) {
+		std::cerr << ">>> Entering comb(x=" << x << ",y=" << y << ")" << std::endl;
+		std::cerr << "<<< Exiting comb(x=" << x << ",y=" << y << ")" << std::endl;
         return x + y;
     }
     /**
@@ -49,6 +51,8 @@ private:
      * @return the middle point between them
      */
     int mid(int l, int r) {
+		std::cerr << ">>> Entering mid(l=" << l << ",r=" << r << ")" << std::endl;
+		std::cerr << "<<< Exiting mid(l=" << l << ",r=" << r << ")" << std::endl;
         return l + (r - l) / 2;
     }
     /**
@@ -60,13 +64,18 @@ private:
      * @param val The value to update it to
      */
     void update(int i, int l, int r, int pos, T val) {
+		std::cerr << ">>> Entering update(i=" << i << ",l=" << l << ",r=" << r << ",pos=" << pos << ",val=" << val << ")" << std::endl;
         if(l == r) t[i] = val;
         else {
             int m = mid(l, r);
+			std::cerr << "update(i=" << i << ",l=" << l << ",r=" << r << ",pos=" << pos << ",val=" << val << "): m → " << m << std::endl;
             if(pos <= m) update(i * 2, l, m, pos, val);
             else update(i * 2 + 1, m + 1, r, pos, val);
             t[i] = comb(t[i * 2], t[i * 2 + 1]);
         }
+		std::cerr << "<<< Exiting update(i=" << i << ",l=" << l << ",r=" << r << ",pos=" << pos << ",val=" << val << ")" << std::endl;
+		std::cerr << ">>> Entering update(pos=" << pos << ",val=" << val << ")" << std::endl;
+		std::cerr << "<<< Exiting update(pos=" << pos << ",val=" << val << ")" << std::endl;
     }
     /**
      * @brief Helper method for range_comb method below
@@ -78,9 +87,13 @@ private:
      * @return The comb operation applied to all values between tl and tr
      */
     T range_comb(int i, int l, int r, int tl, int tr) {
+		std::cerr << ">>> Entering range_comb(i=" << i << ",l=" << l << ",r=" << r << ",tl=" << tl << ",tr=" << tr << ")" << std::endl;
         if(l == tl && r == tr) return t[i];
         if(tl > tr) return 0;
         int m = mid(l, r);
+		std::cerr << "range_comb(i=" << i << ",l=" << l << ",r=" << r << ",tl=" << tl << ",tr=" << tr << "): m → " << m << std::endl;
+		std::cerr << "<<< Exiting range_comb(i=" << i << ",l=" << l << ",r=" << r << ",tl=" << tl << ",tr=" << tr << ")" << std::endl;
+		std::cerr << "<<< Exiting range_comb(l=" << l << ",r=" << r << ")" << std::endl;
         return comb(range_comb(i * 2, l, m, tl, std::min(tr, m)), range_comb(i * 2 + 1, m + 1, r, std::max(tl, m + 1), tr));
     }
 public:
@@ -110,6 +123,7 @@ public:
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     data_structures::SegmentTree<int> t(5);
     t.update(1, 1);
     t.update(2, 2);
@@ -121,6 +135,7 @@ static void test() {
     assert(t.range_comb(1, 3) == 8); // 3 + 2 + 3 = 8
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -128,6 +143,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

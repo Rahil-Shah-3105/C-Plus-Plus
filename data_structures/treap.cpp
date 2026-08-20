@@ -53,15 +53,19 @@ struct Treap {
      * @brief Initialization
      */
     Treap() : treapCnt(1) {
+		std::cerr << ">>> Entering Treap()" << std::endl;
         priority[0] = INT32_MAX;
         size[0] = 0;
+		std::cerr << "<<< Exiting Treap()" << std::endl;
     }
     /**
      * @brief Update the subtree size of the node
      * @param x The node to update
      */
     void update(int x) {
+		std::cerr << ">>> Entering update(x=" << x << ")" << std::endl;
         size[x] = size[childs[x][0]] + cnt[x] + size[childs[x][1]];
+		std::cerr << "<<< Exiting update(x=" << x << ")" << std::endl;
     }
     /**
      * @brief Rotate without breaking the property of BST
@@ -69,6 +73,7 @@ struct Treap {
      * @param t 0 represent left hand, while 1 right hand
      */
     void rotate(int &x, int t) {
+		std::cerr << ">>> Entering rotate(x=" << x << ",t=" << t << ")" << std::endl;
         int y = childs[x][t];
         childs[x][t] = childs[y][1 - t];
         childs[y][1 - t] = x;
@@ -76,6 +81,7 @@ struct Treap {
         update(x);
         update(y);
         x = y;
+		std::cerr << "<<< Exiting rotate(x=" << x << ",t=" << t << ")" << std::endl;
     }
     /**
      * @brief Insert a value into the specified subtree (internal method)
@@ -83,12 +89,14 @@ struct Treap {
      * @param k Key to insert
      */
     void _insert(int &x, int k) {
+		std::cerr << ">>> Entering _insert(x=" << x << ",k=" << k << ")" << std::endl;
         if (x) {
             if (key[x] == k) {
                 cnt[x]++;
             }  // If the node already exists, the number of copies is ++
             else {
                 int t = (key[x] < k);  // Insert according to BST properties
+				std::cerr << "_insert(x=" << x << ",k=" << k << "): t → " << t << std::endl;
                 _insert(childs[x][t], k);
                 // After insertion, the heap properties are retained by rotation
                 if (priority[childs[x][t]] < priority[x]) {
@@ -103,6 +111,7 @@ struct Treap {
             childs[x][0] = childs[x][1] = 0;
         }
         update(x);
+		std::cerr << "<<< Exiting _insert(x=" << x << ",k=" << k << ")" << std::endl;
     }
     /**
      * @brief Erase a value from the specified subtree (internal method)
@@ -110,6 +119,7 @@ struct Treap {
      * @param k Key to erase
      */
     void _erase(int &x, int k) {
+		std::cerr << ">>> Entering _erase(x=" << x << ",k=" << k << ")" << std::endl;
         if (key[x] == k) {
             if (cnt[x] > 1) {
                 cnt[x]--;
@@ -122,6 +132,7 @@ struct Treap {
                 // Otherwise, we need to rotate the sons and delete them
                 // recursively
                 int t = (priority[childs[x][0]] > priority[childs[x][1]]);
+				std::cerr << "_erase(x=" << x << ",k=" << k << "): t → " << t << std::endl;
                 rotate(x, t);
                 _erase(x, k);
             }
@@ -129,6 +140,7 @@ struct Treap {
             _erase(childs[x][key[x] < k], k);
         }
         update(x);
+		std::cerr << "<<< Exiting _erase(x=" << x << ",k=" << k << ")" << std::endl;
     }
     /**
      * @brief Find the KTH largest value (internal method)
@@ -137,11 +149,13 @@ struct Treap {
      * @return The element ranked number k
      */
     int _get_k_th(int &x, int k) {
+		std::cerr << ">>> Entering _get_k_th(x=" << x << ",k=" << k << ")" << std::endl;
         if (k <= size[childs[x][0]]) {
             return _get_k_th(childs[x][0], k);
         }
         k -= size[childs[x][0]] + cnt[x];
         if (k <= 0) {
+		std::cerr << "<<< Exiting _get_k_th(x=" << x << ",k=" << k << ")" << std::endl;
             return key[x];
         }
         return _get_k_th(childs[x][1], k);
@@ -153,6 +167,7 @@ struct Treap {
      * @return The rank of element k
      */
     int _get_rank(int x, int k) {
+		std::cerr << ">>> Entering _get_rank(x=" << x << ",k=" << k << ")" << std::endl;
         if (!x) {
             return 0;
         }
@@ -161,6 +176,7 @@ struct Treap {
         } else if (k < key[x]) {
             return _get_rank(childs[x][0], k);
         } else {
+			std::cerr << "<<< Exiting _get_rank(x=" << x << ",k=" << k << ")" << std::endl;
             return size[childs[x][0]] + cnt[x] + _get_rank(childs[x][1], k);
         }
     }
@@ -170,14 +186,18 @@ struct Treap {
      * @return The predecessor
      */
     int get_predecessor(int k) {
+		std::cerr << ">>> Entering get_predecessor(k=" << k << ")" << std::endl;
         int x = root, pre = -1;
         while (x) {
+			std::cerr << "get_predecessor(k=" << k << "): x → " << x << std::endl;
             if (key[x] < k) {
                 pre = key[x], x = childs[x][1];
             } else {
+				std::cerr << "get_predecessor(k=" << k << "): pre → " << pre << std::endl;
                 x = childs[x][0];
             }
         }
+		std::cerr << "<<< Exiting get_predecessor(k=" << k << ")" << std::endl;
         return pre;
     }
     /**
@@ -186,14 +206,18 @@ struct Treap {
      * @return The successor
      */
     int get_next(int k) {
+		std::cerr << ">>> Entering get_next(k=" << k << ")" << std::endl;
         int x = root, next = -1;
         while (x) {
+			std::cerr << "get_next(k=" << k << "): x → " << x << std::endl;
             if (key[x] > k) {
                 next = key[x], x = childs[x][0];
             } else {
+				std::cerr << "get_next(k=" << k << "): next → " << next << std::endl;
                 x = childs[x][1];
             }
         }
+		std::cerr << "<<< Exiting get_next(k=" << k << ")" << std::endl;
         return next;
     }
     /**
@@ -227,6 +251,7 @@ struct Treap {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     data_structures::treap::Treap mTreap;  ///< Treap object instance
 
     mTreap.insert(1);
@@ -247,12 +272,15 @@ static void test() {
     assert(mTreap.get_predecessor(10) == 7);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

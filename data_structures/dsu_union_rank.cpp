@@ -43,6 +43,7 @@ class dsu {
      * @param n number of elements
      */
     explicit dsu(uint64_t n) {
+		std::cerr << ">>> Entering dsu(n=" << n << ")" << std::endl;
         p.assign(n, 0);
         /// initially all of them are their own parents
         depth.assign(n, 0);
@@ -52,6 +53,7 @@ class dsu {
             depth[i] = 0;
             setSize[i] = 1;
         }
+		std::cerr << "<<< Exiting dsu(n=" << n << ")" << std::endl;
     }
     /**
      * @brief Method to find the representative of the set to which i belongs
@@ -60,10 +62,12 @@ class dsu {
      * @returns representative of the set to which i belongs to
      */
     uint64_t findSet(uint64_t i) {
+		std::cerr << ">>> Entering findSet(i=" << i << ")" << std::endl;
         /// using union-rank
         while (i != p[i]) {
             i = p[i];
         }
+		std::cerr << "<<< Exiting findSet(i=" << i << ")" << std::endl;
         return i;
     }
     /**
@@ -74,12 +78,14 @@ class dsu {
      * @returns void
      */
     void unionSet(uint64_t i, uint64_t j) {
+		std::cerr << ">>> Entering unionSet(i=" << i << ",j=" << j << ")" << std::endl;
         /// checks if both belongs to same set or not
         if (isSame(i, j)) {
             return;
         }
         /// we find representative of the i and j
         uint64_t x = findSet(i);
+		std::cerr << "unionSet(i=" << i << ",j=" << j << "): x → " << x << std::endl;
         uint64_t y = findSet(j);
 
         /// always keeping the min as x
@@ -96,6 +102,7 @@ class dsu {
         }
         /// total size of the resultant set
         setSize[y] += setSize[x];
+		std::cerr << "<<< Exiting unionSet(i=" << i << ",j=" << j << ")" << std::endl;
     }
     /**
      * @brief A utility function which check whether i and j belongs to same set
@@ -106,7 +113,9 @@ class dsu {
      * @returns `false` if element i and j are not in same set
      */
     bool isSame(uint64_t i, uint64_t j) {
+		std::cerr << ">>> Entering isSame(i=" << i << ",j=" << j << ")" << std::endl;
         if (findSet(i) == findSet(j)) {
+		std::cerr << "<<< Exiting isSame(i=" << i << ",j=" << j << ")" << std::endl;
             return true;
         }
         return false;
@@ -118,12 +127,14 @@ class dsu {
      * @returns void
      */
     vector<uint64_t> getParents(uint64_t i) {
+		std::cerr << ">>> Entering getParents(i=" << i << ")" << std::endl;
         vector<uint64_t> ans;
         while (p[i] != i) {
             ans.push_back(i);
             i = p[i];
         }
         ans.push_back(i);
+		std::cerr << "<<< Exiting getParents(i=" << i << ")" << std::endl;
         return ans;
     }
 };
@@ -132,6 +143,7 @@ class dsu {
  * @returns void
  */
 static void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     /* checks the parents in the resultant structures */
     uint64_t n = 10;   ///< number of elements
     dsu d(n + 1);      ///< object of class disjoint sets
@@ -150,12 +162,14 @@ static void test1() {
                ans[i]);  // makes sure algorithm works fine
     }
     cout << "1st test passed!" << endl;
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 /**
  * @brief Self-implementations, 2nd test
  * @returns void
  */
 static void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     // checks the parents in the resultant structures
     uint64_t n = 10;   ///< number of elements
     dsu d(n + 1);      ///< object of class disjoint sets
@@ -175,14 +189,17 @@ static void test2() {
                ans[i]);  /// makes sure algorithm works fine
     }
     cout << "2nd test passed!" << endl;
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test1();  // run 1st test case
     test2();  // run 2nd test case
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -109,6 +109,7 @@ void graphColoring(const std::array<std::array<int, V>, V>& graph, int m,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Create following graph and test whether it is 3 colorable
     // (3)---(2)
     // |   / |
@@ -125,5 +126,6 @@ int main() {
     std::array<int, V> color{};
 
     backtracking::graph_coloring::graphColoring<V>(graph, m, color, 0);
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
