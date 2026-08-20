@@ -107,6 +107,7 @@ void NQueenSol(std::array<std::array<int, n>, n> board, int col) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     const int n = 4;
     std::array<std::array<int, n>, n> board{};
 
@@ -127,5 +128,6 @@ int main() {
             }
         }
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

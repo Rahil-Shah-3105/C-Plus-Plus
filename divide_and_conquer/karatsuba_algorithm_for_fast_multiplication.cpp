@@ -34,6 +34,7 @@ namespace karatsuba_algorithm {
  * @returns the sum binary string
  */
 std::string add_strings(std::string first, std::string second) {
+	std::cerr << ">>> Entering add_strings(first=" << first << ",second=" << second << ")" << std::endl;
     std::string result;  // to store the resulting sum bits
 
     // make the string lengths equal
@@ -70,6 +71,7 @@ std::string add_strings(std::string first, std::string second) {
     if (carry) {
         result.insert(result.begin(), '1');  // adding 1 incase of overflow
     }
+	std::cerr << "<<< Exiting add_strings(first=" << first << ",second=" << second << ")" << std::endl;
     return result;
 }
 
@@ -83,6 +85,7 @@ std::string add_strings(std::string first, std::string second) {
  * @returns "0" if substring spans to leading zeros only
  */
 std::string safe_substr(const std::string &str, int64_t x1, int64_t x2, int64_t n) {
+	std::cerr << ">>> Entering safe_substr(str=" << str << ",x1=" << x1 << ",x2=" << x2 << ",n=" << n << ")" << std::endl;
     int64_t len = str.size();
 
     if (len >= n) {
@@ -97,6 +100,7 @@ std::string safe_substr(const std::string &str, int64_t x1, int64_t x2, int64_t 
     } else if (y1 < 0) {
         return str.substr(0, y2 + 1);
     } else {
+		std::cerr << "<<< Exiting safe_substr(str=" << str << ",x1=" << x1 << ",x2=" << x2 << ",n=" << n << ")" << std::endl;
         return str.substr(y1, x2);
     }
 }
@@ -109,6 +113,7 @@ std::string safe_substr(const std::string &str, int64_t x1, int64_t x2, int64_t 
  * @returns the product number value
  */
 int64_t karatsuba_algorithm(std::string str1, std::string str2) {
+	std::cerr << ">>> Entering karatsuba_algorithm(str1=" << str1 << ",str2=" << str2 << ")" << std::endl;
     int64_t len1 = str1.size();
     int64_t len2 = str2.size();
     int64_t n = std::max(len1, len2);
@@ -136,6 +141,7 @@ int64_t karatsuba_algorithm(std::string str1, std::string str2) {
         divide_and_conquer::karatsuba_algorithm::add_strings(Xl, Xr),
         divide_and_conquer::karatsuba_algorithm::add_strings(Yl, Yr));
 
+	std::cerr << "<<< Exiting karatsuba_algorithm(str1=" << str1 << ",str2=" << str2 << ")" << std::endl;
     return product1 * (1 << (2 * sh)) +
            (product3 - product1 - product2) * (1 << sh) +
            product2;  // combining the three products to get the final result.
@@ -148,6 +154,7 @@ int64_t karatsuba_algorithm(std::string str1, std::string str2) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     std::string s11 = "1";     // 1
     std::string s12 = "1010";  // 10
@@ -171,6 +178,7 @@ static void test() {
     assert(divide_and_conquer::karatsuba_algorithm::karatsuba_algorithm(
                s31, s32) == 60);
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -178,6 +186,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

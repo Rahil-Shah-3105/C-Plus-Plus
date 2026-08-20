@@ -54,10 +54,13 @@ int minimax(int depth, int node_index, bool is_max,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     std::array<int, 8> scores = {90, 23, 6, 33, 21, 65, 123, 34423};
     double height = log2(scores.size());
+	std::cerr << "main(): height → " << height << std::endl;
 
     std::cout << "Optimal value: "
               << backtracking::minimax(0, 0, true, scores, height) << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -36,6 +36,7 @@ struct std::is_unsigned<uint128_t> : std::true_type {};
  * @returns string denoting the addition of both the strings
  */
 std::string add(const std::string &first, const std::string &second) {
+	std::cerr << ">>> Entering add(first=" << first << ",second=" << second << ")" << std::endl;
     std::string third;
     int16_t sum = 0, carry = 0;
     for (int32_t i = static_cast<int32_t>(first.size()) - 1,
@@ -44,6 +45,7 @@ std::string add(const std::string &first, const std::string &second) {
         sum = ((i >= 0 ? first[i] - '0' : 0) + (j >= 0 ? second[j] - '0' : 0) +
                carry);
         carry = sum / 10;
+		std::cerr << "add(first=" << first << ",second=" << second << "): carry → " << carry << std::endl;
         sum %= 10;
         third.push_back(sum + '0');
     }
@@ -51,6 +53,7 @@ std::string add(const std::string &first, const std::string &second) {
         third.push_back('1');
     }
     std::reverse(third.begin(), third.end());
+	std::cerr << "<<< Exiting add(first=" << first << ",second=" << second << ")" << std::endl;
     return third;
 }
 /**
@@ -68,6 +71,7 @@ class uint128_t {
      * @returns void
      */
     void __get_integer_from_string(const std::string &str) {
+		std::cerr << ">>> Entering __get_integer_from_string(str=" << str << ")" << std::endl;
         this->f = this->s = 0;
         if (str.size() > 1 && str[1] == 'x') {  // if hexadecimal
             for (auto i = 2; i < str.size(); ++i) {
@@ -86,6 +90,7 @@ class uint128_t {
                 *this += (x - '0');
             }
         }
+		std::cerr << "<<< Exiting __get_integer_from_string(str=" << str << ")" << std::endl;
     }
 
  public:
@@ -105,7 +110,9 @@ class uint128_t {
      * @param str Integer string (hexadecimal starting with 0x.. or decimal)
      */
     explicit uint128_t(const std::string &str) {
+		std::cerr << ">>> Entering uint128_t(str=" << str << ")" << std::endl;
         __get_integer_from_string(str);
+		std::cerr << "<<< Exiting uint128_t(str=" << str << ")" << std::endl;
     }
 
     /**
@@ -138,6 +145,7 @@ class uint128_t {
      * @returns Integer denoting leading zeroes
      */
     inline uint32_t _lez() {
+	std::cerr << ">>> Entering _lez()" << std::endl;
 #ifndef _MSC_VER
         if (f) {
             return __builtin_clzll(f);
@@ -149,6 +157,7 @@ class uint128_t {
         if (r == 64) {
             unsigned long l = 0;
             _BitScanForward64(&l, s);
+		std::cerr << "<<< Exiting _lez()" << std::endl;
             return 64 + l;
         }
         return r;
@@ -161,6 +170,7 @@ class uint128_t {
      * @returns Integer denoting Trailing zeroes
      */
     inline uint32_t _trz() {
+	std::cerr << ">>> Entering _trz()" << std::endl;
 #ifndef _MSC_VER
         if (f) {
             return __builtin_ctzll(f);
@@ -172,6 +182,7 @@ class uint128_t {
         if (r == 64) {
             unsigned long l = 0;
             _BitScanReverse64(&l, f);
+		std::cerr << "<<< Exiting _trz()" << std::endl;
             return 64 + l;
         }
         return r;
@@ -192,6 +203,8 @@ class uint128_t {
     template <typename T, typename = typename std::enable_if<
                               std::is_integral<T>::value, T>::type>
     inline explicit operator T() const {
+		std::cerr << ">>> Entering T()" << std::endl;
+		std::cerr << "<<< Exiting T()" << std::endl;
         return static_cast<T>(s);
     }
 

@@ -59,6 +59,7 @@ std::uint64_t setKthBit(std ::int64_t N,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // n = 10,2 return 14
     assert(bit_manipulation::set_kth_bit::setKthBit(10, 2) == 14);
     // n = 25,1 return 27
@@ -69,12 +70,15 @@ static void test() {
     assert(bit_manipulation::set_kth_bit::setKthBit(123, 3) == 123);
 
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
