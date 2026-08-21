@@ -55,6 +55,7 @@ bool can_jump(const std::vector<int> &nums) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     assert(greedy_algorithms::can_jump(std::vector<int>({4, 3, 1, 0, 5})));
     assert(!greedy_algorithms::can_jump(std::vector<int>({3, 2, 1, 0, 4})));
     assert(greedy_algorithms::can_jump(std::vector<int>({5, 9, 4, 7, 15, 3})));
@@ -62,6 +63,7 @@ static void test() {
     assert(greedy_algorithms::can_jump(std::vector<int>({2, 1, 4, 7})));
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -69,6 +71,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

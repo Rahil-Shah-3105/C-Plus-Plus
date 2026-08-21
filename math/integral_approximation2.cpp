@@ -131,6 +131,7 @@ double integral_monte_carlo(const double& start_point, const Function& function,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::cout << "Disclaimer: Because this is a randomized algorithm,"
               << std::endl;
     std::cout
@@ -142,7 +143,9 @@ static void test() {
     math::monte_carlo::Function f;
     math::monte_carlo::Function pdf;
     double integral = 0;
+	std::cerr << "test(): integral → " << integral << std::endl;
     double lower_bound = 0, upper_bound = 0;
+	std::cerr << "test(): lower_bound → " << lower_bound << std::endl;
 
     /* \int_{-2}^{2} -x^2 + 4 dx */
     f = [&](double& x) { return -x * x + 4.0; };
@@ -150,6 +153,7 @@ static void test() {
     lower_bound = -2.0;
     upper_bound = 2.0;
     pdf = [&](double& x) {
+		std::cerr << "test(): upper_bound → " << upper_bound << std::endl;
         if (x >= lower_bound && x <= -1.0) {
             return 0.1;
         }

@@ -21,16 +21,20 @@ struct Node {
 
 template <typename Node, typename Action>
 void traverse(const Node* const inNode, const Action& action) {
+	std::cerr << ">>> Entering traverse(inNode=" << inNode << ",action=" << action << ")" << std::endl;
     if (inNode) {
         action(*inNode);
         traverse(inNode->next.get(), action);
     }
+	std::cerr << "<<< Exiting traverse(inNode=" << inNode << ",action=" << action << ")" << std::endl;
 }
 
 template <typename Node>
 void display_all(const Node* const inNode) {
+	std::cerr << ">>> Entering display_all(inNode=" << inNode << ")" << std::endl;
     traverse(inNode,
              [](const Node& curNode) { std::cout << curNode.data << " "; });
+			std::cerr << "<<< Exiting display_all(inNode=" << inNode << ")" << std::endl;
 }
 
 template <typename Node>

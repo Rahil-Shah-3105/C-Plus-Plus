@@ -109,6 +109,7 @@ int kosaraju(int V, const std::vector<std::vector<int> > &adj) {
 // All critical/corner cases have been taken care of.
 // Input your required values: (not hardcoded)
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int t = 0;
     std::cin >> t;
     while (t--) {
@@ -125,5 +126,6 @@ int main() {
         // pass number of nodes and adjacency array as parameters to function:
         std::cout << kosaraju(a, adj) << std::endl;
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

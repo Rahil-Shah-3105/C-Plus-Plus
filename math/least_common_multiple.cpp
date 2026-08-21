@@ -14,6 +14,7 @@
  * @return greatest common divisor of x and y.
  */
 unsigned int gcd(unsigned int x, unsigned int y) {
+	std::cerr << ">>> Entering gcd(x=" << x << ",y=" << y << ")" << std::endl;
     if (x == 0) {
         return y;
     }
@@ -32,6 +33,7 @@ unsigned int gcd(unsigned int x, unsigned int y) {
     // Again the following is valid because we have checked whether x == 0
 
     unsigned int temp = y / x;
+	std::cerr << "<<< Exiting gcd(x=" << x << ",y=" << y << ")" << std::endl;
     return gcd(x, y - temp * x);
 }
 
@@ -41,6 +43,7 @@ unsigned int gcd(unsigned int x, unsigned int y) {
  * @return lcm of x and y using the relation x * y = gcd(x, y) * lcm(x, y)
  */
 unsigned int lcm(unsigned int x, unsigned int y) {
+std::cerr << ">>> Entering lcm(x=" << x << ",y=" << y << ")" << std::endl;
   return x / gcd(x, y) * y;
 }
 
@@ -48,6 +51,7 @@ unsigned int lcm(unsigned int x, unsigned int y) {
  * Function for testing the lcm() functions with some assert statements.
  */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     // First test on lcm(5,10) == 10
     assert(((void)"LCM of 5 and 10 is 10 but lcm function gives a different "
                   "result.\n",
@@ -70,12 +74,15 @@ void tests() {
     std::cout << "Third assertion passes: LCM of 987654321 and 987654321 is "
               << lcm(987654321, 987654321)
               << std::endl;
+			std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

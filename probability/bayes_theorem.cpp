@@ -12,23 +12,30 @@
 /** returns P(A|B)
  */
 double bayes_AgivenB(double BgivenA, double A, double B) {
+	std::cerr << ">>> Entering bayes_AgivenB(BgivenA=" << BgivenA << ",A=" << A << ",B=" << B << ")" << std::endl;
     return (BgivenA * A) / B;
 }
 
 /** returns P(B|A)
  */
 double bayes_BgivenA(double AgivenB, double A, double B) {
+	std::cerr << ">>> Entering bayes_BgivenA(AgivenB=" << AgivenB << ",A=" << A << ",B=" << B << ")" << std::endl;
     return (AgivenB * B) / A;
 }
 
 /** Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     double A = 0.01;
     double B = 0.1;
+	std::cerr << "main(): B → " << B << std::endl;
+	std::cerr << "main(): A → " << A << std::endl;
     double BgivenA = 0.9;
     double AgivenB = bayes_AgivenB(BgivenA, A, B);
+	std::cerr << "main(): AgivenB → " << AgivenB << std::endl;
     std::cout << "A given B = " << AgivenB << std::endl;
     std::cout << "B given A = " << bayes_BgivenA(AgivenB, A, B) << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

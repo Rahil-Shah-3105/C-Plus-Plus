@@ -81,10 +81,12 @@ class DigitSeparation {
  * @return void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     greedy_algorithms::DigitSeparation ds;
 
     // Test case: Positive number
     std::int64_t number = 1234567890;
+	std::cerr << "tests(): number → " << number << std::endl;
     std::vector<std::int64_t> expectedReverse = {0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
     std::vector<std::int64_t> expectedForward = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
     std::vector<std::int64_t> reverseOrder =
@@ -122,6 +124,7 @@ static void tests() {
     assert(forwardOrder == expectedForward);
 
     // Test case: Negative number
+	std::cerr << "<<< Exiting tests()" << std::endl;
     number = -987654321012345;
     expectedReverse = {5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     expectedForward = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 4, 5};
@@ -136,7 +139,9 @@ static void tests() {
  * @return 0 on successful exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self test implementation
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -67,6 +67,8 @@ struct TestCase {
  * @return example data used in the tests of ::longest_common_string_length
  */
 std::vector<TestCase> get_test_cases() {
+	std::cerr << ">>> Entering get_test_cases()" << std::endl;
+	std::cerr << "<<< Exiting get_test_cases()" << std::endl;
     return {TestCase("", "", 0),
             TestCase("ab", "ab", 2),
             TestCase("ab", "ba", 1),
@@ -117,6 +119,7 @@ static void test_longest_common_string_length_is_symmetric(
  * in_str
  */
 std::string reverse_str(const std::string& in_str) {
+	std::cerr << ">>> Entering reverse_str(in_str=" << in_str << ")" << std::endl;
     return {in_str.rbegin(), in_str.rend()};
 }
 
@@ -140,6 +143,7 @@ static void test_longest_common_string_length_for_reversed_inputs(
  * @brief runs all tests for ::longest_common_string_length funcion
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     const auto test_cases = get_test_cases();
     assert(test_cases.size() > 0);
     test_longest_common_string_length(test_cases);
@@ -147,6 +151,7 @@ static void tests() {
     test_longest_common_string_length_for_reversed_inputs(test_cases);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -154,6 +159,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

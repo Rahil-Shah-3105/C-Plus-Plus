@@ -62,6 +62,7 @@ int32_t duplicateNumber(const std::vector<T> &in_arr, const uint32_t &n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     // [3, 4, 8, 5, 9, 1, 2, 6, 7, 4] return 4
     std::vector<uint32_t> array1 = {3, 4, 8, 5, 9, 1, 2, 6, 7, 4};
@@ -86,6 +87,7 @@ static void test() {
            -1);  // since the input array is empty no duplicate number exists in
                  // this case
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -93,6 +95,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -76,11 +76,13 @@ int TravellingSalesmanProblem(std::vector<std::vector<uint32_t>> *cities,
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Initiatinig Predefined Tests..." << std::endl;
     std::cout << "Initiating Test 1..." << std::endl;
     std::vector<std::vector<uint32_t>> cities = {
         {0, 20, 42, 35}, {20, 0, 30, 34}, {42, 30, 0, 12}, {35, 34, 12, 0}};
     uint32_t V = cities.size();
+	std::cerr << "tests(): V → " << V << std::endl;
     assert(graph::TravellingSalesmanProblem(&cities, 0, V) == 97);
     std::cout << "1st test passed..." << std::endl;
 
@@ -96,6 +98,7 @@ static void tests() {
     V = cities.size();
     assert(graph::TravellingSalesmanProblem(&cities, 0, V) == 80);
     std::cout << "3rd test passed..." << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -103,10 +106,13 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
     std::vector<std::vector<uint32_t>> cities = {
         {0, 5, 10, 15}, {5, 0, 20, 30}, {10, 20, 0, 35}, {15, 30, 35, 0}};
     uint32_t V = cities.size();
+	std::cerr << "main(): V → " << V << std::endl;
     std::cout << graph::TravellingSalesmanProblem(&cities, 0, V) << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

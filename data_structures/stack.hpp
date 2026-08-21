@@ -22,19 +22,25 @@ class stack {
 
     /** Show stack */
     void display() const {
+		std::cerr << ">>> Entering display()" << std::endl;
         std::cout << "Top --> ";
         display_all(this->stackTop.get());
         std::cout << '\n';
         std::cout << "Size of stack: " << size << std::endl;
+		std::cerr << "<<< Exiting display()" << std::endl;
     }
 
     std::vector<value_type> toVector() const {
+		std::cerr << ">>> Entering toVector()" << std::endl;
         return push_all_to_vector(this->stackTop.get(), this->size);
     }
 
  private:
     void ensureNotEmpty() const {
+		std::cerr << ">>> Entering ensureNotEmpty()" << std::endl;
         if (isEmptyStack()) {
+			std::cerr << "Throwing std from ensureNotEmpty()" << std::endl;
+		std::cerr << "<<< Exiting ensureNotEmpty()" << std::endl;
             throw std::invalid_argument("Stack is empty.");
         }
     }
@@ -45,29 +51,39 @@ class stack {
 
     /** Add new item to the stack */
     void push(const value_type& item) {
+		std::cerr << ">>> Entering push(item=" << item << ")" << std::endl;
         auto newNode = std::make_shared<Node<value_type>>();
         newNode->data = item;
+		std::cerr << "push(item=" << item << "): newNode → " << newNode << std::endl;
         newNode->next = stackTop;
         stackTop = newNode;
+		std::cerr << "push(item=" << item << "): stackTop → " << stackTop << std::endl;
         size++;
+		std::cerr << "<<< Exiting push(item=" << item << ")" << std::endl;
     }
 
     /** Return the top element of the stack */
     value_type top() const {
+		std::cerr << ">>> Entering top()" << std::endl;
         ensureNotEmpty();
+		std::cerr << "<<< Exiting top()" << std::endl;
         return stackTop->data;
     }
 
     /** Remove the top element of the stack */
     void pop() {
+		std::cerr << ">>> Entering pop()" << std::endl;
         ensureNotEmpty();
         stackTop = stackTop->next;
         size--;
+		std::cerr << "<<< Exiting pop()" << std::endl;
     }
 
     /** Clear stack */
     void clear() {
+		std::cerr << ">>> Entering clear()" << std::endl;
         stackTop = nullptr;
+		std::cerr << "clear(): stackTop → " << stackTop << std::endl;
         size = 0;
     }
 

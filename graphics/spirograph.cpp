@@ -91,6 +91,7 @@ void spirograph(std::array<std::pair<double, double>, N> *points, double l,
  *
  */
 void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     const size_t N = 500;
     double l = 0.3, k = 0.75, rot = 10.;
     std::stringstream fname;

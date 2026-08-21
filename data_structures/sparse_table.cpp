@@ -67,6 +67,7 @@ struct Sparse_table {
      * @complexity: O(n.log(n))
      */
     void buildST() {
+		std::cerr << ">>> Entering buildST()" << std::endl;
         LOG[0] = -1;
 
         for (size_t i = 0; i < n; ++i) {
@@ -97,6 +98,7 @@ struct Sparse_table {
                                              ///< the range [j,i]
             }
         }
+		std::cerr << "<<< Exiting buildST()" << std::endl;
     }
 
     /**
@@ -108,6 +110,7 @@ struct Sparse_table {
      * @complexity: O(1)
      */
     int64_t query(int64_t l, int64_t r) {
+		std::cerr << ">>> Entering query(l=" << l << ",r=" << r << ")" << std::endl;
         int64_t g = LOG[r - l + 1];  ///< smallest power of 2 covering [l,r]
         int64_t x = ST[g][l];  ///< represents minimum value over the range
                                ///< [g,l]
@@ -115,6 +118,7 @@ struct Sparse_table {
             ST[g][r - (1 << g) + 1];  ///< represents minimum value over the
                                       ///< range [g, r - pow(2,g) + 1]
 
+		std::cerr << "<<< Exiting query(l=" << l << ",r=" << r << ")" << std::endl;
         return (A[x] <= A[y] ? x : y);  ///< represents minimum value over
                                         ///< the whole range [l,r]
     }
@@ -127,6 +131,7 @@ struct Sparse_table {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     /* We take an array as an input on which we need to perform the ranged
      * minimum queries[RMQ](https://en.wikipedia.org/wiki/Range_minimum_query).
      */
@@ -158,6 +163,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

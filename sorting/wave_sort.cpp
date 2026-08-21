@@ -51,6 +51,7 @@ std::vector<T> waveSort(const std::vector<T> &in_arr, int64_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // [10, 90, 49, 2, 1, 5, 23] return [2, 1, 10, 5, 49, 23, 90]
     std::vector<int64_t> array1 = {10, 90, 49, 2, 1, 5, 23};
     std::cout << "Test 1... ";
@@ -82,6 +83,7 @@ static void test() {
     const std::vector<int64_t> o4 = {4, 3, 8, 6, 14, 9};
     assert(arr4 == o4);
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -89,6 +91,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

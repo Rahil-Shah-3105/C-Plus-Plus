@@ -46,6 +46,7 @@ namespace geometric_dist {
  * (included)
  */
 float generate_uniform() {
+	std::cerr << ">>> Entering generate_uniform()" << std::endl;
     return static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 }
 
@@ -91,6 +92,7 @@ class geometric_distribution {
      * @returns A number between [0,1] according to p * (1-p)^{k-1}
      */
     float probability_density(const uint32_t& k) const {
+		std::cerr << ">>> Entering probability_density(k=" << k << ")" << std::endl;
         return std::pow((1.0f - p), static_cast<float>(k - 1)) * p;
     }
 
@@ -102,6 +104,7 @@ class geometric_distribution {
      * @returns The probability to have success within k trials
      */
     float cumulative_distribution(const uint32_t& k) const {
+		std::cerr << ">>> Entering cumulative_distribution(k=" << k << ")" << std::endl;
         return 1.0f - std::pow((1.0f - p), static_cast<float>(k));
     }
 
@@ -114,6 +117,7 @@ class geometric_distribution {
      * @returns The number of (exact) trials.
      */
     float inverse_cumulative_distribution(const float& cdf) const {
+		std::cerr << ">>> Entering inverse_cumulative_distribution(cdf=" << cdf << ")" << std::endl;
         return std::log(1.0f - cdf) / std::log(1.0f - p);
     }
 
@@ -123,7 +127,10 @@ class geometric_distribution {
      * @returns A geometrically distributed number in [1,\infty)
      */
     uint32_t draw_sample() const {
+		std::cerr << ">>> Entering draw_sample()" << std::endl;
         float uniform_sample = generate_uniform();
+		std::cerr << "draw_sample(): uniform_sample → " << uniform_sample << std::endl;
+		std::cerr << "<<< Exiting draw_sample()" << std::endl;
         return static_cast<uint32_t>(
                    inverse_cumulative_distribution(uniform_sample)) +
                1;

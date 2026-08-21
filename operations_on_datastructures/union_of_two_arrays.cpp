@@ -102,6 +102,7 @@ using operations_on_datastructures::print;
  * @returns void
  */
 void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Intialized a = {} b = {}\n";
     std::cout << "Expected result: {}\n";
@@ -111,12 +112,14 @@ void test1() {
     assert(result == a);  ///< Check if result is empty
     print(result);        ///< Should only print newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an edge case (one empty array)
  * @returns void
  */
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Intialized a = {} b = {2, 3}\n";
     std::cout << "Expected result: {2, 3}\n";
@@ -126,12 +129,14 @@ void test2() {
     assert(result == b);  ///< Check if result is equal to b
     print(result);        ///< Should print 2 3
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with a simple test case
  * @returns void
  */
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Intialized a = {4, 6} b = {2, 3}\n";
     std::cout << "Expected result: {2, 3, 4, 6}\n";
@@ -142,12 +147,14 @@ void test3() {
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 2 3 4 6
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with duplicate values
  * @returns void
  */
 void test4() {
+	std::cerr << ">>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Intialized a = {4, 6, 6, 7} b = {2, 3, 4}\n";
     std::cout << "Expected result: {2, 3, 4, 6, 7}\n";
@@ -158,12 +165,14 @@ void test4() {
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 2 3 4 6 7
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test4()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with a harder test case
  * @returns void
  */
 void test5() {
+	std::cerr << ">>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Intialized a = {1, 4, 6, 7, 9} b = {2, 3, 5}\n";
     std::cout << "Expected result: {1, 2, 3, 4, 5, 6, 7, 9}\n";
@@ -174,6 +183,7 @@ void test5() {
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 1 2 3 4 5 6 7 9
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test5()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with an array sorted using
@@ -181,6 +191,7 @@ void test5() {
  * @returns void
  */
 void test6() {
+	std::cerr << ">>> Entering test6()" << std::endl;
     std::cout << "TEST CASE 6\n";
     std::cout << "Intialized a = {1, 3, 3, 2, 5, 9, 4, 3, 2} ";
     std::cout << "b = {11, 3, 7, 8, 6}\n";
@@ -194,6 +205,7 @@ void test6() {
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 1 2 3 4 5 6 7 8 9 11
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "<<< Exiting test6()" << std::endl;
 }
 }  // namespace tests
 
@@ -202,12 +214,14 @@ void test6() {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
     tests::test6();
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -215,6 +229,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

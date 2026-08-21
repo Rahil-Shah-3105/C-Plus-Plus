@@ -66,12 +66,14 @@ namespace minimum_edit_distance {
  * @returns z if `z` is the minimum value
  */
 uint64_t min(uint64_t x, uint64_t y, uint64_t z) {
+	std::cerr << ">>> Entering min(x=" << x << ",y=" << y << ",z=" << z << ")" << std::endl;
     if (x <= y && x <= z) {
         return x;  /// returns x, if x is the minimum value
     }
     if (y <= x && y <= z) {
         return y;  /// returns y, if y is the minimum value
     } else {
+		std::cerr << "<<< Exiting min(x=" << x << ",y=" << y << ",z=" << z << ")" << std::endl;
         return z;  /// returns z if z is the minimum value
     }
 }
@@ -140,9 +142,12 @@ uint64_t editDistDP(std::string str1, std::string str2, uint64_t m,
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     std::string str1 = "INTENTION";  // Sample input of 1st string
+	std::cerr << "test(): str1 → " << str1 << std::endl;
     std::string str2 = "EXECUTION";  // Sample input of 2nd string
+	std::cerr << "test(): str2 → " << str2 << std::endl;
     uint64_t expected_output1 = 5;   // Expected minimum cost
     uint64_t output1 = dynamic_programming::minimum_edit_distance::editDistDP(
         str1, str2, str1.length(),

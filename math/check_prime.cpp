@@ -29,6 +29,7 @@ namespace math {
  * @return false if number is not a prime.
  */
 bool is_prime(int64_t num) {
+	std::cerr << ">>> Entering is_prime(num=" << num << ")" << std::endl;
     /*!
      * Reduce all possibilities of a number which cannot be prime with the first
      * 3 if, else if conditionals. Example: Since no even number, except 2 can
@@ -51,6 +52,7 @@ bool is_prime(int64_t num) {
             }
         }
     }
+	std::cerr << "<<< Exiting is_prime(num=" << num << ")" << std::endl;
     return true;
 }
 }  // namespace math
@@ -60,6 +62,7 @@ bool is_prime(int64_t num) {
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     assert(math::is_prime(1) == false);
     assert(math::is_prime(2) == true);
     assert(math::is_prime(3) == true);
@@ -72,6 +75,7 @@ static void tests() {
     assert(math::is_prime(115249) == true);
 
     std::cout << "All tests have successfully passed!" << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -79,6 +83,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // perform self-tests implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

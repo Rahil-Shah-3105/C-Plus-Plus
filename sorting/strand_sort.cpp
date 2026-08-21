@@ -62,6 +62,7 @@ namespace sorting {
  * @return N/A
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::list<int> lst = { -333, 525, 1, 0, 94, 52, 33 };
 
     std::cout << "Before: ";
@@ -75,6 +76,7 @@ static void test() {
     for(auto item: lst) {
         std::cout << item << " ";
     }
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -82,6 +84,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -41,6 +41,7 @@ class uint256_t {
      * @returns void
      */
     void __get_integer_from_string(const std::string &str) {
+		std::cerr << ">>> Entering __get_integer_from_string(str=" << str << ")" << std::endl;
         this->f = this->s = uint128_t(0);
         if (str.size() > 1 && str[1] == 'x') {
             for (auto i = 2; i < str.size(); ++i) {
@@ -59,6 +60,7 @@ class uint256_t {
                 *this += (x - '0');
             }
         }
+		std::cerr << "<<< Exiting __get_integer_from_string(str=" << str << ")" << std::endl;
     }
 
  public:
@@ -79,7 +81,9 @@ class uint256_t {
      * @param str Integer string (hexadecimal starting with 0x.. or decimal)
      */
     explicit uint256_t(const std::string &str) {
+		std::cerr << ">>> Entering uint256_t(str=" << str << ")" << std::endl;
         __get_integer_from_string(str);
+		std::cerr << "<<< Exiting uint256_t(str=" << str << ")" << std::endl;
     }
 
     /**
@@ -121,7 +125,9 @@ class uint256_t {
      * @returns Integer denoting leading zeroes
      */
     inline uint32_t _lez() {
+		std::cerr << ">>> Entering _lez()" << std::endl;
         if (f) {
+		std::cerr << "<<< Exiting _lez()" << std::endl;
             return f._lez();
         }
         return 128 + s._lez();
@@ -133,7 +139,9 @@ class uint256_t {
      * @returns Integer denoting Trailing zeroes
      */
     inline uint32_t _trz() {
+		std::cerr << ">>> Entering _trz()" << std::endl;
         if (s) {
+		std::cerr << "<<< Exiting _trz()" << std::endl;
             return s._trz();
         }
         return 128 + f._trz();
@@ -153,6 +161,7 @@ class uint256_t {
     template <typename T, typename = typename std::enable_if<
                               std::is_integral<T>::value, T>::type>
     inline explicit operator T() const {
+		std::cerr << ">>> Entering T()" << std::endl;
         return static_cast<T>(s);
     }
 

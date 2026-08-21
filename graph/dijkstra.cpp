@@ -64,8 +64,10 @@ void addEdge(std::vector<std::vector<std::pair<int, int>>> *adj, int u, int v,
  * case if target is not reachable from source.
  */
 int dijkstra(std::vector<std::vector<std::pair<int, int>>> *adj, int s, int t) {
+	std::cerr << ">>> Entering dijkstra(adj=" << adj << ",s=" << s << ",t=" << t << ")" << std::endl;
     /// n denotes the number of vertices in graph
     int n = adj->size();
+	std::cerr << "dijkstra(adj=" << adj << ",s=" << s << ",t=" << t << "): n → " << n << std::endl;
 
     /// setting all the distances initially to INF
     std::vector<int64_t> dist(n, INF);
@@ -86,9 +88,11 @@ int dijkstra(std::vector<std::vector<std::pair<int, int>>> *adj, int s, int t) {
     while (!pq.empty()) {
         /// second element of pair denotes the node / vertex
         int currentNode = pq.top().second;
+		std::cerr << "dijkstra(adj=" << adj << ",s=" << s << ",t=" << t << "): currentNode → " << currentNode << std::endl;
 
         /// first element of pair denotes the distance
         int currentDist = pq.top().first;
+		std::cerr << "dijkstra(adj=" << adj << ",s=" << s << ",t=" << t << "): currentDist → " << currentDist << std::endl;
 
         pq.pop();
 
@@ -103,6 +107,7 @@ int dijkstra(std::vector<std::vector<std::pair<int, int>>> *adj, int s, int t) {
         }
     }
     if (dist[t] != INF) {
+	std::cerr << "<<< Exiting dijkstra(adj=" << adj << ",s=" << s << ",t=" << t << ")" << std::endl;
         return dist[t];
     }
     return -1;
@@ -111,6 +116,7 @@ int dijkstra(std::vector<std::vector<std::pair<int, int>>> *adj, int s, int t) {
 
 /** Function to test the Algorithm */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Initiatinig Predefined Tests..." << std::endl;
     std::cout << "Initiating Test 1..." << std::endl;
     std::vector<std::vector<std::pair<int, int>>> adj1(
@@ -121,6 +127,7 @@ void tests() {
     graph::addEdge(&adj1, 1, 3, 5);
 
     int s = 1, t = 3;
+	std::cerr << "tests(): s → " << s << std::endl;
     assert(graph::dijkstra(&adj1, s - 1, t - 1) == 3);
     std::cout << "Test 1 Passed..." << std::endl;
 
@@ -146,14 +153,17 @@ void tests() {
     assert(graph::dijkstra(&adj2, s - 1, t - 1) == 6);
     std::cout << "Test 3 Passed..." << std::endl;
     std::cout << "All Test Passed..." << std::endl << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // running predefined tests
     tests();
 
     int vertices = int(), edges = int();
+	std::cerr << "main(): vertices → " << vertices << std::endl;
     std::cout << "Enter the number of vertices : ";
     std::cin >> vertices;
     std::cout << "Enter the number of edges : ";
@@ -163,18 +173,22 @@ int main() {
         vertices, std::vector<std::pair<int, int>>());
 
     int u = int(), v = int(), w = int();
+	std::cerr << "main(): u → " << u << std::endl;
     while (edges--) {
         std::cin >> u >> v >> w;
         graph::addEdge(&adj, u, v, w);
     }
 
     int s = int(), t = int();
+	std::cerr << "main(): s → " << s << std::endl;
     std::cin >> s >> t;
     int dist = graph::dijkstra(&adj, s - 1, t - 1);
+	std::cerr << "main(): dist → " << dist << std::endl;
     if (dist == -1) {
         std::cout << "Target not reachable from source" << std::endl;
     } else {
         std::cout << "Shortest Path Distance : " << dist << std::endl;
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

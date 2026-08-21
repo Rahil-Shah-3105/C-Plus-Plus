@@ -12,6 +12,7 @@
  * \returns probability of A and B
  */
 double addition_rule_independent(double A, double B) {
+	std::cerr << ">>> Entering addition_rule_independent(A=" << A << ",B=" << B << ")" << std::endl;
     return (A + B) - (A * B);
 }
 
@@ -23,11 +24,13 @@ double addition_rule_independent(double A, double B) {
  * \returns probability of A and B
  */
 double addition_rule_dependent(double A, double B, double B_given_A) {
+	std::cerr << ">>> Entering addition_rule_dependent(A=" << A << ",B=" << B << ",B_given_A=" << B_given_A << ")" << std::endl;
     return (A + B) - (A * B_given_A);
 }
 
 /** Main function */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     double A = 0.5;
     double B = 0.25;
     double B_given_A = 0.05;
@@ -38,5 +41,6 @@ int main() {
     std::cout << "dependent P(A or B) = "
               << addition_rule_dependent(A, B, B_given_A) << std::endl;
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

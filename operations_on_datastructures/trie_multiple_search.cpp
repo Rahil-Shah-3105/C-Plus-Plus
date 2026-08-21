@@ -48,6 +48,9 @@ class Tnode {
 
  public:
     Tnode() {
+		std::cerr << ">>> Entering Tnode()" << std::endl;
+		std::cerr << "Tnode(): endOfWord → " << endOfWord << std::endl;
+		std::cerr << "Tnode(): frequency → " << frequency << std::endl;
         english.resize(ENGLISH_ALPHABET_SIZE, nullptr);
         endOfWord = false;
         frequency = 0;
@@ -70,6 +73,7 @@ class Tnode {
      * @return count of the number of children of the given node (max 26)
      */
     inline uint8_t numberOfChildren(Tnode *node) {
+		std::cerr << ">>> Entering numberOfChildren(node=" << node << ")" << std::endl;
         return ENGLISH_ALPHABET_SIZE -
                std::count(node->english.begin(), node->english.end(), nullptr);
     }
@@ -91,12 +95,14 @@ class Tnode {
 
     // To free up the dynamically allocated objects
     ~Tnode() {
+		std::cerr << ">>> Entering ~Tnode()" << std::endl;
         int i = 0;
         for (i = 0; i < ENGLISH_ALPHABET_SIZE; i++) {
             if (english[i]) {
                 delete english[i];
             }
         }
+		std::cerr << "<<< Exiting ~Tnode()" << std::endl;
     }
 };
 
@@ -105,8 +111,10 @@ class Tnode {
  * @param entry string entry to be inserted in the trie
  */
 void Tnode::Insert(const std::string &entry) {
+	std::cerr << ">>> Entering Tnode::Insert(entry=" << entry << ")" << std::endl;
     Tnode *cur_pos = this;
     int letter_index = 0;
+	std::cerr << "Tnode::Insert(entry=" << entry << "): letter_index → " << letter_index << std::endl;
 
     for (auto &i : entry) {
         // To ignore case
@@ -122,6 +130,7 @@ void Tnode::Insert(const std::string &entry) {
     }
     // cur_pos points to the last char, mark it as end of word
     cur_pos->endOfWord = true;
+	std::cerr << "<<< Exiting Tnode::Insert(entry=" << entry << ")" << std::endl;
 }
 
 /**
@@ -151,9 +160,11 @@ void Tnode::DeleteFrom(Tnode *delete_from, std::string delete_string,
  * @param entry string entry to be deleted from the trie
  */
 void Tnode::Delete(std::string entry) {
+	std::cerr << ">>> Entering Tnode::Delete(entry=" << entry << ")" << std::endl;
     Tnode *cur_pos = this,
           *delete_from = this;  // Current pointer pointing to root
     int letter_index = 0, delete_from_index = 0, i = 0, n = entry.size();
+	std::cerr << "Tnode::Delete(entry=" << entry << "): letter_index → " << letter_index << std::endl;
 
     for (i = 0; i < n; i++) {
         // To ignore case
@@ -176,6 +187,7 @@ void Tnode::Delete(std::string entry) {
 
         // Traversing through the entry
         cur_pos = cur_pos->english[letter_index];
+		std::cerr << "Tnode::Delete(entry=" << entry << "): cur_pos → " << cur_pos << std::endl;
     }
 
     // cur_pos now points to the last char of entry. Display message if that
@@ -209,6 +221,7 @@ void Tnode::Delete(std::string entry) {
     else {
         delete cur_pos;
     }
+	std::cerr << "<<< Exiting Tnode::Delete(entry=" << entry << ")" << std::endl;
 }
 
 /**
@@ -218,8 +231,10 @@ void Tnode::Delete(std::string entry) {
  * @return false if the key is not found
  */
 bool Tnode::SearchPresence(const std::string &key) {
+	std::cerr << ">>> Entering Tnode::SearchPresence(key=" << key << ")" << std::endl;
     Tnode *cur_pos = this;
     int letter_index = 0;
+	std::cerr << "Tnode::SearchPresence(key=" << key << "): letter_index → " << letter_index << std::endl;
 
     for (auto &i : key) {
         letter_index = tolower(i) - 97;
@@ -235,6 +250,7 @@ bool Tnode::SearchPresence(const std::string &key) {
         (cur_pos->frequency)++;
         return true;
     } else {
+	std::cerr << "<<< Exiting Tnode::SearchPresence(key=" << key << ")" << std::endl;
         return false;
     }
 }
@@ -247,6 +263,7 @@ bool Tnode::SearchPresence(const std::string &key) {
  * @param prefix the common prefix that all the suggestions must have
  */
 void Tnode::SuggestAutocomplete(Tnode *new_root, const std::string &prefix) {
+	std::cerr << ">>> Entering Tnode::SuggestAutocomplete(new_root=" << new_root << ",prefix=" << prefix << ")" << std::endl;
     // Iterate through all 26 nodes as we have to print all strings with the
     // given prefix
     int i = 0;
@@ -261,6 +278,7 @@ void Tnode::SuggestAutocomplete(Tnode *new_root, const std::string &prefix) {
             SuggestAutocomplete(new_root->english[i], prefix + char(i + 97));
         }
     }
+	std::cerr << "<<< Exiting Tnode::SuggestAutocomplete(new_root=" << new_root << ",prefix=" << prefix << ")" << std::endl;
 }
 
 /**
@@ -272,9 +290,12 @@ void Tnode::SuggestAutocomplete(Tnode *new_root, const std::string &prefix) {
  * @param key the string key to be searched for suggestions
  */
 void Tnode::SearchSuggestions(const std::string &key) {
+	std::cerr << ">>> Entering Tnode::SearchSuggestions(key=" << key << ")" << std::endl;
     Tnode *cur_pos = nullptr, *prev_pos = nullptr;
     cur_pos = prev_pos = this;  // maintaining 2 pointers, initialized to root
+	std::cerr << "Tnode::SearchSuggestions(key=" << key << "): cur_pos → " << cur_pos << std::endl;
     int letter_index = 0;
+	std::cerr << "Tnode::SearchSuggestions(key=" << key << "): letter_index → " << letter_index << std::endl;
     std::string prefix =
         "";  // variable storing the updated value of longest common prefix
 
@@ -308,6 +329,7 @@ void Tnode::SearchSuggestions(const std::string &key) {
     SuggestAutocomplete(cur_pos, prefix);
     std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - "
               << std::endl;
+	std::cerr << "<<< Exiting Tnode::SearchSuggestions(key=" << key << ")" << std::endl;
     return;
 }
 
@@ -366,9 +388,12 @@ void Tnode::SuggestFreqAutocomplete(
  * @param key the string key to be searched for suggestions
  */
 void Tnode::SearchFreqSuggestions(const std::string &key) {
+	std::cerr << ">>> Entering Tnode::SearchFreqSuggestions(key=" << key << ")" << std::endl;
     Tnode *cur_pos = nullptr, *prev_pos = nullptr;
     cur_pos = prev_pos = this;  // maintaining 2 pointers, initialized to root
+	std::cerr << "Tnode::SearchFreqSuggestions(key=" << key << "): cur_pos → " << cur_pos << std::endl;
     int letter_index = 0;
+	std::cerr << "Tnode::SearchFreqSuggestions(key=" << key << "): letter_index → " << letter_index << std::endl;
     std::string prefix =
         "";  // variable storing the updated value of longest common prefix
     std::priority_queue<std::pair<int, std::string> >
@@ -413,6 +438,7 @@ void Tnode::SearchFreqSuggestions(const std::string &key) {
 
     std::cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - "
               << std::endl;
+	std::cerr << "<<< Exiting Tnode::SearchFreqSuggestions(key=" << key << ")" << std::endl;
     return;
 }
 }  // namespace trie_operations
@@ -423,11 +449,13 @@ void Tnode::SearchFreqSuggestions(const std::string &key) {
  * an entry. And to test out the multiple variants of search.
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     auto root = new operations_on_datastructures::trie_operations::Tnode();
     std::vector<std::string> inputs = {
         "abcde", "sss",    "ssss",  "ssst", "sssu", "sssv",
         "sst",   "ssts",   "sstt",  "sstu", "tutu", "tutuv",
         "tutuu", "tutuvs", "tutus", "tvst", "tvsu", "vvvv"};
+		std::cerr << "test(): root → " << root << std::endl;
 
     for (auto &i : inputs) {
         root->Insert(i);
@@ -455,6 +483,7 @@ static void test() {
                 // tutuvs respectively
     root->SearchSuggestions(
         "");  // Empty search to list all the entries in the trie
+		std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -462,6 +491,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
