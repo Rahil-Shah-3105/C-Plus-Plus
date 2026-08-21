@@ -42,6 +42,7 @@ class Graph {
      * @param V number of vertices of the graph
      */
     explicit Graph(const int V) {
+		std::cerr << ">>> Entering Graph(V=" << V << ")" << std::endl;
         // Initialize the array edges
         this->edges = std::vector<std::vector<int>>(V, std::vector<int>(V, 0));
         for (int i = 0; i < V; i++) {
@@ -56,6 +57,7 @@ class Graph {
         }
 
         this->vertexNum = V;
+		std::cerr << "<<< Exiting Graph(V=" << V << ")" << std::endl;
     }
 
     /**
@@ -66,7 +68,9 @@ class Graph {
      * @returns void
      */
     void add_edge(int src, int dst, int weight) {
+		std::cerr << ">>> Entering add_edge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
         this->edges[src][dst] = weight;
+		std::cerr << "<<< Exiting add_edge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
     }
 };
 

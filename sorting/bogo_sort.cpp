@@ -79,10 +79,12 @@ void show_array (const std::array <T, N> &arr) {
  * Function to test above algorithm
  */
 void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     std::array <int, 5> arr1;
     for (int &x : arr1) {
         x = std::rand() % 100;
+		std::cerr << "test(): x → " << x << std::endl;
     }
     std::cout << "Original Array : ";
     show_array(arr1);
@@ -101,10 +103,12 @@ void test() {
     std::cout << "Sorted Array : ";
     show_array(arr2);
     assert(std::is_sorted(arr2.begin(), arr2.end()));
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Testing
     test();
     // Example Usage
@@ -114,5 +118,6 @@ int main() {
     arr = sorting::randomized_bogosort(arr); // Callling bogo sort on it
     std::cout << "Sorted Array : ";
     show_array(arr); // Printing sorted array
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

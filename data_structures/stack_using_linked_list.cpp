@@ -8,13 +8,17 @@ struct node {
 node *top_var;
 
 void push(int x) {
+	std::cerr << ">>> Entering push(x=" << x << ")" << std::endl;
     node *n = new node;
     n->val = x;
     n->next = top_var;
+	std::cerr << "<<< Exiting push(x=" << x << ")" << std::endl;
+	std::cerr << "push(x=" << x << "): top_var → " << top_var << std::endl;
     top_var = n;
 }
 
 void pop() {
+	std::cerr << ">>> Entering pop()" << std::endl;
     if (top_var == nullptr) {
         std::cout << "\nUnderflow";
     } else {
@@ -23,17 +27,21 @@ void pop() {
         top_var = top_var->next;
         delete t;
     }
+	std::cerr << "<<< Exiting pop()" << std::endl;
 }
 
 void show() {
+	std::cerr << ">>> Entering show()" << std::endl;
     node *t = top_var;
     while (t != nullptr) {
         std::cout << t->val << "\n";
         t = t->next;
     }
+	std::cerr << "<<< Exiting show()" << std::endl;
 }
 
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     int ch = 0, x = 0;
     do {
         std::cout << "\n0. Exit or Ctrl+C";
@@ -62,5 +70,6 @@ int main() {
         }
     } while (ch != 0);
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -56,6 +56,7 @@ uint64_t number_of_subsets(int32_t sum, const std::vector<int32_t> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // 1st test
     std::cout << "1st test ";
     std::vector<int32_t> array1 = {-7, -3, -2, 5, 8};  // input array
@@ -95,6 +96,7 @@ static void test() {
            0);  // here we are expecting 0 subsets which sum up to 6 i.e. we
                 // cannot select anything from an empty array
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -102,6 +104,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

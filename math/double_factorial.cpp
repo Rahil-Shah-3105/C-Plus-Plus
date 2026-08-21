@@ -16,12 +16,14 @@
 /** Compute double factorial using iterative method
  */
 uint64_t double_factorial_iterative(uint64_t n) {
+	std::cerr << ">>> Entering double_factorial_iterative(n=" << n << ")" << std::endl;
     uint64_t res = 1;
     for (uint64_t i = n;; i -= 2) {
         if (i == 0 || i == 1)
             return res;
         res *= i;
     }
+	std::cerr << "<<< Exiting double_factorial_iterative(n=" << n << ")" << std::endl;
     return res;
 }
 
@@ -29,6 +31,7 @@ uint64_t double_factorial_iterative(uint64_t n) {
  * <br/>Recursion can be costly for large numbers.
  */
 uint64_t double_factorial_recursive(uint64_t n) {
+	std::cerr << ">>> Entering double_factorial_recursive(n=" << n << ")" << std::endl;
     if (n <= 1)
         return 1;
     return n * double_factorial_recursive(n - 2);
@@ -41,14 +44,17 @@ uint64_t double_factorial_recursive(uint64_t n) {
  * \param [in] expected expected result
  */
 void test(uint64_t n, uint64_t expected) {
+	std::cerr << ">>> Entering test(n=" << n << ",expected=" << expected << ")" << std::endl;
     assert(double_factorial_iterative(n) == expected);
     assert(double_factorial_recursive(n) == expected);
+	std::cerr << "<<< Exiting test(n=" << n << ",expected=" << expected << ")" << std::endl;
 }
 
 /**
  * Test implementations
  */
 void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Test 1:\t n=5\t...";
     test(5, 15);
     std::cout << "passed\n";
@@ -60,12 +66,15 @@ void tests() {
     std::cout << "Test 3:\t n=0\t...";
     test(0, 1);
     std::cout << "passed\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

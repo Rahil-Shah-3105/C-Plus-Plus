@@ -90,6 +90,7 @@ uint64_t binarySearch(std::vector<uint64_t> arr, uint64_t val) {
  * @returns void
  *******************************************************************************/
 static void test1() {
+	std::cerr << ">>> Entering test1()" << std::endl;
     // testcase #1
     // array = [1,3,5,7,9,8,6,4,2] , Value = 4
     // should return 3
@@ -98,9 +99,11 @@ static void test1() {
     std::sort(arr.begin(), arr.end());
     uint64_t expected_ans = 3;
     uint64_t derived_ans = search::binary_search::binarySearch(arr, 4);
+	std::cerr << "test1(): derived_ans → " << derived_ans << std::endl;
     std::cout << "Test #1: ";
     assert(derived_ans == expected_ans);
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test1()" << std::endl;
 }
 
 /*******************************************************************************
@@ -108,6 +111,7 @@ static void test1() {
  * @returns void
  *******************************************************************************/
 void test2() {
+	std::cerr << ">>> Entering test2()" << std::endl;
     // testcase #2
     // array = [1,23,25,4,2] , Value = 25
     // should return 4
@@ -115,9 +119,11 @@ void test2() {
     std::sort(arr.begin(), arr.end());
     uint64_t expected_ans = 4;
     uint64_t derived_ans = search::binary_search::binarySearch(arr, 25);
+	std::cerr << "test2(): derived_ans → " << derived_ans << std::endl;
     std::cout << "Test #2: ";
     assert(derived_ans == expected_ans);
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test2()" << std::endl;
 }
 
 /*******************************************************************************
@@ -125,6 +131,7 @@ void test2() {
  * @returns void
  *******************************************************************************/
 void test3() {
+	std::cerr << ">>> Entering test3()" << std::endl;
     // testcase #3
     // array = [1,31,231,12,12,2,5,51,21,23,12,3] , Value = 5
     // should return 8
@@ -132,9 +139,11 @@ void test3() {
     std::sort(arr.begin(), arr.end());
     uint64_t expected_ans = 8;
     uint64_t derived_ans = search::binary_search::binarySearch(arr, 31);
+	std::cerr << "test3(): derived_ans → " << derived_ans << std::endl;
     std::cout << "Test #3: ";
     assert(derived_ans == expected_ans);
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test3()" << std::endl;
 }
 
 /*******************************************************************************
@@ -142,9 +151,11 @@ void test3() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test1();  // run self-test implementation #1
     test2();  // run self-test implementation #2
     test3();  // run self-test implementation #3
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -40,6 +40,7 @@ namespace dynamic_programming {
          * @returns string 'Z', superSequence of X and Y 
         */
         std::string scs(const std::string &str1, const std::string &str2) {
+		std::cerr << ">>> Entering scs(str1=" << str1 << ",str2=" << str2 << ")" << std::endl;
 
             // Edge cases
             // If either str1 or str2 or both are empty
@@ -112,6 +113,7 @@ namespace dynamic_programming {
             // As the super sequence is constructd backwards
             // reversing the string before returning gives us the correct output  
             reverse(s.begin(), s.end());
+			std::cerr << "<<< Exiting scs(str1=" << str1 << ",str2=" << str2 << ")" << std::endl;
             return s;
         }
     } // namespace shortest_common_supersequence
@@ -122,6 +124,7 @@ namespace dynamic_programming {
  * @return void 
 */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // custom input vector
     std::vector <std::vector <std::string>> scsStrings {
         {"ABCXYZ", "ABZ"},
@@ -157,11 +160,13 @@ static void test() {
     }
 
     std::cout << "All tests passed successfully!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
     return;
 }
 
 /** Main function (driver code)*/
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // test for implementation
     test();
 
@@ -175,5 +180,7 @@ int main() {
     // user output
     ans = dynamic_programming::shortest_common_supersequence::scs(s1, s2);
     std::cout << ans;
+	std::cerr << "main(): ans → " << ans << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

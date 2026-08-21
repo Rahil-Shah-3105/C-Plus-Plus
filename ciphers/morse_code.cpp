@@ -31,6 +31,7 @@ namespace morse {
  * @returns morse representation string of character
  */
 std::string char_to_morse(const char &c) {
+	std::cerr << ">>> Entering char_to_morse(c=" << c << ")" << std::endl;
     // return corresponding morse code
     switch (c) {
         case 'a':
@@ -109,6 +110,7 @@ std::string char_to_morse(const char &c) {
             std::cerr << "Found invalid character: " << c << ' ' << std::endl;
             std::exit(0);
     }
+	std::cerr << "<<< Exiting char_to_morse(c=" << c << ")" << std::endl;
 }
 /**
  * Get character from the morse representation.
@@ -116,6 +118,7 @@ std::string char_to_morse(const char &c) {
  * @returns corresponding character
  */
 char morse_to_char(const std::string &s) {
+	std::cerr << ">>> Entering morse_to_char(s=" << s << ")" << std::endl;
     // return corresponding character
     if (s == ".-") {
         return 'a';
@@ -193,6 +196,7 @@ char morse_to_char(const std::string &s) {
         std::cerr << "Found invalid Morse code: " << s << ' ' << std::endl;
         std::exit(0);
     }
+	std::cerr << "<<< Exiting morse_to_char(s=" << s << ")" << std::endl;
 }
 /**
  * Encrypt given text using morse code.
@@ -200,12 +204,15 @@ char morse_to_char(const std::string &s) {
  * @returns new encrypted text
  */
 std::string encrypt(const std::string &text) {
+	std::cerr << ">>> Entering encrypt(text=" << text << ")" << std::endl;
     std::string encrypted_text = "";  // Empty string to store encrypted text
     // Going through each character of text and converting it
+	std::cerr << "encrypt(text=" << text << "): encrypted_text → " << encrypted_text << std::endl;
     // to morse representation
     for (const char &c : text) {
         encrypted_text += ciphers::morse::char_to_morse(c) + " ";
     }
+	std::cerr << "<<< Exiting encrypt(text=" << text << ")" << std::endl;
     return encrypted_text;  // Returning encrypted text
 }
 /**
@@ -214,15 +221,19 @@ std::string encrypt(const std::string &text) {
  * @returns new decrypted text
  */
 std::string decrypt(const std::string &text) {
+	std::cerr << ">>> Entering decrypt(text=" << text << ")" << std::endl;
     // Going through each character of text and converting it
     // back to normal representation.
     std::string decrypted_text = "";  // Empty string to store decrypted text
+	std::cerr << "decrypt(text=" << text << "): decrypted_text → " << decrypted_text << std::endl;
     // Spliting string (with delimiter = " ") and storing it
     // in vector
     std::size_t pos_start = 0, pos_end = 0, delim_len = 1;
+	std::cerr << "decrypt(text=" << text << "): pos_start → " << pos_start << std::endl;
     std::vector<std::string> splits;
     while ((pos_end = text.find(' ', pos_start)) != std::string::npos) {
         std::string token = text.substr(pos_start, pos_end - pos_start);
+		std::cerr << "decrypt(text=" << text << "): token → " << token << std::endl;
         pos_start = pos_end + delim_len;
         splits.push_back(token);
     }
@@ -233,6 +244,7 @@ std::string decrypt(const std::string &text) {
         decrypted_text += ciphers::morse::morse_to_char(s);
     }
 
+	std::cerr << "<<< Exiting decrypt(text=" << text << ")" << std::endl;
     return decrypted_text;  // Returning decrypted text
 }
 }  // namespace morse
@@ -243,22 +255,30 @@ std::string decrypt(const std::string &text) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     std::string text1 = "01234567890";
+	std::cerr << "test(): text1 → " << text1 << std::endl;
     std::string encrypted1 = ciphers::morse::encrypt(text1);
+	std::cerr << "test(): encrypted1 → " << encrypted1 << std::endl;
     std::string decrypted1 = ciphers::morse::decrypt(encrypted1);
+	std::cerr << "test(): decrypted1 → " << decrypted1 << std::endl;
     assert(text1 == decrypted1);
     std::cout << "Original text : " << text1 << std::endl;
     std::cout << "Encrypted text : " << encrypted1 << std::endl;
     std::cout << "Decrypted text : " << decrypted1 << std::endl;
     // Test 2
     std::string text2 = "abcdefghijklmnopqrstuvwxyz";
+	std::cerr << "test(): text2 → " << text2 << std::endl;
     std::string encrypted2 = ciphers::morse::encrypt(text2);
+	std::cerr << "test(): encrypted2 → " << encrypted2 << std::endl;
     std::string decrypted2 = ciphers::morse::decrypt(encrypted2);
+	std::cerr << "test(): decrypted2 → " << decrypted2 << std::endl;
     assert(text2 == decrypted2);
     std::cout << "Original text : " << text2 << std::endl;
     std::cout << "Encrypted text : " << encrypted2 << std::endl;
     std::cout << "Decrypted text : " << decrypted2 << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -266,7 +286,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // Testing
     test();
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

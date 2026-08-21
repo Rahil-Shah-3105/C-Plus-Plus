@@ -86,6 +86,7 @@ class LFUCache {
      * @param node node to be pushed to the linked list.
      */
     void push(int freq, CacheNode<K, V> *node) {
+		std::cerr << ">>> Entering push(freq=" << freq << ",node=" << node << ")" << std::endl;
         // if freq is not present, then make a new list with node as the head as
         // well as tail.
         if (!freq_map.count(freq)) {
@@ -99,7 +100,9 @@ class LFUCache {
         // head.
         p.first->prev = node;
         node->next = p.first;
+		std::cerr << "push(freq=" << freq << ",node=" << node << "): p.first → " << p.first << std::endl;
         p.first = node;
+		std::cerr << "<<< Exiting push(freq=" << freq << ",node=" << node << ")" << std::endl;
     }
 
     /**
@@ -147,6 +150,7 @@ class LFUCache {
      * @brief pop the last node in the least frequently used linked list
      */
     void pop() {
+		std::cerr << ">>> Entering pop()" << std::endl;
         std::pair<CacheNode<K, V> *, CacheNode<K, V> *> &p = freq_map[minFreq];
 
         // if there is only one node
@@ -161,8 +165,10 @@ class LFUCache {
         // remove the last node in the linked list
         CacheNode<K, V> *temp = p.second;
         p.second = temp->prev;
+		std::cerr << "pop(): p.second → " << p.second << std::endl;
         p.second->next = nullptr;
         delete temp;
+		std::cerr << "<<< Exiting pop()" << std::endl;
     }
 
  public:
@@ -172,6 +178,7 @@ class LFUCache {
      * @param value value of the key-value pair
      */
     void put(K key, V value) {
+		std::cerr << ">>> Entering put(key=" << key << ",value=" << value << ")" << std::endl;
         // update the value if key already exists
         if (node_map.count(key)) {
             node_map[key].first->data.second = value;
@@ -190,7 +197,9 @@ class LFUCache {
         CacheNode<K, V> *node = new CacheNode<K, V>({key, value});
         node_map[key] = {node, 1};
         minFreq = 1;
+		std::cerr << "put(key=" << key << ",value=" << value << "): minFreq → " << minFreq << std::endl;
         push(1, node);
+		std::cerr << "<<< Exiting put(key=" << key << ",value=" << value << ")" << std::endl;
     }
 
     /**
@@ -200,13 +209,16 @@ class LFUCache {
      * @exception exception is thrown if the key is not present in the cache
      */
     V get(K key) {
+		std::cerr << ">>> Entering get(key=" << key << ")" << std::endl;
         if (!node_map.count(key)) {
+			std::cerr << "Throwing std from get(key=" << key << ")" << std::endl;
             throw std::runtime_error("key is not present in the cache");
         }
 
         // increase the frequency and return the value
         V value = node_map[key].first->data.second;
         increase_frequency(node_map[key]);
+		std::cerr << "<<< Exiting get(key=" << key << ")" << std::endl;
         return value;
     }
 
@@ -233,11 +245,13 @@ class LFUCache {
      * present in the cache.
      */
     ~LFUCache() {
+		std::cerr << ">>> Entering ~LFUCache()" << std::endl;
         auto it = node_map.begin();
         while (it != node_map.end()) {
             delete it->second.first;
             ++it;
         }
+		std::cerr << "<<< Exiting ~LFUCache()" << std::endl;
     }
 };
 }  // namespace Cache
@@ -248,6 +262,7 @@ class LFUCache {
  * @return void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     others::Cache::LFUCache<int, int> cache(5);
 
     // test the initial state of the cache
@@ -292,6 +307,7 @@ static void test() {
     assert(cache.get(6) == 60);
 
     std::cout << "test - passed\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -299,6 +315,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run the self test implementation
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

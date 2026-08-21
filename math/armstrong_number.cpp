@@ -26,11 +26,13 @@
  * @return Total number of digits.
  */
 int number_of_digits(int num) {
+	std::cerr << ">>> Entering number_of_digits(num=" << num << ")" << std::endl;
     int total_digits = 0;
     while (num > 0) {
         num = num / 10;
         ++total_digits;
     }
+	std::cerr << "<<< Exiting number_of_digits(num=" << num << ")" << std::endl;
     return total_digits;
 }
 
@@ -41,6 +43,7 @@ int number_of_digits(int num) {
  * @return `false` if the number is not armstrong.
  */
 bool is_armstrong(int number) {
+	std::cerr << ">>> Entering is_armstrong(number=" << number << ")" << std::endl;
     // If the number is less than 0, then it is not an armstrong number.
     if (number < 0) {
         return false;
@@ -50,6 +53,7 @@ bool is_armstrong(int number) {
     int temp = number;
     // Finding the total number of digits in the number
     int total_digits = number_of_digits(number);
+	std::cerr << "is_armstrong(number=" << number << "): total_digits → " << total_digits << std::endl;
     while (temp > 0) {
         int rem = temp % 10;
         // Finding each digit raised to the power total digit and add it to the
@@ -57,6 +61,7 @@ bool is_armstrong(int number) {
         sum += static_cast<int>(std::pow(rem, total_digits));
         temp = temp / 10;
     }
+	std::cerr << "<<< Exiting is_armstrong(number=" << number << ")" << std::endl;
     return number == sum;
 }
 
@@ -65,6 +70,7 @@ bool is_armstrong(int number) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // is_armstrong(370) returns true.
     assert(is_armstrong(370) == true);
     // is_armstrong(225) returns false.
@@ -79,6 +85,7 @@ static void test() {
     assert(is_armstrong(12) == false);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -86,6 +93,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

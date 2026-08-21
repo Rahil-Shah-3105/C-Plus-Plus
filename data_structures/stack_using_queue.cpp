@@ -46,6 +46,7 @@ struct Stack {
      * @returns void
      */
     void push(int val) {
+		std::cerr << ">>> Entering push(val=" << val << ")" << std::endl;
         auxiliary_q.push(val);
         while (!main_q.empty()) {
             auxiliary_q.push(main_q.front());
@@ -53,6 +54,7 @@ struct Stack {
         }
         swap(main_q, auxiliary_q);
         current_size++;
+		std::cerr << "<<< Exiting push(val=" << val << ")" << std::endl;
     }
 
     /**
@@ -60,11 +62,13 @@ struct Stack {
      * @returns void
      */
     void pop() {
+		std::cerr << ">>> Entering pop()" << std::endl;
         if (main_q.empty()) {
             return;
         }
         main_q.pop();
         current_size--;
+		std::cerr << "<<< Exiting pop()" << std::endl;
     }
 
     /**
@@ -81,6 +85,7 @@ struct Stack {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     data_structures::stack_using_queue::Stack s;
     s.push(1);  /// insert an element into the stack
     s.push(2);  /// insert an element into the stack
@@ -103,6 +108,7 @@ static void test() {
     assert(s.top() == 1);  /// topmost element in the stack should now be 1
 
     assert(s.size() == 1);  /// size should be 1
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -114,6 +120,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

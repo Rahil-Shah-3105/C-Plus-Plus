@@ -86,6 +86,7 @@ bool solve(int x, int y, int mov, std::array<std::array<int, V>, V> &sol,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     const int n = 8;
     std::array<std::array<int, n>, n> sol = {0};
 
@@ -102,6 +103,7 @@ int main() {
     sol[0][0] = 0;
 
     bool flag = backtracking::knight_tour::solve<n>(0, 0, 1, sol, xmov, ymov);
+	std::cerr << "main(): flag → " << flag << std::endl;
     if (flag == false) {
         std::cout << "Error: Solution does not exist\n";
     } else {
@@ -112,5 +114,6 @@ int main() {
             std::cout << "\n";
         }
     }
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

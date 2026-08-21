@@ -26,6 +26,7 @@ namespace math {
  */
 template <typename T>
 T cube_volume(T length) {
+	std::cerr << ">>> Entering cube_volume(length=" << length << ")" << std::endl;
     return std::pow(length, 3);
 }
 
@@ -39,6 +40,7 @@ T cube_volume(T length) {
  */
 template <typename T>
 T rect_prism_volume(T length, T width, T height) {
+	std::cerr << ">>> Entering rect_prism_volume(length=" << length << ",width=" << width << ",height=" << height << ")" << std::endl;
     return length * width * height;
 }
 
@@ -51,6 +53,7 @@ T rect_prism_volume(T length, T width, T height) {
  */
 template <typename T>
 T cone_volume(T radius, T height, double PI = 3.14) {
+	std::cerr << ">>> Entering cone_volume(radius=" << radius << ",height=" << height << ",PI=" << PI << ")" << std::endl;
     return std::pow(radius, 2) * PI * height / 3;
 }
 
@@ -65,6 +68,7 @@ T cone_volume(T radius, T height, double PI = 3.14) {
  */
 template <typename T>
 T triangle_prism_volume(T base, T height, T depth) {
+	std::cerr << ">>> Entering triangle_prism_volume(base=" << base << ",height=" << height << ",depth=" << depth << ")" << std::endl;
     return base * height * depth / 2;
 }
 
@@ -78,6 +82,7 @@ T triangle_prism_volume(T base, T height, T depth) {
  */
 template <typename T>
 T pyramid_volume(T length, T width, T height) {
+	std::cerr << ">>> Entering pyramid_volume(length=" << length << ",width=" << width << ",height=" << height << ")" << std::endl;
     return length * width * height / 3;
 }
 
@@ -89,6 +94,7 @@ T pyramid_volume(T length, T width, T height) {
  */
 template <typename T>
 T sphere_volume(T radius, double PI = 3.14) {
+	std::cerr << ">>> Entering sphere_volume(radius=" << radius << ",PI=" << PI << ")" << std::endl;
     return PI * std::pow(radius, 3) * 4 / 3;
 }
 
@@ -101,6 +107,7 @@ T sphere_volume(T radius, double PI = 3.14) {
  */
 template <typename T>
 T cylinder_volume(T radius, T height, double PI = 3.14) {
+	std::cerr << ">>> Entering cylinder_volume(radius=" << radius << ",height=" << height << ",PI=" << PI << ")" << std::endl;
     return PI * std::pow(radius, 2) * height;
 }
 }  // namespace math
@@ -110,22 +117,34 @@ T cylinder_volume(T radius, T height, double PI = 3.14) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Input variables
     uint32_t int_length = 0; // 32 bit integer length input
+	std::cerr << "test(): int_length → " << int_length << std::endl;
     uint32_t int_width = 0;  // 32 bit integer width input
+	std::cerr << "test(): int_width → " << int_width << std::endl;
     uint32_t int_base = 0;   // 32 bit integer base input
+	std::cerr << "test(): int_base → " << int_base << std::endl;
     uint32_t int_height = 0; // 32 bit integer height input
+	std::cerr << "test(): int_height → " << int_height << std::endl;
     uint32_t int_depth = 0;  // 32 bit integer depth input
+	std::cerr << "test(): int_depth → " << int_depth << std::endl;
 
     double double_radius = NAN; // double radius input
+	std::cerr << "test(): double_radius → " << double_radius << std::endl;
     double double_height = NAN; // double height input
+	std::cerr << "test(): double_height → " << double_height << std::endl;
 
     // Output variables
     uint32_t int_expected = 0; // 32 bit integer expected output
+	std::cerr << "test(): int_expected → " << int_expected << std::endl;
     uint32_t int_volume = 0;   // 32 bit integer output
+	std::cerr << "test(): int_volume → " << int_volume << std::endl;
 
     double double_expected = NAN; // double expected output
+	std::cerr << "test(): double_expected → " << double_expected << std::endl;
     double double_volume = NAN;   // double output
+	std::cerr << "test(): double_volume → " << double_volume << std::endl;
 
     // 1st test
     int_length = 5;
@@ -226,6 +245,7 @@ static void test() {
     std::cout << "Output: " << double_volume << std::endl;
     assert(double_volume == double_expected);
     std::cout << "TEST PASSED" << std::endl << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -233,6 +253,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

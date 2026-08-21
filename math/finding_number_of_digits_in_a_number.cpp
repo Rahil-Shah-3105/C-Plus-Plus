@@ -29,8 +29,10 @@
  * @returns the digits count
  */
 uint64_t finding_number_of_digits_in_a_number(uint64_t n) {
+	std::cerr << ">>> Entering finding_number_of_digits_in_a_number(n=" << n << ")" << std::endl;
     uint64_t count = 0;  ///< the variable used for the digits count
 
+	std::cerr << "finding_number_of_digits_in_a_number(n=" << n << "): count → " << count << std::endl;
     // iterate until `n` becomes 0
     // remove last digit from `n` in each iteration
     // increase `count` by 1 in each iteration
@@ -41,6 +43,7 @@ uint64_t finding_number_of_digits_in_a_number(uint64_t n) {
         ++count;
     }
 
+	std::cerr << "<<< Exiting finding_number_of_digits_in_a_number(n=" << n << ")" << std::endl;
     return count;
 }
 
@@ -52,6 +55,7 @@ uint64_t finding_number_of_digits_in_a_number(uint64_t n) {
  * @returns the digits count
  */
 double finding_number_of_digits_in_a_number_using_log(double n) {
+	std::cerr << ">>> Entering finding_number_of_digits_in_a_number_using_log(n=" << n << ")" << std::endl;
     // log(0) is undefined
     if (n == 0) {
         return 0;
@@ -63,7 +67,9 @@ double finding_number_of_digits_in_a_number_using_log(double n) {
     }
 
     double count = floor(log10(n) + 1);
+	std::cerr << "finding_number_of_digits_in_a_number_using_log(n=" << n << "): count → " << count << std::endl;
 
+	std::cerr << "<<< Exiting finding_number_of_digits_in_a_number_using_log(n=" << n << ")" << std::endl;
     return count;
 }
 
@@ -72,6 +78,7 @@ double finding_number_of_digits_in_a_number_using_log(double n) {
  * @returns void
  */
 static void first_test() {
+	std::cerr << ">>> Entering first_test()" << std::endl;
     assert(finding_number_of_digits_in_a_number(5492) == 4);
     assert(finding_number_of_digits_in_a_number(-0) == 0);
     assert(finding_number_of_digits_in_a_number(10000) == 5);
@@ -79,9 +86,11 @@ static void first_test() {
     assert(finding_number_of_digits_in_a_number(100000) == 6);
     assert(finding_number_of_digits_in_a_number(13) == 2);
     assert(finding_number_of_digits_in_a_number(564) == 3);
+	std::cerr << "<<< Exiting first_test()" << std::endl;
 }
 
 static void second_test() {
+	std::cerr << ">>> Entering second_test()" << std::endl;
     assert(finding_number_of_digits_in_a_number_using_log(5492) == 4);
     assert(finding_number_of_digits_in_a_number_using_log(-0) == 0);
     assert(finding_number_of_digits_in_a_number_using_log(10000) == 5);
@@ -89,15 +98,18 @@ static void second_test() {
     assert(finding_number_of_digits_in_a_number_using_log(100000) == 6);
     assert(finding_number_of_digits_in_a_number_using_log(13) == 2);
     assert(finding_number_of_digits_in_a_number_using_log(564) == 3);
+	std::cerr << "<<< Exiting second_test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     // run self-test implementations
     first_test();
     second_test();
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

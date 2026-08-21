@@ -198,6 +198,7 @@ int Bidijkstra(std::vector<std::vector<std::pair<uint64_t, uint64_t>>> *adj1,
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     std::cout << "Initiatinig Predefined Tests..." << std::endl;
     std::cout << "Initiating Test 1..." << std::endl;
     std::vector<std::vector<std::pair<uint64_t, uint64_t>>> adj1_1(
@@ -210,6 +211,7 @@ static void tests() {
     graph::bidirectional_dijkstra::addEdge(&adj1_1, &adj1_2, 1, 3, 5);
 
     uint64_t s = 1, t = 3;
+	std::cerr << "tests(): s → " << s << std::endl;
     assert(graph::bidirectional_dijkstra::Bidijkstra(&adj1_1, &adj1_2, s - 1,
                                                      t - 1) == 3);
     std::cout << "Test 1 Passed..." << std::endl;
@@ -240,6 +242,7 @@ static void tests() {
                                                      t - 1) == 6);
     std::cout << "Test 3 Passed..." << std::endl;
     std::cout << "All Test Passed..." << std::endl << std::endl;
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -247,8 +250,10 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // running predefined tests
     uint64_t vertices = uint64_t();
+	std::cerr << "main(): vertices → " << vertices << std::endl;
     uint64_t edges = uint64_t();
     std::cout << "Enter the number of vertices : ";
     std::cin >> vertices;
@@ -261,6 +266,7 @@ int main() {
         vertices, std::vector<std::pair<uint64_t, uint64_t>>());
 
     uint64_t u = uint64_t(), v = uint64_t(), w = uint64_t();
+	std::cerr << "main(): u → " << u << std::endl;
     std::cout << "Enter the edges by three integers in this form: u v w "
               << std::endl;
     std::cout << "Example: if there is and edge between node 1 and node 4 with "
@@ -275,6 +281,7 @@ int main() {
     }
 
     uint64_t s = uint64_t(), t = uint64_t();
+	std::cerr << "main(): s → " << s << std::endl;
     std::cout
         << "Enter the source node and the target node separated by a space"
         << std::endl;
@@ -290,5 +297,6 @@ int main() {
         std::cout << "Shortest Path Distance : " << dist << std::endl;
     }
 
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

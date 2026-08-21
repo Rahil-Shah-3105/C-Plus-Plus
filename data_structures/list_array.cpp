@@ -95,12 +95,14 @@ struct list {
      * @return index of element in the list if present else -1
      */
     uint64_t search(const uint64_t &val) {
+		std::cerr << ">>> Entering search(val=" << val << ")" << std::endl;
         uint64_t pos;  // pos variable to store index value of element.
         // if list is sorted, binary search works efficiently else linear search
         // is the only option
         if (isSorted) {
             pos = BinarySearch(data, 0, top - 1, val);
         } else {
+			std::cerr << "search(val=" << val << "): pos → " << pos << std::endl;
             pos = LinearSearch(data, val);
         }
         // if index is equal to -1 means element does not present
@@ -111,6 +113,7 @@ struct list {
             std::cout << "\nElement not found";
         }
         // return the index of element or -1.
+		std::cerr << "<<< Exiting search(val=" << val << ")" << std::endl;
         return pos;
     }
 
@@ -119,9 +122,11 @@ struct list {
      * @returns void
      */
     void sort() {
+		std::cerr << ">>> Entering sort()" << std::endl;
         // Going through each element in the list
         for (uint64_t i = 0; i < top; i++) {
             uint64_t min_idx = i;  // Initialize the min variable
+			std::cerr << "sort(): min_idx → " << min_idx << std::endl;
             for (uint64_t j = i + 1; j < top; j++) {
                 // check whether any element less than current min value
                 if (data[j] < data[min_idx]) {
@@ -132,7 +137,9 @@ struct list {
             std::swap(data[min_idx], data[i]);
         }
         // mark isSorted variable as true
+		std::cerr << "<<< Exiting sort()" << std::endl;
         isSorted = true;
+		std::cerr << "sort(): isSorted → " << isSorted << std::endl;
     }
 
     /**
@@ -141,6 +148,7 @@ struct list {
      * @returns void
      */
     void insert(const uint64_t &val) {
+		std::cerr << ">>> Entering insert(val=" << val << ")" << std::endl;
         // overflow check
         if (top == N) {
             std::cout << "\nOverflow";
@@ -153,6 +161,7 @@ struct list {
             top++;
         } else {
             uint64_t pos = 0;  // Initialize the index variable
+			std::cerr << "insert(val=" << val << "): pos → " << pos << std::endl;
             // Going through each element and find correct position for element
             for (uint64_t i = 0; i < top - 1; i++) {
                 // check for the correct position
@@ -173,6 +182,7 @@ struct list {
             data[pos] =
                 val;  // Assign the value to the correct index in the array
         }
+		std::cerr << "<<< Exiting insert(val=" << val << ")" << std::endl;
     }
 
     /**
@@ -181,8 +191,10 @@ struct list {
      * @returns void
      */
     void remove(const uint64_t &val) {
+		std::cerr << ">>> Entering remove(val=" << val << ")" << std::endl;
         uint64_t pos = search(val);  // search the index of the value
         // if search returns -1, element does not present in the list
+		std::cerr << "remove(val=" << val << "): pos → " << pos << std::endl;
         if (pos == -1) {
             std::cout << "\n Element does not present in the list ";
             return;
@@ -194,6 +206,7 @@ struct list {
             data[i] = data[i + 1];
         }
         top--;  // decrement the top variable to maintain last index
+		std::cerr << "<<< Exiting remove(val=" << val << ")" << std::endl;
     }
 
     /**
@@ -201,11 +214,13 @@ struct list {
      * @returns void
      */
     void show() {
+		std::cerr << ">>> Entering show()" << std::endl;
         // Going through each element in the list
         std::cout << '\n';
         for (uint64_t i = 0; i < top; i++) {
             std::cout << data[i] << " ";  // print the element
         }
+		std::cerr << "<<< Exiting show()" << std::endl;
     }
 };  // structure list
 }  // namespace list_array
@@ -216,6 +231,7 @@ struct list {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     data_structures::list_array::list<50> L;
 
     // Insert testing
@@ -251,6 +267,7 @@ static void test() {
     assert(L.search(11) == 1);  // search for the existing element
     assert(L.search(12) == 2);
     assert(L.search(50) == -1);  // search for the non-existing element
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -258,6 +275,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // Execute the tests
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

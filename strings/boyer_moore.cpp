@@ -198,6 +198,7 @@ std::vector<size_t> search(const std::string& str, const pattern& arg) {
  * @returns `false` if pat is NOT a prefix of str.
  */
 bool is_prefix(const char* str, const char* pat, size_t len) {
+	std::cerr << ">>> Entering is_prefix(str=" << str << ",pat=" << pat << ",len=" << len << ")" << std::endl;
     if (strlen(str) < len) {
         return false;
     }
@@ -208,6 +209,7 @@ bool is_prefix(const char* str, const char* pat, size_t len) {
         }
     }
 
+	std::cerr << "<<< Exiting is_prefix(str=" << str << ",pat=" << pat << ",len=" << len << ")" << std::endl;
     return true;
 }
 }  // namespace boyer_moore
@@ -218,6 +220,7 @@ bool is_prefix(const char* str, const char* pat, size_t len) {
  * @returns void
  */
 void and_test(const char* text) {
+	std::cerr << ">>> Entering and_test(text=" << text << ")" << std::endl;
     strings::boyer_moore::pattern ands;
     strings::boyer_moore::init_pattern("and", ands);
     std::vector<size_t> indexes = strings::boyer_moore::search(text, ands);
@@ -225,6 +228,7 @@ void and_test(const char* text) {
     assert(indexes.size() == 2);
     assert(strings::boyer_moore::is_prefix(text + indexes[0], "and", 3));
     assert(strings::boyer_moore::is_prefix(text + indexes[1], "and", 3));
+	std::cerr << "<<< Exiting and_test(text=" << text << ")" << std::endl;
 }
 
 /**
@@ -233,6 +237,7 @@ void and_test(const char* text) {
  * @returns void
  */
 void pat_test(const char* text) {
+	std::cerr << ">>> Entering pat_test(text=" << text << ")" << std::endl;
     strings::boyer_moore::pattern pat;
     strings::boyer_moore::init_pattern("pat", pat);
     std::vector<size_t> indexes = strings::boyer_moore::search(text, pat);
@@ -242,12 +247,14 @@ void pat_test(const char* text) {
     for (const auto& currentIndex : indexes) {
         assert(strings::boyer_moore::is_prefix(text + currentIndex, "pat", 3));
     }
+	std::cerr << "<<< Exiting pat_test(text=" << text << ")" << std::endl;
 }
 /**
  * @brief Self-test implementations
  * @returns void
  */
 static void tests() {
+	std::cerr << ">>> Entering tests()" << std::endl;
     const char* text =
         "When pat Mr. and Mrs. pat Dursley woke up on the dull, gray  \
                             Tuesday our story starts, \
@@ -260,6 +267,7 @@ static void tests() {
     pat_test(text);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "<<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -267,6 +275,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

@@ -90,6 +90,7 @@ class LRUCache {
      * @returns void
      * */
     void refer(uint64_t page) {
+		std::cerr << ">>> Entering refer(page=" << page << ")" << std::endl;
         // If the page requested not in cache.
         if (pageMap.find(page) == pageMap.end()) {
             pageFault++;  ///< Increase the page fault by one.
@@ -98,6 +99,7 @@ class LRUCache {
             if (cache.size() == pageFrame) {
                 // delete the last page from cache
                 uint64_t lastPage = cache.back();
+				std::cerr << "refer(page=" << page << "): lastPage → " << lastPage << std::endl;
                 cache.pop_back();
                 pageMap.erase(lastPage);
             }
@@ -112,6 +114,7 @@ class LRUCache {
         // page map.
         cache.push_front(page);
         pageMap[page] = cache.begin();
+		std::cerr << "<<< Exiting refer(page=" << page << ")" << std::endl;
     }
 
     /**
@@ -119,10 +122,12 @@ class LRUCache {
      * @returns Void
      * */
     void display() {
+		std::cerr << ">>> Entering display()" << std::endl;
         for (uint64_t &it : cache) {
             std::cout << it << " ";
         }
         std::cout << std::endl;
+		std::cerr << "<<< Exiting display()" << std::endl;
     }
     /**
      * @brief A function to get page hits
@@ -147,8 +152,10 @@ namespace lru_tests {
  * */
 template <typename T>
 void log(T msg) {
+	std::cerr << ">>> Entering log(msg=" << msg << ")" << std::endl;
     // It's just to avoid writing cout and endl
     std::cout << "[TESTS] : ---> " << msg << std::endl;
+	std::cerr << "<<< Exiting log(msg=" << msg << ")" << std::endl;
 }
 
 /**
@@ -158,6 +165,7 @@ void log(T msg) {
  * @returns void
  * */
 static void test_1() {
+	std::cerr << ">>> Entering test_1()" << std::endl;
     uint64_t expected_hits = 2;
     uint64_t expected_pageFault = 4;
 
@@ -176,6 +184,7 @@ static void test_1() {
            cache.getPageFault() == expected_pageFault);
     log("Assert successful!");
     log("Test-1 complete!");
+	std::cerr << "<<< Exiting test_1()" << std::endl;
 }
 
 /**
@@ -185,6 +194,7 @@ static void test_1() {
  * @returns void
  * */
 static void test_2() {
+	std::cerr << ">>> Entering test_2()" << std::endl;
     uint64_t expected_hits = 4;
     uint64_t expected_pageFault = 2;
 
@@ -203,6 +213,7 @@ static void test_2() {
            cache.getPageFault() == expected_pageFault);
     log("Assert successful!");
     log("Test-2 complete!");
+	std::cerr << "<<< Exiting test_2()" << std::endl;
 }
 
 /**
@@ -212,6 +223,7 @@ static void test_2() {
  * @returns void
  * */
 static void test_3() {
+	std::cerr << ">>> Entering test_3()" << std::endl;
     uint64_t expected_hits = 1;
     uint64_t expected_pageFault = 5;
 
@@ -230,6 +242,7 @@ static void test_3() {
            cache.getPageFault() == expected_pageFault);
     log("Assert successful!");
     log("Test-3 complete!");
+	std::cerr << "<<< Exiting test_3()" << std::endl;
 }
 
 /**
@@ -237,11 +250,13 @@ static void test_3() {
  * @returns void
  * */
 static void run_tests() {
+	std::cerr << ">>> Entering run_tests()" << std::endl;
     test_1();
     test_2();
     test_3();
     log("");
     log("TESTS COMPLETED!");
+	std::cerr << "<<< Exiting run_tests()" << std::endl;
 }
 }  // namespace lru_tests
 
@@ -250,6 +265,7 @@ static void run_tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     lru_tests::run_tests();
 
     // Usage
@@ -265,5 +281,6 @@ int main() {
 
     std::cout << "Hits: " << cache.getHits()
               << " Miss: " << cache.getPageFault() << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

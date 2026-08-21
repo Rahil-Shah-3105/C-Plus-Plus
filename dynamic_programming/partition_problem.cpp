@@ -87,13 +87,16 @@ bool findPartiion(const std::vector<uint64_t> &arr, uint64_t size) {
  * @returns void
  *******************************************************************************/
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     std::vector<uint64_t> arr = {{1, 3, 3, 2, 3, 2}};
     uint64_t n = arr.size();
+	std::cerr << "test(): n → " << n << std::endl;
     bool expected_result = true;
     bool derived_result = dp::partitionProblem::findPartiion(arr, n);
     std::cout << "1st test: ";
     assert(expected_result == derived_result);
     std::cout << "Passed!" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /*******************************************************************************
@@ -101,6 +104,8 @@ static void test() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

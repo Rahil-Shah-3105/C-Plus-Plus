@@ -90,6 +90,7 @@ std::vector<T> cycleSort(const std::vector<T> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << ">>> Entering test()" << std::endl;
     // Test 1
     // [4, 3, 2, 1] return [1, 2, 3, 4]
     std::vector<uint32_t> array1 = {4, 3, 2, 1};
@@ -119,6 +120,7 @@ static void test() {
     std::vector<uint32_t> arr4 = sorting::cycle_sort::cycleSort(array4);
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "<<< Exiting test()" << std::endl;
 }
 
 /**
@@ -126,6 +128,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << ">>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }

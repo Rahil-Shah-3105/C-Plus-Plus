@@ -51,6 +51,7 @@
  * \returns random number in the range \f$[a,b]\f$
  */
 double _random(double a, double b) {
+	std::cerr << ">>> Entering _random(a=" << a << ",b=" << b << ")" << std::endl;
     return ((b - a) * (std::rand() % 100) / 100.f) + a;
 }
 

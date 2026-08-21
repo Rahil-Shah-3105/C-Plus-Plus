@@ -9,6 +9,7 @@
  * Main program
  */
 int main(void) {
+	std::cerr << ">>> Entering main()" << std::endl;
     int valueToConvert = 0;  // Holds user input
     int hexArray[8];         // Contains hex values backwards
     int i = 0;               // counter
@@ -30,5 +31,6 @@ int main(void) {
     while (i >= 0) std::cout << HexValues[hexArray[i--]];
 
     std::cout << std::endl;
+	std::cerr << "<<< Exiting main()" << std::endl;
     return 0;
 }
