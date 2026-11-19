@@ -466,6 +466,8 @@ class HLD : public Tree<X>, public SG<X> {
             }
         }
 		std::cerr << "[WARN] <<< Exiting chain_query(a=" << a << ",b=" << b << ")" << std::endl;
+		std::cerr << "[ERROR] >>> Entering query(a=" << a << ",b=" << b << ")" << std::endl;
+		std::cerr << "[WARN] <<< Exiting query(a=" << a << ",b=" << b << ")" << std::endl;
         return ret;
     }
 

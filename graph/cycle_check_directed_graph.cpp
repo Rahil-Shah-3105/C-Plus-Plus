@@ -131,6 +131,8 @@ class Graph {
         }
         m_adjList[edge.src].emplace_back(edge.dest);
 		std::cerr << "[ERROR] Throwing std from addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
+		std::cerr << "[ERROR] >>> Entering addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
+		std::cerr << "[WARN] <<< Exiting addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
     }
 
     /** Add an Edge in the graph
@@ -216,8 +218,10 @@ class CycleCheck {
      * @return true if a cycle is detected, else false.
      */
     static bool isCyclicDFS(Graph const& graph) {
+		std::cerr << "[ERROR] >>> Entering isCyclicDFS(graph=" << graph << ")" << std::endl;
         auto vertices = graph.getVertices();
 
+		std::cerr << "[ERROR] isCyclicDFS(graph=" << graph << "): vertices → " << vertices << std::endl;
         /** State of the node.
          *
          * It is a vector of "nodeStates" which represents the state node is in.
@@ -242,6 +246,7 @@ class CycleCheck {
 
         // All nodes have been safely traversed, that means there is no cycle in
         // the graph. Return false.
+		std::cerr << "[WARN] <<< Exiting isCyclicDFS(graph=" << graph << ")" << std::endl;
         return false;
     }
 
@@ -253,8 +258,11 @@ class CycleCheck {
      * @return true if a cycle is detected, else false.
      */
     static bool isCyclicBFS(Graph const& graph) {
+		std::cerr << "[ERROR] >>> Entering isCyclicBFS(graph=" << graph << ")" << std::endl;
         auto graphAjdList = graph.getAdjList();
         auto vertices = graph.getVertices();
+		std::cerr << "[ERROR] isCyclicBFS(graph=" << graph << "): vertices → " << vertices << std::endl;
+		std::cerr << "[ERROR] isCyclicBFS(graph=" << graph << "): graphAjdList → " << graphAjdList << std::endl;
 
         std::vector<unsigned int> indegree(vertices, 0);
         // Calculate the indegree i.e. the number of incident edges to the node.
@@ -279,6 +287,7 @@ class CycleCheck {
         // While there are safe nodes that we can visit.
         while (!can_be_solved.empty()) {
             auto solved = can_be_solved.front();
+			std::cerr << "[ERROR] isCyclicBFS(graph=" << graph << "): solved → " << solved << std::endl;
             // Visit the node.
             can_be_solved.pop();
             // Decrease number of nodes that need to be traversed.
@@ -286,6 +295,7 @@ class CycleCheck {
 
             // Visit all the children of the visited node.
             auto it = graphAjdList.find(solved);
+			std::cerr << "[ERROR] isCyclicBFS(graph=" << graph << "): it → " << it << std::endl;
             if (it != graphAjdList.end()) {
                 for (auto child : it->second) {
                     // Check if we can visited the node safely.
@@ -300,6 +310,7 @@ class CycleCheck {
 
         // If there are still nodes that we can't visit, then it means that
         // there is a cycle and return true, else return false.
+		std::cerr << "[WARN] <<< Exiting isCyclicBFS(graph=" << graph << ")" << std::endl;
         return !(remain == 0);
     }
 };
@@ -308,6 +319,7 @@ class CycleCheck {
  * Main function.
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Instantiate the graph.
     Graph g(7, std::vector<Edge>{{0, 1}, {1, 2}, {2, 0}, {2, 5}, {3, 5}});
     // Check for cycle using BFS method.
@@ -315,5 +327,6 @@ int main() {
 
     // Check for cycle using DFS method.
     std::cout << CycleCheck::isCyclicDFS(g) << '\n';
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

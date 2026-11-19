@@ -15,6 +15,7 @@ int gcd(int num1, int num2) {
 	std::cerr << "[ERROR] >>> Entering gcd(num1=" << num1 << ",num2=" << num2 << ")" << std::endl;
     if (num1 <= 0 | num2 <= 0) {
 		std::cerr << "[ERROR] Throwing std from gcd(num1=" << num1 << ",num2=" << num2 << ")" << std::endl;
+		std::cerr << "[WARN] <<< Exiting gcd(num1=" << num1 << ",num2=" << num2 << ")" << std::endl;
         throw std::domain_error("Euclidean algorithm domain is for ints > 0");
     }
 

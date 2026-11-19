@@ -106,10 +106,12 @@ class queue {
     void clear() {
 		std::cerr << "[ERROR] >>> Entering clear()" << std::endl;
         queueFront = nullptr;
+		std::cerr << "[DEBUG] clear(): queueFront → " << queueFront << std::endl;
         queueRear = nullptr;
 		std::cerr << "[DEBUG] clear(): queueRear → " << queueRear << std::endl;
         size = 0;
 		std::cerr << "[DEBUG] clear(): size → " << size << std::endl;
+		std::cerr << "[WARN] <<< Exiting clear()" << std::endl;
     }
 
  private:

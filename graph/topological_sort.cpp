@@ -59,6 +59,8 @@ class Graph {
      * @returns A reference to the adjacency list
      */
     const std::vector<std::vector<int>>& getAdjacencyList() const {
+		std::cerr << "[ERROR] >>> Entering getAdjacencyList()" << std::endl;
+        std::cerr << "[WARN] <<< Exiting getAdjacencyList()" << std::endl;
         return adj;
     }
 
@@ -125,6 +127,7 @@ std::vector<int> topologicalSort(const Graph& g) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test 1
     std::cout << "Testing for graph 1\n";
     int n_1 = 6;
@@ -136,6 +139,7 @@ static void test() {
     graph1.addEdge(3, 1);
     graph1.addEdge(4, 1);
     std::vector<int> ans_1 = graph::topological_sort::topologicalSort(graph1);
+	std::cerr << "[ERROR] test(): ans_1.size() → " << ans_1.size() << std::endl;
     std::vector<int> expected_1 = {5, 4, 2, 3, 1, 0};
     std::cout << "Topological Sorting Order: ";
     for (int i : ans_1) {
@@ -156,6 +160,7 @@ static void test() {
     graph2.addEdge(1, 3);
     graph2.addEdge(2, 4);
     std::vector<int> ans_2 = graph::topological_sort::topologicalSort(graph2);
+	std::cerr << "[ERROR] test(): ans_2.size() → " << ans_2.size() << std::endl;
     std::vector<int> expected_2 = {0, 1, 2, 4, 3};
     std::cout << "Topological Sorting Order: ";
     for (int i : ans_2) {
@@ -178,6 +183,7 @@ static void test() {
         assert(std::string(err.what()) == "cycle detected in graph");
     }
     std::cout << "Test Passed\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -185,6 +191,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

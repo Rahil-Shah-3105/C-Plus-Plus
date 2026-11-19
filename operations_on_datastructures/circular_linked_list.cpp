@@ -9,6 +9,7 @@
  * @author [Alvin](https://github.com/polarvoid)
  */
 
+#include "chrono"
 #include <cassert>   /// for assert
 #include <iostream>  /// for IO operations
 #include <vector>    /// for std::vector
@@ -70,6 +71,7 @@ class CircularLinkedList {
     CircularLinkedList() {
 		std::cerr << "[ERROR] >>> Entering CircularLinkedList()" << std::endl;
         root = nullptr;
+		std::cerr << "[WARN] CircularLinkedList(): root → " << root << std::endl;
         end = nullptr;
 		std::cerr << "[DEBUG] CircularLinkedList(): end → " << end << std::endl;
 		std::cerr << "[WARN] <<< Exiting CircularLinkedList()" << std::endl;
@@ -174,6 +176,7 @@ class CircularLinkedList {
         insert(node);
 		std::cerr << "[WARN] <<< Exiting insert(data=" << data << ")" << std::endl;
 		std::cerr << "[ERROR] insert(node=" << node << "): end → " << end << std::endl;
+		std::cerr << "[ERROR] >>> Entering insert(node=" << node << ")" << std::endl;
     }
     /**
      * @brief Inserts a given Node into the Circular Linked List
