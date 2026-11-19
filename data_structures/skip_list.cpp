@@ -70,6 +70,7 @@ class SkipList {
 		std::cerr << "[DEBUG] SkipList(): level → " << level << std::endl;
         header = std::make_shared<Node>(-1, MAX_LEVEL);
 		std::cerr << "[ERROR] SkipList(): header → " << header << std::endl;
+		std::cerr << "[WARN] <<< Exiting SkipList()" << std::endl;
     }
 
     /**

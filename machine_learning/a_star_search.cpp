@@ -400,8 +400,10 @@ class AyStarSearch {
     AyStarSearch(const Puzzle &initial, const Puzzle &final) {
 		std::cerr << "[ERROR] >>> Entering AyStarSearch(initial=" << initial << ",final=" << final << ")" << std::endl;
         Initial = std::make_shared<Info>(initial);
+		std::cerr << "[DEBUG] AyStarSearch(initial=" << initial << ",final=" << final << "): Initial → " << Initial << std::endl;
         Final = std::make_shared<Info>(final);
 		std::cerr << "[ERROR] AyStarSearch(initial=" << initial << ",final=" << final << "): Final → " << Final << std::endl;
+		std::cerr << "[WARN] <<< Exiting AyStarSearch(initial=" << initial << ",final=" << final << ")" << std::endl;
     }
     /**
      * @brief A helper solution: launches when a solution for AyStarSearch

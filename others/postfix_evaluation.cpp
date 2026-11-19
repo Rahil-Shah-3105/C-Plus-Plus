@@ -35,6 +35,8 @@ namespace postfix_expression {
  * @returns bool boolean value if string is number
  */
 bool is_number(const std::string &s) {
+	std::cerr << "[ERROR] >>> Entering is_number(s=" << s << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting is_number(s=" << s << ")" << std::endl;
     return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
 
@@ -96,6 +98,7 @@ float remove_from_stack(std::stack<float> &stack) {
  * @returns stack[stackTop] returns the top value from the stack
  */
 float postfix_evaluation(const std::vector<std::string> &input) {
+	std::cerr << "[ERROR] >>> Entering postfix_evaluation(input.size()=" << input.size() << ")" << std::endl;
     std::stack<float> stack;
 
     for (const auto &scan : input) {
@@ -115,6 +118,7 @@ float postfix_evaluation(const std::vector<std::string> &input) {
 		std::cerr << "[ERROR] Throwing std from postfix_evaluation(input.size()=" << input.size() << ")" << std::endl;
         throw std::invalid_argument("Too many operands");
     }
+	std::cerr << "[WARN] <<< Exiting postfix_evaluation(input.size()=" << input.size() << ")" << std::endl;
     return res;
 }
 }  // namespace postfix_expression
@@ -126,11 +130,15 @@ float postfix_evaluation(const std::vector<std::string> &input) {
  * @returns none
  */
 static void test_function_1() {
+	std::cerr << "[ERROR] >>> Entering test_function_1()" << std::endl;
     std::vector<std::string> input = {"2", "3", "1", "*", "+", "9", "-"};
 
+	std::cerr << "[ERROR] test_function_1(): input.size() → " << input.size() << std::endl;
     float answer = others::postfix_expression::postfix_evaluation(input);
+	std::cerr << "[ERROR] test_function_1(): answer → " << answer << std::endl;
 
     assert(answer == -4);
+	std::cerr << "[WARN] <<< Exiting test_function_1()" << std::endl;
 }
 
 /**
@@ -139,62 +147,83 @@ static void test_function_1() {
  * @returns none
  */
 static void test_function_2() {
+	std::cerr << "[ERROR] >>> Entering test_function_2()" << std::endl;
     std::vector<std::string> input = {"100", "200", "+", "2", "/",
                                       "5",   "*",   "7", "+"};
     float answer = others::postfix_expression::postfix_evaluation(input);
+	std::cerr << "[ERROR] test_function_2(): answer → " << answer << std::endl;
 
     assert(answer == 757);
+	std::cerr << "[WARN] <<< Exiting test_function_2()" << std::endl;
 }
 
 static void test_function_3() {
+	std::cerr << "[ERROR] >>> Entering test_function_3()" << std::endl;
     std::vector<std::string> input = {
         "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
         "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
         "+", "+", "+", "+", "+", "+", "+", "+", "+", "+", "+",
         "+", "+", "+", "+", "+", "+", "+", "+", "+", "+"};
     float answer = others::postfix_expression::postfix_evaluation(input);
+	std::cerr << "[ERROR] test_function_3(): answer → " << answer << std::endl;
 
     assert(answer == 22);
+	std::cerr << "[WARN] <<< Exiting test_function_3()" << std::endl;
 }
 
 static void test_single_input() {
+	std::cerr << "[ERROR] >>> Entering test_single_input()" << std::endl;
     std::vector<std::string> input = {"1"};
     float answer = others::postfix_expression::postfix_evaluation(input);
+	std::cerr << "[ERROR] test_single_input(): answer → " << answer << std::endl;
+	std::cerr << "[ERROR] test_single_input(): input.size() → " << input.size() << std::endl;
 
     assert(answer == 1);
+	std::cerr << "[WARN] <<< Exiting test_single_input()" << std::endl;
 }
 
 static void test_not_enough_operands() {
+	std::cerr << "[ERROR] >>> Entering test_not_enough_operands()" << std::endl;
     std::vector<std::string> input = {"+"};
     bool throws = false;
+	std::cerr << "[ERROR] test_not_enough_operands(): input.size() → " << input.size() << std::endl;
     try {
         others::postfix_expression::postfix_evaluation(input);
     } catch (std::invalid_argument &) {
         throws = true;
+		std::cerr << "[ERROR] test_not_enough_operands(): throws → " << throws << std::endl;
     }
     assert(throws);
+	std::cerr << "[WARN] <<< Exiting test_not_enough_operands()" << std::endl;
 }
 
 static void test_not_enough_operands_empty_input() {
+	std::cerr << "[ERROR] >>> Entering test_not_enough_operands_empty_input()" << std::endl;
     std::vector<std::string> input = {};
     bool throws = false;
     try {
         others::postfix_expression::postfix_evaluation(input);
     } catch (std::invalid_argument &) {
         throws = true;
+		std::cerr << "[ERROR] test_not_enough_operands_empty_input(): throws → " << throws << std::endl;
     }
     assert(throws);
+	std::cerr << "[WARN] <<< Exiting test_not_enough_operands_empty_input()" << std::endl;
 }
 
 static void test_too_many_operands() {
+	std::cerr << "[ERROR] >>> Entering test_too_many_operands()" << std::endl;
     std::vector<std::string> input = {"1", "2"};
     bool throws = false;
+	std::cerr << "[ERROR] test_too_many_operands(): input.size() → " << input.size() << std::endl;
     try {
         others::postfix_expression::postfix_evaluation(input);
     } catch (std::invalid_argument &) {
         throws = true;
+		std::cerr << "[ERROR] test_too_many_operands(): throws → " << throws << std::endl;
     }
     assert(throws);
+	std::cerr << "[WARN] <<< Exiting test_too_many_operands()" << std::endl;
 }
 
 /**
@@ -202,6 +231,7 @@ static void test_too_many_operands() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test_function_1();
     test_function_2();
     test_function_3();
@@ -212,5 +242,6 @@ int main() {
 
     std::cout << "\nTest implementations passed!\n";
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

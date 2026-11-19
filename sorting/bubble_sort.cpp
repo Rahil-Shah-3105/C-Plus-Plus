@@ -114,10 +114,12 @@ std::cerr << "[ERROR] test(): sorted_4.size() → " << sorted_4.size() << std::e
   std::vector<char> vec_5 = {'z', 'Z', 'a', 'B', ' ', 'c', 'a'};
 std::cerr << "[ERROR] test(): vec_5.size() → " << vec_5.size() << std::endl;
   std::vector<char> sorted_5 = sorting::bubble_sort::bubble_sort(vec_5);
+std::cerr << "[ERROR] test(): sorted_5.size() → " << sorted_5.size() << std::endl;
 
   std::vector<std::string> vec_6 = {"Hello", "hello", "Helo", "Hi", "hehe"};
 std::cerr << "[ERROR] test(): vec_6.size() → " << vec_6.size() << std::endl;
   std::vector<std::string> sorted_6 = sorting::bubble_sort::bubble_sort(vec_6);
+std::cerr << "[ERROR] test(): sorted_6.size() → " << sorted_6.size() << std::endl;
 
   std::vector<std::pair<int, char>> vec_7 = {{10, 'c'}, {2, 'z'}, {10, 'a'}, {0, 'b'}, {-1, 'z'}};
   std::vector<std::pair<int, char>> sorted_7 = sorting::bubble_sort::bubble_sort(vec_7);

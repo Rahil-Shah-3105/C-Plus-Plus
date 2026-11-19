@@ -133,9 +133,11 @@ int rec_ternary_search(int left, int right, int A[], int target) {
  * \param[in] target value to search for
  */
 void ternary_search(int N, int A[], int target) {
+	std::cerr << "[ERROR] >>> Entering ternary_search(N=" << N << ",A=" << A << ",target=" << target << ")" << std::endl;
     std::cout << it_ternary_search(0, N - 1, A, target) << '\t';
     std::cout << rec_ternary_search(0, N - 1, A, target) << '\t';
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting ternary_search(N=" << N << ",A=" << A << ",target=" << target << ")" << std::endl;
 }
 
 /** Main function */

@@ -19,10 +19,12 @@ class MinHeap {
     explicit MinHeap(int cap) {
 		std::cerr << "[ERROR] >>> Entering MinHeap(cap=" << cap << ")" << std::endl;
         heap_size = 0;
+		std::cerr << "[DEBUG] MinHeap(cap=" << cap << "): heap_size → " << heap_size << std::endl;
         capacity = cap;
 		std::cerr << "[DEBUG] MinHeap(cap=" << cap << "): capacity → " << capacity << std::endl;
         harr = new int[cap];
 		std::cerr << "[DEBUG] MinHeap(cap=" << cap << "): harr → " << harr << std::endl;
+		std::cerr << "[WARN] <<< Exiting MinHeap(cap=" << cap << ")" << std::endl;
     }
 
     /** to heapify a subtree with the root at given index */

@@ -85,8 +85,10 @@ class stack {
     void clear() {
 		std::cerr << "[ERROR] >>> Entering clear()" << std::endl;
         stackTop = nullptr;
+		std::cerr << "[DEBUG] clear(): stackTop → " << stackTop << std::endl;
         size = 0;
 		std::cerr << "[DEBUG] clear(): size → " << size << std::endl;
+		std::cerr << "[WARN] <<< Exiting clear()" << std::endl;
     }
 
  private:
