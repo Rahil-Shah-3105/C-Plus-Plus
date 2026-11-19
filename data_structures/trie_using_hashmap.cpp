@@ -60,17 +60,20 @@ class Trie {
      * @param word string to insert in the trie
      */
     void insert(const std::string& word) {
+		std::cerr << "[ERROR] >>> Entering insert(word=" << word << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         for (char ch : word) {
             if (curr->children.find(ch) == curr->children.end()) {
                 curr->children[ch] = std::make_shared<Node>();
             }
             curr = curr->children[ch];
+			std::cerr << "[ERROR] insert(word=" << word << "): curr → " << curr << std::endl;
         }
 
         if (!curr->word_end && curr != root_node) {
             curr->word_end = true;
         }
+		std::cerr << "[WARN] <<< Exiting insert(word=" << word << ")" << std::endl;
     }
 
     /**
@@ -80,12 +83,14 @@ class Trie {
      * @returns `false` if not found
      */
     bool search(const std::string& word) {
+		std::cerr << "[ERROR] >>> Entering search(word=" << word << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         for (char ch : word) {
             if (curr->children.find(ch) == curr->children.end()) {
                 return false;
             }
             curr = curr->children[ch];
+			std::cerr << "[ERROR] search(word=" << word << "): curr → " << curr << std::endl;
             if (!curr) {
                 return false;
             }
@@ -94,6 +99,7 @@ class Trie {
         if (curr->word_end) {
             return true;
         } else {
+		std::cerr << "[WARN] <<< Exiting search(word=" << word << ")" << std::endl;
             return false;
         }
     }
@@ -105,13 +111,16 @@ class Trie {
      * @returns `false` if not found
      */
     bool startwith(const std::string& prefix) {
+		std::cerr << "[ERROR] >>> Entering startwith(prefix=" << prefix << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         for (char ch : prefix) {
             if (curr->children.find(ch) == curr->children.end()) {
                 return false;
             }
             curr = curr->children[ch];
+			std::cerr << "[ERROR] startwith(prefix=" << prefix << "): curr → " << curr << std::endl;
         }
+		std::cerr << "[WARN] <<< Exiting startwith(prefix=" << prefix << ")" << std::endl;
         return true;
     }
 
@@ -120,6 +129,7 @@ class Trie {
      * @param word string to delete from trie
      */
     void delete_word(std::string word) {
+		std::cerr << "[ERROR] >>> Entering delete_word(word=" << word << ")" << std::endl;
         std::shared_ptr<Node> curr = root_node;
         std::stack<std::shared_ptr<Node>> nodes;
         int cnt = 0;
@@ -133,6 +143,7 @@ class Trie {
 
             nodes.push(curr->children[ch]);
             curr = curr->children[ch];
+			std::cerr << "[ERROR] delete_word(word=" << word << "): curr → " << curr << std::endl;
         }
         // Delete only when it's a word, and it has children after
         // or prefix in the line
@@ -146,6 +157,7 @@ class Trie {
             nodes.top()->children.erase(word.back());
             word.pop_back();
         }
+		std::cerr << "[WARN] <<< Exiting delete_word(word=" << word << ")" << std::endl;
     }
 
     /**
@@ -186,6 +198,7 @@ class Trie {
      * @returns list of recommended words
      */
     std::vector<std::string> predict_words(const std::string& prefix) {
+		std::cerr << "[ERROR] >>> Entering predict_words(prefix=" << prefix << ")" << std::endl;
         std::vector<std::string> result;
         std::shared_ptr<Node> curr = root_node;
         // traversing until the end of the given prefix in trie
@@ -196,6 +209,7 @@ class Trie {
             }
 
             curr = curr->children[ch];
+			std::cerr << "[ERROR] predict_words(prefix=" << prefix << "): curr → " << curr << std::endl;
         }
 
         // if the given prefix is the only word without children
@@ -208,6 +222,7 @@ class Trie {
             result, curr,
             prefix);  ///< iteratively and recursively get the recommended words
 
+		std::cerr << "[WARN] <<< Exiting predict_words(prefix=" << prefix << ")" << std::endl;
         return result;
     }
 };
@@ -219,6 +234,7 @@ class Trie {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     data_structures::trie_using_hashmap::Trie obj;
     // Inserting data into trie using the insert
     // method and testing it with search method
@@ -286,6 +302,7 @@ static void test() {
     assert(pred_words.size() == 8);
     std::cout << "Returned all words that start with prefix a " << std::endl;
     pred_words = obj.predict_words("app");
+	std::cerr << "[ERROR] test(): pred_words.size() → " << pred_words.size() << std::endl;
 
     for (const std::string& str : pred_words) {
         std::cout << str << std::endl;
@@ -333,6 +350,7 @@ static void test() {
     std::cout << "No word starts with prefix h in trie" << std::endl;
 
     std::cout << "All tests passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -340,6 +358,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementaions
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

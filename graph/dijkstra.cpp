@@ -111,6 +111,7 @@ int dijkstra(std::vector<std::vector<std::pair<int, int>>> *adj, int s, int t) {
 
 /** Function to test the Algorithm */
 void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     std::cout << "Initiatinig Predefined Tests..." << std::endl;
     std::cout << "Initiating Test 1..." << std::endl;
     std::vector<std::vector<std::pair<int, int>>> adj1(
@@ -121,6 +122,7 @@ void tests() {
     graph::addEdge(&adj1, 1, 3, 5);
 
     int s = 1, t = 3;
+	std::cerr << "[ERROR] tests(): s → " << s << std::endl;
     assert(graph::dijkstra(&adj1, s - 1, t - 1) == 3);
     std::cout << "Test 1 Passed..." << std::endl;
 
@@ -146,14 +148,17 @@ void tests() {
     assert(graph::dijkstra(&adj2, s - 1, t - 1) == 6);
     std::cout << "Test 3 Passed..." << std::endl;
     std::cout << "All Test Passed..." << std::endl << std::endl;
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // running predefined tests
     tests();
 
     int vertices = int(), edges = int();
+	std::cerr << "[ERROR] main(): vertices → " << vertices << std::endl;
     std::cout << "Enter the number of vertices : ";
     std::cin >> vertices;
     std::cout << "Enter the number of edges : ";
@@ -163,12 +168,14 @@ int main() {
         vertices, std::vector<std::pair<int, int>>());
 
     int u = int(), v = int(), w = int();
+	std::cerr << "[ERROR] main(): u → " << u << std::endl;
     while (edges--) {
         std::cin >> u >> v >> w;
         graph::addEdge(&adj, u, v, w);
     }
 
     int s = int(), t = int();
+	std::cerr << "[ERROR] main(): s → " << s << std::endl;
     std::cin >> s >> t;
     int dist = graph::dijkstra(&adj, s - 1, t - 1);
     if (dist == -1) {
@@ -176,5 +183,6 @@ int main() {
     } else {
         std::cout << "Shortest Path Distance : " << dist << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

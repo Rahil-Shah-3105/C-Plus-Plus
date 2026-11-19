@@ -15,6 +15,8 @@
  * e.g 5 dollars every 2 mins = 5 / 2 = 2.5
  */
 double poisson_rate(double events, double timeframe) {
+	std::cerr << "[ERROR] >>> Entering poisson_rate(events=" << events << ",timeframe=" << timeframe << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting poisson_rate(events=" << events << ",timeframe=" << timeframe << ")" << std::endl;
     return events / timeframe;
 }
 
@@ -28,14 +30,17 @@ double poisson_expected(double rate, double time) { return rate * time; }
  * Compute factorial of a given number
  */
 double fact(double x) {
+	std::cerr << "[ERROR] >>> Entering fact(x=" << x << ")" << std::endl;
     double x_fact = x;
     for (int i = x - 1; i > 0; i--) {
+		std::cerr << "[ERROR] fact(x=" << x << "): x_fact → " << x_fact << std::endl;
         x_fact *= i;
     }
 
     if (x_fact <= 0) {
         x_fact = 1;
     }
+	std::cerr << "[WARN] <<< Exiting fact(x=" << x << ")" << std::endl;
     return x_fact;
 }
 
@@ -44,6 +49,8 @@ double fact(double x) {
  * \f[p(\mu,x) = \frac{\mu^x e^{-\mu}}{x!}\f]
  */
 double poisson_x_successes(double expected, double x) {
+	std::cerr << "[ERROR] >>> Entering poisson_x_successes(expected=" << expected << ",x=" << x << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting poisson_x_successes(expected=" << expected << ",x=" << x << ")" << std::endl;
     return (std::pow(expected, x) * std::exp(-expected)) / fact(x);
 }
 
@@ -52,10 +59,12 @@ double poisson_x_successes(double expected, double x) {
  * \f[P = \sum_i p(\mu,i)\f]
  */
 double poisson_range_successes(double expected, double lower, double upper) {
+	std::cerr << "[ERROR] >>> Entering poisson_range_successes(expected=" << expected << ",lower=" << lower << ",upper=" << upper << ")" << std::endl;
     double probability = 0;
     for (int i = lower; i <= upper; i++) {
         probability += poisson_x_successes(expected, i);
     }
+	std::cerr << "[WARN] <<< Exiting poisson_range_successes(expected=" << expected << ",lower=" << lower << ",upper=" << upper << ")" << std::endl;
     return probability;
 }
 
@@ -63,11 +72,16 @@ double poisson_range_successes(double expected, double lower, double upper) {
  * main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     double rate, expected;
     rate = poisson_rate(3, 1);
+	std::cerr << "[ERROR] main(): rate → " << rate << std::endl;
+	std::cerr << "[DEBUG] main(): rate → " << rate << std::endl;
     std::cout << "Poisson rate : " << rate << std::endl;
 
     expected = poisson_expected(rate, 2);
+	std::cerr << "[ERROR] main(): expected → " << expected << std::endl;
+	std::cerr << "[DEBUG] main(): expected → " << expected << std::endl;
     std::cout << "Poisson expected : " << expected << std::endl;
 
     std::cout << "Poisson 0 successes : " << poisson_x_successes(expected, 0)
@@ -75,5 +89,6 @@ int main() {
     std::cout << "Poisson 0-8 successes : "
               << poisson_range_successes(expected, 0, 8) << std::endl;
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

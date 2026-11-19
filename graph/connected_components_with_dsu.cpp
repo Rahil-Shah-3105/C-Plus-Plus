@@ -41,10 +41,12 @@ std::vector<uint32_t> connected_set_size{};  // size of each set
  * @returns void
  */
 void make_set() {
+	std::cerr << "[ERROR] >>> Entering make_set()" << std::endl;
     for (uint32_t i = 1; i <= number_of_nodes; i++) {
         parent[i] = i;
         connected_set_size[i] = 1;
     }
+	std::cerr << "[WARN] <<< Exiting make_set()" << std::endl;
 }
 /**
  * @brief Find the component where following node belongs to
@@ -52,10 +54,12 @@ void make_set() {
  * @return parent of val
  */
 int64_t find_set(int64_t val) {
+	std::cerr << "[ERROR] >>> Entering find_set(val=" << val << ")" << std::endl;
     while (parent[val] != val) {
         parent[val] = parent[parent[val]];
         val = parent[val];
     }
+	std::cerr << "[WARN] <<< Exiting find_set(val=" << val << ")" << std::endl;
     return val;
 }
 /**
@@ -65,8 +69,11 @@ int64_t find_set(int64_t val) {
  * @returns void
  */
 void union_sets(int64_t node1, int64_t node2) {
+	std::cerr << "[ERROR] >>> Entering union_sets(node1=" << node1 << ",node2=" << node2 << ")" << std::endl;
     node1 = find_set(node1);  // find the parent of node1
     node2 = find_set(node2);  // find the parent of node2
+	std::cerr << "[ERROR] union_sets(node1=" << node1 << ",node2=" << node2 << "): node2 → " << node2 << std::endl;
+	std::cerr << "[ERROR] union_sets(node1=" << node1 << ",node2=" << node2 << "): node1 → " << node1 << std::endl;
 
     // If parents of both nodes are not same, combine them
     if (node1 != node2) {
@@ -77,14 +84,17 @@ void union_sets(int64_t node1, int64_t node2) {
         connected_set_size[node1] +=
             connected_set_size[node2];  // sum the size of both as they combined
     }
+	std::cerr << "[WARN] <<< Exiting union_sets(node1=" << node1 << ",node2=" << node2 << ")" << std::endl;
 }
 /**
  * @brief Find total no. of connected components
  * @return Number of connected components
  */
 uint32_t no_of_connected_components() {
+	std::cerr << "[ERROR] >>> Entering no_of_connected_components()" << std::endl;
     std::set<int64_t> temp;  // temp set to count number of connected components
     for (uint32_t i = 1; i <= number_of_nodes; i++) temp.insert(find_set(i));
+	std::cerr << "[WARN] <<< Exiting no_of_connected_components()" << std::endl;
     return temp.size();  // return the size of temp set
 }
 }  // namespace disjoint_union
@@ -95,6 +105,7 @@ uint32_t no_of_connected_components() {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     namespace dsu = graph::disjoint_union;
     std::cin >> dsu::number_of_nodes;
     dsu::parent.resize(dsu::number_of_nodes + 1);
@@ -108,6 +119,7 @@ static void test() {
         dsu::union_sets(node_a, node_b);
     }
     std::cout << dsu::no_of_connected_components() << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -115,6 +127,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // Execute the tests
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

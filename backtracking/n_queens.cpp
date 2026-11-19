@@ -36,6 +36,7 @@ namespace n_queens {
  */
 template <size_t n>
 void printSolution(const std::array<std::array<int, n>, n> &board) {
+	std::cerr << "[ERROR] >>> Entering printSolution(board.size()=" << board.size() << ")" << std::endl;
     std::cout << "\n";
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -43,6 +44,7 @@ void printSolution(const std::array<std::array<int, n>, n> &board) {
         }
         std::cout << "\n";
     }
+	std::cerr << "[WARN] <<< Exiting printSolution(board.size()=" << board.size() << ")" << std::endl;
 }
 
 /**
@@ -89,6 +91,7 @@ bool isSafe(const std::array<std::array<int, n>, n> &board, const int &row,
  */
 template <size_t n>
 void solveNQ(std::array<std::array<int, n>, n> board, const int &col) {
+	std::cerr << "[ERROR] >>> Entering solveNQ(board.size()=" << board.size() << ",col=" << col << ")" << std::endl;
     if (col >= n) {
         printSolution<n>(board);
         return;
@@ -109,6 +112,7 @@ void solveNQ(std::array<std::array<int, n>, n> board, const int &col) {
             board[i][col] = 0;  // backtrack
         }
     }
+	std::cerr << "[WARN] <<< Exiting solveNQ(board.size()=" << board.size() << ",col=" << col << ")" << std::endl;
 }
 }  // namespace n_queens
 }  // namespace backtracking
@@ -118,11 +122,13 @@ void solveNQ(std::array<std::array<int, n>, n> board, const int &col) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     const int n = 4;
     std::array<std::array<int, n>, n> board = {
         std::array<int, n>({0, 0, 0, 0}), std::array<int, n>({0, 0, 0, 0}),
         std::array<int, n>({0, 0, 0, 0}), std::array<int, n>({0, 0, 0, 0})};
 
     backtracking::n_queens::solveNQ<n>(board, 0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

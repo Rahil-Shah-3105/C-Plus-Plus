@@ -91,6 +91,7 @@ void spirograph(std::array<std::pair<double, double>, N> *points, double l,
  *
  */
 void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     const size_t N = 500;
     double l = 0.3, k = 0.75, rot = 10.;
     std::stringstream fname;
@@ -114,6 +115,7 @@ void test() {
     }
 
     fp.close();
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 #ifdef USE_GLUT
@@ -128,7 +130,9 @@ static const double num_rot = 20.; /**< number of rotations to simulate */
 /** A wrapper that is not available in all GLUT implementations.
  */
 static inline void glutBitmapString(void *font, char *message) {
+	std::cerr << "[ERROR] >>> Entering glutBitmapString(font=" << font << ",message=" << message << ")" << std::endl;
     for (char *ch = message; *ch != '\0'; ch++) glutBitmapCharacter(font, *ch);
+	std::cerr << "[WARN] <<< Exiting glutBitmapString(font=" << font << ",message=" << message << ")" << std::endl;
 }
 
 /**
@@ -179,10 +183,13 @@ void display_graph(const std::array<std::pair<double, double>, N> &points,
  *
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     const size_t N = 5000;  // number of samples
 
     static bool direction1 = true;  // increment if true, otherwise decrement
+	std::cerr << "[ERROR] test2(): direction1 → " << direction1 << std::endl;
     static bool direction2 = true;  // increment if true, otherwise decrement
+	std::cerr << "[ERROR] test2(): direction2 → " << direction2 << std::endl;
 
     std::array<std::pair<double, double>, N> points;
 
@@ -217,14 +224,17 @@ void test2() {
             k_ratio -= step;
         }
     }
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 
 /**
  * @brief GLUT timer callback function to add animation delay.
  */
 void timer_cb(int t) {
+	std::cerr << "[ERROR] >>> Entering timer_cb(t=" << t << ")" << std::endl;
     glutTimerFunc(animation_speed, timer_cb, 0);
     glutPostRedisplay();
+	std::cerr << "[WARN] <<< Exiting timer_cb(t=" << t << ")" << std::endl;
 }
 
 /**
@@ -235,6 +245,7 @@ void timer_cb(int t) {
  * @param y mouse pointer position at event
  */
 void keyboard_cb(unsigned char key, int x, int y) {
+	std::cerr << "[ERROR] >>> Entering keyboard_cb(key=" << key << ",x=" << x << ",y=" << y << ")" << std::endl;
     switch (key) {
         case ' ':              // spacebar toggles pause
             paused = !paused;  // toggle
@@ -258,6 +269,7 @@ void keyboard_cb(unsigned char key, int x, int y) {
         case 0x1B:  // escape key exits
             exit(EXIT_SUCCESS);
         default:
+			std::cerr << "[WARN] <<< Exiting keyboard_cb(key=" << key << ",x=" << x << ",y=" << y << ")" << std::endl;
             return;
     }
 }
@@ -266,6 +278,8 @@ void keyboard_cb(unsigned char key, int x, int y) {
 
 /** Main function */
 int main(int argc, char **argv) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     spirograph::test();
 
 #ifdef USE_GLUT

@@ -1,7 +1,9 @@
+#include "iostream"
 #include "cll.h"
 using namespace std;
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     /* Test CLL */
     cout << "----------- Test construct -----------" << endl;
     cll list1;
@@ -39,5 +41,6 @@ int main() {
     cout << "After ++list1: " << endl;
     list1.display();
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

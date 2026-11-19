@@ -49,6 +49,7 @@
  * @returns void
  *******************************************************************************/
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<geometry::grahamscan::Point> points = {
         {0, 3}, {1, 1}, {2, 2}, {4, 4}, {0, 0}, {1, 2}, {3, 1}, {3, 3}};
     std::vector<geometry::grahamscan::Point> expected_result = {
@@ -57,6 +58,8 @@ static void test() {
     std::vector<geometry::grahamscan::Point> res;
 
     derived_result = geometry::grahamscan::convexHull(points, points.size());
+	std::cerr << "[ERROR] test(): derived_result.size() → " << derived_result.size() << std::endl;
+	std::cerr << "[DEBUG] test(): derived_result.size() → " << derived_result.size() << std::endl;
 
     std::cout << "1st test: ";
     for (int i = 0; i < expected_result.size(); i++) {
@@ -64,6 +67,7 @@ static void test() {
         assert(derived_result[i].y == expected_result[i].y);
     }
     std::cout << "passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /*******************************************************************************
@@ -71,6 +75,8 @@ static void test() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

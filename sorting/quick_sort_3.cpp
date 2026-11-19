@@ -136,17 +136,21 @@ std::vector<T> quicksort(std::vector<T> arr, int32_t low, int32_t high) {
 
 /** Test function for integer type arrays */
 static void test_int() {
+	std::cerr << "[ERROR] >>> Entering test_int()" << std::endl;
     std::cout << "\nTesting integer type arrays\n";
 
     for (int num_tests = 1; num_tests < 21; num_tests++) {
         size_t size = std::rand() % 500;
+		std::cerr << "[ERROR] test_int(): size → " << size << std::endl;
         std::vector<int> arr(size);
         for (auto &a : arr) {
             a = std::rand() % 500 - 250;  // random numbers between -250, 249
+			std::cerr << "[ERROR] test_int(): a → " << a << std::endl;
         }
 
         std::cout << "Test " << num_tests << "\t Array size:" << size << "\t ";
         std::vector<int> sorted = sorting::quicksort(arr, 0, int32_t(size) - 1);
+		std::cerr << "[ERROR] test_int(): sorted.size() → " << sorted.size() << std::endl;
         if (size < 20) {
             std::cout << "\t Sorted Array is:\n\t";
             std::cout << sorted << "\n";
@@ -154,13 +158,16 @@ static void test_int() {
         assert(std::is_sorted(std::begin(sorted), std::end(sorted)));
         std::cout << "\t Passed\n";
     }
+	std::cerr << "[WARN] <<< Exiting test_int()" << std::endl;
 }
 
 /** Test function for double type arrays */
 static void test_double() {
+	std::cerr << "[ERROR] >>> Entering test_double()" << std::endl;
     std::cout << "\nTesting Double type arrays\n";
     for (int num_tests = 1; num_tests < 21; num_tests++) {
         size_t size = std::rand() % 500;
+		std::cerr << "[ERROR] test_double(): size → " << size << std::endl;
         std::vector<double> arr(size);
         for (auto &a : arr) {
             a = double(std::rand() % 500) -
@@ -178,12 +185,15 @@ static void test_double() {
         assert(std::is_sorted(std::begin(sorted), std::end(sorted)));
         std::cout << "\t Passed\n";
     }
+	std::cerr << "[WARN] <<< Exiting test_double()" << std::endl;
 }
 
 /** Driver program for above functions */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));
     test_int();
     test_double();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

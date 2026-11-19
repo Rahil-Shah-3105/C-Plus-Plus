@@ -31,15 +31,18 @@ namespace math {
  * @return if number is a magic number, returns true, else false.
  */
 bool magic_number(const uint64_t &n) {
+	std::cerr << "[ERROR] >>> Entering magic_number(n=" << n << ")" << std::endl;
     if (n <= 0) {
         return false;
     }
     // result stores the modulus of @param n with 9
     uint64_t result = n % 9;
+	std::cerr << "[ERROR] magic_number(n=" << n << "): result → " << result << std::endl;
     // if result is 1 then the number is a magic number else not
     if (result == 1) {
         return true;
     } else {
+		std::cerr << "[WARN] <<< Exiting magic_number(n=" << n << ")" << std::endl;
         return false;
     }
 }
@@ -50,6 +53,7 @@ bool magic_number(const uint64_t &n) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     std::cout << "Test 1:\t n=60\n";
     assert(math::magic_number(60) == false);
     std::cout << "passed\n";
@@ -69,6 +73,7 @@ static void tests() {
     std::cout << "Test 5:\t n=-35\n";
     assert(math::magic_number(-35) == false);
     std::cout << "passed\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -76,6 +81,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // execute the tests
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

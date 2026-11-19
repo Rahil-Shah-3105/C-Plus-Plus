@@ -74,6 +74,7 @@ bool checkBipartite(const std::vector<std::vector<int64_t>> &graph,
  * @returns booleans
  */
 bool isBipartite(const std::vector<std::vector<int64_t>> &graph) {
+	std::cerr << "[ERROR] >>> Entering isBipartite(graph.size()=" << graph.size() << ")" << std::endl;
     std::vector<int64_t> visited(
         graph.size());  ///< stores boolean values
                         /// which signify whether that node had been visited or
@@ -89,6 +90,7 @@ bool isBipartite(const std::vector<std::vector<int64_t>> &graph) {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting isBipartite(graph.size()=" << graph.size() << ")" << std::endl;
     return true;
 }
 }  // namespace graph
@@ -98,6 +100,7 @@ bool isBipartite(const std::vector<std::vector<int64_t>> &graph) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<std::vector<int64_t>> graph = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
 
     assert(graph::isBipartite(graph) ==
@@ -111,6 +114,7 @@ static void test() {
            false);  /// check whether
                     /// the above defined graph is indeed bipartite
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
@@ -121,6 +125,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

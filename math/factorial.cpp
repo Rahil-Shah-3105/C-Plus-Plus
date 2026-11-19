@@ -27,12 +27,15 @@ namespace math {
  * cannot be represented in 64 bit unsigned int
  */
 uint64_t factorial(uint8_t n) {
+	std::cerr << "[ERROR] >>> Entering factorial(n=" << n << ")" << std::endl;
     if (n > 20) {
+		std::cerr << "[ERROR] Throwing std from factorial(n=" << n << ")" << std::endl;
         throw std::invalid_argument("maximum value is 20\n");
     }
     if (n == 0) {
         return 1;
     }
+	std::cerr << "[WARN] <<< Exiting factorial(n=" << n << ")" << std::endl;
     return n * factorial(n - 1);
 }
 }  // namespace math
@@ -42,12 +45,14 @@ uint64_t factorial(uint8_t n) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     assert(math::factorial(1) == 1);
     assert(math::factorial(0) == 1);
     assert(math::factorial(5) == 120);
     assert(math::factorial(10) == 3628800);
     assert(math::factorial(20) == 2432902008176640000);
     std::cout << "All tests have passed successfully!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -55,6 +60,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

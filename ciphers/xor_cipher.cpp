@@ -45,11 +45,15 @@ namespace ciphers {
          * @return new encrypted text
          */
         std::string encrypt (const std::string &text, const int &key) {
+			std::cerr << "[ERROR] >>> Entering encrypt(text=" << text << ",key=" << key << ")" << std::endl;
             std::string encrypted_text = ""; // Empty string to store encrypted text
             for (auto &c: text) { // Going through each character
+				std::cerr << "[ERROR] encrypt(text=" << text << ",key=" << key << "): encrypted_text → " << encrypted_text << std::endl;
                 char encrypted_char = char(c ^ key); // Applying encyption
+				std::cerr << "[ERROR] encrypt(text=" << text << ",key=" << key << "): encrypted_char → " << encrypted_char << std::endl;
                 encrypted_text += encrypted_char; // Appending encrypted character
             }
+			std::cerr << "[WARN] <<< Exiting encrypt(text=" << text << ",key=" << key << ")" << std::endl;
             return encrypted_text; // Returning encrypted text
         }
         /**
@@ -59,11 +63,15 @@ namespace ciphers {
          * @return new decrypted text
          */        
         std::string decrypt (const std::string &text, const int &key) {
+			std::cerr << "[ERROR] >>> Entering decrypt(text=" << text << ",key=" << key << ")" << std::endl;
             std::string decrypted_text = ""; // Empty string to store decrypted text
             for (auto &c : text) { // Going through each character
+				std::cerr << "[ERROR] decrypt(text=" << text << ",key=" << key << "): decrypted_text → " << decrypted_text << std::endl;
                 char decrypted_char = char(c ^ key); // Applying decryption
+				std::cerr << "[ERROR] decrypt(text=" << text << ",key=" << key << "): decrypted_char → " << decrypted_char << std::endl;
                 decrypted_text += decrypted_char; // Appending decrypted character
             }
+			std::cerr << "[WARN] <<< Exiting decrypt(text=" << text << ",key=" << key << ")" << std::endl;
             return decrypted_text; // Returning decrypted text
         }
     } // namespace XOR
@@ -73,27 +81,37 @@ namespace ciphers {
  * Function to test above algorithm
  */
 void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test 1
     std::string text1 = "Whipalsh! : Do watch this movie...";
+	std::cerr << "[ERROR] test(): text1 → " << text1 << std::endl;
     std::string encrypted1 = ciphers::XOR::encrypt(text1, 17);
+	std::cerr << "[ERROR] test(): encrypted1 → " << encrypted1 << std::endl;
     std::string decrypted1 = ciphers::XOR::decrypt(encrypted1, 17);
+	std::cerr << "[ERROR] test(): decrypted1 → " << decrypted1 << std::endl;
     assert(text1 == decrypted1);
     std::cout << "Original text : " << text1;
     std::cout << " , Encrypted text (with key = 17) : " << encrypted1;
     std::cout << " , Decrypted text : "<< decrypted1 << std::endl;
     // Test 2
     std::string text2 = "->Valar M0rghulis<-";
+	std::cerr << "[ERROR] test(): text2 → " << text2 << std::endl;
     std::string encrypted2 = ciphers::XOR::encrypt(text2, 29);
+	std::cerr << "[ERROR] test(): encrypted2 → " << encrypted2 << std::endl;
     std::string decrypted2 = ciphers::XOR::decrypt(encrypted2, 29);
+	std::cerr << "[ERROR] test(): decrypted2 → " << decrypted2 << std::endl;
     assert(text2 == decrypted2);
     std::cout << "Original text : " << text2;
     std::cout << " , Encrypted text (with key = 29) : " << encrypted2;
     std::cout << " , Decrypted text : "<< decrypted2 << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Testing
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

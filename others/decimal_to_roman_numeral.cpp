@@ -13,8 +13,11 @@
  * @note This can probably be replace by `memcpy` function.
  */
 std::string fill(char c, int n) {
+	std::cerr << "[ERROR] >>> Entering fill(c=" << c << ",n=" << n << ")" << std::endl;
     std::string s = "";
     while (n--) s += c;
+	std::cerr << "[ERROR] fill(c=" << c << ",n=" << n << "): s → " << s << std::endl;
+	std::cerr << "[WARN] <<< Exiting fill(c=" << c << ",n=" << n << ")" << std::endl;
     return s;
 }
 
@@ -22,6 +25,7 @@ std::string fill(char c, int n) {
  * the function works recursively
  */
 std::string tolowerRoman(int n) {
+	std::cerr << "[ERROR] >>> Entering tolowerRoman(n=" << n << ")" << std::endl;
     if (n < 4)
         return fill('i', n);
     if (n < 6)
@@ -56,6 +60,7 @@ std::string tolowerRoman(int n) {
  * the function works recursively
  */
 std::string toupperRoman(int n) {
+	std::cerr << "[ERROR] >>> Entering toupperRoman(n=" << n << ")" << std::endl;
     if (n < 4)
         return fill('I', n);
     if (n < 6)
@@ -88,11 +93,13 @@ std::string toupperRoman(int n) {
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int n;
     std::cout << "\t\tRoman numbers converter\n\n";
     std::cout << "Type in decimal number between 0 up to 4000 (exclusive): ";
     std::cin >> n;
     std::cout << n << " in Upper Roman Numerals is " << toupperRoman(n) << "\n";
     std::cout << n << " in Lower Roman Numerals is " << tolowerRoman(n) << "\n";
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

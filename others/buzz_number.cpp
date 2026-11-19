@@ -7,6 +7,7 @@
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int n, t;
     std::cin >> t;
     while (t--) {
@@ -16,5 +17,6 @@ int main() {
         else
             std::cout << n << " is not a buzz number" << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

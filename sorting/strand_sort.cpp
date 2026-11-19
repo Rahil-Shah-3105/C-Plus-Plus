@@ -13,6 +13,7 @@
  * 
  * @author [Mertcan Davulcu](https://github.com/mertcandav)
  */
+#include "chrono"
 #include <iostream>
 #include <list>
 
@@ -34,6 +35,7 @@ namespace sorting {
         */
         template <typename T>
         std::list<T> strand_sort(std::list<T> lst) {
+			std::cerr << "[ERROR] >>> Entering strand_sort(lst.size()=" << lst.size() << ")" << std::endl;
             if (lst.size() < 2) { // Returns list if empty or contains only one element
                 return lst; // Returns list
             }
@@ -52,6 +54,7 @@ namespace sorting {
                 }
                 result.merge(sorted); // Merge "result" list with "sorted" list.
             }
+			std::cerr << "[WARN] <<< Exiting strand_sort(lst.size()=" << lst.size() << ")" << std::endl;
             return result; // Returns sorted list
         }
     }  // namespace strand
@@ -62,6 +65,7 @@ namespace sorting {
  * @return N/A
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::list<int> lst = { -333, 525, 1, 0, 94, 52, 33 };
 
     std::cout << "Before: ";
@@ -70,11 +74,13 @@ static void test() {
     }
 
     lst = sorting::strand::strand_sort(lst); // Sort list.
+	std::cerr << "[ERROR] test(): lst.size() → " << lst.size() << std::endl;
 
     std::cout << "\nAfter: ";
     for(auto item: lst) {
         std::cout << item << " ";
     }
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -82,6 +88,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

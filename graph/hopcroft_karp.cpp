@@ -94,18 +94,25 @@ public:
  */
 int HKGraph::hopcroftKarpAlgorithm()
 {
+std::cerr << "[ERROR] >>> Entering HKGraph::hopcroftKarpAlgorithm()" << std::endl;
 
     // pair_u[u] stores pair of u in matching on left side of Bipartite Graph.
     // If u doesn't have any pair, then pair_u[u] is NIL
     pair_u = std::vector<int>(m + 1,NIL); 
+	std::cerr << "[ERROR] HKGraph::hopcroftKarpAlgorithm(): pair_u.size() → " << pair_u.size() << std::endl;
+	std::cerr << "[DEBUG] HKGraph::hopcroftKarpAlgorithm(): pair_u.size() → " << pair_u.size() << std::endl;
 
     // pair_v[v] stores pair of v in matching on right side of Biparite Graph.
     // If v doesn't have any pair, then pair_u[v] is NIL
     pair_v = std::vector<int>(n + 1,NIL); 
+	std::cerr << "[ERROR] HKGraph::hopcroftKarpAlgorithm(): pair_v.size() → " << pair_v.size() << std::endl;
+	std::cerr << "[DEBUG] HKGraph::hopcroftKarpAlgorithm(): pair_v.size() → " << pair_v.size() << std::endl;
+	std::cerr << "[ERROR] HKGraph::hopcroftKarpAlgorithm(): dist.size() → " << dist.size() << std::endl;
 
     dist = std::vector<int>(m + 1);  // dist[u] stores distance of left side vertices
 
     int result = 0;  // Initialize result
+	std::cerr << "[ERROR] HKGraph::hopcroftKarpAlgorithm(): result → " << result << std::endl;
 
     // Keep updating the result while there is an augmenting path possible.
     while (bfs())
@@ -121,6 +128,7 @@ int HKGraph::hopcroftKarpAlgorithm()
 	    }
 	}
     }
+	std::cerr << "[WARN] <<< Exiting HKGraph::hopcroftKarpAlgorithm()" << std::endl;
     return result;
 }
 
@@ -132,6 +140,7 @@ int HKGraph::hopcroftKarpAlgorithm()
  */
 bool HKGraph::bfs()
 {
+	std::cerr << "[ERROR] >>> Entering HKGraph::bfs()" << std::endl;
     std::queue<int> q; // an integer queue for bfs
 
     // First layer of vertices (set distance as 0)
@@ -156,6 +165,7 @@ bool HKGraph::bfs()
     while (!q.empty())
     {
         int u = q.front();  // dequeue a vertex
+		std::cerr << "[ERROR] HKGraph::bfs(): u → " << u << std::endl;
         q.pop();
 
         // If this node is not NIL and can provide a shorter path to NIL then
@@ -179,6 +189,7 @@ bool HKGraph::bfs()
 
    
    
+	std::cerr << "[WARN] <<< Exiting HKGraph::bfs()" << std::endl;
     return (dist[NIL] != INF);   // If we could come back to NIL using alternating path of distinct vertices then there is an augmenting path available
 }
 
@@ -190,6 +201,7 @@ bool HKGraph::bfs()
  */
 bool HKGraph::dfs(int u)
 {
+	std::cerr << "[ERROR] >>> Entering HKGraph::dfs(u=" << u << ")" << std::endl;
     if (u != NIL)
     {
         std::list<int>::iterator it;
@@ -215,6 +227,7 @@ bool HKGraph::dfs(int u)
         dist[u] = INF; // If there is no augmenting path beginning with u then set distance to infinite.
         return false;
     }
+	std::cerr << "[WARN] <<< Exiting HKGraph::dfs(u=" << u << ")" << std::endl;
     return true;
 }
 
@@ -241,7 +254,9 @@ HKGraph::HKGraph(int m, int n) {
  */
 void HKGraph::addEdge(int u, int v)
 {
+	std::cerr << "[ERROR] >>> Entering HKGraph::addEdge(u=" << u << ",v=" << v << ")" << std::endl;
     adj[u].push_back(v); // Add v to u’s list.
+	std::cerr << "[WARN] <<< Exiting HKGraph::addEdge(u=" << u << ",v=" << v << ")" << std::endl;
 }
 
 } // namespace graph
@@ -253,6 +268,7 @@ using graph::HKGraph;
  * @returns none
  */
 void tests(){
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
      // Sample test case 1
 	     int v1a = 3, v1b = 5;  // vertices of left side, right side and edges
 	     HKGraph g1(v1a, v1b); // execute the algorithm 
@@ -262,6 +278,7 @@ void tests(){
 
 	     int expected_res1 = 0; // for the above sample data, this is the expected output
 	     int res1 = g1.hopcroftKarpAlgorithm();
+		std::cerr << "[ERROR] tests(): res1 → " << res1 << std::endl;
 
 	     assert(res1 == expected_res1); // assert check to ensure that the algorithm executed correctly for test 1
 	
@@ -278,6 +295,7 @@ void tests(){
 	
 	     int expected_res2 = 0; // for the above sample data, this is the expected output
 	     int res2 = g2.hopcroftKarpAlgorithm();
+		std::cerr << "[ERROR] tests(): res2 → " << res2 << std::endl;
 
 	     assert(res2 == expected_res2); // assert check to ensure that the algorithm executed correctly for test 2
 	
@@ -292,11 +310,13 @@ void tests(){
 
 	     int expected_res3 = 0; // for the above sample data, this is the expected output
 	     int res3 = g3.hopcroftKarpAlgorithm();
+		std::cerr << "[ERROR] tests(): res3 → " << res3 << std::endl;
 
 	     assert(res3 == expected_res3); // assert check to ensure that the algorithm executed correctly for test 3
 	
 	
     	
+		std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -305,6 +325,7 @@ void tests(){
  */
 int main()
 {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // perform self-tests
 
     int v1 = 0, v2 = 0, e = 0;
@@ -318,8 +339,10 @@ int main()
     }
   
     int res = g.hopcroftKarpAlgorithm();
+	std::cerr << "[ERROR] main(): res → " << res << std::endl;
     std::cout << "Maximum matching is " << res <<"\n";
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 
 }

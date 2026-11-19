@@ -102,9 +102,11 @@ class EightPuzzle {
      * @returns -1 if invalid i or j position
      */
     uint32_t get(size_t i, size_t j) const {
+		std::cerr << "[ERROR] >>> Entering get(i=" << i << ",j=" << j << ")" << std::endl;
         if (in_range(i) && in_range(j)) {
             return board[i][j];
         }
+		std::cerr << "[WARN] <<< Exiting get(i=" << i << ",j=" << j << ")" << std::endl;
         return -1;
     }
     /**
@@ -121,11 +123,13 @@ class EightPuzzle {
      * @brief Default constructor for EightPuzzle
      */
     EightPuzzle() {
+		std::cerr << "[ERROR] >>> Entering EightPuzzle()" << std::endl;
         for (size_t i = 0; i < N; ++i) {
             for (size_t j = 0; j < N; ++j) {
                 board[i][j] = ((i * 3 + j + 1) % (N * N));
             }
         }
+		std::cerr << "[WARN] <<< Exiting EightPuzzle()" << std::endl;
     }
     /**
      * @brief Parameterized Constructor for EightPuzzle
@@ -176,6 +180,7 @@ class EightPuzzle {
      * @note the implementation is compulsory to create A* search
      */
     std::vector<EightPuzzle<N>> generate_possible_moves() {
+		std::cerr << "[ERROR] >>> Entering generate_possible_moves()" << std::endl;
         auto zero_pos = find_zero();
         // vector which will contain all possible state from current state
         std::vector<EightPuzzle<N>> NewStates;
@@ -192,6 +197,7 @@ class EightPuzzle {
                 NewStates.emplace_back(new_state);
             }
         }
+		std::cerr << "[WARN] <<< Exiting generate_possible_moves()" << std::endl;
         return NewStates;
     }
     /**
@@ -392,8 +398,10 @@ class AyStarSearch {
      * @param final denoting final state of the puzzle
      */
     AyStarSearch(const Puzzle &initial, const Puzzle &final) {
+		std::cerr << "[ERROR] >>> Entering AyStarSearch(initial=" << initial << ",final=" << final << ")" << std::endl;
         Initial = std::make_shared<Info>(initial);
         Final = std::make_shared<Info>(final);
+		std::cerr << "[ERROR] AyStarSearch(initial=" << initial << ",final=" << final << "): Final → " << Final << std::endl;
     }
     /**
      * @brief A helper solution: launches when a solution for AyStarSearch
@@ -534,6 +542,7 @@ class AyStarSearch {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Renaming for simplicity
     using matrix3 = std::array<std::array<uint32_t, 3>, 3>;
     using row3 = std::array<uint32_t, 3>;
@@ -560,7 +569,9 @@ static void test() {
             for (size_t i = 0; i < first.get_size(); ++i) {
                 for (size_t j = 0; j < first.get_size(); ++j) {
                     uint32_t find = first.get(i, j);
+					std::cerr << "[ERROR] test(): find → " << find << std::endl;
                     size_t m = first.get_size(), n = first.get_size();
+					std::cerr << "[ERROR] test(): m → " << m << std::endl;
                     for (size_t k = 0; k < second.get_size(); ++k) {
                         for (size_t l = 0; l < second.get_size(); ++l) {
                             if (find == second.get(k, l)) {
@@ -601,6 +612,7 @@ static void test() {
         matrix3({row3({1, 2, 3}), row3({4, 5, 6}), row3({7, 8, 0})}));
 
     auto Solution = search.a_star_search(manhattan_distance);
+	std::cerr << "[ERROR] test(): Solution.size() → " << Solution.size() << std::endl;
     std::cout << Solution.size() << std::endl;
 
     assert(Solution.size() == answer.size());
@@ -622,9 +634,13 @@ static void test() {
     ideal[2] = row3({7, 8, 0});
 
     Puzzle = machine_learning::aystar_search::EightPuzzle<>(puzzle);
+	std::cerr << "[ERROR] test(): Puzzle → " << Puzzle << std::endl;
+	std::cerr << "[DEBUG] test(): Puzzle → " << Puzzle << std::endl;
     Ideal = machine_learning::aystar_search::EightPuzzle<>(ideal);
+	std::cerr << "[ERROR] test(): Ideal → " << Ideal << std::endl;
 
     // Initialize the search object
+	std::cerr << "[DEBUG] test(): Ideal → " << Ideal << std::endl;
     search = machine_learning::aystar_search::AyStarSearch<
         machine_learning::aystar_search::EightPuzzle<3>>(Puzzle, Ideal);
 
@@ -701,12 +717,15 @@ static void test() {
     for (auto it = sol2.rbegin(); it != sol2.rend(); ++it) {
         std::cout << *it << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

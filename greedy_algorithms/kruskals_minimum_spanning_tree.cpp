@@ -62,6 +62,7 @@ void findMinimumEdge(const T &infinity,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     /**
      * define a large value for int
      * define a large value for float
@@ -69,8 +70,11 @@ static void test() {
      * define a large value for uint32_t
      */
     constexpr int INFINITY_INT = std::numeric_limits<int>::max();
+	std::cerr << "[ERROR] test(): INFINITY_INT → " << INFINITY_INT << std::endl;
     constexpr float INFINITY_FLOAT = std::numeric_limits<float>::max();
+	std::cerr << "[ERROR] test(): INFINITY_FLOAT → " << INFINITY_FLOAT << std::endl;
     constexpr double INFINITY_DOUBLE = std::numeric_limits<double>::max();
+	std::cerr << "[ERROR] test(): INFINITY_DOUBLE → " << INFINITY_DOUBLE << std::endl;
     constexpr uint32_t INFINITY_UINT32 = UINT32_MAX;
   
     // Test case with integer values
@@ -93,6 +97,7 @@ static void test() {
     greedy_algorithms::findMinimumEdge(INFINITY_FLOAT, graph2);
 
     // Test case with double values
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
     std::cout << "\nTest Case 3 :\n";
    std::array<std::array<double, 5>, 5> graph3{
                0.0,             10.5,       INFINITY_DOUBLE,        6.7,              3.3,
@@ -182,7 +187,9 @@ static void test() {
  */
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run Self-test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }
 

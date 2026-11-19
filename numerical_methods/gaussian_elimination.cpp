@@ -7,6 +7,7 @@
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int mat_size, i, j, step;
 
     std::cout << "Matrix size: ";
@@ -33,6 +34,7 @@ int main() {
     for (step = 0; step < mat_size - 1; step++) {
         for (i = step; i < mat_size - 1; i++) {
             double a = (mat[i + 1][step] / mat[step][step]);
+			std::cerr << "[ERROR] main(): a → " << a << std::endl;
 
             for (j = step; j <= mat_size; j++)
                 mat[i + 1][j] = mat[i + 1][j] - (a * mat[step][j]);
@@ -55,6 +57,7 @@ int main() {
         for (j = mat_size - 1; j > i; j--) {
             x[i][j] = x[j][j] * x[i][j];
             sum = x[i][j] + sum;
+			std::cerr << "[ERROR] main(): sum → " << sum << std::endl;
         }
         if (x[i][i] == 0)
             x[i][i] = 0;
@@ -72,5 +75,6 @@ int main() {
     delete[] mat;
     delete[] x;
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -26,6 +26,8 @@ namespace math {
  */
 template <typename T>
 T square_perimeter(T length) {
+	std::cerr << "[ERROR] >>> Entering square_perimeter(length=" << length << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting square_perimeter(length=" << length << ")" << std::endl;
     return 4 * length;
 }
 
@@ -38,6 +40,8 @@ T square_perimeter(T length) {
  */
 template <typename T>
 T rect_perimeter(T length, T width) {
+	std::cerr << "[ERROR] >>> Entering rect_perimeter(length=" << length << ",width=" << width << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting rect_perimeter(length=" << length << ",width=" << width << ")" << std::endl;
     return 2 * (length + width);
 }
 
@@ -50,6 +54,8 @@ T rect_perimeter(T length, T width) {
  */
 template <typename T>
 T triangle_perimeter(T base, T height, T hypotenuse) {
+	std::cerr << "[ERROR] >>> Entering triangle_perimeter(base=" << base << ",height=" << height << ",hypotenuse=" << hypotenuse << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting triangle_perimeter(base=" << base << ",height=" << height << ",hypotenuse=" << hypotenuse << ")" << std::endl;
     return base + height + hypotenuse;
 }
 
@@ -61,6 +67,8 @@ T triangle_perimeter(T base, T height, T hypotenuse) {
  */
 template <typename T>
 T circle_perimeter(T radius) {
+	std::cerr << "[ERROR] >>> Entering circle_perimeter(radius=" << radius << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting circle_perimeter(radius=" << radius << ")" << std::endl;
     return 2 * M_PI * radius;
 }
 
@@ -73,6 +81,8 @@ T circle_perimeter(T radius) {
  */
 template <typename T>
 T parallelogram_perimeter(T base, T height) {
+	std::cerr << "[ERROR] >>> Entering parallelogram_perimeter(base=" << base << ",height=" << height << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting parallelogram_perimeter(base=" << base << ",height=" << height << ")" << std::endl;
     return 2 * (base + height);
 }
 
@@ -84,6 +94,8 @@ T parallelogram_perimeter(T base, T height) {
  */
 template <typename T>
 T cube_surface_perimeter(T length) {
+	std::cerr << "[ERROR] >>> Entering cube_surface_perimeter(length=" << length << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting cube_surface_perimeter(length=" << length << ")" << std::endl;
     return 12 * length;
 }
 
@@ -97,6 +109,8 @@ T cube_surface_perimeter(T length) {
  */
 template <typename T>
 T n_polygon_surface_perimeter(T sides, T length) {
+	std::cerr << "[ERROR] >>> Entering n_polygon_surface_perimeter(sides=" << sides << ",length=" << length << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting n_polygon_surface_perimeter(sides=" << sides << ",length=" << length << ")" << std::endl;
     return sides * length;
 }
 
@@ -109,6 +123,8 @@ T n_polygon_surface_perimeter(T sides, T length) {
  */
 template <typename T>
 T cylinder_surface_perimeter(T radius, T height) {
+	std::cerr << "[ERROR] >>> Entering cylinder_surface_perimeter(radius=" << radius << ",height=" << height << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting cylinder_surface_perimeter(radius=" << radius << ",height=" << height << ")" << std::endl;
     return (2 * radius) + (2 * height);
 }
 }  // namespace math
@@ -118,26 +134,44 @@ T cylinder_surface_perimeter(T radius, T height) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // I/O variables for testing
     uint16_t int_length = 0;      // 16 bit integer length input
+	std::cerr << "[ERROR] test(): int_length → " << int_length << std::endl;
     uint16_t int_width = 0;       // 16 bit integer width input
+	std::cerr << "[ERROR] test(): int_width → " << int_width << std::endl;
     uint16_t int_base = 0;        // 16 bit integer base input
+	std::cerr << "[ERROR] test(): int_base → " << int_base << std::endl;
     uint16_t int_height = 0;      // 16 bit integer height input
+	std::cerr << "[ERROR] test(): int_height → " << int_height << std::endl;
     uint16_t int_hypotenuse = 0;  // 16 bit integer hypotenuse input
+	std::cerr << "[ERROR] test(): int_hypotenuse → " << int_hypotenuse << std::endl;
     uint16_t int_sides = 0;       // 16 bit integer sides input
+	std::cerr << "[ERROR] test(): int_sides → " << int_sides << std::endl;
     uint16_t int_expected = 0;    // 16 bit integer expected output
+	std::cerr << "[ERROR] test(): int_expected → " << int_expected << std::endl;
     uint16_t int_perimeter = 0;   // 16 bit integer output
+	std::cerr << "[ERROR] test(): int_perimeter → " << int_perimeter << std::endl;
 
     float float_length = NAN;     // float length input
+	std::cerr << "[ERROR] test(): float_length → " << float_length << std::endl;
     float float_expected = NAN;   // float expected output
+	std::cerr << "[ERROR] test(): float_expected → " << float_expected << std::endl;
     float float_perimeter = NAN;  // float output
+	std::cerr << "[ERROR] test(): float_perimeter → " << float_perimeter << std::endl;
 
     double double_length = NAN;     // double length input
+	std::cerr << "[ERROR] test(): double_length → " << double_length << std::endl;
     double double_width = NAN;      // double width input
+	std::cerr << "[ERROR] test(): double_width → " << double_width << std::endl;
     double double_radius = NAN;     // double radius input
+	std::cerr << "[ERROR] test(): double_radius → " << double_radius << std::endl;
     double double_height = NAN;     // double height input
+	std::cerr << "[ERROR] test(): double_height → " << double_height << std::endl;
     double double_expected = NAN;   // double expected output
+	std::cerr << "[ERROR] test(): double_expected → " << double_expected << std::endl;
     double double_perimeter = NAN;  // double output
+	std::cerr << "[ERROR] test(): double_perimeter → " << double_perimeter << std::endl;
 
     // 1st test
     int_length = 5;
@@ -275,6 +309,7 @@ static void test() {
     std::cout << "Output: " << double_perimeter << std::endl;
     assert(double_perimeter == double_expected);
     std::cout << "TEST PASSED" << std::endl << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -282,6 +317,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

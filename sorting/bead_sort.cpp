@@ -1,4 +1,5 @@
 // C++ program to implement gravity/bead sort
+#include "iostream"
 #include <cstdio>
 #include <cstring>
 
@@ -6,8 +7,10 @@
 
 // function to perform the above algorithm
 void beadSort(int *a, int len) {
+	std::cerr << "[ERROR] >>> Entering beadSort(a=" << a << ",len=" << len << ")" << std::endl;
     // Find the maximum element
     int max = a[0];
+	std::cerr << "[ERROR] beadSort(a=" << a << ",len=" << len << "): max → " << max << std::endl;
     for (int i = 1; i < len; i++)
         if (a[i] > max)
             max = a[i];
@@ -41,10 +44,12 @@ void beadSort(int *a, int len) {
         a[i] = j;
     }
     delete[] beads;
+	std::cerr << "[WARN] <<< Exiting beadSort(a=" << a << ",len=" << len << ")" << std::endl;
 }
 
 // driver function to test the algorithm
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int a[] = {5, 3, 1, 7, 4, 1, 1, 20};
     int len = sizeof(a) / sizeof(a[0]);
 
@@ -52,5 +57,6 @@ int main() {
 
     for (int i = 0; i < len; i++) printf("%d ", a[i]);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

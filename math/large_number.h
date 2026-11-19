@@ -7,6 +7,7 @@
 
 #ifndef MATH_LARGE_NUMBER_H_
 #define MATH_LARGE_NUMBER_H_
+#include "stdio.h"
 #include <algorithm>
 #include <cassert>
 #include <cinttypes>
@@ -37,11 +38,13 @@ class large_number {
 
     /**< initializer from an integer */
     explicit large_number(int n) {
+		fprintf(stderr, "[ERROR] >>> Entering large_number(n=%d)\n", n);
         int carry = n;
         do {
             add_digit(carry % 10);
             carry /= 10;
         } while (carry != 0);
+		fprintf(stderr, "[WARN] <<< Exiting large_number(n=%d)\n", n);
     }
 
     /**< initializer from another large_number */
@@ -52,8 +55,11 @@ class large_number {
 
     /**< initializer from a string */
     explicit large_number(char const *number_str) {
+		fprintf(stderr, "[ERROR] >>> Entering large_number(number_str=%s)\n", number_str);
         for (size_t i = strlen(number_str); i > 0; i--) {
+			fprintf(stderr, "[WARN] <<< Exiting large_number(n=%d)\n", n);
             char a = number_str[i - 1] - '0';
+			fprintf(stderr, "[ERROR] large_number(number_str=%s): a → %c\n", number_str, a);
             if (a >= 0 && a <= 9)
                 _digits.push_back(a);
         }
@@ -63,6 +69,7 @@ class large_number {
      * Function to check implementation
      **/
     static bool test() {
+		fprintf(stderr, "[ERROR] >>> Entering test()\n");
         std::cout << "------ Checking `large_number` class implementations\t"
                   << std::endl;
         large_number a(40);
@@ -103,12 +110,14 @@ class large_number {
         std::cout << "\tPassed 5/6...";
         // 6. test addition with another large number
         a = a + large_number("7000000000000000000000000000000");
+		fprintf(stderr, "[ERROR] test(): a → %d\n", a);
         if (a != large_number("7000000000000000000000000005202")) {
             std::cerr << "\tFailed 6/6 (" << a
                       << "!=7000000000000000000000000005202)" << std::endl;
             return false;
         }
         std::cout << "\tPassed 6/6..." << std::endl;
+		fprintf(stderr, "[WARN] <<< Exiting test()\n");
         return true;
     }
 
@@ -116,12 +125,14 @@ class large_number {
      * add a digit at MSB to the large number
      **/
     void add_digit(unsigned int value) {
+		fprintf(stderr, "[ERROR] >>> Entering add_digit(value=%u)\n", value);
         if (value > 9) {
             std::cerr << "digit > 9!!\n";
             exit(EXIT_FAILURE);
         }
 
         _digits.push_back(value);
+		fprintf(stderr, "[WARN] <<< Exiting add_digit(value=%u)\n", value);
     }
 
     /**
@@ -246,6 +257,8 @@ class large_number {
      * returns i^th digit as an ASCII character
      **/
     char digit_char(size_t i) const {
+		fprintf(stderr, "[ERROR] >>> Entering digit_char(i=%zu)\n", i);
+        fprintf(stderr, "[WARN] <<< Exiting digit_char(i=%zu)\n", i);
         return _digits[num_digits() - i - 1] + '0';
     }
 
@@ -256,6 +269,7 @@ class large_number {
      **/
     template <class T>
     void multiply(const T n) {
+		fprintf(stderr, "[ERROR] >>> Entering multiply(n=%d)\n", n);
         static_assert(std::is_integral<T>::value,
                       "Can only have integer types.");
         // assert(!(std::is_signed<T>::value)); //, "Implemented only for
@@ -263,6 +277,7 @@ class large_number {
 
         size_t i;
         uint64_t carry = 0, temp;
+		fprintf(stderr, "[ERROR] multiply(n=%d): carry → %d\n", n, carry);
         for (i = 0; i < this->num_digits(); i++) {
             temp = static_cast<uint64_t>((*this)[i]) * n;
             temp += carry;
@@ -279,6 +294,7 @@ class large_number {
             this->add_digit(carry % 10);
             carry /= 10;
         }
+		fprintf(stderr, "[WARN] <<< Exiting multiply(n=%d)\n", n);
     }
 
     std::vector<unsigned char>

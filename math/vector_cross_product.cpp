@@ -50,6 +50,7 @@
  * @author [Shreyas Sable](https://github.com/Shreyas-OwO)
  */
 
+#include "iostream"
 #include <array>
 #include <cassert>
 #include <cmath>
@@ -101,6 +102,7 @@ double mag(const std::array<double, 3> &vec) {
  * @details test the cross() and the mag() functions.
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     /// Tests the cross() function.
     std::array<double, 3> t_vec =
         math::vector_cross::cross({1, 2, 3}, {4, 5, 6});
@@ -108,6 +110,7 @@ static void test() {
 
     /// Tests the mag() function.
     double t_mag = math::vector_cross::mag({6, 8, 0});
+	std::cerr << "[ERROR] test(): t_mag → " << t_mag << std::endl;
     assert(t_mag == 10);
 
     /// Tests A ⨯ A = 0
@@ -117,6 +120,7 @@ static void test() {
            t_vec2[2] == 0);  // checking each element
     assert(math::vector_cross::mag(t_vec2) ==
            0);  // checking the magnitude is also zero
+		std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -126,7 +130,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     /// Tests the functions with sample input before asking for user input.
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

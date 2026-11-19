@@ -29,6 +29,7 @@ namespace n_queens_all_solutions {
  */
 template <size_t n>
 void PrintSol(const std::array<std::array<int, n>, n>& board) {
+	std::cerr << "[ERROR] >>> Entering PrintSol(board.size()=" << board.size() << ")" << std::endl;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             std::cout << board[i][j] << " ";
@@ -36,6 +37,7 @@ void PrintSol(const std::array<std::array<int, n>, n>& board) {
         std::cout << std::endl;
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting PrintSol(board.size()=" << board.size() << ")" << std::endl;
 }
 
 /**
@@ -79,6 +81,7 @@ bool CanIMove(const std::array<std::array<int, n>, n>& board, int row,
  */
 template <size_t n>
 void NQueenSol(std::array<std::array<int, n>, n> board, int col) {
+	std::cerr << "[ERROR] >>> Entering NQueenSol(board.size()=" << board.size() << ",col=" << col << ")" << std::endl;
     if (col >= n) {
         PrintSol(board);
         return;
@@ -90,6 +93,7 @@ void NQueenSol(std::array<std::array<int, n>, n> board, int col) {
             board[i][col] = 0;
         }
     }
+	std::cerr << "[WARN] <<< Exiting NQueenSol(board.size()=" << board.size() << ",col=" << col << ")" << std::endl;
 }
 }  // namespace n_queens_all_solutions
 }  // namespace backtracking
@@ -99,8 +103,10 @@ void NQueenSol(std::array<std::array<int, n>, n> board, int col) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     const int n = 4;
     std::array<std::array<int, n>, n> board{0};
 
     backtracking::n_queens_all_solutions::NQueenSol(board, 0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

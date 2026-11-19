@@ -20,6 +20,7 @@
  * Space Complexity: O(n)
  */
 
+#include "iostream"
 #include <cassert>  // For test cases
 #include <cstdint>  // For uint64_t
 #include <vector>   // For std::vector
@@ -34,23 +35,29 @@ class MemorisedFactorial {
      * @returns factorial of n
      */
     std::uint64_t operator()(std::uint64_t n) {
+		std::cerr << "[ERROR] >>> Entering operator()" << std::endl;
         if (n >= this->known_values.size()) {
             this->known_values.push_back(n * this->operator()(n - 1));
         }
+		std::cerr << "[WARN] <<< Exiting operator()" << std::endl;
         return this->known_values.at(n);
     }
 };
 
 void test_MemorisedFactorial_in_order() {
+	std::cerr << "[ERROR] >>> Entering test_MemorisedFactorial_in_order()" << std::endl;
     auto factorial = MemorisedFactorial();
     assert(factorial(0) == 1);
     assert(factorial(1) == 1);
     assert(factorial(5) == 120);
     assert(factorial(10) == 3628800);
+	std::cerr << "[WARN] <<< Exiting test_MemorisedFactorial_in_order()" << std::endl;
 }
 
 void test_MemorisedFactorial_no_order() {
+	std::cerr << "[ERROR] >>> Entering test_MemorisedFactorial_no_order()" << std::endl;
     auto factorial = MemorisedFactorial();
+	std::cerr << "[WARN] <<< Exiting test_MemorisedFactorial_no_order()" << std::endl;
     assert(factorial(10) == 3628800);
 }
 
@@ -59,7 +66,9 @@ void test_MemorisedFactorial_no_order() {
  * @returns 0 on program success
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test_MemorisedFactorial_in_order();
     test_MemorisedFactorial_no_order();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

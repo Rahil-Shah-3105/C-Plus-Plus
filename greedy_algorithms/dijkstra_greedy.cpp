@@ -42,6 +42,7 @@ class Graph {
      * @param V number of vertices of the graph
      */
     explicit Graph(const int V) {
+		std::cerr << "[ERROR] >>> Entering Graph(V=" << V << ")" << std::endl;
         // Initialize the array edges
         this->edges = std::vector<std::vector<int>>(V, std::vector<int>(V, 0));
         for (int i = 0; i < V; i++) {
@@ -56,6 +57,7 @@ class Graph {
         }
 
         this->vertexNum = V;
+		std::cerr << "[WARN] <<< Exiting Graph(V=" << V << ")" << std::endl;
     }
 
     /**
@@ -66,7 +68,9 @@ class Graph {
      * @returns void
      */
     void add_edge(int src, int dst, int weight) {
+		std::cerr << "[ERROR] >>> Entering add_edge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
         this->edges[src][dst] = weight;
+		std::cerr << "[WARN] <<< Exiting add_edge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
     }
 };
 
@@ -80,14 +84,18 @@ class Graph {
  * @returns index of the vertex with the minimum distance
  */
 int minimum_distance(std::vector<int> mdist, std::vector<bool> vset, int V) {
+	std::cerr << "[ERROR] >>> Entering minimum_distance(mdist.size()=" << mdist.size() << ",vset.size()=" << vset.size() << ",V=" << V << ")" << std::endl;
     int minVal = INT_MAX, minInd = 0;
     for (int i = 0; i < V; i++) {
+		std::cerr << "[ERROR] minimum_distance(mdist.size()=" << mdist.size() << ",vset.size()=" << vset.size() << ",V=" << V << "): minVal → " << minVal << std::endl;
         if (!vset[i] && (mdist[i] < minVal)) {
             minVal = mdist[i];
             minInd = i;
+			std::cerr << "[DEBUG] minimum_distance(mdist.size()=" << mdist.size() << ",vset.size()=" << vset.size() << ",V=" << V << "): minInd → " << minInd << std::endl;
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting minimum_distance(mdist.size()=" << mdist.size() << ",vset.size()=" << vset.size() << ",V=" << V << ")" << std::endl;
     return minInd;
 }
 
@@ -158,6 +166,7 @@ void dijkstra(Graph graph, int src) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     greedy_algorithms::dijkstra::Graph graph(8);
 
     // 1st test.
@@ -190,6 +199,7 @@ static void tests() {
     assert(graph.edges[1][3] == 3);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -197,6 +207,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -46,6 +46,8 @@ namespace geometric_dist {
  * (included)
  */
 float generate_uniform() {
+	std::cerr << "[ERROR] >>> Entering generate_uniform()" << std::endl;
+    std::cerr << "[WARN] <<< Exiting generate_uniform()" << std::endl;
     return static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 }
 
@@ -91,6 +93,8 @@ class geometric_distribution {
      * @returns A number between [0,1] according to p * (1-p)^{k-1}
      */
     float probability_density(const uint32_t& k) const {
+		std::cerr << "[ERROR] >>> Entering probability_density(k=" << k << ")" << std::endl;
+        std::cerr << "[WARN] <<< Exiting probability_density(k=" << k << ")" << std::endl;
         return std::pow((1.0f - p), static_cast<float>(k - 1)) * p;
     }
 
@@ -102,6 +106,8 @@ class geometric_distribution {
      * @returns The probability to have success within k trials
      */
     float cumulative_distribution(const uint32_t& k) const {
+		std::cerr << "[ERROR] >>> Entering cumulative_distribution(k=" << k << ")" << std::endl;
+        std::cerr << "[WARN] <<< Exiting cumulative_distribution(k=" << k << ")" << std::endl;
         return 1.0f - std::pow((1.0f - p), static_cast<float>(k));
     }
 
@@ -114,6 +120,8 @@ class geometric_distribution {
      * @returns The number of (exact) trials.
      */
     float inverse_cumulative_distribution(const float& cdf) const {
+		std::cerr << "[ERROR] >>> Entering inverse_cumulative_distribution(cdf=" << cdf << ")" << std::endl;
+        std::cerr << "[WARN] <<< Exiting inverse_cumulative_distribution(cdf=" << cdf << ")" << std::endl;
         return std::log(1.0f - cdf) / std::log(1.0f - p);
     }
 
@@ -123,7 +131,10 @@ class geometric_distribution {
      * @returns A geometrically distributed number in [1,\infty)
      */
     uint32_t draw_sample() const {
+		std::cerr << "[ERROR] >>> Entering draw_sample()" << std::endl;
         float uniform_sample = generate_uniform();
+		std::cerr << "[ERROR] draw_sample(): uniform_sample → " << uniform_sample << std::endl;
+		std::cerr << "[WARN] <<< Exiting draw_sample()" << std::endl;
         return static_cast<uint32_t>(
                    inverse_cumulative_distribution(uniform_sample)) +
                1;
@@ -195,6 +206,7 @@ void sample_test(
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     probability::geometric_dist::geometric_distribution dist(0.3);
 
     const float threshold = 1e-3f;
@@ -247,6 +259,7 @@ static void test() {
     assert(std::abs(dist.range_tries(5, 11) - 0.00159997f) < threshold);
     std::cout << "All tests have successfully passed!" << std::endl;
     sample_test(dist);
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -254,7 +267,9 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     srand(time(nullptr));
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

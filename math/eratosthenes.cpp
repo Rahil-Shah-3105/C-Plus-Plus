@@ -31,6 +31,7 @@ namespace math {
  * @returns void
  */
 void sieve(std::vector<bool> *vec) {
+	std::cerr << "[ERROR] >>> Entering sieve(vec=" << vec << ")" << std::endl;
     (*vec)[0] = false;
     (*vec)[1] = false;
 
@@ -38,9 +39,11 @@ void sieve(std::vector<bool> *vec) {
     for (uint64_t n = 2; n < vec->size(); n++) {
         for (uint64_t multiple = n << 1; multiple < vec->size();
              multiple += n) {
+			std::cerr << "[ERROR] sieve(vec=" << vec << "): multiple → " << multiple << std::endl;
             (*vec)[multiple] = false;
         }
     }
+	std::cerr << "[WARN] <<< Exiting sieve(vec=" << vec << ")" << std::endl;
 }
 
 /**
@@ -62,6 +65,7 @@ void print_primes(std::vector<bool> const &primes) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     auto primes = std::vector<bool>(10, true);
     math::sieve(&primes);
     assert(primes[0] == false);
@@ -76,6 +80,7 @@ static void test() {
     assert(primes[9] == false);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -85,6 +90,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main(int argc, char *argv[]) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     test();  // run self-test implementations
 
     // The largest prime we will check for
@@ -114,5 +120,6 @@ int main(int argc, char *argv[]) {
     // Print the time taken we found earlier
     std::cout << "Time taken: " << time << " seconds" << std::endl;
 
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

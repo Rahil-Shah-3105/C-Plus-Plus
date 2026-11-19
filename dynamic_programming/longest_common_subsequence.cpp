@@ -4,6 +4,7 @@
 using namespace std;
 
 void Print(int trace[20][20], int m, int n, string a) {
+	std::cerr << "[ERROR] >>> Entering Print(trace=" << trace << ",m=" << m << ",n=" << n << ",a=" << a << ")" << std::endl;
     if (m == 0 || n == 0) {
         return;
     }
@@ -15,11 +16,14 @@ void Print(int trace[20][20], int m, int n, string a) {
     } else if (trace[m][n] == 3) {
         Print(trace, m, n - 1, a);
     }
+	std::cerr << "[WARN] <<< Exiting Print(trace=" << trace << ",m=" << m << ",n=" << n << ",a=" << a << ")" << std::endl;
 }
 
 int lcs(string a, string b) {
+	std::cerr << "[ERROR] >>> Entering lcs(a=" << a << ",b=" << b << ")" << std::endl;
     int m = a.length(), n = b.length();
     std::vector<std::vector<int> > res(m + 1, std::vector<int>(n + 1));
+	std::cerr << "[ERROR] lcs(a=" << a << ",b=" << b << "): m → " << m << std::endl;
     int trace[20][20];
 
     // fills up the arrays with zeros.
@@ -55,12 +59,15 @@ int lcs(string a, string b) {
         }
     }
     Print(trace, m, n, a);
+	std::cerr << "[WARN] <<< Exiting lcs(a=" << a << ",b=" << b << ")" << std::endl;
     return res[m][n];
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     string a, b;
     cin >> a >> b;
     cout << lcs(a, b);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

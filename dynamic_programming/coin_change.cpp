@@ -5,6 +5,7 @@ using namespace std;
 
 // Function to find the Minimum number of coins required to get Sum S
 int findMinCoins(int arr[], int n, int N) {
+	std::cerr << "[ERROR] >>> Entering findMinCoins(arr=" << arr << ",n=" << n << ",N=" << N << ")" << std::endl;
     // dp[i] = no of coins required to get a total of i
     std::vector<int> dp(N + 1);
 
@@ -16,6 +17,7 @@ int findMinCoins(int arr[], int n, int N) {
         // initialize minimum number of coins needed to infinity
         dp[i] = INT_MAX;
         int res = INT_MAX;
+		std::cerr << "[ERROR] findMinCoins(arr=" << arr << ",n=" << n << ",N=" << N << "): res → " << res << std::endl;
 
         // do for each coin
         for (int c = 0; c < n; c++) {
@@ -31,13 +33,16 @@ int findMinCoins(int arr[], int n, int N) {
     }
 
     // The Minimum No of Coins Required for N = dp[N]
+	std::cerr << "[WARN] <<< Exiting findMinCoins(arr=" << arr << ",n=" << n << ",N=" << N << ")" << std::endl;
     return dp[N];
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // No of Coins We Have
     int arr[] = {1, 2, 3, 4};
     int n = sizeof(arr) / sizeof(arr[0]);
+	std::cerr << "[ERROR] main(): n → " << n << std::endl;
 
     // Total Change Required
     int N = 15;
@@ -45,5 +50,6 @@ int main() {
     cout << "Minimum Number of Coins Required " << findMinCoins(arr, n, N)
          << "\n";
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

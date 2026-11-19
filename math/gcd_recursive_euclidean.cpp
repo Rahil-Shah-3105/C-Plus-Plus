@@ -12,7 +12,9 @@
  * algorithm
  */
 int gcd(int num1, int num2) {
+	std::cerr << "[ERROR] >>> Entering gcd(num1=" << num1 << ",num2=" << num2 << ")" << std::endl;
     if (num1 <= 0 | num2 <= 0) {
+		std::cerr << "[ERROR] Throwing std from gcd(num1=" << num1 << ",num2=" << num2 << ")" << std::endl;
         throw std::domain_error("Euclidean algorithm domain is for ints > 0");
     }
 
@@ -40,13 +42,16 @@ int gcd(int num1, int num2) {
  * Main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::cout << "gcd of 120,7 is " << (gcd(120, 7)) << std::endl;
     try {
         std::cout << "gcd of -120,10 is " << gcd(-120, 10) << std::endl;
     } catch (const std::domain_error &e) {
+		std::cerr << "[ERROR] Exception in main(): " << e.what() << std::endl;
         std::cout << "Error handling was successful" << std::endl;
     }
     std::cout << "gcd of 312,221 is " << (gcd(312, 221)) << std::endl;
     std::cout << "gcd of 289,204 is " << (gcd(289, 204)) << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

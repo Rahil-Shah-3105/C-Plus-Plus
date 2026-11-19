@@ -80,6 +80,7 @@ std::vector<std::vector<T>> matrix_multiplication(
  */
 template <typename T = int64_t>
 bool is_zero_matrix(const std::vector<std::vector<T>>& _mat) {
+	std::cerr << "[ERROR] >>> Entering is_zero_matrix(_mat.size()=" << _mat.size() << ")" << std::endl;
     for (uint32_t i = 0; i < _mat.size(); ++i) {
         for (uint32_t j = 0; j < _mat[i].size(); ++j) {
             if (_mat[i][j] != 0) {
@@ -87,6 +88,7 @@ bool is_zero_matrix(const std::vector<std::vector<T>>& _mat) {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting is_zero_matrix(_mat.size()=" << _mat.size() << ")" << std::endl;
     return true;
 }
 
@@ -191,6 +193,7 @@ T get_nth_term_of_recurrence_series(
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     /*
      * Example 1: [Fibonacci
      * series](https://en.wikipedia.org/wiki/Fibonacci_number);
@@ -361,6 +364,7 @@ static void test() {
                tribonacci_sum, trib_sum_base_case, 18, 1) == 23249LL);
     assert(math::linear_recurrence_matrix::get_nth_term_of_recurrence_series(
                tribonacci_sum, trib_sum_base_case, 19, 1) == 42762LL);
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -368,6 +372,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

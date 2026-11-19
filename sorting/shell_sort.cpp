@@ -1,6 +1,7 @@
 #include <iostream>
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int size = 10;
     int* array = new int[size];
     // Input
@@ -33,5 +34,6 @@ int main() {
     }
 
     delete[] array;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

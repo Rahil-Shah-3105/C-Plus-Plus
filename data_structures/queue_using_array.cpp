@@ -57,16 +57,20 @@ class Queue_Array {
  * @param ele to be added to the end of the queue
  */
 void Queue_Array::enqueue(const int16_t& ele) {
+	std::cerr << "[ERROR] >>> Entering Queue_Array::enqueue(ele=" << ele << ")" << std::endl;
     if (rear == arr.size() - 1) {
         std::cout << "\nStack is full";
     } else if (front == -1 && rear == -1) {
         front = 0;
+		std::cerr << "[DEBUG] Queue_Array::enqueue(ele=" << ele << "): front → " << front << std::endl;
         rear = 0;
+		std::cerr << "[DEBUG] Queue_Array::enqueue(ele=" << ele << "): rear → " << rear << std::endl;
         arr[rear] = ele;
     } else if (rear < arr.size()) {
         ++rear;
         arr[rear] = ele;
     }
+	std::cerr << "[WARN] <<< Exiting Queue_Array::enqueue(ele=" << ele << ")" << std::endl;
 }
 
 /**
@@ -74,17 +78,20 @@ void Queue_Array::enqueue(const int16_t& ele) {
  * @returns data that is deleted if queue is not empty
  */
 int Queue_Array::dequeue() {
+	std::cerr << "[ERROR] >>> Entering Queue_Array::dequeue()" << std::endl;
     int8_t d{0};
     if (front == -1) {
         std::cout << "\nstack is empty ";
         return 0;
     } else if (front == rear) {
         d = arr.at(front);
+		std::cerr << "[ERROR] Queue_Array::dequeue(): d → " << d << std::endl;
         front = rear = -1;
     } else {
         d = arr.at(front++);
     }
 
+	std::cerr << "[WARN] <<< Exiting Queue_Array::dequeue()" << std::endl;
     return d;
 }
 
@@ -92,11 +99,13 @@ int Queue_Array::dequeue() {
  * @brief Utility function to show all elements in the queue
  */
 void Queue_Array::display() const {
+	std::cerr << "[ERROR] >>> Entering Queue_Array::display()" << std::endl;
     if (front == -1) {
         std::cout << "\nStack is empty";
     } else {
         for (int16_t i{front}; i <= rear; ++i) std::cout << arr.at(i) << " ";
     }
+	std::cerr << "[WARN] <<< Exiting Queue_Array::display()" << std::endl;
 }
 
 }  // namespace queue_using_array
@@ -110,6 +119,7 @@ void Queue_Array::display() const {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int op{0}, data{0};
     data_structures::queue_using_array::Queue_Array ob;
 
@@ -126,6 +136,7 @@ int main() {
             ob.enqueue(data);
         } else if (op == 2) {
             data = ob.dequeue();
+			std::cerr << "[ERROR] main(): data → " << data << std::endl;
             std::cout << "\ndequeue element is:\t" << data;
         } else if (op == 3) {
             ob.display();
@@ -136,5 +147,6 @@ int main() {
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

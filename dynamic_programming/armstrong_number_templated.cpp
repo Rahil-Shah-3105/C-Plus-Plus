@@ -37,8 +37,10 @@ namespace dynamic_programming {
  */
 template <typename T>
 bool is_armstrong(const T &number) {
+	std::cerr << "[ERROR] >>> Entering is_armstrong(number=" << number << ")" << std::endl;
     int count = 0, temp = number, result = 0, rem = 0;
 
+	std::cerr << "[ERROR] is_armstrong(number=" << number << "): count → " << count << std::endl;
     // Count the number of digits of the given number.
     // For example: 153 would be 3 digits.
     while (temp != 0) {
@@ -52,6 +54,7 @@ bool is_armstrong(const T &number) {
     temp = number;
     while (temp != 0) {
         rem = temp % 10;
+		std::cerr << "[DEBUG] is_armstrong(number=" << number << "): rem → " << rem << std::endl;
         result += static_cast<T>(std::pow(rem, count));
         temp /= 10;
     }
@@ -59,6 +62,7 @@ bool is_armstrong(const T &number) {
     if (result == number) {
         return true;
     } else {
+		std::cerr << "[WARN] <<< Exiting is_armstrong(number=" << number << ")" << std::endl;
         return false;
     }
 }
@@ -69,6 +73,7 @@ bool is_armstrong(const T &number) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     assert(dynamic_programming::is_armstrong(153) == true);
     assert(dynamic_programming::is_armstrong(1) == true);
     assert(dynamic_programming::is_armstrong(0) == true);
@@ -81,6 +86,7 @@ static void tests() {
     assert(dynamic_programming::is_armstrong(103) == false);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -88,6 +94,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

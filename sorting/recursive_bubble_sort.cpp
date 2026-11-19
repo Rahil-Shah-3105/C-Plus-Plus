@@ -81,6 +81,7 @@ namespace sorting {
  */
 template <typename T>
 void recursive_bubble_sort(std::vector<T> *nums, uint64_t n) {
+	std::cerr << "[ERROR] >>> Entering recursive_bubble_sort(nums=" << nums << ",n=" << n << ")" << std::endl;
     if (n == 1) {  //!< base case; when size of the array is 1
         return;
     }
@@ -94,6 +95,7 @@ void recursive_bubble_sort(std::vector<T> *nums, uint64_t n) {
 
     //!< calling the function after we have fixed the last element
     recursive_bubble_sort(nums, n - 1);
+	std::cerr << "[WARN] <<< Exiting recursive_bubble_sort(nums=" << nums << ",n=" << n << ")" << std::endl;
 }
 }  // namespace sorting
 
@@ -102,6 +104,7 @@ void recursive_bubble_sort(std::vector<T> *nums, uint64_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st example. Creating an array of type `int`.
     std::cout << "1st test using `int`\n";
     const uint64_t size = 6;
@@ -145,6 +148,7 @@ static void test() {
         std::cout << double_arr[i] << ", ";
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -152,6 +156,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

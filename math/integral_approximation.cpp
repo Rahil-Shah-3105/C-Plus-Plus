@@ -60,8 +60,10 @@ double integral_approx(double lb, double ub,
  * @param threshold values from [0, 1)
  */
 void test_eval(double approx, double expected, double threshold) {
+	std::cerr << "[ERROR] >>> Entering test_eval(approx=" << approx << ",expected=" << expected << ",threshold=" << threshold << ")" << std::endl;
     assert(approx >= expected * (1 - threshold));
     assert(approx <= expected * (1 + threshold));
+	std::cerr << "[WARN] <<< Exiting test_eval(approx=" << approx << ",expected=" << expected << ",threshold=" << threshold << ")" << std::endl;
 }
 
 /**
@@ -73,6 +75,7 @@ void test_eval(double approx, double expected, double threshold) {
 }  // namespace math
 
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     double test_1 = math::integral_approx(
         3.24, 7.56, [](const double x) { return log(x) + exp(x) + x; });
     std::cout << "Test Case 1" << std::endl;
@@ -131,6 +134,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -37,7 +37,10 @@ struct Node {
      * @param _data Value of Node
      */
     explicit Node(int64_t _data) {
+		std::cerr << "[ERROR] >>> Entering Node(_data=" << _data << ")" << std::endl;
         data = _data;    ///< Set value of Node data
+		std::cerr << "[WARN] <<< Exiting Node(_data=" << _data << ")" << std::endl;
+		std::cerr << "[ERROR] Node(_data=" << _data << "): data → " << data << std::endl;
         next = nullptr;  ///< Initialize successor
     }
     /**
@@ -47,6 +50,7 @@ struct Node {
      */
     explicit Node(int64_t _data, Node* _next) {
         data = _data;  ///< Set value of Node data
+		std::cerr << "[ERROR] Node(_data=" << _data << ",_next=" << _next << "): data → " << data << std::endl;
         next = _next;  ///< Initialize successor
     }
 };
@@ -64,8 +68,11 @@ class CircularLinkedList {
      * @brief Creates an empty CircularLinkedList.
      */
     CircularLinkedList() {
+		std::cerr << "[ERROR] >>> Entering CircularLinkedList()" << std::endl;
         root = nullptr;
         end = nullptr;
+		std::cerr << "[DEBUG] CircularLinkedList(): end → " << end << std::endl;
+		std::cerr << "[WARN] <<< Exiting CircularLinkedList()" << std::endl;
     }
     /**
      * @brief Copy constructor for CircularLinkedList.
@@ -124,6 +131,7 @@ class CircularLinkedList {
      * Iteratively frees each node in the Circular Linked List from the heap
      */
     void erase() {
+		std::cerr << "[ERROR] >>> Entering erase()" << std::endl;
         if (root == nullptr) {
             return;
         }
@@ -134,7 +142,10 @@ class CircularLinkedList {
             delete (temp);
         } while (node != root);
         root = nullptr;
+		std::cerr << "[WARN] erase(): root → " << root << std::endl;
         end = nullptr;
+		std::cerr << "[DEBUG] erase(): end → " << end << std::endl;
+		std::cerr << "[WARN] <<< Exiting erase()" << std::endl;
     }
     /**
      * @brief Inserts all the values from a vector into the Circular Linked List
@@ -144,9 +155,11 @@ class CircularLinkedList {
      * @returns void
      */
     void insert(const std::vector<int64_t>& values) {
+		std::cerr << "[ERROR] >>> Entering insert(values.size()=" << values.size() << ")" << std::endl;
         for (int64_t value : values) {
             insert(value);
         }
+		std::cerr << "[WARN] <<< Exiting insert(values.size()=" << values.size() << ")" << std::endl;
     }
     /**
      * @brief Inserts a single value into the Circular Linked List
@@ -156,8 +169,11 @@ class CircularLinkedList {
      * @returns void
      */
     void insert(int64_t data) {
+		std::cerr << "[ERROR] >>> Entering insert(data=" << data << ")" << std::endl;
         Node* node = new Node(data, root);
         insert(node);
+		std::cerr << "[WARN] <<< Exiting insert(data=" << data << ")" << std::endl;
+		std::cerr << "[ERROR] insert(node=" << node << "): end → " << end << std::endl;
     }
     /**
      * @brief Inserts a given Node into the Circular Linked List
@@ -194,6 +210,7 @@ class CircularLinkedList {
      * @returns void
      */
     void print(Node* root) {
+		std::cerr << "[ERROR] >>> Entering print(root=" << root << ")" << std::endl;
         Node* temp = root;
         if (root == nullptr) {
             std::cout << "Empty List!\n";
@@ -203,6 +220,7 @@ class CircularLinkedList {
             std::cout << temp->data << " ";
             temp = temp->next;
         } while (temp != root);
+		std::cerr << "[WARN] <<< Exiting print(root=" << root << ")" << std::endl;
         std::cout << "\n";
     }
     /**
@@ -221,6 +239,7 @@ class CircularLinkedList {
      * @returns A std::vector of the list's values
      */
     std::vector<int64_t> values(Node* root) {
+		std::cerr << "[ERROR] >>> Entering values(root=" << root << ")" << std::endl;
         std::vector<int64_t> res;
         if (root == nullptr) {
             return res;  ///< Return empty vector
@@ -230,6 +249,7 @@ class CircularLinkedList {
             res.push_back(temp->data);
             temp = temp->next;
         } while (temp != root);
+		std::cerr << "[WARN] <<< Exiting values(root=" << root << ")" << std::endl;
         return res;
     }
 };
@@ -250,6 +270,7 @@ using operations_on_datastructures::circular_linked_list::Node;
  * @returns void
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Intialized a = {2}\n";
     std::cout << "Expected result: {2}\n";
@@ -259,12 +280,14 @@ void test1() {
     assert(a.values() == res);
     a.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check a few values
  * @returns void
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Intialized a = {2, 5, 6}\n";
     std::cout << "Expected result: {2, 5, 6}\n";
@@ -276,12 +299,14 @@ void test2() {
     assert(a.values() == res);
     a.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check an input array
  * @returns void
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Intialized a = {2, 7, 8, 3, 2, 6}\n";
     std::cout << "Expected result: {2, 7, 8, 3, 2, 6}\n";
@@ -291,12 +316,14 @@ void test3() {
     a.print();
     assert(a.values() == res);
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check using a specific Node as the starting point
  * @returns void
  */
 void test4() {
+	std::cerr << "[ERROR] >>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Intialized a = {2, 5}\n";
     std::cout << "Expected result: {5, 2}\n";
@@ -308,6 +335,7 @@ void test4() {
     assert(a.values(start) == res);
     a.print(start);
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test4()" << std::endl;
 }
 
 /**
@@ -315,6 +343,7 @@ void test4() {
  * @returns void
  */
 void test5() {
+	std::cerr << "[ERROR] >>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Intialized a = {}\n";
     std::cout << "Expected result: Empty List!\n";
@@ -323,6 +352,7 @@ void test5() {
     assert(a.values() == res);
     a.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test5()" << std::endl;
 }
 }  // namespace tests
 
@@ -331,11 +361,13 @@ void test5() {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -343,6 +375,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

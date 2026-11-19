@@ -33,7 +33,9 @@ class hash_chain {
      * @param mod modulus of the chain
      */
     explicit hash_chain(int mod) : _mod(mod) {
+		std::cerr << "[ERROR] >>> Entering hash_chain(mod=" << mod << ")" << std::endl;
         while (mod--) head.push_back(nullptr);
+		std::cerr << "[WARN] <<< Exiting hash_chain(mod=" << mod << ")" << std::endl;
     }
 
     /**
@@ -43,6 +45,7 @@ class hash_chain {
      * @param h height of the node
      */
     void add(int x, int h) {
+		std::cerr << "[ERROR] >>> Entering add(x=" << x << ",h=" << h << ")" << std::endl;
         std::shared_ptr<Node> curr;
         std::shared_ptr<Node> temp(new Node);
         temp->data = x;
@@ -55,12 +58,14 @@ class hash_chain {
             while (curr->next) curr = curr->next;
             curr->next = temp;
         }
+		std::cerr << "[WARN] <<< Exiting add(x=" << x << ",h=" << h << ")" << std::endl;
     }
 
     /**
      * @brief Display the chain
      */
     void display() {
+		std::cerr << "[ERROR] >>> Entering display()" << std::endl;
         std::shared_ptr<Node> temp = nullptr;
         int i = 0;
         for (i = 0; i < _mod; i++) {
@@ -77,6 +82,7 @@ class hash_chain {
                 std::cout << std::endl;
             }
         }
+		std::cerr << "[WARN] <<< Exiting display()" << std::endl;
     }
 
     /**
@@ -99,6 +105,7 @@ class hash_chain {
      * @returns `false` if element not found
      */
     bool find(int x, int h) const {
+		std::cerr << "[ERROR] >>> Entering find(x=" << x << ",h=" << h << ")" << std::endl;
         std::shared_ptr<Node> temp = head[h];
         if (!head[h]) {
             // index does not exist!
@@ -123,6 +130,7 @@ class hash_chain {
 
         // further implicit else condition
         std::cout << "Element not found" << std::endl;
+		std::cerr << "[WARN] <<< Exiting find(x=" << x << ",h=" << h << ")" << std::endl;
         return false;
     }
 };
@@ -131,8 +139,10 @@ class hash_chain {
  * @returns `0` always
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int c = 0, x = 0, mod = 0, h = 0;
     std::cout << "Enter the size of Hash Table. = " << std::endl;
+	std::cerr << "[ERROR] main(): h → " << h << std::endl;
     std::cin >> mod;
 
     hash_chain mychain(mod);
@@ -172,6 +182,7 @@ int main() {
                 break;
             default:
                 loop = false;
+				std::cerr << "[ERROR] main(): loop → " << loop << std::endl;
                 break;
         }
         std::cout << std::endl;
@@ -182,5 +193,6 @@ int main() {
     add(5,&head1);
     display(&head1);
     display(&head2);*/
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

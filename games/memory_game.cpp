@@ -29,6 +29,8 @@ template <typename T>
 constexpr typename std::enable_if<std::is_integral<T>::value, void>::type SLEEP(
     T milliseconds) {
     Sleep(milliseconds * 1000);
+	std::cerr << "[ERROR] >>> Entering SLEEP(seconds=" << seconds << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting SLEEP(seconds=" << seconds << ")" << std::endl;
 }
 #else
 #include <unistd.h>  /// for sleep()
@@ -60,6 +62,7 @@ namespace memory_game {
  */
 template <typename T>
 bool is_number(const T &input) {
+	std::cerr << "[ERROR] >>> Entering is_number(input=" << input << ")" << std::endl;
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(256, '\n');
@@ -67,6 +70,7 @@ bool is_number(const T &input) {
         return false;
     }
 
+	std::cerr << "[WARN] <<< Exiting is_number(input=" << input << ")" << std::endl;
     return true;
 }
 
@@ -121,6 +125,7 @@ void init(std::vector<T> *table) {
  */
 template <typename T>
 void print_table(const std::vector<T> &table) {
+	std::cerr << "[ERROR] >>> Entering print_table(table.size()=" << table.size() << ")" << std::endl;
     std::cout << "| ";
     std::vector<T> table_print(table.size());
 
@@ -139,6 +144,7 @@ void print_table(const std::vector<T> &table) {
 
         std::cout << table_print[i] << " | ";
     }
+	std::cerr << "[WARN] <<< Exiting print_table(table.size()=" << table.size() << ")" << std::endl;
 }
 
 // Prototype function. This is needed as `ask_data` calls `reset_data`, and
@@ -358,13 +364,16 @@ void assign_results(std::vector<T> *table_empty, std::vector<T> *table,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Start randomizer. This changes the values every time.
     std::srand(std::time(nullptr));
 
     int size = 0;       ///< Size of the table.
+	std::cerr << "[ERROR] main(): size → " << size << std::endl;
     int selection = 0;  ///< Selection of the size (4x2, 5x2, 7x2).
 
     int response = 0;    ///< The answer (number index) that the user chose.
+	std::cerr << "[ERROR] main(): response → " << response << std::endl;
     int old_answer = 0;  ///< Previous answer (number index).
 
     int memory_count =
@@ -410,5 +419,6 @@ int main() {
     games::memory_game::assign_results(&table_empty, &table, &response,
                                        &first_time, &old_answer, &memory_count);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

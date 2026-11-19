@@ -17,13 +17,17 @@
  * @returns std::string
  */
 std::string lower(std::string word) {
+	std::cerr << "[ERROR] >>> Entering lower(word=" << word << ")" << std::endl;
     int length = word.length();
     std::string lc = "";
+	std::cerr << "[ERROR] lower(word=" << word << "): lc → " << lc << std::endl;
+	std::cerr << "[ERROR] lower(word=" << word << "): length → " << length << std::endl;
 
     for (int i = 0; i < length; i++) {
         lc += tolower(word[i]);
     }
 
+	std::cerr << "[WARN] <<< Exiting lower(word=" << word << ")" << std::endl;
     return lc;
 }
 
@@ -32,9 +36,11 @@ std::string lower(std::string word) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     assert(lower("abcd").compare("abcd") == 0);
     assert(lower("abc").compare("abcd") == -1);
     assert(lower("abcd").compare("abc") == 1);
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -42,6 +48,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
     std::string paragraph;
     std::cout << "Please enter your paragraph: \n";
@@ -94,5 +101,6 @@ int main() {
             std::cin.get();
         }
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

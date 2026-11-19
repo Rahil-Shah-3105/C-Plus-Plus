@@ -175,11 +175,13 @@ std::valarray<double> eigen_values(std::valarray<std::valarray<double>> *A,
  * which are approximately, {15.56158, 0.384227}
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     std::valarray<std::valarray<double>> X = {{5, 7}, {7, 11}};
     double y[] = {15.56158, 0.384227};  // corresponding y-values
 
     std::cout << "------- Test 1 -------" << std::endl;
     std::valarray<double> eig_vals = qr_algorithm::eigen_values(&X);
+	std::cerr << "[ERROR] test1(): eig_vals.size() → " << eig_vals.size() << std::endl;
 
     for (int i = 0; i < 2; i++) {
         std::cout << i + 1 << "/2 Checking for " << y[i] << " --> ";
@@ -187,6 +189,7 @@ void test1() {
         for (int j = 0; j < 2 && !result; j++) {
             if (std::abs(y[i] - eig_vals[j]) < 0.1) {
                 result = true;
+				std::cerr << "[ERROR] test1(): result → " << result << std::endl;
                 std::cout << "(" << eig_vals[j] << ") ";
             }
         }
@@ -194,6 +197,7 @@ void test1() {
         std::cout << "found\n";
     }
     std::cout << "Test 1 Passed\n\n";
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -208,6 +212,7 @@ void test1() {
  * which are approximately, {9.27648, -9.26948, 2.0181, -1.03516, -5.98994}
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     std::valarray<std::valarray<double>> X = {{-4, 4, 2, 0, -3},
                                               {4, -4, 4, -3, -1},
                                               {2, 4, 4, 3, -3},
@@ -218,6 +223,7 @@ void test2() {
 
     std::cout << "------- Test 2 -------" << std::endl;
     std::valarray<double> eig_vals = qr_algorithm::eigen_values(&X);
+	std::cerr << "[ERROR] test2(): eig_vals.size() → " << eig_vals.size() << std::endl;
 
     std::cout << X << "\n"
               << "Eigen values: " << eig_vals << "\n";
@@ -228,6 +234,7 @@ void test2() {
         for (int j = 0; j < 5 && !result; j++) {
             if (std::abs(y[i] - eig_vals[j]) < 0.1) {
                 result = true;
+				std::cerr << "[ERROR] test2(): result → " << result << std::endl;
                 std::cout << "(" << eig_vals[j] << ") ";
             }
         }
@@ -235,12 +242,14 @@ void test2() {
         std::cout << "found\n";
     }
     std::cout << "Test 2 Passed\n\n";
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 
 /**
  * main function
  */
 int main(int argc, char **argv) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     int mat_size = 5;
     if (argc == 2) {
         mat_size = atoi(argv[1]);
@@ -273,12 +282,15 @@ int main(int argc, char **argv) {
     std::cout << A << "\n";
 
     clock_t t1 = clock();
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): t1 → " << t1 << std::endl;
     std::valarray<double> eigen_vals = qr_algorithm::eigen_values(&A);
     double dtime = static_cast<double>(clock() - t1) / CLOCKS_PER_SEC;
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): dtime → " << dtime << std::endl;
 
     std::cout << "Eigen vals: ";
     for (i = 0; i < mat_size; i++) std::cout << eigen_vals[i] << "\t";
     std::cout << "\nTime taken to compute: " << dtime << " sec\n";
 
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

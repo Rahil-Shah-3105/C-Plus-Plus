@@ -83,6 +83,7 @@ std::uint32_t longest_increasing_subsequence_using_binary_search(std::vector<T>&
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     std::vector<int> arr = {10, 9, 2, 5, 3, 7, 101, 18};
     assert(longest_increasing_subsequence_using_binary_search(arr) == 4);
 
@@ -99,12 +100,14 @@ static void tests() {
     assert(longest_increasing_subsequence_using_binary_search(arr5) == 4);
 
     std::vector<char> arr6 = {'a', 'b', 'c', 'a', 'd'};
+	std::cerr << "[ERROR] tests(): arr6.size() → " << arr6.size() << std::endl;
     assert(longest_increasing_subsequence_using_binary_search(arr6) == 4);
 
     std::vector<int> arr7 = {};
     assert(longest_increasing_subsequence_using_binary_search(arr7) == 0);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -112,6 +115,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

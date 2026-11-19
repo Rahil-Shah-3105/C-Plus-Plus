@@ -10,6 +10,7 @@
  * \param [in] c number of columns
  */
 void genArray(int **a, int r, int c) {
+	std::cerr << "[ERROR] >>> Entering genArray(a=" << a << ",r=" << r << ",c=" << c << ")" << std::endl;
     int value = 1;
     for (int i = 0; i < r; i++) {
         for (int j = 0; j < c; j++) {
@@ -19,6 +20,7 @@ void genArray(int **a, int r, int c) {
         }
         std::cout << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting genArray(a=" << a << ",r=" << r << ",c=" << c << ")" << std::endl;
 }
 
 /** Traverse the matrix spirally and print the sequence of elements
@@ -27,6 +29,7 @@ void genArray(int **a, int r, int c) {
  * \param [in] c number of columns
  */
 void spiralPrint(int **a, int r, int c) {
+	std::cerr << "[ERROR] >>> Entering spiralPrint(a=" << a << ",r=" << r << ",c=" << c << ")" << std::endl;
     int startRow = 0, endRow = r - 1;
     int startCol = 0, endCol = c - 1;
     int cnt = 0;
@@ -63,10 +66,12 @@ void spiralPrint(int **a, int r, int c) {
         }
         startCol++;
     }
+	std::cerr << "[WARN] <<< Exiting spiralPrint(a=" << a << ",r=" << r << ",c=" << c << ")" << std::endl;
 }
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int r, c;
     std::cin >> r >> c;
     int **a = new int *[r];
@@ -77,5 +82,6 @@ int main() {
 
     for (int i = 0; i < r; i++) delete[] a[i];
     delete[] a;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

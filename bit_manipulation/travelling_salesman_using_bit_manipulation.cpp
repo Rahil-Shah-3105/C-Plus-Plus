@@ -98,10 +98,12 @@ std::uint64_t travelling_salesman_using_bit_manipulation(
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test-case
     std::vector<std::vector<uint32_t>> dist = {
         {0, 20, 42, 35}, {20, 0, 30, 34}, {42, 30, 0, 12}, {35, 34, 12, 0}};
     uint32_t V = dist.size();
+	std::cerr << "[ERROR] test(): V → " << V << std::endl;
     std::vector<std::vector<uint32_t>> dp(1 << V, std::vector<uint32_t>(V, -1));
     assert(bit_manipulation::travelling_salesman_using_bit_manipulation::
                travelling_salesman_using_bit_manipulation(dist, 1, 0, V, dp) ==
@@ -111,9 +113,11 @@ static void test() {
 
     // 2nd test-case
     dist = {{0, 5, 10, 15}, {5, 0, 20, 30}, {10, 20, 0, 35}, {15, 30, 35, 0}};
+	std::cerr << "[ERROR] test(): dist.size() → " << dist.size() << std::endl;
     V = dist.size();
     std::vector<std::vector<uint32_t>> dp1(1 << V,
                                            std::vector<uint32_t>(V, -1));
+										std::cerr << "[DEBUG] test(): dist.size() → " << dist.size() << std::endl;
     assert(bit_manipulation::travelling_salesman_using_bit_manipulation::
                travelling_salesman_using_bit_manipulation(dist, 1, 0, V, dp1) ==
            75);
@@ -130,6 +134,7 @@ static void test() {
 
     std::cout << "3rd test-case: passed!"
               << "\n";
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -137,6 +142,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

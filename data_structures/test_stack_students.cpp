@@ -18,8 +18,10 @@
 #include "./stack.hpp"
 
 int main(int argc, char* argv[]) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     double GPA = NAN;
     double highestGPA = NAN;
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): highestGPA → " << highestGPA << std::endl;
     std::string name;
 
     assert(argc == 2);
@@ -49,5 +51,6 @@ int main(int argc, char* argv[]) {
         stk.pop();
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

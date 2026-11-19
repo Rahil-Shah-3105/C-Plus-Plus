@@ -56,11 +56,14 @@ struct Node {
  * @returns void
  */
 void printLinkedList(Node *start) {
+	std::cerr << "[ERROR] >>> Entering printLinkedList(start=" << start << ")" << std::endl;
+    std::cerr << "[ERROR] >>> Entering printLinkedList(start=" << start << ")" << std::endl;
     while (start != nullptr) {
         std::cout << "->" << start->data;
         start = start->next;
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting printLinkedList(start=" << start << ")" << std::endl;
 }
 
 /**
@@ -99,10 +102,12 @@ Node *makeLinkedList(const std::vector<uint64_t> &data) {
  * new.
  */
 void deleteList(Node *const root) {
+	std::cerr << "[ERROR] >>> Entering deleteList(root=" << root << ")" << std::endl;
     if (root != NULL) {
         deleteList(root->next);
         delete root;
     }
+	std::cerr << "[WARN] <<< Exiting deleteList(root=" << root << ")" << std::endl;
 }
 
 /**
@@ -113,6 +118,7 @@ void deleteList(Node *const root) {
  * @returns false if the sublist is NOT found
  */
 bool sublistSearch(Node *sublist, Node *mainList) {
+	std::cerr << "[ERROR] >>> Entering sublistSearch(sublist=" << sublist << ",mainList=" << mainList << ")" << std::endl;
     if (sublist == nullptr || mainList == nullptr) {
         return false;
     }
@@ -132,6 +138,7 @@ bool sublistSearch(Node *sublist, Node *mainList) {
                 /// If the data of target node and main node is equal then move
                 /// to the next node of both lists.
                 target_ptr = target_ptr->next;
+				std::cerr << "[ERROR] sublistSearch(sublist=" << sublist << ",mainList=" << mainList << "): target_ptr → " << target_ptr << std::endl;
                 main_ptr = main_ptr->next;
 
             } else {
@@ -156,6 +163,7 @@ bool sublistSearch(Node *sublist, Node *mainList) {
 
     /// If the main list is exhausted, means sublist does not found, return
     /// false
+	std::cerr << "[WARN] <<< Exiting sublistSearch(sublist=" << sublist << ",mainList=" << mainList << ")" << std::endl;
     return false;
 }
 
@@ -174,8 +182,10 @@ class TestCases {
      * */
     template <typename T>
     void log(T msg) {
+		std::cerr << "[ERROR] >>> Entering log(msg=" << msg << ")" << std::endl;
         // It's just to avoid writing cout and endl
         std::cout << "[TESTS] : ---> " << msg << std::endl;
+		std::cerr << "[WARN] <<< Exiting log(msg=" << msg << ")" << std::endl;
     }
 
  public:
@@ -184,6 +194,7 @@ class TestCases {
      * @returns void
      * */
     void runTests() {
+		std::cerr << "[ERROR] >>> Entering runTests()" << std::endl;
         log("Running Tests...");
 
         testCase_1();
@@ -192,6 +203,7 @@ class TestCases {
 
         log("Test Cases over!");
         std::cout << std::endl;
+		std::cerr << "[WARN] <<< Exiting runTests()" << std::endl;
     }
 
     /**
@@ -199,6 +211,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_1() {
+		std::cerr << "[ERROR] >>> Entering testCase_1()" << std::endl;
         const bool expectedOutput = true;  ///< Expected output of this test
 
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -234,6 +247,7 @@ class TestCases {
 
         deleteList(mainlistLL);
         deleteList(sublistLL);
+		std::cerr << "[WARN] <<< Exiting testCase_1()" << std::endl;
     }
 
     /**
@@ -242,6 +256,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_2() {
+		std::cerr << "[ERROR] >>> Entering testCase_2()" << std::endl;
         const bool expectedOutput = true;  /// Expected output of this test
 
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -288,6 +303,7 @@ class TestCases {
 
         deleteList(mainlistLL);
         deleteList(sublistLL);
+		std::cerr << "[WARN] <<< Exiting testCase_2()" << std::endl;
     }
 
     /**
@@ -296,6 +312,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_3() {
+		std::cerr << "[ERROR] >>> Entering testCase_3()" << std::endl;
         const bool expectedOutput = false;  ///< Expected output of this test
 
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -339,6 +356,7 @@ class TestCases {
 
         deleteList(mainlistLL);
         deleteList(sublistLL);
+		std::cerr << "[WARN] <<< Exiting testCase_3()" << std::endl;
     }
 };
 
@@ -347,8 +365,10 @@ class TestCases {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     TestCases tc;
     tc.runTests();
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -356,6 +376,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     std::vector<uint64_t> mainlistData = {
@@ -388,5 +409,6 @@ int main() {
 
     deleteList(mainlistLL);
     deleteList(sublistLL);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -64,11 +64,14 @@ class perSegTree {
      * @returns the new node
      */
     std::shared_ptr<Node> newKid(std::shared_ptr<Node> const &curr) {
+		std::cerr << "[ERROR] >>> Entering newKid(curr=" << curr << ")" << std::endl;
         auto newNode = std::make_shared<Node>(Node());
         newNode->left = curr->left;
+		std::cerr << "[ERROR] newKid(curr=" << curr << "): newNode → " << newNode << std::endl;
         newNode->right = curr->right;
         newNode->prop = curr->prop;
         newNode->val = curr->val;
+		std::cerr << "[WARN] <<< Exiting newKid(curr=" << curr << ")" << std::endl;
         return newNode;
     }
 
@@ -105,17 +108,23 @@ class perSegTree {
      * @returns pointer to the newly created node
      */
     std::shared_ptr<Node> construct(const uint32_t &i, const uint32_t &j) {
+		std::cerr << "[ERROR] >>> Entering construct(i=" << i << ",j=" << j << ")" << std::endl;
         auto newNode = std::make_shared<Node>(Node());
         if (i == j) {
+			std::cerr << "[ERROR] construct(i=" << i << ",j=" << j << "): newNode → " << newNode << std::endl;
             newNode->val = vec[i];
         } else {
             uint32_t mid = i + (j - i) / 2;
+			std::cerr << "[ERROR] construct(i=" << i << ",j=" << j << "): mid → " << mid << std::endl;
             auto leftt = construct(i, mid);
+			std::cerr << "[ERROR] construct(i=" << i << ",j=" << j << "): leftt → " << leftt << std::endl;
             auto right = construct(mid + 1, j);
+			std::cerr << "[ERROR] construct(i=" << i << ",j=" << j << "): right → " << right << std::endl;
             newNode->val = leftt->val + right->val;
             newNode->left = leftt;
             newNode->right = right;
         }
+		std::cerr << "[WARN] <<< Exiting construct(i=" << i << ",j=" << j << ")" << std::endl;
         return newNode;
     }
 
@@ -267,6 +276,7 @@ class perSegTree {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<int64_t> arr = {-5, 2, 3, 11, -2, 7, 0, 1};
     range_queries::perSegTree tree;
     std::cout << "Elements before any updates are {";
@@ -310,6 +320,7 @@ static void test() {
               << tree.query(3, 5, 0) << '\n';
     std::cout << "Querying range sum on version 1 from index 3 to 5 = 4-9+0 = "
               << tree.query(3, 5, 1) << '\n';
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -317,6 +328,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

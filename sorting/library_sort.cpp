@@ -2,6 +2,7 @@
 #include <iostream>
 
 void librarySort(int *index, int n) {
+	std::cerr << "[ERROR] >>> Entering librarySort(index=" << index << ",n=" << n << ")" << std::endl;
     int lib_size, index_pos,
         *gaps,        // gaps
         *library[2];  // libraries
@@ -11,11 +12,17 @@ void librarySort(int *index, int n) {
     for (int i = 0; i < 2; i++) library[i] = new int[n];
 
     gaps = new int[n + 1];
+	std::cerr << "[DEBUG] librarySort(index=" << index << ",n=" << n << "): gaps → " << gaps << std::endl;
     numbered = new bool[n + 1];
+	std::cerr << "[DEBUG] librarySort(index=" << index << ",n=" << n << "): numbered → " << numbered << std::endl;
 
     lib_size = 1;
+	std::cerr << "[ERROR] librarySort(index=" << index << ",n=" << n << "): lib_size → " << lib_size << std::endl;
+	std::cerr << "[DEBUG] librarySort(index=" << index << ",n=" << n << "): lib_size → " << lib_size << std::endl;
     index_pos = 1;
     target_lib = 0;
+	std::cerr << "[DEBUG] librarySort(index=" << index << ",n=" << n << "): index_pos → " << index_pos << std::endl;
+	std::cerr << "[DEBUG] librarySort(index=" << index << ",n=" << n << "): target_lib → " << target_lib << std::endl;
     library[target_lib][0] = index[0];
 
     while (index_pos < n) {
@@ -47,6 +54,7 @@ void librarySort(int *index, int n) {
             }
 
             target_lib = next_target_lib;
+			std::cerr << "[ERROR] librarySort(index=" << index << ",n=" << n << "): target_lib → " << target_lib << std::endl;
             lib_size = prov_size - 1;
         } else {
             numbered[insert] = true;
@@ -74,12 +82,15 @@ void librarySort(int *index, int n) {
     for (int i = 0; i < 2; ++i) {
         delete[] library[i];
     }
+	std::cerr << "[WARN] <<< Exiting librarySort(index=" << index << ",n=" << n << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // ---example--
     int index_ex[] = {-6, 5, 9, 1, 9, 1, 0, 1, -8, 4, -12};
     int n_ex = sizeof(index_ex) / sizeof(index_ex[0]);
+	std::cerr << "[ERROR] main(): n_ex → " << n_ex << std::endl;
 
     librarySort(index_ex, n_ex);
     std::cout << "sorted array :" << std::endl;
@@ -90,4 +101,5 @@ int main() {
     sorted array :
     -12 -8 -6 0 1 1 1 4 5 9 9
     */
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

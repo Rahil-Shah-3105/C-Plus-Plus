@@ -17,11 +17,13 @@
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int num;
     std::cout << "Enter number = ";
     std::cin >> num;
 
     std::string s1 = std::to_string(num);  // convert number to string
+	std::cerr << "[ERROR] main(): s1 → " << s1 << std::endl;
     std::string s2 = s1;
 
     std::reverse(s1.begin(), s1.end());  // reverse the string
@@ -31,5 +33,6 @@ int main() {
     else
         std::cout << "false";
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

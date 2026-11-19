@@ -26,6 +26,7 @@ namespace math {
  * @return false if number is not a factorial
  */
 bool is_factorial(uint64_t n) {
+	std::cerr << "[ERROR] >>> Entering is_factorial(n=" << n << ")" << std::endl;
     if (n <= 0) {  // factorial numbers are only ever positive Integers
         return false;
     }
@@ -45,6 +46,7 @@ bool is_factorial(uint64_t n) {
      * if n was the sum of a factorial then it should be divided until it
      * becomes 1
      */
+	std::cerr << "[WARN] <<< Exiting is_factorial(n=" << n << ")" << std::endl;
     return (n == 1);
 }
 }  // namespace math
@@ -54,6 +56,7 @@ bool is_factorial(uint64_t n) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     assert(math::is_factorial(50) == false);
     assert(math::is_factorial(720) == true);
     assert(math::is_factorial(0) == false);
@@ -62,6 +65,7 @@ static void tests() {
     assert(math::is_factorial(-24) == false);
 
     std::cout << "All tests have successfully passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -69,6 +73,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -121,11 +121,14 @@ std::vector<size_t> dfs(const std::vector<std::vector<size_t> > &graph, size_t s
  * @returns none
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
 	size_t start_pos;
 
 	/// Test 1
 	std::cout << "Case 1: " << std::endl;
 	start_pos = 1;
+	std::cerr << "[ERROR] tests(): start_pos → " << start_pos << std::endl;
+	std::cerr << "[DEBUG] tests(): start_pos → " << start_pos << std::endl;
 	std::vector<std::vector<size_t> > g1(3, std::vector<size_t>());
 
 	graph::depth_first_search::addEdge(&g1, 1, 2);
@@ -162,6 +165,7 @@ static void tests() {
 
 	std::vector<size_t> expected3 {2, 4, 1, 3}; /// for the above sample data, this is the expected output
 	assert(graph::depth_first_search::dfs(g3, start_pos - 1) == expected3);
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 	std::cout << "Passed" << std::endl;
 
 }
@@ -171,6 +175,7 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // execute the tests
 
     size_t vertices = 0, edges = 0, start_pos = 1;
@@ -197,11 +202,14 @@ int main() {
 	std::cin >> start_pos;
 	start_pos -= 1;
 	traversal = graph::depth_first_search::dfs(adj, start_pos);
+	std::cerr << "[ERROR] main(): traversal.size() → " << traversal.size() << std::endl;
+	std::cerr << "[DEBUG] main(): traversal.size() → " << traversal.size() << std::endl;
 
     /// Printing the order of traversal
     for (auto x : traversal) {
 		std::cout << x << ' ';
 	}
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

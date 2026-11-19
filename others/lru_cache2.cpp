@@ -81,15 +81,19 @@ class LRUCache {
      * @param node_ptr the node to be pushed
      */
     void push_front(CacheNode<K, V> *node_ptr) {
+		std::cerr << "[ERROR] >>> Entering push_front(node_ptr=" << node_ptr << ")" << std::endl;
         if (!head) {
             head = node_ptr;
+			std::cerr << "[ERROR] push_front(node_ptr=" << node_ptr << "): head → " << head << std::endl;
             tail = node_ptr;
+			std::cerr << "[DEBUG] push_front(node_ptr=" << node_ptr << "): tail → " << tail << std::endl;
             return;
         }
 
         node_ptr->next = head;
         head->prev = node_ptr;
         head = node_ptr;
+		std::cerr << "[WARN] <<< Exiting push_front(node_ptr=" << node_ptr << ")" << std::endl;
     }
 
     /**
@@ -97,6 +101,7 @@ class LRUCache {
      * @param node_ptr node to be moved to the beginning.
      */
     void make_recent(CacheNode<K, V> *node_ptr) {
+		std::cerr << "[ERROR] >>> Entering make_recent(node_ptr=" << node_ptr << ")" << std::endl;
         if (head == node_ptr) {
             return;
         }
@@ -109,31 +114,37 @@ class LRUCache {
             next->prev = prev;
         } else {
             tail = prev;
+			std::cerr << "[DEBUG] make_recent(node_ptr=" << node_ptr << "): tail → " << tail << std::endl;
         }
 
         node_ptr->prev = nullptr;
         node_ptr->next = nullptr;
         push_front(node_ptr);
+		std::cerr << "[WARN] <<< Exiting make_recent(node_ptr=" << node_ptr << ")" << std::endl;
     }
 
     /**
      * @brief pop the last node in the linked list.
      */
     void pop_back() {
+		std::cerr << "[ERROR] >>> Entering pop_back()" << std::endl;
         if (!head) {
             return;
         }
         if (head == tail) {
             delete head;
             head = nullptr;
+			std::cerr << "[DEBUG] pop_back(): head → " << head << std::endl;
             tail = nullptr;
             return;
         }
 
         CacheNode<K, V> *temp = tail;
         tail = tail->prev;
+		std::cerr << "[ERROR] pop_back(): tail → " << tail << std::endl;
         tail->next = nullptr;
         delete temp;
+		std::cerr << "[WARN] <<< Exiting pop_back()" << std::endl;
     }
 
  public:
@@ -143,6 +154,7 @@ class LRUCache {
      * @param value value of the key-value pair
      */
     void put(K key, V value) {
+		std::cerr << "[ERROR] >>> Entering put(key=" << key << ",value=" << value << ")" << std::endl;
         // update the value if key already exists
         if (node_map.count(key)) {
             node_map[key]->data.second = value;
@@ -161,6 +173,7 @@ class LRUCache {
 
         node_map[key] = newNode;
         push_front(newNode);
+		std::cerr << "[WARN] <<< Exiting put(key=" << key << ",value=" << value << ")" << std::endl;
     }
 
     /**
@@ -170,13 +183,16 @@ class LRUCache {
      * @exception exception is thrown if the key is not present in the cache
      */
     V get(K key) {
+		std::cerr << "[ERROR] >>> Entering get(key=" << key << ")" << std::endl;
         if (!node_map.count(key)) {
+			std::cerr << "[ERROR] Throwing std from get(key=" << key << ")" << std::endl;
             throw std::runtime_error("key is not present in the cache");
         }
 
         // move node to the beginning of the list
         V value = node_map[key]->data.second;
         make_recent(node_map[key]);
+		std::cerr << "[WARN] <<< Exiting get(key=" << key << ")" << std::endl;
         return value;
     }
 
@@ -203,11 +219,13 @@ class LRUCache {
      * present in the cache.
      */
     ~LRUCache() {
+		std::cerr << "[ERROR] >>> Entering ~LRUCache()" << std::endl;
         auto it = node_map.begin();
         while (it != node_map.end()) {
             delete it->second;
             ++it;
         }
+		std::cerr << "[WARN] <<< Exiting ~LRUCache()" << std::endl;
     }
 };
 }  // namespace Cache
@@ -218,6 +236,7 @@ class LRUCache {
  * @return void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     others::Cache::LRUCache<int, int> cache(5);
 
     // test the initial state of the cache
@@ -254,6 +273,7 @@ static void test() {
     try {
         cache.get(1);
     } catch (const std::runtime_error &e) {
+		std::cerr << "[ERROR] Exception in test(): " << e.what() << std::endl;
         assert(std::string(e.what()) == "key is not present in the cache");
     }
 
@@ -265,6 +285,7 @@ static void test() {
     assert(cache.get(6) == 60);
 
     std::cout << "test - passed\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -272,6 +293,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run the self test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

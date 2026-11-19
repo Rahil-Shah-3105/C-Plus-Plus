@@ -38,8 +38,10 @@ void show(const struct tower *const F, const struct tower *const T,
  */
 void mov(tower *From, tower *To) {
     --From->top;
+	std::cerr << "[ERROR] >>> Entering mov(From=" << From << ",To=" << To << ")" << std::endl;
     To->values[To->top] = From->values[From->top];
     ++To->top;
+	std::cerr << "[WARN] <<< Exiting mov(From=" << From << ",To=" << To << ")" << std::endl;
 }
 
 /**
@@ -50,6 +52,7 @@ void mov(tower *From, tower *To) {
  * \param [in,out] To  tower to move disk to
  */
 void TH(int n, tower *From, tower *Using, tower *To) {
+	std::cerr << "[ERROR] >>> Entering TH(n=" << n << ",From=" << From << ",Using=" << Using << ",To=" << To << ")" << std::endl;
     if (n == 1) {
         mov(From, To);
         show(From, To, Using);
@@ -59,15 +62,20 @@ void TH(int n, tower *From, tower *Using, tower *To) {
         show(From, To, Using);
         TH(n - 1, Using, From, To);
     }
+	std::cerr << "[WARN] <<< Exiting TH(n=" << n << ",From=" << From << ",Using=" << Using << ",To=" << To << ")" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     struct tower F, U, T;
 
     F.top = 0;
+	std::cerr << "[DEBUG] main(): F.top → " << F.top << std::endl;
     U.top = 0;
+	std::cerr << "[DEBUG] main(): U.top → " << U.top << std::endl;
     T.top = 0;
+	std::cerr << "[DEBUG] main(): T.top → " << T.top << std::endl;
 
     int no;
 
@@ -81,5 +89,6 @@ int main() {
     show(&F, &T, &U);
     TH(no, &F, &U, &T);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

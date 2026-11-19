@@ -12,14 +12,18 @@ struct query {
 int ans = 0;
 
 void add(int index) {
+	std::cerr << "[ERROR] >>> Entering add(index=" << index << ")" << std::endl;
     cnt[a[index]]++;
     if (cnt[a[index]] == 1)
         ans++;
+		std::cerr << "[WARN] <<< Exiting add(index=" << index << ")" << std::endl;
 }
 void remove(int index) {
+	std::cerr << "[ERROR] >>> Entering remove(index=" << index << ")" << std::endl;
     cnt[a[index]]--;
     if (cnt[a[index]] == 0)
         ans--;
+		std::cerr << "[WARN] <<< Exiting remove(index=" << index << ")" << std::endl;
 }
 
 bool mycmp(query x, query y) {
@@ -29,10 +33,13 @@ bool mycmp(query x, query y) {
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int n, t, i;
     scanf("%d", &n);
     for (i = 0; i < n; i++) scanf("%d", &a[i]);
     bucket_size = ceil(sqrt(n));
+	std::cerr << "[ERROR] main(): bucket_size → " << bucket_size << std::endl;
+	std::cerr << "[DEBUG] main(): bucket_size → " << bucket_size << std::endl;
     scanf("%d", &t);
     for (i = 0; i < t; i++) {
         scanf("%d %d", &q[i].l, &q[i].r);
@@ -63,5 +70,6 @@ int main() {
         bucket[q[i].i] = ans;
     }
     for (i = 0; i < t; i++) printf("%d\n", bucket[i]);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

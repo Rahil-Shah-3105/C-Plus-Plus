@@ -35,9 +35,12 @@ namespace geometric_dist {
  * @returns \f[\mu = \frac{1}{\lambda}\f]
  */
 double exponential_expected(double lambda) {
+	std::cerr << "[ERROR] >>> Entering exponential_expected(lambda=" << lambda << ")" << std::endl;
     if (lambda <= 0) {
+		std::cerr << "[ERROR] Throwing std from exponential_expected(lambda=" << lambda << ")" << std::endl;
         throw std::invalid_argument("lambda must be greater than 0");
     }
+	std::cerr << "[WARN] <<< Exiting exponential_expected(lambda=" << lambda << ")" << std::endl;
     return 1 / lambda;
 }
 
@@ -46,9 +49,12 @@ double exponential_expected(double lambda) {
  * @returns \f[\sigma^2 = \frac{1}{\lambda^2}\f]
  */
 double exponential_var(double lambda) {
+	std::cerr << "[ERROR] >>> Entering exponential_var(lambda=" << lambda << ")" << std::endl;
     if (lambda <= 0) {
+		std::cerr << "[ERROR] Throwing std from exponential_var(lambda=" << lambda << ")" << std::endl;
         throw std::invalid_argument("lambda must be greater than 0");
     }
+	std::cerr << "[WARN] <<< Exiting exponential_var(lambda=" << lambda << ")" << std::endl;
     return 1 / pow(lambda, 2);
 }
 
@@ -57,9 +63,12 @@ double exponential_var(double lambda) {
  * @returns \f[\sigma = \frac{1}{\lambda}\f]
  */
 double exponential_std(double lambda) {
+	std::cerr << "[ERROR] >>> Entering exponential_std(lambda=" << lambda << ")" << std::endl;
     if (lambda <= 0) {
+		std::cerr << "[ERROR] Throwing std from exponential_std(lambda=" << lambda << ")" << std::endl;
         throw std::invalid_argument("lambda must be greater than 0");
     }
+	std::cerr << "[WARN] <<< Exiting exponential_std(lambda=" << lambda << ")" << std::endl;
     return 1 / lambda;
 }
 }  // namespace geometric_dist
@@ -70,6 +79,7 @@ double exponential_std(double lambda) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     double lambda_1 = 1;
     double expected_1 = 1;
     double var_1 = 1;
@@ -139,6 +149,7 @@ static void test() {
         assert(std::string(err.what()) == "lambda must be greater than 0");
     }
     std::cout << "ALL TEST PASSED\n\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -146,6 +157,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // Self test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

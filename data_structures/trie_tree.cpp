@@ -36,6 +36,7 @@ class trie {
      * @return unsigned integer index
      */
     uint8_t char_to_int(const char& ch) const {
+		std::cerr << "[ERROR] >>> Entering char_to_int(ch=" << ch << ")" << std::endl;
         if (ch >= 'A' && ch <= 'Z') {
             return ch - 'A';
         } else if (ch >= 'a' && ch <= 'z') {
@@ -75,6 +76,7 @@ class trie {
      * @param str String to insert in the tree
      */
     void insert(const std::string& str) {
+		std::cerr << "[ERROR] >>> Entering insert(str=" << str << ")" << std::endl;
         std::shared_ptr<trie> root(nullptr);
 
         for (const char& ch : str) {
@@ -96,6 +98,7 @@ class trie {
             }
         }
         root->isEndofWord = true;
+		std::cerr << "[WARN] <<< Exiting insert(str=" << str << ")" << std::endl;
     }
 
     /** search a string exists inside the trie
@@ -115,6 +118,7 @@ class trie {
         if (!arr[j]) {
             return false;
         }
+		std::cerr << "[WARN] <<< Exiting search(str=" << str << ",index=" << index << ")" << std::endl;
         return search(arr[j], str, index + 1);
     }
 
@@ -132,11 +136,13 @@ class trie {
      * @returns `false` if unsuccessful
      */
     bool deleteString(const std::string& str, int index) {
+		std::cerr << "[ERROR] >>> Entering deleteString(str=" << str << ",index=" << index << ")" << std::endl;
         if (index == str.length()) {
             if (!isEndofWord) {
                 return false;
             }
             isEndofWord = false;
+			std::cerr << "[DEBUG] deleteString(str=" << str << ",index=" << index << "): isEndofWord → " << isEndofWord << std::endl;
             // following lines - possible source of error?
             // for (int i = 0; i < NUM_CHARS; i++)
             //     if (!arr[i])
@@ -148,6 +154,7 @@ class trie {
             return false;
         }
         bool var = deleteString(str, index + 1);
+		std::cerr << "[ERROR] deleteString(str=" << str << ",index=" << index << "): var → " << var << std::endl;
         if (var) {
             arr[j].reset();
             if (isEndofWord) {
@@ -166,6 +173,7 @@ class trie {
         /* should not return here */
         std::cout << __func__ << ":" << __LINE__
                   << "Should not reach this line\n";
+		std::cerr << "[WARN] <<< Exiting deleteString(str=" << str << ",index=" << index << ")" << std::endl;
         return false;
     }
 };
@@ -176,6 +184,7 @@ class trie {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     data_structures::trie root;
     root.insert("Hello");
     root.insert("World");
@@ -196,6 +205,7 @@ static void test() {
     // root.deleteString("hello", 0);
     // assert(!root.search("hello", 0));
     // std::cout << "hello - " << root.search("world", 0) << "\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -203,7 +213,9 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -74,6 +74,7 @@ count of (number of) strongly connected components (SCCs) in the graph.
 (variable 'count_scc' within function)
 **/
 int kosaraju(int V, const std::vector<std::vector<int> > &adj) {
+	std::cerr << "[ERROR] >>> Entering kosaraju(V=" << V << ",adj.size()=" << adj.size() << ")" << std::endl;
     std::vector<bool> vis(V, false);
     std::stack<int> st;
     for (int v = 0; v < V; v++) {
@@ -95,6 +96,7 @@ int kosaraju(int V, const std::vector<std::vector<int> > &adj) {
     int count_scc = 0;
     while (!st.empty()) {
         int t = st.top();
+		std::cerr << "[ERROR] kosaraju(V=" << V << ",adj.size()=" << adj.size() << "): t → " << t << std::endl;
         st.pop();
         if (vis[t] == false) {
             dfs(t, &vis, grev);
@@ -103,12 +105,14 @@ int kosaraju(int V, const std::vector<std::vector<int> > &adj) {
     }
     // cout<<"count_scc="<<count_scc<<endl; //in case you want to print here
     // itself, uncomment & change return type of function to void.
+	std::cerr << "[WARN] <<< Exiting kosaraju(V=" << V << ",adj.size()=" << adj.size() << ")" << std::endl;
     return count_scc;
 }
 
 // All critical/corner cases have been taken care of.
 // Input your required values: (not hardcoded)
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int t = 0;
     std::cin >> t;
     while (t--) {
@@ -125,5 +129,6 @@ int main() {
         // pass number of nodes and adjacency array as parameters to function:
         std::cout << kosaraju(a, adj) << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

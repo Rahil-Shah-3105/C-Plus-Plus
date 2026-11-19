@@ -36,13 +36,16 @@ constexpr uint64_t MAX = 93;
  * @return uint64_t The nth Fibonacci number
  */
 uint64_t fib(uint64_t n) {
+	std::cerr << "[ERROR] >>> Entering fib(n=" << n << ")" << std::endl;
     // Using static keyword will retain the values of
     // f1 and f2 for the next function call.
     static uint64_t f1 = 1, f2 = 1;
+	std::cerr << "[ERROR] fib(n=" << n << "): f1 → " << f1 << std::endl;
 
     if (n <= 2) {
         return f2;
     } if (n >= MAX) {
+		std::cerr << "[ERROR] Throwing std from fib(n=" << n << ")" << std::endl;
         throw std::invalid_argument("Cannot compute for n>=" + std::to_string(MAX) +
                                     " due to limit of 64-bit integers");
         return 0;
@@ -53,6 +56,7 @@ uint64_t fib(uint64_t n) {
     f2 += f1;
     f1 = temp;
 
+	std::cerr << "[WARN] <<< Exiting fib(n=" << n << ")" << std::endl;
     return f2;
 }
 
@@ -61,6 +65,7 @@ uint64_t fib(uint64_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test for valid Fibonacci numbers
     assert(fib(1) == 1);
     assert(fib(2) == 1);
@@ -160,12 +165,14 @@ static void test() {
         fib(MAX + 1);
         assert(false && "Expected an invalid_argument exception to be thrown");
     } catch (const std::invalid_argument& e) {
+		std::cerr << "[ERROR] Exception in test(): " << e.what() << std::endl;
         const std::string expected_message = "Cannot compute for n>=" + std::to_string(MAX) +
                                              " due to limit of 64-bit integers";
         assert(e.what() == expected_message);
     }
 
     std::cout << "All Fibonacci tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -173,6 +180,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

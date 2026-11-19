@@ -7,6 +7,7 @@
 std::vector<int> topoSortKahn(int N, const std::vector<std::vector<int> > &adj);
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int nodes = 0, edges = 0;
     std::cin >> edges >> nodes;
     if (edges == 0 || nodes == 0) {
@@ -26,10 +27,12 @@ int main() {
     }
 
     std::vector<int> topo = topoSortKahn(nodes, graph);
+	std::cerr << "[ERROR] main(): topo.size() → " << topo.size() << std::endl;
     // topologically sorted nodes
     for (int i = 0; i < nodes; i++) {
         std::cout << topo[i] << " ";
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }
 
 std::vector<int> topoSortKahn(int V,

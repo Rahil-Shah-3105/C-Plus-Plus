@@ -34,6 +34,7 @@ char pop() { return stack[stack_idx--]; }
  * @param[in] ch closed paranthesis character
  */
 char opening(char ch) {
+	std::cerr << "[ERROR] >>> Entering opening(ch=" << ch << ")" << std::endl;
     switch (ch) {
     case '}':
         return '{';
@@ -42,14 +43,17 @@ char opening(char ch) {
     case ')':
         return '(';
     case '>':
+	std::cerr << "[WARN] <<< Exiting opening(ch=" << ch << ")" << std::endl;
         return '<';
     }
     return '\0';
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::string exp;
     int valid = 1, i = 0;
+	std::cerr << "[ERROR] main(): valid → " << valid << std::endl;
     std::cout << "Enter The Expression : ";
     std::cin >> exp;
 
@@ -71,5 +75,6 @@ int main() {
         std::cout << "\nWrong Expression";
     }
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

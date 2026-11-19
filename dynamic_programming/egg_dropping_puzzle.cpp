@@ -9,6 +9,7 @@
 using namespace std;
 
 int eggDrop(int n, int k) {
+	std::cerr << "[ERROR] >>> Entering eggDrop(n=" << n << ",k=" << k << ")" << std::endl;
     std::vector<std::vector<int> > eggFloor(n + 1, std::vector<int>(k + 1));
 
     int result;
@@ -30,19 +31,23 @@ int eggDrop(int n, int k) {
                 // 1+max(eggBreak[one less egg, lower floors],
                 //       eggDoesntBreak[same # of eggs, upper floors]);
                 result = 1 + max(eggFloor[i - 1][x - 1], eggFloor[i][j - x]);
+				std::cerr << "[ERROR] eggDrop(n=" << n << ",k=" << k << "): result → " << result << std::endl;
                 if (result < eggFloor[i][j])
                     eggFloor[i][j] = result;
             }
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting eggDrop(n=" << n << ",k=" << k << ")" << std::endl;
     return eggFloor[n][k];
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int n, k;
     cout << "Enter number of eggs and floors: ";
     cin >> n >> k;
     cout << "Minimum number of trials in worst case: " << eggDrop(n, k) << endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

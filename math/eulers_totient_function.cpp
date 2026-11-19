@@ -39,8 +39,10 @@ namespace math {
  * @param n the number to find the Euler's Totient of
  */
 uint64_t phiFunction(uint64_t n) {
+	std::cerr << "[ERROR] >>> Entering phiFunction(n=" << n << ")" << std::endl;
     uint64_t result = n;
     for (uint64_t i = 2; i * i <= n; i++) {
+		std::cerr << "[ERROR] phiFunction(n=" << n << "): result → " << result << std::endl;
         if (n % i != 0)
             continue;
         while (n % i == 0) n /= i;
@@ -50,6 +52,7 @@ uint64_t phiFunction(uint64_t n) {
     if (n > 1)
         result -= result / n;
 
+	std::cerr << "[WARN] <<< Exiting phiFunction(n=" << n << ")" << std::endl;
     return result;
 }
 }  // namespace math
@@ -59,6 +62,7 @@ uint64_t phiFunction(uint64_t n) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     assert(math::phiFunction(1) == 1);
     assert(math::phiFunction(2) == 1);
     assert(math::phiFunction(10) == 4);
@@ -68,6 +72,7 @@ static void test() {
     assert(math::phiFunction(27182818) == 12545904);
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -75,6 +80,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

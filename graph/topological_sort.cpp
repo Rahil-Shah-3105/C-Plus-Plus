@@ -112,6 +112,7 @@ std::vector<int> topologicalSort(const Graph& g) {
     }
 
     if (ans.size() < n) {  // Cycle detected
+		std::cerr << "[ERROR] Throwing std from topologicalSort(g=" << g << ")" << std::endl;
         throw std::invalid_argument("cycle detected in graph");
     }
     return ans;

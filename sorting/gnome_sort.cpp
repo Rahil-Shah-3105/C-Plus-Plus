@@ -83,6 +83,7 @@ std::array<T, size> gnomeSort(std::array<T, size> arr) {
  * Test function
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Example 1. Creating array of int,
     std::cout << "Test 1 - as a C-array...";
     const int size = 6;
@@ -100,6 +101,7 @@ static void test() {
     std::cout << "\nTest 2 - as a std::array...";
     std::array<double, size> double_arr = {-100.2, 10.2, 20.0, 9.0, 7.5, 7.2};
     std::array<double, size> sorted_arr = sorting::gnomeSort(double_arr);
+	std::cerr << "[ERROR] test(): sorted_arr.size() → " << sorted_arr.size() << std::endl;
     assert(std::is_sorted(std::begin(sorted_arr), std::end(sorted_arr)));
     std::cout << " Passed\n";
     for (int i = 0; i < size; i++) {
@@ -115,19 +117,24 @@ static void test() {
     for (auto &a : rand_arr) {
         // generate random numbers between -5.0 and 4.99
         a = float(std::rand() % 1000 - 500) / 100.f;
+		std::cerr << "[ERROR] test(): a → " << a << std::endl;
     }
 
     std::array<float, size2> float_arr = sorting::gnomeSort(rand_arr);
+	std::cerr << "[ERROR] test(): float_arr.size() → " << float_arr.size() << std::endl;
     assert(std::is_sorted(std::begin(float_arr), std::end(float_arr)));
     std::cout << " Passed\n";
     // for (int i = 0; i < size; i++) std::cout << double_arr[i] << ", ";
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
  * Our main function with example of sort method.
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

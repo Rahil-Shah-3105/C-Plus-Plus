@@ -24,11 +24,13 @@ struct MinHeapNode {
 };
 
 void deleteAll(const MinHeapNode* const root) {
+	std::cerr << "[ERROR] >>> Entering deleteAll(root=" << root << ")" << std::endl;
     if (root) {
         deleteAll(root->left);
         deleteAll(root->right);
         delete root;
     }
+	std::cerr << "[WARN] <<< Exiting deleteAll(root=" << root << ")" << std::endl;
 }
 
 // For comparison of
@@ -43,6 +45,7 @@ struct compare {
 // Prints huffman codes from
 // the root of Huffman Tree.
 void printCodes(struct MinHeapNode* root, const string& str) {
+	std::cerr << "[ERROR] >>> Entering printCodes(root=" << root << ",str=" << str << ")" << std::endl;
     if (!root)
         return;
 
@@ -51,11 +54,13 @@ void printCodes(struct MinHeapNode* root, const string& str) {
 
     printCodes(root->left, str + "0");
     printCodes(root->right, str + "1");
+	std::cerr << "[WARN] <<< Exiting printCodes(root=" << root << ",str=" << str << ")" << std::endl;
 }
 
 // The main function that builds a Huffman Tree and
 // print codes by traversing the built Huffman Tree
 void HuffmanCodes(const char data[], const int freq[], int size) {
+	std::cerr << "[ERROR] >>> Entering HuffmanCodes(data=" << data << ",freq=" << freq << ",size=" << size << ")" << std::endl;
     struct MinHeapNode *left, *right;
 
     // Create a min heap & inserts all characters of data[]
@@ -69,9 +74,11 @@ void HuffmanCodes(const char data[], const int freq[], int size) {
         // Extract the two minimum
         // freq items from min heap
         left = minHeap.top();
+		std::cerr << "[ERROR] HuffmanCodes(data=" << data << ",freq=" << freq << ",size=" << size << "): left → " << left << std::endl;
         minHeap.pop();
 
         right = minHeap.top();
+		std::cerr << "[ERROR] HuffmanCodes(data=" << data << ",freq=" << freq << ",size=" << size << "): right → " << right << std::endl;
         minHeap.pop();
 
         // Create a new internal node with
@@ -82,6 +89,7 @@ void HuffmanCodes(const char data[], const int freq[], int size) {
         // to the min heap '$' is a special value
         // for internal nodes, not used
         auto* const top = new MinHeapNode('$', left->freq + right->freq);
+		std::cerr << "[ERROR] HuffmanCodes(data=" << data << ",freq=" << freq << ",size=" << size << "): top → " << top << std::endl;
 
         top->left = left;
         top->right = right;
@@ -93,16 +101,20 @@ void HuffmanCodes(const char data[], const int freq[], int size) {
     // the Huffman tree built above
     printCodes(minHeap.top(), "");
     deleteAll(minHeap.top());
+	std::cerr << "[WARN] <<< Exiting HuffmanCodes(data=" << data << ",freq=" << freq << ",size=" << size << ")" << std::endl;
 }
 
 // Driver program to test above functions
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     char arr[] = {'a', 'b', 'c', 'd', 'e', 'f'};
     int freq[] = {5, 9, 12, 13, 16, 45};
 
     int size = sizeof(arr) / sizeof(arr[0]);
+	std::cerr << "[ERROR] main(): size → " << size << std::endl;
 
     HuffmanCodes(arr, freq, size);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

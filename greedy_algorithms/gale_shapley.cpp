@@ -17,6 +17,7 @@
  * @author [B Karthik](https://github.com/BKarthik7)
  */
 
+#include "iostream"
 #include <algorithm>  /// for std::find
 #include <cassert>    /// for assert
 #include <cstdint>    /// for std::uint32_t
@@ -112,6 +113,7 @@ std::vector<std::uint32_t> gale_shapley(
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     // Test Case 1
     std::vector<std::vector<std::uint32_t>> primary_preferences = {
         {0, 1, 2, 3}, {2, 1, 3, 0}, {1, 2, 0, 3}, {3, 0, 1, 2}};
@@ -131,6 +133,11 @@ static void tests() {
            std::vector<std::uint32_t>({0, 3, 1, 2}));
 
     // Test Case 3
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
+	std::cerr << "[ERROR] tests(): primary_preferences.size() → " << primary_preferences.size() << std::endl;
+	std::cerr << "[DEBUG] tests(): primary_preferences.size() → " << primary_preferences.size() << std::endl;
+	std::cerr << "[ERROR] tests(): secondary_preferences.size() → " << secondary_preferences.size() << std::endl;
+	std::cerr << "[DEBUG] tests(): secondary_preferences.size() → " << secondary_preferences.size() << std::endl;
     primary_preferences = {{0, 1, 2}, {2, 1, 0}, {1, 2, 0}};
     secondary_preferences = {{1, 0, 2}, {2, 0, 1}, {0, 2, 1}};
     assert(greedy_algorithms::stable_matching::gale_shapley(
@@ -150,6 +157,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // Run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

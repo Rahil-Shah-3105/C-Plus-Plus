@@ -14,16 +14,19 @@ class node {
 
 // printing the linked list
 void print(node *head) {
+	std::cerr << "[ERROR] >>> Entering print(head=" << head << ")" << std::endl;
     node *current = head;
     while (current != NULL) {
         cout << current->data << " ";
         current = current->link;
     }
     cout << endl;
+	std::cerr << "[WARN] <<< Exiting print(head=" << head << ")" << std::endl;
 }
 
 // creating the linked list with 'n' nodes
 node *createlist(int n) {
+	std::cerr << "[ERROR] >>> Entering createlist(n=" << n << ")" << std::endl;
     node *head = NULL;
     node *t = NULL;
     for (int i = 0; i < n; i++) {
@@ -33,18 +36,22 @@ node *createlist(int n) {
         temp = new node(num);
         if (head == NULL) {
             head = temp;
+			std::cerr << "[DEBUG] createlist(n=" << n << "): head → " << head << std::endl;
             t = temp;
+			std::cerr << "[ERROR] createlist(n=" << n << "): t → " << t << std::endl;
             continue;
         }
         if (t->link == NULL)
             t->link = temp;
         t = temp;
     }
+	std::cerr << "[WARN] <<< Exiting createlist(n=" << n << ")" << std::endl;
     return head;
 }
 
 // performing selection sort on the linked list in an iterative manner
 void my_selection_sort_linked_list(node *&head) {
+	std::cerr << "[ERROR] >>> Entering my_selection_sort_linked_list(head=" << head << ")" << std::endl;
     node *min = head;  // throughout the algorithm 'min' is used to denote the
                        // node with min value out of all the nodes left for
                        // scanning while scanning if we find a node 'X' with
@@ -89,10 +96,12 @@ void my_selection_sort_linked_list(node *&head) {
                     {
                         // Update the pointers
                         head = current;  // update the head pointer with the
+										std::cerr << "[ERROR] my_selection_sort_linked_list(head=" << head << "): head → " << head << std::endl;
                                          // current node
                         min->link = current->link;
                         current->link = previous;
                         min = current;
+						std::cerr << "[ERROR] my_selection_sort_linked_list(head=" << head << "): min → " << min << std::endl;
                         current = previous->link;
                     } else  // if the 'previous' is not pointing to the 'min'
                             // node
@@ -118,6 +127,7 @@ void my_selection_sort_linked_list(node *&head) {
                     // previous and the current pointer a step further
             {
                 previous = previous->link;
+				std::cerr << "[ERROR] my_selection_sort_linked_list(head=" << head << "): previous → " << previous << std::endl;
                 current = current->link;
             }
         }
@@ -130,6 +140,7 @@ void my_selection_sort_linked_list(node *&head) {
         previous = min;
         current = min->link;
     }
+	std::cerr << "[WARN] <<< Exiting my_selection_sort_linked_list(head=" << head << ")" << std::endl;
 }
 
 // Test cases:
@@ -155,6 +166,7 @@ void my_selection_sort_linked_list(node *&head) {
 // sorted list is : -4 -2 1 3 4 5
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     node *head = NULL;
     int n;
     cout << "enter the no. of nodes : ";  // taking input from user about the
@@ -163,10 +175,12 @@ int main() {
     if (n == 0)
         return 0;
     head = createlist(n);  // creating the list
+	std::cerr << "[ERROR] main(): head → " << head << std::endl;
     cout << "original list is : ";
     print(head);                          // printing the original linked list
     my_selection_sort_linked_list(head);  // applying selection sort
     cout << "sorted list is : ";
     print(head);  // printing the sorted linked list
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -76,6 +76,7 @@ namespace geometry {
              * which enclose all given points thus forming a hull
              */
             std::vector<Point> getConvexHull() const {
+				std::cerr << "[ERROR] >>> Entering getConvexHull()" << std::endl;
                 // Initialize Result
                 std::vector<Point> hull;
 
@@ -84,12 +85,15 @@ namespace geometry {
                 for (int i = 1; i < size; i++) {
                     if (points[i].x < points[leftmost_point].x) {
                         leftmost_point = i;
+						std::cerr << "[ERROR] getConvexHull(): leftmost_point → " << leftmost_point << std::endl;
                     }
                 }
                 // Start from leftmost point, keep moving counterclockwise
                 // until reach the start point again.  This loop runs O(h)
                 // times where h is number of points in result or output.
                 int p = leftmost_point, q = 0;
+				std::cerr << "[ERROR] getConvexHull(): p → " << p << std::endl;
+				std::cerr << "[ERROR] getConvexHull(): q → " << q << std::endl;
                 do {
                     // Add current point to result
                     hull.push_back(points[p]);
@@ -115,6 +119,7 @@ namespace geometry {
 
                 } while (p != leftmost_point);        // While we don't come to first point
 
+				std::cerr << "[WARN] <<< Exiting getConvexHull()" << std::endl;
                 return hull;
             }
 
@@ -149,6 +154,7 @@ namespace geometry {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<geometry::jarvis::Point> points = {{0, 3},
                                                    {2, 2},
                                                    {1, 1},
@@ -160,6 +166,8 @@ static void test() {
     geometry::jarvis::Convexhull hull(points);
     std::vector<geometry::jarvis::Point> actualPoint;
     actualPoint = hull.getConvexHull();
+	std::cerr << "[ERROR] test(): actualPoint.size() → " << actualPoint.size() << std::endl;
+	std::cerr << "[DEBUG] test(): actualPoint.size() → " << actualPoint.size() << std::endl;
 
     std::vector<geometry::jarvis::Point> expectedPoint = {{0, 3},
                                                           {0, 0},
@@ -170,10 +178,13 @@ static void test() {
         assert(actualPoint[i].y == expectedPoint[i].y);
     }
     std::cout << "Test implementations passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /** Driver Code */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

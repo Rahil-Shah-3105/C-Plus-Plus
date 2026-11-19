@@ -21,8 +21,10 @@ struct Point {
      * \param [in] b ordinate (default = 0.0)
      */
     explicit Point(double a = 0.f, double b = 0.f) {
+		std::cerr << "[ERROR] >>> Entering Point(a=" << a << ",b=" << b << ")" << std::endl;
         x = a;
         y = b;
+		std::cerr << "[WARN] <<< Exiting Point(a=" << a << ",b=" << b << ")" << std::endl;
     }
 };
 
@@ -156,6 +158,7 @@ double circle(const std::vector<Point> &P) {
  * \n centre at (3.0454545454545454, 1.3181818181818181)
  */
 void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<Point> Pv;
     Pv.push_back(Point(0, 0));
     Pv.push_back(Point(5, 4));
@@ -163,6 +166,7 @@ void test() {
     Pv.push_back(Point(4, 1));
     Pv.push_back(Point(3, -2));
     std::cout << circle(Pv) << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /** Test case: result should be:
@@ -171,12 +175,14 @@ void test() {
  * \n centre at (1.0, 1.0)
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     std::vector<Point> Pv;
     Pv.push_back(Point(0, 0));
     Pv.push_back(Point(0, 2));
     Pv.push_back(Point(2, 2));
     Pv.push_back(Point(2, 0));
     std::cout << circle(Pv) << std::endl;
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 
 /** Test case: result should be:
@@ -186,20 +192,24 @@ void test2() {
  * @todo This test fails
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     std::vector<Point> Pv;
     Pv.push_back(Point(0.5, 1));
     Pv.push_back(Point(3.5, 3));
     Pv.push_back(Point(2.5, 0));
     Pv.push_back(Point(2, 1.5));
     std::cout << circle(Pv) << std::endl;
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
 }
 
 /** Main program */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
     std::cout << std::endl;
     test2();
     std::cout << std::endl;
     test3();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -9,6 +9,7 @@
  * numeric character is entered.
  */
 void fastinput(int *number) {
+	std::cerr << "[ERROR] >>> Entering fastinput(number=" << number << ")" << std::endl;
     // variable to indicate sign of input integer
     bool negative = false;
     int c;
@@ -16,9 +17,11 @@ void fastinput(int *number) {
 
     // extract current character from buffer
     c = std::getchar();
+	std::cerr << "[ERROR] fastinput(number=" << number << "): c → " << c << std::endl;
     if (c == '-') {
         // number is negative
         negative = true;
+		std::cerr << "[ERROR] fastinput(number=" << number << "): negative → " << negative << std::endl;
 
         // extract the next character from the buffer
         c = std::getchar();
@@ -33,12 +36,15 @@ void fastinput(int *number) {
     // value of the input number
     if (negative)
         *(number) *= -1;
+		std::cerr << "[WARN] <<< Exiting fastinput(number=" << number << ")" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int number;
     fastinput(&number);
     std::cout << number << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

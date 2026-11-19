@@ -99,6 +99,7 @@ uint64_t interpolationSearch(const std::vector<uint64_t> &arr,
  * @returns void
  *******************************************************************************/
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     // testcase
     // array = [10, 12, 13, 16, 18, 19, 20, 21, 1, 2, 3, 4, 22, 23, 24, 33, 35,
     // 42, 47] , Value = 33 should return 15
@@ -112,6 +113,7 @@ static void tests() {
     std::cout << "Testcase: ";
     assert(derived_answer == expected_answer);
     std::cout << "Passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /*******************************************************************************
@@ -119,6 +121,8 @@ static void tests() {
  * @returns 0 on exit
  *******************************************************************************/
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -9,6 +9,7 @@ struct node {
 };
 
 void CreateTree(node *curr, node *n, int x, char pos) {
+	std::cerr << "[ERROR] >>> Entering CreateTree(curr=" << curr << ",n=" << n << ",x=" << x << ",pos=" << pos << ")" << std::endl;
     if (n != NULL) {
         char ch;
         cout << "\nLeft or Right of " << n->val << " : ";
@@ -28,15 +29,18 @@ void CreateTree(node *curr, node *n, int x, char pos) {
             curr->right = t;
         }
     }
+	std::cerr << "[WARN] <<< Exiting CreateTree(curr=" << curr << ",n=" << n << ",x=" << x << ",pos=" << pos << ")" << std::endl;
 }
 
 void BFT(node *n) {
+	std::cerr << "[ERROR] >>> Entering BFT(n=" << n << ")" << std::endl;
     list<node *> queue;
 
     queue.push_back(n);
 
     while (!queue.empty()) {
         n = queue.front();
+		std::cerr << "[ERROR] BFT(n=" << n << "): n → " << n << std::endl;
         cout << n->val << "  ";
         queue.pop_front();
 
@@ -45,33 +49,41 @@ void BFT(node *n) {
         if (n->right != NULL)
             queue.push_back(n->right);
     }
+	std::cerr << "[WARN] <<< Exiting BFT(n=" << n << ")" << std::endl;
 }
 
 void Pre(node *n) {
+	std::cerr << "[ERROR] >>> Entering Pre(n=" << n << ")" << std::endl;
     if (n != NULL) {
         cout << n->val << "  ";
         Pre(n->left);
         Pre(n->right);
     }
+	std::cerr << "[WARN] <<< Exiting Pre(n=" << n << ")" << std::endl;
 }
 
 void In(node *n) {
+	std::cerr << "[ERROR] >>> Entering In(n=" << n << ")" << std::endl;
     if (n != NULL) {
         In(n->left);
         cout << n->val << "  ";
         In(n->right);
     }
+	std::cerr << "[WARN] <<< Exiting In(n=" << n << ")" << std::endl;
 }
 
 void Post(node *n) {
+	std::cerr << "[ERROR] >>> Entering Post(n=" << n << ")" << std::endl;
     if (n != NULL) {
         Post(n->left);
         Post(n->right);
         cout << n->val << "  ";
     }
+	std::cerr << "[WARN] <<< Exiting Post(n=" << n << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int value;
     int ch;
     node *root = new node;
@@ -116,4 +128,5 @@ int main() {
             break;
         }
     } while (ch != 0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

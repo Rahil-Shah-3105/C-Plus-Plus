@@ -93,6 +93,7 @@ void selectionSortRecursive(std::vector<T> &in_arr,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test
     // [1, 0, 2, 1] return [0, 1, 1, 2]
     std::vector<uint64_t> array1 = {0, 1, 1, 2};
@@ -121,6 +122,7 @@ static void test() {
     sorting::selection_sort_recursive::selectionSortRecursive(array4);
     assert(std::is_sorted(std::begin(array4), std::end(array4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -128,6 +130,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

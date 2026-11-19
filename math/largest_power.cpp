@@ -27,6 +27,7 @@ namespace math {
  * @returns largest power
  */
 uint64_t largestPower(uint32_t n, const uint16_t& p) {
+	std::cerr << "[ERROR] >>> Entering largestPower(n=" << n << ",p=" << p << ")" << std::endl;
     // Initialize result
     int x = 0;
 
@@ -35,6 +36,7 @@ uint64_t largestPower(uint32_t n, const uint16_t& p) {
         n /= p;
         x += n;
     }
+	std::cerr << "[WARN] <<< Exiting largestPower(n=" << n << ",p=" << p << ")" << std::endl;
     return x;
 }
 
@@ -46,25 +48,32 @@ uint64_t largestPower(uint32_t n, const uint16_t& p) {
  * @returns `void`
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     uint8_t test_case_1 = math::largestPower(5, 2);
     assert(test_case_1 == 3);
+	std::cerr << "[ERROR] test(): test_case_1 → " << test_case_1 << std::endl;
     std::cout << "Test 1 Passed!" << std::endl;
 
     uint16_t test_case_2 = math::largestPower(10, 3);
+	std::cerr << "[ERROR] test(): test_case_2 → " << test_case_2 << std::endl;
     assert(test_case_2 == 4);
     std::cout << "Test 2 Passed!" << std::endl;
 
     uint32_t test_case_3 = math::largestPower(25, 5);
+	std::cerr << "[ERROR] test(): test_case_3 → " << test_case_3 << std::endl;
     assert(test_case_3 == 6);
     std::cout << "Test 3 Passed!" << std::endl;
 
     uint32_t test_case_4 = math::largestPower(27, 2);
+	std::cerr << "[ERROR] test(): test_case_4 → " << test_case_4 << std::endl;
     assert(test_case_4 == 23);
     std::cout << "Test 4 Passed!" << std::endl;
 
     uint16_t test_case_5 = math::largestPower(7, 3);
+	std::cerr << "[ERROR] test(): test_case_5 → " << test_case_5 << std::endl;
     assert(test_case_5 == 2);
     std::cout << "Test 5 Passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -72,6 +81,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -4,6 +4,7 @@
 using namespace std;
 
 void countSort(string arr) {
+	std::cerr << "[ERROR] >>> Entering countSort(arr=" << arr << ")" << std::endl;
     string output;
 
     int count[256], i;
@@ -21,13 +22,16 @@ void countSort(string arr) {
     for (i = 0; arr[i]; ++i) arr[i] = output[i];
 
     cout << "Sorted character array is " << arr;
+	std::cerr << "[WARN] <<< Exiting countSort(arr=" << arr << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     string arr;
     cin >> arr;
 
     countSort(arr);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -28,6 +28,7 @@
  * Time complexity: O(logN). Space complexity: O(N). N - size of window
  * @author [Yaniv Hollander](https://github.com/YanivHollander)
  */
+#include "iostream"
 #include <cassert>  /// for assert
 #include <cstdlib>  /// for std::rand - needed in testing
 #include <ctime>    /// for std::time - needed in testing
@@ -67,8 +68,10 @@ class WindowedMedian {
      * @param value Value to insert
      */
     void insertToSorted(int value) {
+		std::cerr << "[ERROR] >>> Entering insertToSorted(value=" << value << ")" << std::endl;
         _sortedValues.insert(value);  /// Insert value to BST - O(logN)
         const auto sz = _sortedValues.size();
+		std::cerr << "[ERROR] insertToSorted(value=" << value << "): sz → " << sz << std::endl;
         if (sz == 1) {  /// For the first value, set median iterator to BST root
             _itMedian = _sortedValues.begin();
             return;
@@ -86,6 +89,7 @@ class WindowedMedian {
         else if (value >= *_itMedian && sz % 2 != 0) {
             ++_itMedian;  /// O(1) - traversing one step to the right child
         }
+		std::cerr << "[WARN] <<< Exiting insertToSorted(value=" << value << ")" << std::endl;
     }
 
     /**
@@ -93,8 +97,10 @@ class WindowedMedian {
      * @param value Value to insert
      */
     void eraseFromSorted(int value) {
+		std::cerr << "[ERROR] >>> Entering eraseFromSorted(value=" << value << ")" << std::endl;
         const auto sz = _sortedValues.size();
 
+		std::cerr << "[ERROR] eraseFromSorted(value=" << value << "): sz → " << sz << std::endl;
         /// If the erased value is on the left branch or the median itself and
         /// the number of elements is even, the new median will be the right
         /// child of the current one
@@ -127,6 +133,7 @@ class WindowedMedian {
      * @param value New value to insert
      */
     void insert(int value) {
+		std::cerr << "[ERROR] >>> Entering insert(value=" << value << ")" << std::endl;
         /// Push new value to the back of the sliding window - O(1)
         _window.push_back(value);
         insertToSorted(value);  // Insert value to the multi-value BST - O(logN)
@@ -138,6 +145,7 @@ class WindowedMedian {
             _window.pop_front();   /// Pop the left side value from the window -
                                    /// O(1)
         }
+		std::cerr << "[WARN] <<< Exiting insert(value=" << value << ")" << std::endl;
     }
 
     /**
@@ -146,9 +154,11 @@ class WindowedMedian {
      * between the two values in the middle
      */
     float getMedian() const {
+		std::cerr << "[ERROR] >>> Entering getMedian()" << std::endl;
         if (_sortedValues.size() % 2 != 0) {
             return *_itMedian;  // O(1)
         }
+		std::cerr << "[WARN] <<< Exiting getMedian()" << std::endl;
         return 0.5f * *_itMedian + 0.5f * *next(_itMedian);  /// O(1)
     }
 
@@ -159,6 +169,7 @@ class WindowedMedian {
      * between the two values in the middle
      */
     float getMedianNaive() const {
+		std::cerr << "[ERROR] >>> Entering getMedianNaive()" << std::endl;
         auto window = _window;
         window.sort();  /// Sort window - O(NlogN)
         auto median =
@@ -167,6 +178,7 @@ class WindowedMedian {
         if (window.size() % 2 != 0) {
             return median;
         }
+		std::cerr << "[WARN] <<< Exiting getMedianNaive()" << std::endl;
         return 0.5f * median +
                0.5f * *next(window.begin(), window.size() / 2 - 1);  /// O(N)
     }
@@ -180,6 +192,7 @@ class WindowedMedian {
  * @param windowSize Size of sliding window
  */
 static void test(const std::vector<int> &vals, int windowSize) {
+	std::cerr << "[ERROR] >>> Entering test(vals.size()=" << vals.size() << ",windowSize=" << windowSize << ")" << std::endl;
     probability::windowed_median::WindowedMedian windowedMedian(windowSize);
     for (const auto val : vals) {
         windowedMedian.insert(val);
@@ -187,6 +200,7 @@ static void test(const std::vector<int> &vals, int windowSize) {
         /// Comparing medians: efficient function vs. Naive one
         assert(windowedMedian.getMedian() == windowedMedian.getMedianNaive());
     }
+	std::cerr << "[WARN] <<< Exiting test(vals.size()=" << vals.size() << ",windowSize=" << windowSize << ")" << std::endl;
 }
 
 /**
@@ -194,6 +208,7 @@ static void test(const std::vector<int> &vals, int windowSize) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     /// A few fixed test cases
     test({1, 2, 3, 4, 5, 6, 7, 8, 9},
          3);  /// Array of sorted values; odd window size
@@ -230,5 +245,6 @@ int main() {
         }
         test(vals, windowSize);  /// Testing randomized test
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

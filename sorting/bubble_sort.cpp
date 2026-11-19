@@ -94,22 +94,29 @@ std::vector<T> bubble_sort(std::vector<T>& array) {
  * @return void
  */
 static void test() {
+std::cerr << "[ERROR] >>> Entering test()" << std::endl;
   std::vector<int> vec_1 = {3, 1, -9, 0};
   std::vector<int> sorted_1 = sorting::bubble_sort::bubble_sort(vec_1);
+std::cerr << "[ERROR] test(): sorted_1.size() → " << sorted_1.size() << std::endl;
 
   std::vector<int> vec_2 = {3};
   std::vector<int> sorted_2 = sorting::bubble_sort::bubble_sort(vec_2);
+std::cerr << "[ERROR] test(): sorted_2.size() → " << sorted_2.size() << std::endl;
 
   std::vector<int> vec_3 = {10, 10, 10, 10, 10};
   std::vector<int> sorted_3 = sorting::bubble_sort::bubble_sort(vec_3);
+std::cerr << "[ERROR] test(): sorted_3.size() → " << sorted_3.size() << std::endl;
 
   std::vector<float> vec_4 = {1234, -273.1, 23, 150, 1234, 1555.55, -2000};
   std::vector<float> sorted_4 = sorting::bubble_sort::bubble_sort(vec_4);
+std::cerr << "[ERROR] test(): sorted_4.size() → " << sorted_4.size() << std::endl;
 
   std::vector<char> vec_5 = {'z', 'Z', 'a', 'B', ' ', 'c', 'a'};
+std::cerr << "[ERROR] test(): vec_5.size() → " << vec_5.size() << std::endl;
   std::vector<char> sorted_5 = sorting::bubble_sort::bubble_sort(vec_5);
 
   std::vector<std::string> vec_6 = {"Hello", "hello", "Helo", "Hi", "hehe"};
+std::cerr << "[ERROR] test(): vec_6.size() → " << vec_6.size() << std::endl;
   std::vector<std::string> sorted_6 = sorting::bubble_sort::bubble_sort(vec_6);
 
   std::vector<std::pair<int, char>> vec_7 = {{10, 'c'}, {2, 'z'}, {10, 'a'}, {0, 'b'}, {-1, 'z'}};
@@ -122,6 +129,7 @@ static void test() {
   assert(std::is_sorted(sorted_5.begin(), sorted_5.end()));
   assert(std::is_sorted(sorted_6.begin(), sorted_6.end()));
   assert(std::is_sorted(sorted_7.begin(), sorted_7.end()));
+std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -129,6 +137,8 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+std::cerr << "[ERROR] >>> Entering main()" << std::endl;
   test();
+std::cerr << "[WARN] <<< Exiting main()" << std::endl;
   return 0;
 }

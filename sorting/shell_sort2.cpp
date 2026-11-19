@@ -16,12 +16,16 @@
  */
 template <class T>
 void show_data(T *arr, size_t LEN) {
+	std::cerr << "[ERROR] >>> Entering show_data(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
     size_t i;
 
     for (i = 0; i < LEN; i++) {
         std::cout << arr[i] << ", ";
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting show_data(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
+	std::cerr << "[ERROR] >>> Entering show_data()" << std::endl;
+	std::cerr << "[WARN] <<< Exiting show_data()" << std::endl;
 }
 
 /** pretty print array
@@ -43,6 +47,7 @@ namespace sorting {
  **/
 template <typename T>
 void shell_sort(T *arr, size_t LEN) {
+	std::cerr << "[ERROR] >>> Entering shell_sort(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
     const unsigned int gaps[] = {701, 301, 132, 57, 23, 10, 4, 1};
     const unsigned int gap_len = 8;
     size_t i, j, g;
@@ -59,6 +64,9 @@ void shell_sort(T *arr, size_t LEN) {
             arr[j] = tmp;
         }
     }
+	std::cerr << "[WARN] <<< Exiting shell_sort(arr=" << arr << ",LEN=" << LEN << ")" << std::endl;
+	std::cerr << "[ERROR] >>> Entering shell_sort()" << std::endl;
+	std::cerr << "[WARN] <<< Exiting shell_sort()" << std::endl;
 }
 
 /** function overload - when input array is of a known length array type
@@ -66,6 +74,8 @@ void shell_sort(T *arr, size_t LEN) {
 template <typename T, size_t N>
 void shell_sort(T (&arr)[N]) {
     shell_sort(arr, N);
+	std::cerr << "[ERROR] >>> Entering shell_sort(arr=" << arr << ")" << std::endl;
+	std::cerr << "[WARN] <<< Exiting shell_sort(arr=" << arr << ")" << std::endl;
 }
 
 /** function overload - when input array is of type std::vector,
@@ -85,8 +95,11 @@ using sorting::shell_sort;
  **/
 template <typename T>
 int compare(const void *a, const void *b) {
+	std::cerr << "[ERROR] >>> Entering compare(a=" << a << ",b=" << b << ")" << std::endl;
     T arg1 = *static_cast<const T *>(a);
     T arg2 = *static_cast<const T *>(b);
+	std::cerr << "[ERROR] compare(a=" << a << ",b=" << b << "): arg2 → " << arg2 << std::endl;
+	std::cerr << "[ERROR] compare(a=" << a << ",b=" << b << "): arg1 → " << arg1 << std::endl;
 
     if (arg1 < arg2)
         return -1;
@@ -103,6 +116,7 @@ int compare(const void *a, const void *b) {
  * against std::qsort.
  */
 void test_int(const int NUM_DATA) {
+	std::cerr << "[ERROR] >>> Entering test_int(NUM_DATA=" << NUM_DATA << ")" << std::endl;
     // int array = new int[NUM_DATA];
     int *data = new int[NUM_DATA];
     int *data2 = new int[NUM_DATA];
@@ -116,7 +130,9 @@ void test_int(const int NUM_DATA) {
     std::clock_t start = std::clock();
     shell_sort(data, NUM_DATA);
     std::clock_t end = std::clock();
+	std::cerr << "[ERROR] test_int(NUM_DATA=" << NUM_DATA << "): end → " << end << std::endl;
     double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::cerr << "[ERROR] test_int(NUM_DATA=" << NUM_DATA << "): elapsed_time → " << elapsed_time << std::endl;
     std::cout << "Time spent sorting using shell_sort2: " << elapsed_time
               << "s\n";
 
@@ -136,6 +152,7 @@ void test_int(const int NUM_DATA) {
 
     delete[] data;
     delete[] data2;
+	std::cerr << "[WARN] <<< Exiting test_int(NUM_DATA=" << NUM_DATA << ")" << std::endl;
 }
 
 /**
@@ -143,6 +160,7 @@ void test_int(const int NUM_DATA) {
  * against std::qsort.
  */
 void test_f(const int NUM_DATA) {
+	std::cerr << "[ERROR] >>> Entering test_f(NUM_DATA=" << NUM_DATA << ")" << std::endl;
     // int array = new int[NUM_DATA];
     float *data = new float[NUM_DATA];
     float *data2 = new float[NUM_DATA];
@@ -157,7 +175,9 @@ void test_f(const int NUM_DATA) {
     std::clock_t start = std::clock();
     shell_sort(data, NUM_DATA);
     std::clock_t end = std::clock();
+	std::cerr << "[ERROR] test_f(NUM_DATA=" << NUM_DATA << "): end → " << end << std::endl;
     double elapsed_time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::cerr << "[ERROR] test_f(NUM_DATA=" << NUM_DATA << "): elapsed_time → " << elapsed_time << std::endl;
     std::cout << "Time spent sorting using shell_sort2: " << elapsed_time
               << "s\n";
 
@@ -177,10 +197,12 @@ void test_f(const int NUM_DATA) {
 
     delete[] data;
     delete[] data2;
+	std::cerr << "[WARN] <<< Exiting test_f(NUM_DATA=" << NUM_DATA << ")" << std::endl;
 }
 
 /** Main function */
 int main(int argc, char *argv[]) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     // initialize random number generator - once per program
     std::srand(std::time(NULL));
 
@@ -204,6 +226,8 @@ int main(int argc, char *argv[]) {
         NUM_DATA = atoi(argv[1]);
     else
         NUM_DATA = 200;
+		std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): NUM_DATA → " << NUM_DATA << std::endl;
+		std::cerr << "[DEBUG] main(argc=" << argc << ",argv=" << argv << "): NUM_DATA → " << NUM_DATA << std::endl;
 
     // int array = new int[NUM_DATA];
     int *data = new int[NUM_DATA];
@@ -221,14 +245,17 @@ int main(int argc, char *argv[]) {
     std::clock_t start = std::clock();
     shell_sort(data, NUM_DATA);  // perform sorting
     std::clock_t end = std::clock();
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): end → " << end << std::endl;
 
     std::cout << std::endl
               << "Data Sorted using custom implementation: " << std::endl;
     show_data(data, NUM_DATA);
 
     double elapsed_time = (end - start) * 1.f / CLOCKS_PER_SEC;
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): elapsed_time → " << elapsed_time << std::endl;
     std::cout << "Time spent sorting: " << elapsed_time << "s\n" << std::endl;
 
     delete[] data;
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

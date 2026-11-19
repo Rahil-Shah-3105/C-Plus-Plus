@@ -9,15 +9,20 @@
  * number.
  */
 void method1(int number) {
+	std::cerr << "[ERROR] >>> Entering method1(number=" << number << ")" << std::endl;
     int remainder, binary = 0, var = 1;
 
+	std::cerr << "[ERROR] method1(number=" << number << "): binary → " << binary << std::endl;
     do {
         remainder = number % 2;
+		std::cerr << "[DEBUG] method1(number=" << number << "): remainder → " << remainder << std::endl;
         number = number / 2;
         binary = binary + (remainder * var);
         var = var * 10;
+		std::cerr << "[DEBUG] method1(number=" << number << "): binary → " << binary << std::endl;
     } while (number > 0);
     std::cout << "Method 1 : " << binary << std::endl;
+	std::cerr << "[WARN] <<< Exiting method1(number=" << number << ")" << std::endl;
 }
 
 /**
@@ -25,6 +30,7 @@ void method1(int number) {
  * from MSB to LSB
  */
 void method2(int number) {
+	std::cerr << "[ERROR] >>> Entering method2(number=" << number << ")" << std::endl;
     int num_bits = 0;
     char bit_string[50];
 
@@ -41,9 +47,11 @@ void method2(int number) {
     while (num_bits >= 0)
         std::cout << bit_string[num_bits--];  // print from MSB to LSB
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting method2(number=" << number << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int number;
     std::cout << "Enter a number:";
     std::cin >> number;
@@ -51,5 +59,6 @@ int main() {
     method1(number);
     method2(number);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

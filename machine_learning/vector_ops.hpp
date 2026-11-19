@@ -83,12 +83,14 @@ std::ostream &operator<<(std::ostream &out, const std::valarray<T> &A) {
  */
 template <typename T>
 std::valarray<T> insert_element(const std::valarray<T> &A, const T &ele) {
+	std::cerr << "[ERROR] >>> Entering insert_element(A.size()=" << A.size() << ",ele=" << ele << ")" << std::endl;
     std::valarray<T> B;      // New 1D vector to store resultant vector
     B.resize(A.size() + 1);  // Resizing it accordingly
     for (size_t i = 0; i < A.size(); i++) {  // For every element in A
         B[i] = A[i];                         // Copy element in B
     }
     B[B.size() - 1] = ele;  // Inserting new element in last position
+	std::cerr << "[WARN] <<< Exiting insert_element(A.size()=" << A.size() << ",ele=" << ele << ")" << std::endl;
     return B;               // Return resultant vector
 }
 
@@ -100,12 +102,14 @@ std::valarray<T> insert_element(const std::valarray<T> &A, const T &ele) {
  */
 template <typename T>
 std::valarray<T> pop_front(const std::valarray<T> &A) {
+	std::cerr << "[ERROR] >>> Entering pop_front(A.size()=" << A.size() << ")" << std::endl;
     std::valarray<T> B;      // New 1D vector to store resultant vector
     B.resize(A.size() - 1);  // Resizing it accordingly
     for (size_t i = 1; i < A.size();
          i++) {           // // For every (except first) element in A
         B[i - 1] = A[i];  // Copy element in B with left shifted position
     }
+	std::cerr << "[WARN] <<< Exiting pop_front(A.size()=" << A.size() << ")" << std::endl;
     return B;  // Return resultant vector
 }
 
@@ -117,12 +121,14 @@ std::valarray<T> pop_front(const std::valarray<T> &A) {
  */
 template <typename T>
 std::valarray<T> pop_back(const std::valarray<T> &A) {
+	std::cerr << "[ERROR] >>> Entering pop_back(A.size()=" << A.size() << ")" << std::endl;
     std::valarray<T> B;      // New 1D vector to store resultant vector
     B.resize(A.size() - 1);  // Resizing it accordingly
     for (size_t i = 0; i < A.size() - 1;
          i++) {       // For every (except last) element in A
         B[i] = A[i];  // Copy element in B
     }
+	std::cerr << "[WARN] <<< Exiting pop_back(A.size()=" << A.size() << ")" << std::endl;
     return B;  // Return resultant vector
 }
 
@@ -230,10 +236,12 @@ void zeroes_initialization(std::vector<std::valarray<T>> &A,
  */
 template <typename T>
 T sum(const std::vector<std::valarray<T>> &A) {
+	std::cerr << "[ERROR] >>> Entering sum(A.size()=" << A.size() << ")" << std::endl;
     T cur_sum = 0;             // Initially sum is zero
     for (const auto &a : A) {  // For every row in A
         cur_sum += a.sum();    // Add sum of that row to current sum
     }
+	std::cerr << "[WARN] <<< Exiting sum(A.size()=" << A.size() << ")" << std::endl;
     return cur_sum;  // Return sum
 }
 
@@ -305,8 +313,10 @@ std::vector<std::vector<std::valarray<T>>> minmax_scaler(
  */
 template <typename T>
 size_t argmax(const std::vector<std::valarray<T>> &A) {
+	std::cerr << "[ERROR] >>> Entering argmax(A.size()=" << A.size() << ")" << std::endl;
     const auto shape = get_shape(A);
     // As this function is used on predicted (or target) vector, shape should be
+	std::cerr << "[ERROR] argmax(A.size()=" << A.size() << "): shape → " << shape << std::endl;
     // (1, X)
     if (shape.first != 1) {
         std::cerr << "ERROR (" << __func__ << ") : ";
@@ -314,6 +324,7 @@ size_t argmax(const std::vector<std::valarray<T>> &A) {
         std::exit(EXIT_FAILURE);
     }
     // Return distance of max element from first element (i.e. index)
+	std::cerr << "[WARN] <<< Exiting argmax(A.size()=" << A.size() << ")" << std::endl;
     return std::distance(std::begin(A[0]),
                          std::max_element(std::begin(A[0]), std::end(A[0])));
 }

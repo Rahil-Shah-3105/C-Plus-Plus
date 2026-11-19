@@ -128,6 +128,7 @@ class FCFS {
      *
      */
     void addProcess(S id, T arrival, E burst) {
+		std::cerr << "[ERROR] >>> Entering addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
         // Add if a process with process ID as id is not found in idList.
         if (idList.find(id) == idList.end()) {
             tuple<S, T, E, double, double, double> t =
@@ -135,6 +136,7 @@ class FCFS {
             schedule.push(t);
             idList.insert(id);
         }
+		std::cerr << "[WARN] <<< Exiting addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
     }
 
     /**
@@ -190,6 +192,7 @@ class FCFS {
      * @returns void
      */
     void printResult() {
+		std::cerr << "[ERROR] >>> Entering printResult()" << std::endl;
         cout << "Status of all the proceses post completion is as follows:"
              << endl;
 
@@ -208,6 +211,7 @@ class FCFS {
                  << get<4>(result[i]) << std::setw(17) << left
                  << get<5>(result[i]) << endl;
         }
+		std::cerr << "[WARN] <<< Exiting printResult()" << std::endl;
     }
 };
 
@@ -255,9 +259,11 @@ vector<tuple<S, T, E, double, double, double>> get_final_status(
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     for (int i{}; i < 1000; i++) {
         srand(time(nullptr));
         uint32_t n = 1 + rand() % 1000;
+		std::cerr << "[ERROR] test(): n → " << n << std::endl;
         FCFS<uint32_t, uint32_t, uint32_t> readyQueue;
         vector<tuple<uint32_t, uint32_t, uint32_t>> input(n);
 
@@ -279,6 +285,7 @@ static void test() {
         // readyQueue.printResult();
     }
     cout << "All the tests have successfully passed!" << endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -286,6 +293,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

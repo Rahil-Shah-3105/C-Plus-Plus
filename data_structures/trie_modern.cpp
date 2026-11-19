@@ -39,11 +39,13 @@ class Trie {
      * @return `false` if a child is not found
      */
     inline static bool hasChildren(std::shared_ptr<TrieNode> node) {
+		std::cerr << "[ERROR] >>> Entering hasChildren(node=" << node << ")" << std::endl;
         for (size_t i = 0; i < ALPHABETS; i++) {
             if (node->character[i]) {
                 return true;
             }
         }
+		std::cerr << "[WARN] <<< Exiting hasChildren(node=" << node << ")" << std::endl;
         return false;
     }
 
@@ -107,8 +109,10 @@ class Trie {
      * @param word which needs to be inserted into the string.
      */
     void insert(const std::string& word) {
+		std::cerr << "[ERROR] >>> Entering insert(word=" << word << ")" << std::endl;
         auto curr = m_root;
         for (char ch : word) {
+			std::cerr << "[ERROR] insert(word=" << word << "): curr → " << curr << std::endl;
             size_t index = ch - 'a';
 
             // if a node for current word is not already present in trie, create
@@ -120,6 +124,7 @@ class Trie {
             curr = curr->character[index];
         }
         curr->isEndOfWord = true;
+		std::cerr << "[WARN] <<< Exiting insert(word=" << word << ")" << std::endl;
     }
 
     /**
@@ -130,8 +135,10 @@ class Trie {
      * false.
      */
     bool search(const std::string& word) {
+		std::cerr << "[ERROR] >>> Entering search(word=" << word << ")" << std::endl;
         auto curr = m_root;
         for (char ch : word) {
+			std::cerr << "[ERROR] search(word=" << word << "): curr → " << curr << std::endl;
             size_t index = ch - 'a';
 
             // if any node for a character is not found, then return that the
@@ -141,12 +148,16 @@ class Trie {
             }
             curr = curr->character[index];
         }
+		std::cerr << "[WARN] <<< Exiting search(word=" << word << ")" << std::endl;
         return curr->isEndOfWord;
     }
 
     // Function to remove the word which calls the helper function.
     void removeWord(const std::string& word) {
+		std::cerr << "[ERROR] >>> Entering removeWord(word=" << word << ")" << std::endl;
         m_root = removeWordHelper(word, m_root, 0);
+		std::cerr << "[DEBUG] removeWord(word=" << word << "): m_root → " << m_root << std::endl;
+    std::cerr << "[WARN] <<< Exiting removeWord(word=" << word << ")" << std::endl;
     }
 
  private:
@@ -158,11 +169,13 @@ class Trie {
  * Main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     Trie trie;
     trie.insert("hel");
     trie.insert("hello");
     trie.removeWord("hel");
     std::cout << trie.search("hello") << '\n';
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

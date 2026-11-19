@@ -11,26 +11,35 @@ std::array<ll, mx> parent;
 ll node, edge;
 std::vector<std::pair<ll, std::pair<ll, ll>>> edges;
 void initial() {
+	std::cerr << "[ERROR] >>> Entering initial()" << std::endl;
     for (int i = 0; i < node + edge; ++i) {
         parent[i] = i;
     }
+	std::cerr << "[WARN] <<< Exiting initial()" << std::endl;
 }
 
 int root(int i) {
+	std::cerr << "[ERROR] >>> Entering root(i=" << i << ")" << std::endl;
     while (parent[i] != i) {
         parent[i] = parent[parent[i]];
         i = parent[i];
     }
+	std::cerr << "[WARN] <<< Exiting root(i=" << i << ")" << std::endl;
     return i;
 }
 
 void join(int x, int y) {
+	std::cerr << "[ERROR] >>> Entering join(x=" << x << ",y=" << y << ")" << std::endl;
     int root_x = root(x);  // Disjoint set union by rank
+	std::cerr << "[WARN] <<< Exiting join(x=" << x << ",y=" << y << ")" << std::endl;
     int root_y = root(y);
+	std::cerr << "[ERROR] join(x=" << x << ",y=" << y << "): root_y → " << root_y << std::endl;
+	std::cerr << "[ERROR] join(x=" << x << ",y=" << y << "): root_x → " << root_x << std::endl;
     parent[root_x] = root_y;
 }
 
 ll kruskal() {
+	std::cerr << "[ERROR] >>> Entering kruskal()" << std::endl;
     ll mincost = 0;
     for (int i = 0; i < edge; ++i) {
         ll x = edges[i].second.first;
@@ -40,10 +49,12 @@ ll kruskal() {
             join(x, y);
         }
     }
+	std::cerr << "[WARN] <<< Exiting kruskal()" << std::endl;
     return mincost;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     while (true) {
         int from = 0, to = 0, cost = 0, totalcost = 0;
         std::cin >> node >> edge;  // Enter the nodes and edges
@@ -60,5 +71,6 @@ int main() {
         std::cout << kruskal() << std::endl;
         edges.clear();
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

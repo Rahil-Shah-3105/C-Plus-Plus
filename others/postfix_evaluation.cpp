@@ -80,6 +80,7 @@ void evaluate(float a, float b, const std::string &operation,
 namespace {
 float remove_from_stack(std::stack<float> &stack) {
     if (stack.empty()) {
+		std::cerr << "[ERROR] Throwing std from remove_from_stack(stack=" << stack << ")" << std::endl;
         throw std::invalid_argument("Not enough operands");
     }
     const auto res = stack.top();
@@ -111,6 +112,7 @@ float postfix_evaluation(const std::vector<std::string> &input) {
 
     const auto res = remove_from_stack(stack);
     if (!stack.empty()) {
+		std::cerr << "[ERROR] Throwing std from postfix_evaluation(input.size()=" << input.size() << ")" << std::endl;
         throw std::invalid_argument("Too many operands");
     }
     return res;

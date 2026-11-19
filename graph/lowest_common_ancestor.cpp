@@ -115,9 +115,14 @@ class RootedTree : public Graph {
      * @returns none
      */
     void populate_parents() {
+		std::cerr << "[ERROR] >>> Entering populate_parents()" << std::endl;
         // Initialize the vector with -1 which indicates the vertex
         // wasn't yet visited.
         parent = std::vector<int>(number_of_vertices(), -1);
+		std::cerr << "[ERROR] populate_parents(): parent.size() → " << parent.size() << std::endl;
+		std::cerr << "[ERROR] populate_parents(): level.size() → " << level.size() << std::endl;
+		std::cerr << "[DEBUG] populate_parents(): parent.size() → " << parent.size() << std::endl;
+		std::cerr << "[DEBUG] populate_parents(): level.size() → " << level.size() << std::endl;
         level = std::vector<int>(number_of_vertices());
         parent[root] = root;
         level[root] = 0;
@@ -125,6 +130,7 @@ class RootedTree : public Graph {
         queue_of_vertices.push(root);
         while (!queue_of_vertices.empty()) {
             int vertex = queue_of_vertices.front();
+			std::cerr << "[ERROR] populate_parents(): vertex → " << vertex << std::endl;
             queue_of_vertices.pop();
             for (int neighbor : neighbors[vertex]) {
                 // As long as the vertex was not yet visited.
@@ -135,6 +141,7 @@ class RootedTree : public Graph {
                 }
             }
         }
+		std::cerr << "[WARN] <<< Exiting populate_parents()" << std::endl;
     }
 };
 
@@ -162,6 +169,7 @@ class LowestCommonAncestor {
      * @return index of the vertex which is the lowet common ancestor of u and v
      */
     int lowest_common_ancestor(int u, int v) const {
+		std::cerr << "[ERROR] >>> Entering lowest_common_ancestor(u=" << u << ",v=" << v << ")" << std::endl;
         // Ensure u is the deeper (higher level) of the two vertices
         if (tree.level[v] > tree.level[u]) {
             std::swap(u, v);
@@ -172,6 +180,7 @@ class LowestCommonAncestor {
         for (int i = 0; (1 << i) <= level_diff; ++i) {
             if (level_diff & (1 << i)) {
                 u = up[u][i];
+				std::cerr << "[ERROR] lowest_common_ancestor(u=" << u << ",v=" << v << "): u → " << u << std::endl;
             }
         }
         assert(tree.level[u] == tree.level[v]);
@@ -192,6 +201,7 @@ class LowestCommonAncestor {
         // that their ancestor would be different, the only logical
         // consequence is that their parent is the sought answer.
         assert(up[u][0] == up[v][0]);
+		std::cerr << "[WARN] <<< Exiting lowest_common_ancestor(u=" << u << ",v=" << v << ")" << std::endl;
         return up[u][0];
     }
 
@@ -210,6 +220,7 @@ class LowestCommonAncestor {
      * Populate the "up" structure. See above.
      */
     void populate_up() {
+		std::cerr << "[ERROR] >>> Entering populate_up()" << std::endl;
         up.resize(tree.number_of_vertices());
         for (int vertex = 0; vertex < tree.number_of_vertices(); ++vertex) {
             up[vertex].push_back(tree.parent[vertex]);
@@ -222,6 +233,7 @@ class LowestCommonAncestor {
                 up[vertex].push_back(up[up[vertex][level]][level]);
             }
         }
+		std::cerr << "[WARN] <<< Exiting populate_up()" << std::endl;
     }
 };
 
@@ -232,6 +244,7 @@ class LowestCommonAncestor {
  * @returns none
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     /**
      *             _  3  _
      *          /     |     \
@@ -249,10 +262,13 @@ static void tests() {
     assert(lca.lowest_common_ancestor(9, 6) == 6);
     assert(lca.lowest_common_ancestor(0, 0) == 0);
     assert(lca.lowest_common_ancestor(8, 2) == 6);
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -51,9 +51,11 @@ class Matrix {
               typename = typename std::enable_if<
                   std::is_integral<Integer>::value, Integer>::type>
     explicit Matrix(const Integer size) {
+		std::cerr << "[ERROR] >>> Entering Matrix(size=" << size << ")" << std::endl;
         for (size_t i = 0; i < size; ++i) {
             _mat.emplace_back(std::vector<T>(size, 0));
         }
+		std::cerr << "[WARN] <<< Exiting Matrix(size=" << size << ")" << std::endl;
     }
 
     /**
@@ -132,12 +134,14 @@ class Matrix {
                                        std::is_floating_point<Number>::value,
                                    Number>::type>
     void h_stack(const Matrix<Number> &other) {
+		std::cerr << "[ERROR] >>> Entering h_stack(other=" << other << ")" << std::endl;
         assert(_mat.size() == other._mat.size());
         for (size_t i = 0; i < other._mat.size(); ++i) {
             for (size_t j = 0; j < other._mat[i].size(); ++j) {
                 _mat[i].push_back(other._mat[i][j]);
             }
         }
+		std::cerr << "[WARN] <<< Exiting h_stack(other=" << other << ")" << std::endl;
     }
 
     /**
@@ -151,6 +155,7 @@ class Matrix {
                                        std::is_floating_point<Number>::value,
                                    Number>::type>
     void v_stack(const Matrix<Number> &other) {
+		std::cerr << "[ERROR] >>> Entering v_stack(other=" << other << ")" << std::endl;
         assert(_mat[0].size() == other._mat[0].size());
         for (size_t i = 0; i < other._mat.size(); ++i) {
             _mat.emplace_back(std::vector<T>(other._mat[i].size()));
@@ -158,6 +163,7 @@ class Matrix {
                 _mat.back()[j] = other._mat[i][j];
             }
         }
+		std::cerr << "[WARN] <<< Exiting v_stack(other=" << other << ")" << std::endl;
     }
 
     /**
@@ -314,8 +320,10 @@ class Matrix {
                                        std::is_floating_point<Number>::value,
                                    bool>::type>
     Matrix naive_multiplication(const Matrix<Number> &other) const {
+		std::cerr << "[ERROR] >>> Entering naive_multiplication(other=" << other << ")" << std::endl;
         Matrix C = Matrix<Number>(_mat.size(), other._mat[0].size());
 
+		std::cerr << "[ERROR] naive_multiplication(other=" << other << "): C → " << C << std::endl;
         for (size_t i = 0; i < _mat.size(); ++i) {
             for (size_t k = 0; k < _mat[0].size(); ++k) {
                 for (size_t j = 0; j < other._mat[0].size(); ++j) {
@@ -323,6 +331,7 @@ class Matrix {
                 }
             }
         }
+		std::cerr << "[WARN] <<< Exiting naive_multiplication(other=" << other << ")" << std::endl;
         return C;
     }
 
@@ -338,8 +347,10 @@ class Matrix {
                                        std::is_floating_point<Number>::value,
                                    bool>::type>
     Matrix strassens_multiplication(const Matrix<Number> &other) const {
+		std::cerr << "[ERROR] >>> Entering strassens_multiplication(other=" << other << ")" << std::endl;
         const size_t size = _mat.size();
         // Base case: when a matrix is small enough for faster naive
+		std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): size → " << size << std::endl;
         // multiplication, or the matrix is of odd size, then go with the naive
         // multiplication route;
         // else; go with the strassen's method.
@@ -355,14 +366,22 @@ class Matrix {
                 F = other.slice(0ULL, size >> 1, size >> 1, size),
                 G = other.slice(size >> 1, size, 0ULL, size >> 1),
                 H = other.slice(size >> 1, size, size >> 1, size);
+				std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): H → " << H << std::endl;
 
             Matrix P1 = A.strassens_multiplication(F - H);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P1 → " << P1 << std::endl;
             Matrix P2 = (A + B).strassens_multiplication(H);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P2 → " << P2 << std::endl;
             Matrix P3 = (C + D).strassens_multiplication(E);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P3 → " << P3 << std::endl;
             Matrix P4 = D.strassens_multiplication(G - E);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P4 → " << P4 << std::endl;
             Matrix P5 = (A + D).strassens_multiplication(E + H);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P5 → " << P5 << std::endl;
             Matrix P6 = (B - D).strassens_multiplication(G + H);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P6 → " << P6 << std::endl;
             Matrix P7 = (A - C).strassens_multiplication(E + F);
+			std::cerr << "[ERROR] strassens_multiplication(other=" << other << "): P7 → " << P7 << std::endl;
 
             // Building final matrix C11 would be
             //     [      |      ]
@@ -381,6 +400,7 @@ class Matrix {
             C11.h_stack(C12);
             C11.v_stack(C21);
 
+			std::cerr << "[WARN] <<< Exiting strassens_multiplication(other=" << other << ")" << std::endl;
             return C11;
         }
     }
@@ -425,6 +445,7 @@ class Matrix {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     const size_t s = 512;
     auto matrix_demo =
         divide_and_conquer::strassens_multiplication::Matrix<size_t>(s, s);
@@ -452,6 +473,7 @@ static void test() {
 
     start = std::chrono::system_clock::now();
     auto conf = matrix_demo2.naive_multiplication(matrix_demo);
+	std::cerr << "[ERROR] test(): conf → " << conf << std::endl;
     end = std::chrono::system_clock::now();
 
     time = end - start;
@@ -459,6 +481,7 @@ static void test() {
 
     // std::cout << Mat3 << conf << std::endl;
     assert(Mat3 == conf);
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -466,6 +489,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 
 void radixsort(int a[], int n) {
+	std::cerr << "[ERROR] >>> Entering radixsort(a=" << a << ",n=" << n << ")" << std::endl;
     int count[10];
     int* output = new int[n];
     memset(output, 0, n * sizeof(*output));
@@ -12,6 +13,7 @@ void radixsort(int a[], int n) {
     for (int i = 0; i < n; ++i) {
         if (a[i] > max) {
             max = a[i];
+			std::cerr << "[ERROR] radixsort(a=" << a << ",n=" << n << "): max → " << max << std::endl;
         }
     }
     int maxdigits = 0;
@@ -22,6 +24,7 @@ void radixsort(int a[], int n) {
     for (int j = 0; j < maxdigits; j++) {
         for (int i = 0; i < n; i++) {
             int t = std::pow(10, j);
+			std::cerr << "[ERROR] radixsort(a=" << a << ",n=" << n << "): t → " << t << std::endl;
             count[(a[i] % (10 * t)) / t]++;
         }
         int k = 0;
@@ -40,19 +43,25 @@ void radixsort(int a[], int n) {
         }
     }
     delete[] output;
+	std::cerr << "[WARN] <<< Exiting radixsort(a=" << a << ",n=" << n << ")" << std::endl;
 }
 
 void print(int a[], int n) {
+	std::cerr << "[ERROR] >>> Entering print(a=" << a << ",n=" << n << ")" << std::endl;
     for (int i = 0; i < n; ++i) {
         std::cout << a[i] << " ";
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting print(a=" << a << ",n=" << n << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int a[] = {170, 45, 75, 90, 802, 24, 2, 66};
     int n = sizeof(a) / sizeof(a[0]);
+	std::cerr << "[ERROR] main(): n → " << n << std::endl;
     radixsort(a, n);
     print(a, n);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

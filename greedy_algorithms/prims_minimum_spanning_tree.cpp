@@ -15,6 +15,7 @@ struct mst {
 mst MST_Array[V];
 
 void initilize() {
+	std::cerr << "[ERROR] >>> Entering initilize()" << std::endl;
     for (int i = 0; i < V; i++) {
         MST_Array[i].visited = false;
         MST_Array[i].key = INFINITY;  // considering INFINITY as inifinity
@@ -22,17 +23,21 @@ void initilize() {
     }
 
     MST_Array[0].key = 0;
+	std::cerr << "[WARN] <<< Exiting initilize()" << std::endl;
 }
 
 void updateNear() {
+	std::cerr << "[ERROR] >>> Entering updateNear()" << std::endl;
     for (int v = 0; v < V; v++) {
         int min = INFINITY;
+		std::cerr << "[ERROR] updateNear(): min → " << min << std::endl;
         int minIndex = 0;
         for (int i = 0; i < V; i++) {
             if (MST_Array[i].key < min && MST_Array[i].visited == false &&
                 MST_Array[i].key != INFINITY) {
                 min = MST_Array[i].key;
                 minIndex = i;
+				std::cerr << "[ERROR] updateNear(): minIndex → " << minIndex << std::endl;
             }
         }
 
@@ -47,18 +52,23 @@ void updateNear() {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting updateNear()" << std::endl;
 }
 
 void show() {
+	std::cerr << "[ERROR] >>> Entering show()" << std::endl;
     for (int i = 0; i < V; i++) {
         cout << i << "  -  " << MST_Array[i].near << "\t"
              << graph[i][MST_Array[i].near] << "\n";
     }
+	std::cerr << "[WARN] <<< Exiting show()" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     initilize();
     updateNear();
     show();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -51,6 +51,8 @@
  * \returns random number in the range \f$[a,b]\f$
  */
 double _random(double a, double b) {
+	std::cerr << "[ERROR] >>> Entering _random(a=" << a << ",b=" << b << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting _random(a=" << a << ",b=" << b << ")" << std::endl;
     return ((b - a) * (std::rand() % 100) / 100.f) + a;
 }
 
@@ -328,10 +330,13 @@ using machine_learning::save_u_matrix;
  * \param[out] data matrix to store data in
  */
 void test_2d_classes(std::vector<std::valarray<double>> *data) {
+	std::cerr << "[ERROR] >>> Entering test_2d_classes(data=" << data << ")" << std::endl;
     const int N = data->size();
     const double R = 0.3;  // radius of cluster
+	std::cerr << "[ERROR] test_2d_classes(data=" << data << "): N → " << N << std::endl;
     int i = 0;
     const int num_classes = 4;
+	std::cerr << "[WARN] <<< Exiting test_2d_classes(data=" << data << ")" << std::endl;
     std::array<std::array<double, 2>, num_classes> centres = {
         // centres of each class cluster
         std::array<double, 2>({.5, .5}),   // centre of class 1
@@ -346,6 +351,7 @@ void test_2d_classes(std::vector<std::valarray<double>> *data) {
     for (i = 0; i < N; i++) {
         // select a random class for the point
         int cls = std::rand() % num_classes;
+		std::cerr << "[ERROR] test_2d_classes(data=" << data << "): cls → " << cls << std::endl;
 
         // create random coordinates (x,y,z) around the centre of the class
         data[0][i][0] = _random(centres[cls][0] - R, centres[cls][0] + R);
@@ -367,11 +373,13 @@ void test_2d_classes(std::vector<std::valarray<double>> *data) {
  * * `w12.csv`: trained SOM map
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     int j = 0, N = 300;
     int features = 2;
     int num_out = 30;
     std::vector<std::valarray<double>> X(N);
     std::vector<std::vector<std::valarray<double>>> W(num_out);
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
     for (int i = 0; i < std::max(num_out, N); i++) {
         // loop till max(N, num_out)
         if (i < N) {  // only add new arrays if i < N
@@ -409,10 +417,13 @@ void test1() {
  * \param[out] data matrix to store data in
  */
 void test_3d_classes1(std::vector<std::valarray<double>> *data) {
+	std::cerr << "[ERROR] >>> Entering test_3d_classes1(data=" << data << ")" << std::endl;
     const size_t N = data->size();
     const double R = 0.3;  // radius of cluster
+	std::cerr << "[ERROR] test_3d_classes1(data=" << data << "): N → " << N << std::endl;
     int i = 0;
     const int num_classes = 4;
+	std::cerr << "[WARN] <<< Exiting test_3d_classes1(data=" << data << ")" << std::endl;
     const std::array<std::array<double, 3>, num_classes> centres = {
         // centres of each class cluster
         std::array<double, 3>({.5, .5, .5}),    // centre of class 1
@@ -427,6 +438,7 @@ void test_3d_classes1(std::vector<std::valarray<double>> *data) {
     for (i = 0; i < N; i++) {
         // select a random class for the point
         int cls = std::rand() % num_classes;
+		std::cerr << "[ERROR] test_3d_classes1(data=" << data << "): cls → " << cls << std::endl;
 
         // create random coordinates (x,y,z) around the centre of the class
         data[0][i][0] = _random(centres[cls][0] - R, centres[cls][0] + R);
@@ -449,11 +461,13 @@ void test_3d_classes1(std::vector<std::valarray<double>> *data) {
  * * `w22.csv`: trained SOM map
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     int j = 0, N = 300;
     int features = 3;
     int num_out = 30;
     std::vector<std::valarray<double>> X(N);
     std::vector<std::vector<std::valarray<double>>> W(num_out);
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
     for (int i = 0; i < std::max(num_out, N); i++) {
         // loop till max(N, num_out)
         if (i < N) {  // only add new arrays if i < N
@@ -491,10 +505,13 @@ void test2() {
  * \param[out] data matrix to store data in
  */
 void test_3d_classes2(std::vector<std::valarray<double>> *data) {
+	std::cerr << "[ERROR] >>> Entering test_3d_classes2(data=" << data << ")" << std::endl;
     const size_t N = data->size();
     const double R = 0.2;  // radius of cluster
+	std::cerr << "[ERROR] test_3d_classes2(data=" << data << "): N → " << N << std::endl;
     int i = 0;
     const int num_classes = 8;
+	std::cerr << "[WARN] <<< Exiting test_3d_classes2(data=" << data << ")" << std::endl;
     const std::array<std::array<double, 3>, num_classes> centres = {
         // centres of each class cluster
         std::array<double, 3>({.5, .5, .5}),    // centre of class 1
@@ -513,6 +530,7 @@ void test_3d_classes2(std::vector<std::valarray<double>> *data) {
     for (i = 0; i < N; i++) {
         // select a random class for the point
         int cls = std::rand() % num_classes;
+		std::cerr << "[ERROR] test_3d_classes2(data=" << data << "): cls → " << cls << std::endl;
 
         // create random coordinates (x,y,z) around the centre of the class
         data[0][i][0] = _random(centres[cls][0] - R, centres[cls][0] + R);
@@ -535,11 +553,13 @@ void test_3d_classes2(std::vector<std::valarray<double>> *data) {
  * * `w32.csv`: trained SOM map
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     int j = 0, N = 500;
     int features = 3;
     int num_out = 30;
     std::vector<std::valarray<double>> X(N);
     std::vector<std::vector<std::valarray<double>>> W(num_out);
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
     for (int i = 0; i < std::max(num_out, N); i++) {
         // loop till max(N, num_out)
         if (i < N) {  // only add new arrays if i < N
@@ -575,12 +595,16 @@ void test3() {
  * \returns time difference in seconds
  */
 double get_clock_diff(clock_t start_t, clock_t end_t) {
+	std::cerr << "[ERROR] >>> Entering get_clock_diff(start_t=" << start_t << ",end_t=" << end_t << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting get_clock_diff(start_t=" << start_t << ",end_t=" << end_t << ")" << std::endl;
     return static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
 }
 
 /** Main function */
 int main() {
 #ifdef _OPENMP
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     std::cout << "Using OpenMP based parallelization\n";
 #else
     std::cout << "NOT using OpenMP based parallelization\n";
@@ -589,8 +613,10 @@ int main() {
     std::srand(std::time(nullptr));
 
     std::clock_t start_clk = std::clock();
+	std::cerr << "[ERROR] main(): start_clk → " << start_clk << std::endl;
     test1();
     auto end_clk = std::clock();
+	std::cerr << "[ERROR] main(): end_clk → " << end_clk << std::endl;
     std::cout << "Test 1 completed in " << get_clock_diff(start_clk, end_clk)
               << " sec\n";
 

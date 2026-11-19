@@ -31,6 +31,7 @@ namespace bit_manipulation {
  * @returns a number
  */
 uint64_t next_higher_number(uint64_t x) {
+	std::cerr << "[ERROR] >>> Entering next_higher_number(x=" << x << ")" << std::endl;
     uint64_t rightOne = 0;
     uint64_t nextHigherOneBit = 0;
     uint64_t rightOnesPattern = 0;
@@ -40,15 +41,18 @@ uint64_t next_higher_number(uint64_t x) {
     if (x) {
         // right most set bit
         rightOne = x & -static_cast<signed>(x);
+		std::cerr << "[ERROR] next_higher_number(x=" << x << "): rightOne → " << rightOne << std::endl;
 
         // reset the pattern and set next higher bit
         // left part of x will be here
         nextHigherOneBit = x + rightOne;
+		std::cerr << "[ERROR] next_higher_number(x=" << x << "): nextHigherOneBit → " << nextHigherOneBit << std::endl;
 
         // nextHigherOneBit is now part [D] of the above explanation.
 
         // isolate the pattern
         rightOnesPattern = x ^ nextHigherOneBit;
+		std::cerr << "[ERROR] next_higher_number(x=" << x << "): rightOnesPattern → " << rightOnesPattern << std::endl;
 
         // right adjust pattern
         rightOnesPattern = (rightOnesPattern) / rightOne;
@@ -60,8 +64,10 @@ uint64_t next_higher_number(uint64_t x) {
 
         // integrate new pattern (Add [D] and [A])
         next = nextHigherOneBit | rightOnesPattern;
+		std::cerr << "[ERROR] next_higher_number(x=" << x << "): next → " << next << std::endl;
     }
 
+	std::cerr << "[WARN] <<< Exiting next_higher_number(x=" << x << ")" << std::endl;
     return next;
 }
 
@@ -72,6 +78,7 @@ uint64_t next_higher_number(uint64_t x) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // x = 4 return 8
     assert(bit_manipulation::next_higher_number(4) == 8);
     // x = 6 return 9
@@ -90,12 +97,15 @@ static void test() {
     assert(bit_manipulation::next_higher_number(1024) == 2048);
 
     std::cout << "All test cases have successfully passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

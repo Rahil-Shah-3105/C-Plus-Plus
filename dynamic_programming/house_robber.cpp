@@ -64,6 +64,7 @@ std::uint32_t houseRobber(const std::vector<uint32_t> &money,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test 1
     // [1, 2, 3, 1] return 4
     std::vector<uint32_t> array1 = {1, 2, 3, 1};
@@ -102,6 +103,7 @@ static void test() {
         12);  // here the three non-adjacent houses that are robbed are first,
               // third and fifth with total sum money as 12
     std::cout << "passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -109,6 +111,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -9,6 +9,7 @@ struct node {
 node *start;
 
 void insert(int x) {
+	std::cerr << "[ERROR] >>> Entering insert(x=" << x << ")" << std::endl;
     node *t = start;
     if (start != NULL) {
         while (t->next != NULL) {
@@ -24,9 +25,11 @@ void insert(int x) {
         n->next = NULL;
         start = n;
     }
+	std::cerr << "[WARN] <<< Exiting insert(x=" << x << ")" << std::endl;
 }
 
 void reverse(node *p, node *q) {
+	std::cerr << "[ERROR] >>> Entering reverse(p=" << p << ",q=" << q << ")" << std::endl;
     if (q->next == NULL) {
         q->next = p;
         p->next = NULL;
@@ -37,17 +40,21 @@ void reverse(node *p, node *q) {
         q->next = p;
         p->next = NULL;
     }
+	std::cerr << "[WARN] <<< Exiting reverse(p=" << p << ",q=" << q << ")" << std::endl;
 }
 
 void show() {
+	std::cerr << "[ERROR] >>> Entering show()" << std::endl;
     node *t = start;
     while (t != NULL) {
         cout << t->val << "\t";
         t = t->next;
     }
+	std::cerr << "[WARN] <<< Exiting show()" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     insert(1);
     insert(2);
     insert(3);
@@ -59,5 +66,6 @@ int main() {
 
     show();
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -63,6 +63,7 @@ std::uint64_t countSetBits(
 }  // namespace bit_manipulation
 
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // n = 4 return 1
     assert(bit_manipulation::count_of_set_bits::countSetBits(4) == 1);
     // n = 6 return 2
@@ -80,12 +81,15 @@ static void test() {
     // n = 31 return 5
     assert(bit_manipulation::count_of_set_bits::countSetBits(31) == 5);
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

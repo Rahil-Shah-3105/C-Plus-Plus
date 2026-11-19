@@ -21,6 +21,7 @@ std::vector<std::pair<int, int>> factors;
 /** Calculating prime number upto a given range
  */
 void SieveOfEratosthenes(int N) {
+	std::cerr << "[ERROR] >>> Entering SieveOfEratosthenes(N=" << N << ")" << std::endl;
     // initializes the array isprime
     memset(isprime, true, sizeof isprime);
 
@@ -34,14 +35,18 @@ void SieveOfEratosthenes(int N) {
         if (isprime[i])
             prime_numbers.push_back(i);
     }
+	std::cerr << "[WARN] <<< Exiting SieveOfEratosthenes(N=" << N << ")" << std::endl;
 }
 
 /** Prime factorization of a number */
 void prime_factorization(int num) {
+	std::cerr << "[ERROR] >>> Entering prime_factorization(num=" << num << ")" << std::endl;
     int number = num;
 
+	std::cerr << "[ERROR] prime_factorization(num=" << num << "): number → " << number << std::endl;
     for (int i = 0; prime_numbers[i] <= num; i++) {
         int count = 0;
+		std::cerr << "[ERROR] prime_factorization(num=" << num << "): count → " << count << std::endl;
 
         // termination condition
         if (number == 1) {
@@ -56,10 +61,12 @@ void prime_factorization(int num) {
         if (count)
             factors.push_back(std::make_pair(prime_numbers[i], count));
     }
+	std::cerr << "[WARN] <<< Exiting prime_factorization(num=" << num << ")" << std::endl;
 }
 
 /** Main program */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int num;
     std::cout << "\t\tComputes the prime factorization\n\n";
     std::cout << "Type in a number: ";
@@ -74,5 +81,6 @@ int main() {
         std::cout << it.first << " " << it.second << std::endl;
     }
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

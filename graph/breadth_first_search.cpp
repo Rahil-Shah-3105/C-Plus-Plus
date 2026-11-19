@@ -71,6 +71,7 @@ class Graph {
     Graph() = default;
     ;
     void add_edge(T u, T v, bool bidir = true) {
+		std::cerr << "[ERROR] >>> Entering add_edge(u=" << u << ",v=" << v << ",bidir=" << bidir << ")" << std::endl;
         /**
          *  add_edge(u,v,bidir) is used to add an edge between node u and
          * node v by default , bidir is made true , i.e graph is
@@ -85,6 +86,7 @@ class Graph {
             // if graph is bidirectional
             adjacency_list[v].push_back(u);  // v-->u edge added
         }
+		std::cerr << "[WARN] <<< Exiting add_edge(u=" << u << ",v=" << v << ",bidir=" << bidir << ")" << std::endl;
     }
 
     /**
@@ -136,6 +138,7 @@ class Graph {
 
 /** Test function */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     /// Test 1 Begin
     graph::Graph<int> g;
     std::map<int, bool> correct_result;
@@ -154,6 +157,7 @@ static void tests() {
 
     /// Test 2 Begin
     returned_result = g.breadth_first_search(0);
+	std::cerr << "[ERROR] tests(): returned_result.size() → " << returned_result.size() << std::endl;
 
     assert(returned_result == correct_result);
     std::cout << "Test 2 Passed..." << std::endl;
@@ -179,10 +183,12 @@ static void tests() {
     correct_res["Noida"] = true;
     assert(correct_res == returned_res);
     std::cout << "Test 3 Passed..." << std::endl;
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();
     size_t edges = 0;
     std::cout << "Enter the number of edges: ";
@@ -199,5 +205,6 @@ int main() {
     }
 
     g.breadth_first_search(0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

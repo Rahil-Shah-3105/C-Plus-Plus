@@ -30,8 +30,10 @@ namespace string_search {
  * @returns the partial match table as a vector array
  */
 std::vector<size_t> getFailureArray(const std::string &pattern) {
+	std::cerr << "[ERROR] >>> Entering getFailureArray(pattern=" << pattern << ")" << std::endl;
     size_t pattern_length = pattern.size();
     std::vector<size_t> failure(pattern_length + 1);
+	std::cerr << "[ERROR] getFailureArray(pattern=" << pattern << "): pattern_length → " << pattern_length << std::endl;
     failure[0] = std::string::npos;
     size_t j = std::string::npos;
     for (int i = 0; i < pattern_length; i++) {
@@ -40,6 +42,7 @@ std::vector<size_t> getFailureArray(const std::string &pattern) {
         }
         failure[i + 1] = ++j;
     }
+	std::cerr << "[WARN] <<< Exiting getFailureArray(pattern=" << pattern << ")" << std::endl;
     return failure;
 }
 
@@ -51,12 +54,16 @@ std::vector<size_t> getFailureArray(const std::string &pattern) {
  * @returns `std::string::npos` if not found
  */
 size_t kmp(const std::string &pattern, const std::string &text) {
+	std::cerr << "[ERROR] >>> Entering kmp(pattern=" << pattern << ",text=" << text << ")" << std::endl;
     if (pattern.empty()) {
         return 0;
     }
     std::vector<size_t> failure = getFailureArray(pattern);
+	std::cerr << "[ERROR] kmp(pattern=" << pattern << ",text=" << text << "): failure.size() → " << failure.size() << std::endl;
     size_t text_length = text.size();
+	std::cerr << "[ERROR] kmp(pattern=" << pattern << ",text=" << text << "): text_length → " << text_length << std::endl;
     size_t pattern_length = pattern.size();
+	std::cerr << "[ERROR] kmp(pattern=" << pattern << ",text=" << text << "): pattern_length → " << pattern_length << std::endl;
     size_t k = 0;
     for (size_t j = 0; j < text_length; j++) {
         while (k != std::string::npos && pattern[k] != text[j]) {
@@ -66,6 +73,7 @@ size_t kmp(const std::string &pattern, const std::string &text) {
             return j - k + 1;
         }
     }
+	std::cerr << "[WARN] <<< Exiting kmp(pattern=" << pattern << ",text=" << text << ")" << std::endl;
     return std::string::npos;
 }
 }  // namespace string_search
@@ -77,6 +85,7 @@ using string_search::kmp;
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     assert(kmp("abc1abc12l", "alskfjaldsabc1abc1abc12k2") == std::string::npos);
     assert(kmp("bca", "abcabc") == 1);
     assert(kmp("World", "helloWorld") == 5);
@@ -86,6 +95,7 @@ static void tests() {
 
     // this lets the user know that the tests have passed
     std::cout << "All KMP algorithm tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /*
@@ -93,6 +103,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

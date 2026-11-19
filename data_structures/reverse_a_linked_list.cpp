@@ -51,6 +51,7 @@ class Node {
  *  @return pointer to the first node/head of the copied list or nullptr
  */
 Node* copy_all_nodes(const Node* const node) {
+	std::cerr << "[ERROR] >>> Entering copy_all_nodes(node=" << node << ")" << std::endl;
     if (node) {
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         Node* res = new Node();
@@ -58,6 +59,7 @@ Node* copy_all_nodes(const Node* const node) {
         res->next = copy_all_nodes(node->next);
         return res;
     }
+	std::cerr << "[WARN] <<< Exiting copy_all_nodes(node=" << node << ")" << std::endl;
     return nullptr;
 }
 
@@ -97,6 +99,7 @@ bool list::isEmpty() const { return head == nullptr; }
  * @param new_elem element be added at the end of the list
  */
 void list::insert(int32_t n) {
+	std::cerr << "[ERROR] >>> Entering list::insert(n=" << n << ")" << std::endl;
     try {
         // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
         Node* new_node = new Node();
@@ -115,6 +118,7 @@ void list::insert(int32_t n) {
     } catch (std::bad_alloc& exception) {
         std::cerr << "bad_alloc detected: " << exception.what() << "\n";
     }
+	std::cerr << "[WARN] <<< Exiting list::insert(n=" << n << ")" << std::endl;
 }
 
 /**
@@ -123,16 +127,21 @@ void list::insert(int32_t n) {
  * @returns void
  */
 void list::reverseList() {
+	std::cerr << "[ERROR] >>> Entering list::reverseList()" << std::endl;
     Node* curr = head;
     Node* prev = nullptr;
     Node* next_node = nullptr;
     while (curr != nullptr) {
         next_node = curr->next;
+		std::cerr << "[DEBUG] list::reverseList(): next_node → " << next_node << std::endl;
         curr->next = prev;
         prev = curr;
+		std::cerr << "[DEBUG] list::reverseList(): prev → " << prev << std::endl;
         curr = next_node;
     }
+	std::cerr << "[WARN] <<< Exiting list::reverseList()" << std::endl;
     head = prev;
+	std::cerr << "[DEBUG] list::reverseList(): head → " << head << std::endl;
 }
 
 /**
@@ -140,9 +149,12 @@ void list::reverseList() {
  * @returns the top element of the list
  */
 int32_t list::top() const {
+	std::cerr << "[ERROR] >>> Entering list::top()" << std::endl;
     if (!isEmpty()) {
         return head->val;
     } else {
+		std::cerr << "[ERROR] Throwing std from list::top()" << std::endl;
+	std::cerr << "[WARN] <<< Exiting list::top()" << std::endl;
         throw std::logic_error("List is empty");
     }
 }
@@ -151,6 +163,7 @@ int32_t list::top() const {
  *  @returns the last element of the list
  */
 int32_t list::last() const {
+	std::cerr << "[ERROR] >>> Entering list::last()" << std::endl;
     if (!isEmpty()) {
         Node* t = head;
         while (t->next != nullptr) {
@@ -158,6 +171,8 @@ int32_t list::last() const {
         }
         return t->val;
     } else {
+		std::cerr << "[ERROR] Throwing std from list::last()" << std::endl;
+	std::cerr << "[WARN] <<< Exiting list::last()" << std::endl;
         throw std::logic_error("List is empty");
     }
 }
@@ -166,11 +181,14 @@ int32_t list::last() const {
  *  @returns the i th element of the list
  */
 int32_t list::traverse(int32_t index) const {
+	std::cerr << "[ERROR] >>> Entering list::traverse(index=" << index << ")" << std::endl;
     Node* current = head;
 
     int count = 0;
+	std::cerr << "[ERROR] list::traverse(index=" << index << "): count → " << count << std::endl;
     while (current != nullptr) {
         if (count == index) {
+			std::cerr << "[WARN] <<< Exiting list::traverse(index=" << index << ")" << std::endl;
             return (current->val);
         }
         count++;
@@ -186,11 +204,13 @@ int32_t list::traverse(int32_t index) const {
  *  @brief calls delete operator on every node in the represented list
  */
 void list::delete_all_nodes() {
+	std::cerr << "[ERROR] >>> Entering list::delete_all_nodes()" << std::endl;
     while (head != nullptr) {
         const auto tmp_node = head->next;
         delete head;
         head = tmp_node;
     }
+	std::cerr << "[WARN] <<< Exiting list::delete_all_nodes()" << std::endl;
 }
 
 list::~list() { delete_all_nodes(); }
@@ -226,6 +246,7 @@ list& list::operator=(const list& other) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     data_structures::linked_list::list L;
     // 1st test
     L.insert(11);
@@ -247,9 +268,11 @@ static void test() {
     assert(L.traverse(5) == 12);
     assert(L.last() == 11);
     std::cout << "All tests have successfully passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 void test_copy_constructor() {
+	std::cerr << "[ERROR] >>> Entering test_copy_constructor()" << std::endl;
     data_structures::linked_list::list L;
     L.insert(10);
     L.insert(20);
@@ -269,9 +292,11 @@ void test_copy_constructor() {
 
     assert(L.last() == 400);
     assert(otherList.last() == 40);
+	std::cerr << "[WARN] <<< Exiting test_copy_constructor()" << std::endl;
 }
 
 void test_assignment_operator() {
+	std::cerr << "[ERROR] >>> Entering test_assignment_operator()" << std::endl;
     data_structures::linked_list::list L;
     data_structures::linked_list::list otherList;
     L.insert(10);
@@ -292,6 +317,7 @@ void test_assignment_operator() {
 
     assert(L.last() == 400);
     assert(otherList.last() == 40);
+	std::cerr << "[WARN] <<< Exiting test_assignment_operator()" << std::endl;
 }
 
 /**
@@ -299,8 +325,10 @@ void test_assignment_operator() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
     test_copy_constructor();
     test_assignment_operator();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

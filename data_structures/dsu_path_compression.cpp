@@ -44,6 +44,7 @@ class dsu {
      * @param n number of elements
      */
     explicit dsu(uint64_t n) {
+		std::cerr << "[ERROR] >>> Entering dsu(n=" << n << ")" << std::endl;
         p.assign(n, 0);
         /// initially, all of them are their own parents
         for (uint64_t i = 0; i < n; i++) {
@@ -63,6 +64,7 @@ class dsu {
         for (uint64_t i = 0; i < n; i++) {
             setSize[i] = 1;
         }
+		std::cerr << "[WARN] <<< Exiting dsu(n=" << n << ")" << std::endl;
     }
 
     /**
@@ -72,10 +74,12 @@ class dsu {
      * @returns representative of the set to which i belongs to.
      */
     uint64_t findSet(uint64_t i) {
+		std::cerr << "[ERROR] >>> Entering findSet(i=" << i << ")" << std::endl;
         /// using path compression
         if (p[i] == i) {
             return i;
         }
+		std::cerr << "[WARN] <<< Exiting findSet(i=" << i << ")" << std::endl;
         return (p[i] = findSet(p[i]));
     }
     /**
@@ -86,6 +90,7 @@ class dsu {
      * @returns void
      */
     void UnionSet(uint64_t i, uint64_t j) {
+		std::cerr << "[ERROR] >>> Entering UnionSet(i=" << i << ",j=" << j << ")" << std::endl;
         /// check if both belongs to the same set or not
         if (isSame(i, j)) {
             return;
@@ -93,7 +98,9 @@ class dsu {
 
         // we find the representative of the i and j
         uint64_t x = findSet(i);
+		std::cerr << "[ERROR] UnionSet(i=" << i << ",j=" << j << "): x → " << x << std::endl;
         uint64_t y = findSet(j);
+		std::cerr << "[ERROR] UnionSet(i=" << i << ",j=" << j << "): y → " << y << std::endl;
 
         /// always keeping the min as x
         /// shallow tree
@@ -112,6 +119,7 @@ class dsu {
         /// changing the maximum elements
         maxElement[y] = std::max(maxElement[x], maxElement[y]);
         minElement[y] = std::min(minElement[x], minElement[y]);
+		std::cerr << "[WARN] <<< Exiting UnionSet(i=" << i << ",j=" << j << ")" << std::endl;
     }
     /**
      * @brief A utility function which check whether i and j belongs to
@@ -122,9 +130,11 @@ class dsu {
      * @returns `false` if element `i` and `j` are NOT in same set
      */
     bool isSame(uint64_t i, uint64_t j) {
+		std::cerr << "[ERROR] >>> Entering isSame(i=" << i << ",j=" << j << ")" << std::endl;
         if (findSet(i) == findSet(j)) {
             return true;
         }
+		std::cerr << "[WARN] <<< Exiting isSame(i=" << i << ",j=" << j << ")" << std::endl;
         return false;
     }
     /**
@@ -134,10 +144,12 @@ class dsu {
      * @returns void
      */
     vector<uint64_t> get(uint64_t i) {
+		std::cerr << "[ERROR] >>> Entering get(i=" << i << ")" << std::endl;
         vector<uint64_t> ans;
         ans.push_back(get_min(i));
         ans.push_back(get_max(i));
         ans.push_back(size(i));
+		std::cerr << "[WARN] <<< Exiting get(i=" << i << ")" << std::endl;
         return ans;
     }
     /**
@@ -168,6 +180,7 @@ class dsu {
  * @returns void
  */
 static void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     // the minimum, maximum, and size of the set
     uint64_t n = 10;  ///< number of items
     dsu d(n + 1);     ///< object of class disjoint sets
@@ -179,12 +192,14 @@ static void test1() {
         assert(d.get(4).at(i) == ans[i]);  // makes sure algorithm works fine
     }
     cout << "1st test passed!" << endl;
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 /**
  * @brief Self-implementations, 2nd test
  * @returns void
  */
 static void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     // the minimum, maximum, and size of the set
     uint64_t n = 10;  ///< number of items
     dsu d(n + 1);     ///< object of class disjoint sets
@@ -197,6 +212,7 @@ static void test2() {
         assert(d.get(3).at(i) == ans[i]);  // makes sure algorithm works fine
     }
     cout << "2nd test passed!" << endl;
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 
 /**
@@ -204,11 +220,13 @@ static void test2() {
  * @returns 0 on exit
  * */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     uint64_t n = 10;  ///< number of items
     dsu d(n + 1);     ///< object of class disjoint sets
 
     test1();  // run 1st test case
     test2();  // run 2nd test case
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

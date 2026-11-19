@@ -60,6 +60,7 @@ int64_t find_non_repeating_integer(const std::vector<int>& nums) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // n = 10,2 return 14
 
     std::vector<int> nums_one{1, 1, 2, 2, 4, 5, 5};
@@ -77,12 +78,15 @@ static void test() {
            1);  // 1 is non repeating
 
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

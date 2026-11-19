@@ -38,12 +38,14 @@ namespace linked_list {
  * @returns false if any other character is found
  */
 bool isDigit(const std::string& s) {
+	std::cerr << "[ERROR] >>> Entering isDigit(s=" << s << ")" << std::endl;
     // function statements here
     for (char i : s) {
         if (!isdigit(i)) {
             return false;
         }
     }
+	std::cerr << "[WARN] <<< Exiting isDigit(s=" << s << ")" << std::endl;
     return true;
 }
 
@@ -109,9 +111,11 @@ class list {
  * @returns false if list is not empty
  */
 bool list::isEmpty() {
+	std::cerr << "[ERROR] >>> Entering list::isEmpty()" << std::endl;
     if (last == nullptr) {
         return true;
     } else {
+		std::cerr << "[WARN] <<< Exiting list::isEmpty()" << std::endl;
         return false;
     }
 }
@@ -121,6 +125,7 @@ bool list::isEmpty() {
  * @param new_elem to be added to the end of the list
  */
 void list::push_back(int new_elem) {
+	std::cerr << "[ERROR] >>> Entering list::push_back(new_elem=" << new_elem << ")" << std::endl;
     if (isEmpty()) {
         first->succ() = std::make_shared<link>(new_elem);
         last = first->succ();
@@ -128,6 +133,7 @@ void list::push_back(int new_elem) {
         last->succ() = std::make_shared<link>(new_elem);
         last = last->succ();
     }
+	std::cerr << "[WARN] <<< Exiting list::push_back(new_elem=" << new_elem << ")" << std::endl;
 }
 
 /**
@@ -135,14 +141,17 @@ void list::push_back(int new_elem) {
  * @param new_elem to be added to front of the list
  */
 void list::push_front(int new_elem) {
+	std::cerr << "[ERROR] >>> Entering list::push_front(new_elem=" << new_elem << ")" << std::endl;
     if (isEmpty()) {
         first->succ() = std::make_shared<link>(new_elem);
         last = first->succ();
     } else {
         std::shared_ptr<link> t = std::make_shared<link>(new_elem);
+		std::cerr << "[ERROR] list::push_front(new_elem=" << new_elem << "): t → " << t << std::endl;
         t->succ() = first->succ();
         first->succ() = t;
     }
+	std::cerr << "[WARN] <<< Exiting list::push_front(new_elem=" << new_elem << ")" << std::endl;
 }
 
 /**
@@ -150,6 +159,7 @@ void list::push_front(int new_elem) {
  * @param old_elem to be erased from the list
  */
 void list::erase(int old_elem) {
+	std::cerr << "[ERROR] >>> Entering list::erase(old_elem=" << old_elem << ")" << std::endl;
     if (isEmpty()) {
         std::cout << "List is Empty!";
         return;
@@ -158,20 +168,25 @@ void list::erase(int old_elem) {
     std::shared_ptr<link> to_be_removed = nullptr;
     while (t != last && t->succ()->val() != old_elem) {
         t = t->succ();
+		std::cerr << "[ERROR] list::erase(old_elem=" << old_elem << "): t → " << t << std::endl;
     }
     if (t == last) {
         std::cout << "Element not found\n";
         return;
     }
     to_be_removed = t->succ();
+	std::cerr << "[ERROR] list::erase(old_elem=" << old_elem << "): to_be_removed → " << to_be_removed << std::endl;
     t->succ() = t->succ()->succ();
     to_be_removed.reset();
     if (t->succ() == nullptr) {
         last = t;
+		std::cerr << "[ERROR] list::erase(old_elem=" << old_elem << "): last → " << last << std::endl;
+		std::cerr << "[DEBUG] list::erase(old_elem=" << old_elem << "): last → " << last << std::endl;
     }
     if (first == last){
         last = nullptr;
     }
+	std::cerr << "[WARN] <<< Exiting list::erase(old_elem=" << old_elem << ")" << std::endl;
 }
 
 /**
@@ -179,6 +194,7 @@ void list::erase(int old_elem) {
  * @returns 'void'
  */
 void list::display() {
+	std::cerr << "[ERROR] >>> Entering list::display()" << std::endl;
     if (isEmpty()) {
         std::cout << "List is Empty!";
         return;
@@ -187,7 +203,9 @@ void list::display() {
     while (t->succ() != nullptr) {
         std::cout << t->succ()->val() << "\t";
         t = t->succ();
+		std::cerr << "[ERROR] list::display(): t → " << t << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting list::display()" << std::endl;
 }
 
 /**
@@ -195,6 +213,7 @@ void list::display() {
  * @param find_elem to be searched for in the list
  */
 std::shared_ptr<link> list::search(int find_elem) {
+	std::cerr << "[ERROR] >>> Entering list::search(find_elem=" << find_elem << ")" << std::endl;
     if (isEmpty()) {
         std::cout << "List is Empty!";
         return nullptr;
@@ -202,12 +221,14 @@ std::shared_ptr<link> list::search(int find_elem) {
     std::shared_ptr<link> t = first;
     while (t != last && t->succ()->val() != find_elem) {
         t = t->succ();
+		std::cerr << "[ERROR] list::search(find_elem=" << find_elem << "): t → " << t << std::endl;
     }
     if (t == last) {
         std::cout << "Element not found\n";
         return nullptr;
     }
     std::cout << "Element was found\n";
+	std::cerr << "[WARN] <<< Exiting list::search(find_elem=" << find_elem << ")" << std::endl;
     return t->succ();
 }
 }  // namespace linked_list
@@ -220,6 +241,7 @@ std::shared_ptr<link> list::search(int find_elem) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     data_structures::linked_list::list l;
     int choice = 0;
     int x = 0;
@@ -242,6 +264,7 @@ int main() {
 
                 if (data_structures::linked_list::isDigit(s)) {
                     x = std::stoi(s);
+					std::cerr << "[ERROR] main(): x → " << x << std::endl;
                     l.push_back(x);
                 } else {
                     std::cout << "Wrong Input!\n";
@@ -277,5 +300,6 @@ int main() {
                 break;
         }
     } while (choice != 0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -131,6 +131,7 @@ double integral_monte_carlo(const double& start_point, const Function& function,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::cout << "Disclaimer: Because this is a randomized algorithm,"
               << std::endl;
     std::cout
@@ -143,6 +144,8 @@ static void test() {
     math::monte_carlo::Function pdf;
     double integral = 0;
     double lower_bound = 0, upper_bound = 0;
+	std::cerr << "[ERROR] test(): lower_bound → " << lower_bound << std::endl;
+	std::cerr << "[ERROR] test(): upper_bound → " << upper_bound << std::endl;
 
     /* \int_{-2}^{2} -x^2 + 4 dx */
     f = [&](double& x) { return -x * x + 4.0; };
@@ -150,6 +153,7 @@ static void test() {
     lower_bound = -2.0;
     upper_bound = 2.0;
     pdf = [&](double& x) {
+		std::cerr << "[DEBUG] test(): upper_bound → " << upper_bound << std::endl;
         if (x >= lower_bound && x <= -1.0) {
             return 0.1;
         }
@@ -203,9 +207,11 @@ static void test() {
     };
 
     integral = math::monte_carlo::integral_monte_carlo(0.0, f, pdf, 10000000);
+	std::cerr << "[ERROR] test(): integral → " << integral << std::endl;
 
     std::cout << "This number should be close to 1.0: " << integral
               << std::endl;
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -213,6 +219,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

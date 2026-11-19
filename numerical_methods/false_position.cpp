@@ -42,6 +42,8 @@ namespace false_position {
  * @return value of f(x) for given x.
  */
 static float eq(float x) {
+	std::cerr << "[ERROR] >>> Entering eq(x=" << x << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting eq(x=" << x << ")" << std::endl;
     return (x * x - x);  // original equation
 }
 
@@ -53,9 +55,11 @@ static float eq(float x) {
 * @return root of the equation in the given interval.
 */
 static float regula_falsi(float x1, float x2, float y1, float y2) {
+	std::cerr << "[ERROR] >>> Entering regula_falsi(x1=" << x1 << ",x2=" << x2 << ",y1=" << y1 << ",y2=" << y2 << ")" << std::endl;
     float diff = x1 - x2;
     if (diff < 0) {
         diff = (-1) * diff;
+		std::cerr << "[ERROR] regula_falsi(x1=" << x1 << ",x2=" << x2 << ",y1=" << y1 << ",y2=" << y2 << "): diff → " << diff << std::endl;
     }
     if (diff < 0.00001) {
         if (y1 < 0) {
@@ -71,8 +75,11 @@ static float regula_falsi(float x1, float x2, float y1, float y2) {
         }
     }
     float x3 = 0, y3 = 0;
+	std::cerr << "[ERROR] regula_falsi(x1=" << x1 << ",x2=" << x2 << ",y1=" << y1 << ",y2=" << y2 << "): y3 → " << y3 << std::endl;
     x3 = x1 - (x1 - x2) * (y1) / (y1 - y2);
+	std::cerr << "[ERROR] regula_falsi(x1=" << x1 << ",x2=" << x2 << ",y1=" << y1 << ",y2=" << y2 << "): x3 → " << x3 << std::endl;
     y3 = eq(x3);
+	std::cerr << "[WARN] <<< Exiting regula_falsi(x1=" << x1 << ",x2=" << x2 << ",y1=" << y1 << ",y2=" << y2 << ")" << std::endl;
     return regula_falsi(x2, x3, y2, y3);
 }
 
@@ -82,6 +89,7 @@ static float regula_falsi(float x1, float x2, float y1, float y2) {
  * @param count which is count of the root in an interval [-range,range].
  */
 void printRoot(float root, const int16_t &count) {
+	std::cerr << "[ERROR] >>> Entering printRoot(root=" << root << ",count=" << count << ")" << std::endl;
     if (count == 1) {
         std::cout << "Your 1st root is : " << root << std::endl;
     } else if (count == 2) {
@@ -91,6 +99,7 @@ void printRoot(float root, const int16_t &count) {
     } else {
         std::cout << "Your " << count << "th root is : " << root << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting printRoot(root=" << root << ",count=" << count << ")" << std::endl;
 }
 }  // namespace false_position
 }  // namespace numerical_methods
@@ -100,12 +109,16 @@ void printRoot(float root, const int16_t &count) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     float a = 0, b = 0, i = 0, root = 0;
     int16_t count = 0;
+	std::cerr << "[ERROR] main(): b → " << b << std::endl;
     float range =
         100000;       // Range in which we have to find the root. (-range,range)
     float gap = 0.5;  // interval gap. lesser the gap more the accuracy
+		std::cerr << "[ERROR] main(): count → " << count << std::endl;
     a = numerical_methods::false_position::eq((-1) * range);
+		std::cerr << "[ERROR] main(): a → " << a << std::endl;
     i = ((-1) * range + gap);
     // while loop for selecting proper interval in provided range and with
     // provided interval gap.
@@ -124,5 +137,6 @@ int main() {
         a = b;
         i += gap;
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -34,6 +34,7 @@ namespace math {
  * @param num The input number
  */
 uint64_t aliquot_sum(const uint64_t num) {
+	std::cerr << "[ERROR] >>> Entering aliquot_sum(num=" << num << ")" << std::endl;
     if (num == 0 || num == 1) {
         return 0;  // The aliquot sum for 0 and 1 is 0
     }
@@ -46,6 +47,7 @@ uint64_t aliquot_sum(const uint64_t num) {
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting aliquot_sum(num=" << num << ")" << std::endl;
     return sum;
 }
 }  // namespace math
@@ -55,6 +57,7 @@ uint64_t aliquot_sum(const uint64_t num) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Aliquot sum of 10 is 1 + 2 + 5 = 8
     assert(math::aliquot_sum(10) == 8);
     // Aliquot sum of 15 is 1 + 3 + 5 = 9
@@ -65,6 +68,7 @@ static void test() {
     assert(math::aliquot_sum(97) == 1);
 
     std::cout << "All the tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -72,6 +76,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run the self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

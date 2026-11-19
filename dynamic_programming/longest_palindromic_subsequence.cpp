@@ -13,6 +13,7 @@
  * @author [Anjali Jha](https://github.com/anjali1903)
  */
 
+#include "iostream"
 #include <cassert>  /// for assert
 #include <string>   /// for std::string
 #include <vector>   /// for std::vector
@@ -29,8 +30,11 @@ namespace dynamic_programming {
  * @returns longest palindromic subsequence of the string
  */
 std::string lps(const std::string& a) {
+	std::cerr << "[ERROR] >>> Entering lps(a=" << a << ")" << std::endl;
     const auto b = std::string(a.rbegin(), a.rend());
     const auto m = a.length();
+	std::cerr << "[ERROR] lps(a=" << a << "): m → " << m << std::endl;
+	std::cerr << "[ERROR] lps(a=" << a << "): b → " << b << std::endl;
     using ind_type = std::string::size_type;
     std::vector<std::vector<ind_type> > res(m + 1,
                                             std::vector<ind_type>(m + 1));
@@ -75,6 +79,7 @@ std::string lps(const std::string& a) {
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting lps(a=" << a << ")" << std::endl;
     return ans;
 }
 }  // namespace dynamic_programming
@@ -84,10 +89,12 @@ std::string lps(const std::string& a) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     assert(dynamic_programming::lps("radar") == "radar");
     assert(dynamic_programming::lps("abbcbaa") == "abcba");
     assert(dynamic_programming::lps("bbbab") == "bbbb");
     assert(dynamic_programming::lps("") == "");
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -95,6 +102,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // execute the tests
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

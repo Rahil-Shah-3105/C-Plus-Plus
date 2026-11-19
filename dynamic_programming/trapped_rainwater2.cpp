@@ -11,6 +11,7 @@
  * @author [kanavgoyal898](https://github.com/kanavgoyal898)
  */
 
+#include "iostream"
 #include <algorithm>  /// For std::min and std::max
 #include <cassert>    /// For assert
 #include <cstddef>    /// For std::size_t
@@ -67,6 +68,7 @@ uint32_t trappedRainwater(const std::vector<uint32_t>& heights) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<uint32_t> test_basic = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
     assert(dynamic_programming::trappedRainwater(test_basic) == 6);
 
@@ -99,6 +101,7 @@ static void test() {
                                                                  7, 1, 8};
     assert(dynamic_programming::trappedRainwater(
                test_large_elevation_map_difference) == 15);
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -106,6 +109,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

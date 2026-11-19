@@ -43,8 +43,10 @@ using std::vector;
  */
 template <typename S, typename T, typename E>
 bool sortcol(tuple<S, T, E>& t1, tuple<S, T, E>& t2) {
+	std::cerr << "[ERROR] >>> Entering sortcol(t1=" << t1 << ",t2=" << t2 << ")" << std::endl;
     if (get<1>(t1) < get<1>(t2) ||
         (get<1>(t1) == get<1>(t2) && get<0>(t1) < get<0>(t2))) {
+	std::cerr << "[WARN] <<< Exiting sortcol(t1=" << t1 << ",t2=" << t2 << ")" << std::endl;
         return true;
     }
     return false;
@@ -125,6 +127,7 @@ class SJF {
      *
      */
     void addProcess(S id, T arrival, E burst) {
+		std::cerr << "[ERROR] >>> Entering addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
         // Add if a process with process ID as id is not found in idList.
         if (idList.find(id) == idList.end()) {
             tuple<S, T, E, double, double, double> t =
@@ -132,6 +135,7 @@ class SJF {
             schedule.push(t);
             idList.insert(id);
         }
+		std::cerr << "[WARN] <<< Exiting addProcess(id=" << id << ",arrival=" << arrival << ",burst=" << burst << ")" << std::endl;
     }
 
     /**
@@ -265,6 +269,7 @@ vector<tuple<S, T, E, double, double, double>> get_final_status(
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // A vector to store the results of all processes across all test cases.
     vector<tuple<uint32_t, uint32_t, uint32_t, double, double, double>>
         finalResult;
@@ -275,6 +280,7 @@ static void test() {
         std::uniform_int_distribution<> distr(1, 10);
 
         uint32_t n = distr(eng);
+		std::cerr << "[ERROR] test(): n → " << n << std::endl;
         SJF<uint32_t, uint32_t, uint32_t> readyQueue;
         vector<tuple<uint32_t, uint32_t, uint32_t, double, double, double>>
             input(n);
@@ -304,6 +310,7 @@ static void test() {
         readyQueue.printResult(finalResult);
     }
     cout << "All the tests have successfully passed!" << endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -311,6 +318,8 @@ static void test() {
  * @returns 0 on successful exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

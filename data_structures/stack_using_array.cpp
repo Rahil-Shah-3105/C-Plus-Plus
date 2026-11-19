@@ -46,11 +46,14 @@ class Stack {
      * @param element Element to push onto the stack
      */
     void push(T element) {
+		std::cerr << "[ERROR] >>> Entering push(element=" << element << ")" << std::endl;
         if (full()) {
+			std::cerr << "[ERROR] Throwing std from push(element=" << element << ")" << std::endl;
             throw std::out_of_range("Stack overflow");
         } else {
             stack[++stackIndex] = element;
         }
+		std::cerr << "[WARN] <<< Exiting push(element=" << element << ")" << std::endl;
     }
 
     /**
@@ -60,9 +63,12 @@ class Stack {
      * @throws std::out_of_range if the stack is empty
      */
     T pop() {
+		std::cerr << "[ERROR] >>> Entering pop()" << std::endl;
         if (empty()) {
+			std::cerr << "[ERROR] Throwing std from pop()" << std::endl;
             throw std::out_of_range("Stack underflow");
         }
+		std::cerr << "[WARN] <<< Exiting pop()" << std::endl;
         return stack[stackIndex--];
     }
 
@@ -70,9 +76,11 @@ class Stack {
      * @brief Displays all elements in the stack
      */
     void show() const {
+		std::cerr << "[ERROR] >>> Entering show()" << std::endl;
         for (int i = 0; i <= stackIndex; i++) {
             std::cout << stack[i] << "\n";
         }
+		std::cerr << "[WARN] <<< Exiting show()" << std::endl;
     }
 
     /**
@@ -82,9 +90,12 @@ class Stack {
      * @throws std::out_of_range if the stack is empty
      */
     T topmost() const {
+		std::cerr << "[ERROR] >>> Entering topmost()" << std::endl;
         if (empty()) {
+			std::cerr << "[ERROR] Throwing std from topmost()" << std::endl;
             throw std::out_of_range("Stack underflow");
         }
+		std::cerr << "[WARN] <<< Exiting topmost()" << std::endl;
         return stack[stackIndex];
     }
 
@@ -95,9 +106,12 @@ class Stack {
      * @throws std::out_of_range if the stack is empty
      */
     T bottom() const {
+		std::cerr << "[ERROR] >>> Entering bottom()" << std::endl;
         if (empty()) {
+			std::cerr << "[ERROR] Throwing std from bottom()" << std::endl;
             throw std::out_of_range("Stack underflow");
         }
+		std::cerr << "[WARN] <<< Exiting bottom()" << std::endl;
         return stack[0];
     }
 };
@@ -108,6 +122,7 @@ class Stack {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     data_structures::Stack<int> stack(5);
 
     // Test empty and full operations
@@ -130,6 +145,7 @@ static void test() {
     try {
         stack.push(60);
     } catch (const std::out_of_range& e) {
+		std::cerr << "[ERROR] Exception in test(): " << e.what() << std::endl;
         assert(std::string(e.what()) == "Stack overflow");
     }
 
@@ -166,6 +182,7 @@ static void test() {
     } catch (const std::out_of_range& e) {
         assert(std::string(e.what()) == "Stack underflow");
     }
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -173,7 +190,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
     std::cout << "All tests passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

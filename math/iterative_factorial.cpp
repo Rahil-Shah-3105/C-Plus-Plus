@@ -45,7 +45,9 @@ namespace math {
  * returns 1.419e+19, which is not 21! but (21! % UINT64_MAX).
  */
 uint64_t iterativeFactorial(uint8_t n) {
+	std::cerr << "[ERROR] >>> Entering iterativeFactorial(n=" << n << ")" << std::endl;
     if (n > 20) {
+		std::cerr << "[ERROR] Throwing std from iterativeFactorial(n=" << n << ")" << std::endl;
         throw std::invalid_argument("Maximum n value is 20");
     }
 
@@ -57,6 +59,7 @@ uint64_t iterativeFactorial(uint8_t n) {
         --n;
     }
 
+	std::cerr << "[WARN] <<< Exiting iterativeFactorial(n=" << n << ")" << std::endl;
     return accumulator;
 }
 
@@ -67,6 +70,7 @@ uint64_t iterativeFactorial(uint8_t n) {
  * @note There is 1 special case: 0! = 1.
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Special case test
     std::cout << "Exception case test \n"
                  "Input: 0 \n"
@@ -107,10 +111,12 @@ static void test() {
         math::iterativeFactorial(21);
     } catch (const std::invalid_argument&) {
         wasExceptionThrown = true;
+		std::cerr << "[ERROR] test(): wasExceptionThrown → " << wasExceptionThrown << std::endl;
     }
     assert(wasExceptionThrown);
 
     std::cout << "All tests have passed successfully.\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -118,6 +124,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // Run self-test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

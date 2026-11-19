@@ -27,6 +27,8 @@ namespace math {
  */
 template <typename T>
 T square_area(T length) {
+	std::cerr << "[ERROR] >>> Entering square_area(length=" << length << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting square_area(length=" << length << ")" << std::endl;
     return length * length;
 }
 
@@ -38,6 +40,8 @@ T square_area(T length) {
  */
 template <typename T>
 T rect_area(T length, T width) {
+	std::cerr << "[ERROR] >>> Entering rect_area(length=" << length << ",width=" << width << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting rect_area(length=" << length << ",width=" << width << ")" << std::endl;
     return length * width;
 }
 
@@ -50,6 +54,8 @@ T rect_area(T length, T width) {
  */
 template <typename T>
 T triangle_area(T base, T height) {
+	std::cerr << "[ERROR] >>> Entering triangle_area(base=" << base << ",height=" << height << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting triangle_area(base=" << base << ",height=" << height << ")" << std::endl;
     return base * height / 2;
 }
 
@@ -61,6 +67,8 @@ T triangle_area(T base, T height) {
  */
 template <typename T>
 T circle_area(T radius) {
+	std::cerr << "[ERROR] >>> Entering circle_area(radius=" << radius << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting circle_area(radius=" << radius << ")" << std::endl;
     return M_PI * pow(radius, 2);
 }
 
@@ -73,6 +81,8 @@ T circle_area(T radius) {
  */
 template <typename T>
 T parallelogram_area(T base, T height) {
+	std::cerr << "[ERROR] >>> Entering parallelogram_area(base=" << base << ",height=" << height << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting parallelogram_area(base=" << base << ",height=" << height << ")" << std::endl;
     return base * height;
 }
 
@@ -84,6 +94,8 @@ T parallelogram_area(T base, T height) {
  */
 template <typename T>
 T cube_surface_area(T length) {
+	std::cerr << "[ERROR] >>> Entering cube_surface_area(length=" << length << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting cube_surface_area(length=" << length << ")" << std::endl;
     return 6 * length * length;
 }
 
@@ -95,6 +107,8 @@ T cube_surface_area(T length) {
  */
 template <typename T>
 T sphere_surface_area(T radius) {
+	std::cerr << "[ERROR] >>> Entering sphere_surface_area(radius=" << radius << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting sphere_surface_area(radius=" << radius << ")" << std::endl;
     return 4 * M_PI * pow(radius, 2);
 }
 
@@ -107,6 +121,8 @@ T sphere_surface_area(T radius) {
  */
 template <typename T>
 T cylinder_surface_area(T radius, T height) {
+	std::cerr << "[ERROR] >>> Entering cylinder_surface_area(radius=" << radius << ",height=" << height << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting cylinder_surface_area(radius=" << radius << ",height=" << height << ")" << std::endl;
     return 2 * M_PI * radius * height + 2 * M_PI * pow(radius, 2);
 }
 
@@ -119,6 +135,8 @@ T cylinder_surface_area(T radius, T height) {
  */
 template <typename T>
 T hemi_sphere_surface_area(T radius) {
+	std::cerr << "[ERROR] >>> Entering hemi_sphere_surface_area(radius=" << radius << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting hemi_sphere_surface_area(radius=" << radius << ")" << std::endl;
     return 3 * M_PI * pow(radius, 2);
 }
 }  // namespace math
@@ -128,24 +146,40 @@ T hemi_sphere_surface_area(T radius) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // I/O variables for testing
     uint16_t int_length = 0;    // 16 bit integer length input
+	std::cerr << "[ERROR] test(): int_length → " << int_length << std::endl;
     uint16_t int_width = 0;     // 16 bit integer width input
+	std::cerr << "[ERROR] test(): int_width → " << int_width << std::endl;
     uint16_t int_base = 0;      // 16 bit integer base input
+	std::cerr << "[ERROR] test(): int_base → " << int_base << std::endl;
     uint16_t int_height = 0;    // 16 bit integer height input
+	std::cerr << "[ERROR] test(): int_height → " << int_height << std::endl;
     uint16_t int_expected = 0;  // 16 bit integer expected output
+	std::cerr << "[ERROR] test(): int_expected → " << int_expected << std::endl;
     uint16_t int_area = 0;      // 16 bit integer output
+	std::cerr << "[ERROR] test(): int_area → " << int_area << std::endl;
 
     float float_length = NAN;    // float length input
+	std::cerr << "[ERROR] test(): float_length → " << float_length << std::endl;
     float float_expected = NAN;  // float expected output
+	std::cerr << "[ERROR] test(): float_expected → " << float_expected << std::endl;
     float float_area = NAN;      // float output
+	std::cerr << "[ERROR] test(): float_area → " << float_area << std::endl;
 
     double double_length = NAN;    // double length input
+	std::cerr << "[ERROR] test(): double_length → " << double_length << std::endl;
     double double_width = NAN;     // double width input
+	std::cerr << "[ERROR] test(): double_width → " << double_width << std::endl;
     double double_radius = NAN;    // double radius input
+	std::cerr << "[ERROR] test(): double_radius → " << double_radius << std::endl;
     double double_height = NAN;    // double height input
+	std::cerr << "[ERROR] test(): double_height → " << double_height << std::endl;
     double double_expected = NAN;  // double expected output
+	std::cerr << "[ERROR] test(): double_expected → " << double_expected << std::endl;
     double double_area = NAN;      // double output
+	std::cerr << "[ERROR] test(): double_area → " << double_area << std::endl;
 
     // 1st test
     int_length = 5;
@@ -291,6 +325,7 @@ static void test() {
     std::cout << "Output: " << double_area << std::endl;
     assert(double_area == double_expected);
     std::cout << "TEST PASSED" << std::endl << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -298,6 +333,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

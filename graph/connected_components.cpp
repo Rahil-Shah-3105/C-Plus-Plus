@@ -91,6 +91,7 @@ int getConnectedComponents(const std::vector<std::vector<int>> *adj) {
 
 /** Function to test the algorithm */
 void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     std::cout << "Running predefined tests..." << std::endl;
     std::cout << "Initiating Test 1..." << std::endl;
     std::vector<std::vector<int>> adj1(9, std::vector<int>());
@@ -121,14 +122,17 @@ void tests() {
 
     assert(graph::getConnectedComponents(&adj2) == 2);
     std::cout << "Test 2 Passed..." << std::endl;
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     /// running predefined tests
     tests();
 
     int vertices = int(), edges = int();
+	std::cerr << "[ERROR] main(): vertices → " << vertices << std::endl;
     std::cout << "Enter the number of vertices : ";
     std::cin >> vertices;
     std::cout << "Enter the number of edges : ";
@@ -137,12 +141,15 @@ int main() {
     std::vector<std::vector<int>> adj(vertices, std::vector<int>());
 
     int u = int(), v = int();
+	std::cerr << "[ERROR] main(): u → " << u << std::endl;
     while (edges--) {
         std::cin >> u >> v;
         graph::addEdge(&adj, u, v);
     }
 
     int cc = graph::getConnectedComponents(&adj);
+	std::cerr << "[ERROR] main(): cc → " << cc << std::endl;
     std::cout << cc << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

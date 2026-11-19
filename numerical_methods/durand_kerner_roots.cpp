@@ -76,10 +76,12 @@ std::complex<double> poly_function(const std::valarray<double> &coeffs,
  */
 const char *complex_str(const std::complex<double> &x) {
 #define MAX_BUFF_SIZE 50
+	std::cerr << "[ERROR] >>> Entering complex_str(x=" << x << ")" << std::endl;
     static char msg[MAX_BUFF_SIZE];
 
     std::snprintf(msg, MAX_BUFF_SIZE, "% 7.04g%+7.04gj", x.real(), x.imag());
 
+	std::cerr << "[WARN] <<< Exiting complex_str(x=" << x << ")" << std::endl;
     return msg;
 }
 
@@ -90,10 +92,12 @@ const char *complex_str(const std::complex<double> &x) {
  * \returns `true` if termination reached
  */
 bool check_termination(long double delta) {
+	std::cerr << "[ERROR] >>> Entering check_termination(delta=" << delta << ")" << std::endl;
     static long double past_delta = INFINITY;
     if (std::abs(past_delta - delta) <= ACCURACY || delta < ACCURACY)
         return true;
     past_delta = delta;
+	std::cerr << "[WARN] <<< Exiting check_termination(delta=" << delta << ")" << std::endl;
     return false;
 }
 
@@ -206,6 +210,7 @@ std::pair<uint32_t, double> durand_kerner_algo(
  * roots are \f$0 \pm 2i\f$
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     const std::valarray<double> coeffs = {1, 0, 4};  // x^2 - 2 = 0
     std::valarray<std::complex<double>> roots(2);
     std::valarray<std::complex<double>> expected = {
@@ -234,6 +239,7 @@ void test1() {
     std::cout << "Test 1 passed! - " << result.first << " iterations, "
               << result.second << " accuracy"
               << "\n";
+			std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -241,6 +247,7 @@ void test1() {
  * which the roots are \f$(4+0i),\,(-2\pm3.464i)\f$
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     const std::valarray<double> coeffs = {// 0.015625 x^3 - 1 = 0
                                           1. / 64., 0., 0., -1.};
     std::valarray<std::complex<double>> roots(3);
@@ -270,6 +277,7 @@ void test2() {
     std::cout << "Test 2 passed! - " << result.first << " iterations, "
               << result.second << " accuracy"
               << "\n";
+			std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 
 /***
@@ -282,6 +290,7 @@ void test2() {
  * will find roots of the polynomial \f$1\cdot x^2 + 0\cdot x^1 + (-4)=0\f$
  **/
 int main(int argc, char **argv) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     /* initialize random seed: */
     std::srand(std::time(nullptr));
 
@@ -327,6 +336,8 @@ int main(int argc, char **argv) {
     clock_t end_time, start_time = clock();
     auto result = durand_kerner_algo(coeffs, &s0, true);
     end_time = clock();
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): end_time → " << end_time << std::endl;
+	std::cerr << "[DEBUG] main(argc=" << argc << ",argv=" << argv << "): end_time → " << end_time << std::endl;
 
     std::cout << "\nIterations: " << result.first << "\n";
     for (n = 0; n < degree - 1; n++)
@@ -336,5 +347,6 @@ int main(int argc, char **argv) {
               << static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC
               << " sec\n";
 
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

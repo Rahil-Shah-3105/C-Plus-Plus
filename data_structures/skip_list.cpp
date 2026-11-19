@@ -42,10 +42,12 @@ struct Node {
      * @param level is the maximum level node's going to added
      */
     Node(int key, int level, void* value = nullptr) : key(key), value(value) {
+		std::cerr << "[ERROR] >>> Entering Node(key=" << key << ",level=" << level << ",value=" << value << ")" << std::endl;
         // Initialization of forward vector
         for (int i = 0; i < (level + 1); i++) {
             forward.push_back(nullptr);
         }
+		std::cerr << "[WARN] <<< Exiting Node(key=" << key << ",level=" << level << ",value=" << value << ")" << std::endl;
     }
 };
 
@@ -62,9 +64,12 @@ class SkipList {
      * Node for searching in the list
      */
     SkipList() {
+		std::cerr << "[ERROR] >>> Entering SkipList()" << std::endl;
         level = 0;
         // Header initialization
+		std::cerr << "[DEBUG] SkipList(): level → " << level << std::endl;
         header = std::make_shared<Node>(-1, MAX_LEVEL);
+		std::cerr << "[ERROR] SkipList(): header → " << header << std::endl;
     }
 
     /**
@@ -73,11 +78,13 @@ class SkipList {
      * @return random level for skip list
      */
     int randomLevel() {
+		std::cerr << "[ERROR] >>> Entering randomLevel()" << std::endl;
         int lvl = 0;
         while (static_cast<float>(std::rand()) / RAND_MAX < PROBABILITY &&
                lvl < MAX_LEVEL) {
             lvl++;
         }
+		std::cerr << "[WARN] <<< Exiting randomLevel()" << std::endl;
         return lvl;
     }
 
@@ -88,6 +95,7 @@ class SkipList {
      * @param value pointer to a value, that can be any type
      */
     void insertElement(int key, void* value) {
+		std::cerr << "[ERROR] >>> Entering insertElement(key=" << key << ",value=" << value << ")" << std::endl;
         std::cout << "Inserting" << key << "...";
         std::shared_ptr<Node> x = header;
         std::array<std::shared_ptr<Node>, MAX_LEVEL + 1> update;
@@ -96,6 +104,7 @@ class SkipList {
         for (int i = level; i >= 0; i--) {
             while (x->forward[i] != nullptr && x->forward[i]->key < key) {
                 x = x->forward[i];
+				std::cerr << "[ERROR] insertElement(key=" << key << ",value=" << value << "): x → " << x << std::endl;
             }
             update[i] = x;
         }
@@ -103,14 +112,17 @@ class SkipList {
         x = x->forward[0];
 
         bool doesnt_exist = (x == nullptr || x->key != key);
+		std::cerr << "[ERROR] insertElement(key=" << key << ",value=" << value << "): doesnt_exist → " << doesnt_exist << std::endl;
         if (doesnt_exist) {
             int rlevel = randomLevel();
+			std::cerr << "[ERROR] insertElement(key=" << key << ",value=" << value << "): rlevel → " << rlevel << std::endl;
 
             if (rlevel > level) {
                 for (int i = level + 1; i < rlevel + 1; i++) update[i] = header;
 
                 // Update current level
                 level = rlevel;
+				std::cerr << "[DEBUG] insertElement(key=" << key << ",value=" << value << "): level → " << level << std::endl;
             }
 
             std::shared_ptr<Node> n =
@@ -124,6 +136,7 @@ class SkipList {
         } else {
             std::cout << "Exists" << std::endl;
         }
+		std::cerr << "[WARN] <<< Exiting insertElement(key=" << key << ",value=" << value << ")" << std::endl;
     }
 
     /**
@@ -131,6 +144,7 @@ class SkipList {
      * @param key is number that is used for comparision.
      */
     void deleteElement(int key) {
+		std::cerr << "[ERROR] >>> Entering deleteElement(key=" << key << ")" << std::endl;
         std::shared_ptr<Node> x = header;
 
         std::array<std::shared_ptr<Node>, MAX_LEVEL + 1> update;
@@ -139,6 +153,7 @@ class SkipList {
         for (int i = level; i >= 0; i--) {
             while (x->forward[i] != nullptr && x->forward[i]->key < key) {
                 x = x->forward[i];
+				std::cerr << "[ERROR] deleteElement(key=" << key << "): x → " << x << std::endl;
             }
             update[i] = x;
         }
@@ -146,6 +161,7 @@ class SkipList {
         x = x->forward[0];
 
         bool doesnt_exist = (x == nullptr || x->key != key);
+		std::cerr << "[ERROR] deleteElement(key=" << key << "): doesnt_exist → " << doesnt_exist << std::endl;
 
         if (!doesnt_exist) {
             for (int i = 0; i <= level; i++) {
@@ -160,6 +176,7 @@ class SkipList {
         } else {
             std::cout << "Doesn't exist" << std::endl;
         }
+		std::cerr << "[WARN] <<< Exiting deleteElement(key=" << key << ")" << std::endl;
     }
 
     /**
@@ -168,6 +185,7 @@ class SkipList {
      * @return pointer to the value of the node
      */
     void* searchElement(int key) {
+		std::cerr << "[ERROR] >>> Entering searchElement(key=" << key << ")" << std::endl;
         std::shared_ptr<Node> x = header;
         std::cout << "Searching for " << key << std::endl;
 
@@ -176,11 +194,13 @@ class SkipList {
         }
 
         x = x->forward[0];
+		std::cerr << "[ERROR] searchElement(key=" << key << "): x → " << x << std::endl;
         if (x && x->key == key) {
             std::cout << "Found" << std::endl;
             return x->value;
         } else {
             std::cout << "Not Found" << std::endl;
+		std::cerr << "[WARN] <<< Exiting searchElement(key=" << key << ")" << std::endl;
             return nullptr;
         }
     }
@@ -189,6 +209,7 @@ class SkipList {
      * Display skip list level
      */
     void displayList() {
+		std::cerr << "[ERROR] >>> Entering displayList()" << std::endl;
         std::cout << "Displaying list:\n";
         for (int i = 0; i <= level; i++) {
             std::shared_ptr<Node> node = header->forward[i];
@@ -196,9 +217,11 @@ class SkipList {
             while (node != nullptr) {
                 std::cout << node->key << " ";
                 node = node->forward[i];
+				std::cerr << "[ERROR] displayList(): node → " << node << std::endl;
             }
             std::cout << std::endl;
         }
+		std::cerr << "[WARN] <<< Exiting displayList()" << std::endl;
     }
 };
 
@@ -210,6 +233,7 @@ class SkipList {
  * elements into the skip lists and than displays it
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));
 
     data_structures::SkipList lst;
@@ -221,5 +245,6 @@ int main() {
 
     lst.displayList();
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

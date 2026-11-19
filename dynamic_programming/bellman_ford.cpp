@@ -18,26 +18,34 @@ class Graph {
 
     // Constructs a graph with V vertices and E edges
     Graph(int V, int E) {
+		std::cerr << "[ERROR] >>> Entering Graph(V=" << V << ",E=" << E << ")" << std::endl;
         this->vertexNum = V;
         this->edgeNum = E;
         this->edges.reserve(E);
+		std::cerr << "[WARN] <<< Exiting Graph(V=" << V << ",E=" << E << ")" << std::endl;
     }
 
     // Adds the given edge to the graph
     void addEdge(int src, int dst, int weight) {
+		std::cerr << "[ERROR] >>> Entering addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
         static int edgeInd = 0;
         if (edgeInd < this->edgeNum) {
             Edge newEdge;
             newEdge.src = src;
+			std::cerr << "[DEBUG] addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << "): newEdge.src → " << newEdge.src << std::endl;
             newEdge.dst = dst;
+			std::cerr << "[DEBUG] addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << "): newEdge.dst → " << newEdge.dst << std::endl;
             newEdge.weight = weight;
+			std::cerr << "[DEBUG] addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << "): newEdge.weight → " << newEdge.weight << std::endl;
             this->edges[edgeInd++] = newEdge;
         }
+		std::cerr << "[WARN] <<< Exiting addEdge(src=" << src << ",dst=" << dst << ",weight=" << weight << ")" << std::endl;
     }
 };
 
 // Utility function to print distances
 void print(const std::vector<int>& dist, int V) {
+	std::cerr << "[ERROR] >>> Entering print(dist.size()=" << dist.size() << ",V=" << V << ")" << std::endl;
     cout << "\nVertex  Distance" << endl;
     for (int i = 0; i < V; i++) {
         if (dist[i] != INT_MAX)
@@ -45,6 +53,7 @@ void print(const std::vector<int>& dist, int V) {
         else
             cout << i << "\tINF" << endl;
     }
+	std::cerr << "[WARN] <<< Exiting print(dist.size()=" << dist.size() << ",V=" << V << ")" << std::endl;
 }
 
 // The main function that finds the shortest path from given source
@@ -94,6 +103,7 @@ void BellmanFord(Graph graph, int src) {
 
 // Driver Function
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int V, E, gsrc;
     int src, dst, weight;
     cout << "Enter number of vertices: ";
@@ -114,5 +124,6 @@ int main() {
     cin >> gsrc;
     BellmanFord(G, gsrc);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

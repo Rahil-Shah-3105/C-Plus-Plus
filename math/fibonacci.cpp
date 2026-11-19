@@ -30,6 +30,7 @@ namespace fibonacci {
  * @returns n-th element of the Fibonacci's sequence
  */
 uint64_t fibonacci(uint64_t n) {
+	std::cerr << "[ERROR] >>> Entering fibonacci(n=" << n << ")" << std::endl;
     // If the input is 0 or 1 just return the same (Base Case)
     // This will set the first 2 values of the sequence
     if (n <= 1) {
@@ -37,6 +38,7 @@ uint64_t fibonacci(uint64_t n) {
     }
 
     // Add the preceding 2 values of the sequence to get next
+	std::cerr << "[WARN] <<< Exiting fibonacci(n=" << n << ")" << std::endl;
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 }  // namespace fibonacci
@@ -47,6 +49,7 @@ uint64_t fibonacci(uint64_t n) {
  * @returns `void`
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     assert(math::fibonacci::fibonacci(0) == 0);
     assert(math::fibonacci::fibonacci(1) == 1);
     assert(math::fibonacci::fibonacci(2) == 1);
@@ -55,6 +58,7 @@ static void test() {
     assert(math::fibonacci::fibonacci(15) == 610);
     assert(math::fibonacci::fibonacci(20) == 6765);
     std::cout << "All tests have passed successfully!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -62,6 +66,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

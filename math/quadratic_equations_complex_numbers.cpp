@@ -120,6 +120,7 @@ void assertArray(std::array<std::complex<long double>, 2> input,
  * complex, complex and equal.
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Values are equal and real.
     std::cout << "Input: \n"
                  "a=1 \n"
@@ -175,8 +176,10 @@ static void test() {
     try {
         math::quadraticEquation(0, 0, 0);
     } catch (std::invalid_argument& e) {
+		std::cerr << "[ERROR] Exception in test(): " << e.what() << std::endl;
         std::cout << "Exception thrown successfully \n";
     }
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -184,6 +187,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // Run self-test implementation.
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -14,6 +14,7 @@
 #include <vector>
 
 bool NumericSort(std::string a, std::string b) {
+	std::cerr << "[ERROR] >>> Entering NumericSort(a=" << a << ",b=" << b << ")" << std::endl;
     while (a[0] == '0') {
         a.erase(a.begin());
     }
@@ -21,13 +22,16 @@ bool NumericSort(std::string a, std::string b) {
         b.erase(b.begin());
     }
     int n = a.length();
+	std::cerr << "[ERROR] NumericSort(a=" << a << ",b=" << b << "): n → " << n << std::endl;
     int m = b.length();
+	std::cerr << "[ERROR] NumericSort(a=" << a << ",b=" << b << "): m → " << m << std::endl;
     if (n == m)
         return a < b;
     return n < m;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int n;
     std::cout << "Enter number of elements to be sorted Numerically\n";
     std::cin >> n;
@@ -51,5 +55,6 @@ int main() {
         std::cout << v[i] << " ";
     }
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

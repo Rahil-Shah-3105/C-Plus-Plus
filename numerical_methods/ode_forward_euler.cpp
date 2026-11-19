@@ -187,10 +187,12 @@ void save_exact_solution(const double &X0, const double &X_MAX,
  * Main Function
  */
 int main(int argc, char *argv[]) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     double X0 = 0.f;                    /* initial value of x0 */
     double X_MAX = 10.F;                /* upper limit of integration */
     std::valarray<double> Y0{1.f, 0.f}; /* initial value Y = y(x = x_0) */
     double step_size = NAN;
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): step_size → " << step_size << std::endl;
 
     if (argc == 1) {
         std::cout << "\nEnter the step size: ";
@@ -202,10 +204,12 @@ int main(int argc, char *argv[]) {
 
     // get approximate solution
     double total_time = forward_euler(step_size, X0, X_MAX, &Y0, true);
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): total_time → " << total_time << std::endl;
     std::cout << "\tTime = " << total_time << " ms\n";
 
     /* compute exact solution for comparion */
     save_exact_solution(X0, X_MAX, step_size, Y0);
 
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

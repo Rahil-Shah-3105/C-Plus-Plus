@@ -10,6 +10,7 @@
  * and store in a list
  */
 std::vector<int> primes(size_t max) {
+	std::cerr << "[ERROR] >>> Entering primes(max=" << max << ")" << std::endl;
     std::vector<int> res;
     std::vector<bool> is_not_prime(max + 1, false);
     for (size_t i = 2; i <= max; i++) {
@@ -27,15 +28,19 @@ std::vector<int> primes(size_t max) {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting primes(max=" << max << ")" << std::endl;
     return res;
 }
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::cout << "Calculate primes up to:\n>> ";
     int n = 0;
     std::cin >> n;
     std::vector<int> ans = primes(n);
+	std::cerr << "[ERROR] main(): ans.size() → " << ans.size() << std::endl;
     for (int p : ans) std::cout << p << ' ';
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

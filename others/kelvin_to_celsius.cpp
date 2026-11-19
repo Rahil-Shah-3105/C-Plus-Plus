@@ -38,6 +38,8 @@ namespace others {
  * otherwise
  */
 bool are_almost_equal(double a, double b, double absolute_tolerance = 0.0001) {
+	std::cerr << "[ERROR] >>> Entering are_almost_equal(a=" << a << ",b=" << b << ",absolute_tolerance=" << absolute_tolerance << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting are_almost_equal(a=" << a << ",b=" << b << ",absolute_tolerance=" << absolute_tolerance << ")" << std::endl;
     return std::abs(a - b) < absolute_tolerance;
 }
 
@@ -47,10 +49,13 @@ bool are_almost_equal(double a, double b, double absolute_tolerance = 0.0001) {
  * @returns the Kelvin number converted to Celsius
  */
 double kelvin_to_celsius(double temperature_in_k) {
+	std::cerr << "[ERROR] >>> Entering kelvin_to_celsius(temperature_in_k=" << temperature_in_k << ")" << std::endl;
     const double absolute_zero_in_c = -273.15;
     if (temperature_in_k < absolute_zero_in_c) {
+		std::cerr << "[ERROR] Throwing std from kelvin_to_celsius(temperature_in_k=" << temperature_in_k << ")" << std::endl;
         throw std::invalid_argument("input temperature below absolute zero");
     }
+	std::cerr << "[WARN] <<< Exiting kelvin_to_celsius(temperature_in_k=" << temperature_in_k << ")" << std::endl;
     return temperature_in_k + absolute_zero_in_c;
 }
 }  // namespace others
@@ -60,6 +65,7 @@ double kelvin_to_celsius(double temperature_in_k) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     assert(others::are_almost_equal(others::kelvin_to_celsius(230), -43.15));
     assert(others::are_almost_equal(others::kelvin_to_celsius(512), 238.85));
     assert(others::are_almost_equal(others::kelvin_to_celsius(55), -218.15));
@@ -69,6 +75,7 @@ static void tests() {
     assert(others::are_almost_equal(others::kelvin_to_celsius(273.15), 0));
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -76,6 +83,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

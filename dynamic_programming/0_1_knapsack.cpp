@@ -94,6 +94,7 @@ int maxKnapsackValue(const int capacity, const std::array<int, n> &weight,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test 1
     const int n1 = 3;                             // number of items
     std::array<int, n1> weight1 = {10, 20, 30};   // weight of each item
@@ -117,6 +118,7 @@ static void test() {
     assert(max_value2 == expected_max_value2);
     std::cout << "Maximum Knapsack value with " << n2 << " items is "
               << max_value2 << std::endl;
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -124,7 +126,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Testing
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -68,9 +68,11 @@ void generate_parentheses::makeStrings(std::string str, int n,
  * @return all well-formed pattern of parentheses
  */
 std::vector<std::string> generate_parentheses::generate(int n) {
+	std::cerr << "[ERROR] >>> Entering generate_parentheses::generate(n=" << n << ")" << std::endl;
     backtracking::generate_parentheses::res.clear();
     std::string str = "(";
     generate_parentheses::makeStrings(str, n, 0, 1);
+	std::cerr << "[WARN] <<< Exiting generate_parentheses::generate(n=" << n << ")" << std::endl;
     return res;
 }
 }  // namespace backtracking
@@ -80,11 +82,15 @@ std::vector<std::string> generate_parentheses::generate(int n) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     int n = 0;
     std::vector<std::string> patterns;
     backtracking::generate_parentheses p;
 
     n = 1;
+	std::cerr << "[ERROR] test(): n → " << n << std::endl;
+	std::cerr << "[ERROR] test(): patterns.size() → " << patterns.size() << std::endl;
+	std::cerr << "[DEBUG] test(): patterns.size() → " << patterns.size() << std::endl;
     patterns = {{"()"}};
     assert(p.generate(n) == patterns);
 
@@ -101,6 +107,7 @@ static void test() {
     assert(p.generate(n) == patterns);
 
     std::cout << "All tests passed\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -108,6 +115,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

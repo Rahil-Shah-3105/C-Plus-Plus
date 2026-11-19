@@ -71,10 +71,12 @@ namespace random_pivot_quick_sort {
  * */
 template <size_t T>
 void showArray(std::array<int64_t, T> arr) {
+	std::cerr << "[ERROR] >>> Entering showArray(arr.size()=" << arr.size() << ")" << std::endl;
     for (int64_t i = 0; i < arr.size(); i++) {
         std::cout << arr[i] << " ";
     }
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting showArray(arr.size()=" << arr.size() << ")" << std::endl;
 }
 
 /**
@@ -86,8 +88,12 @@ void showArray(std::array<int64_t, T> arr) {
  * @returns int64_t A random number between start and end index.
  * */
 int64_t getRandomIndex(int64_t start, int64_t end) {
+	std::cerr << "[ERROR] >>> Entering getRandomIndex(start=" << start << ",end=" << end << ")" << std::endl;
+    std::cerr << "[ERROR] >>> Entering getRandomIndex(start=" << start << ",end=" << end << ")" << std::endl;
     srand(time(nullptr));  // Initialize random number generator.
     int64_t randomPivotIndex = start + rand() % (end - start + 1);
+	std::cerr << "[ERROR] getRandomIndex(start=" << start << ",end=" << end << "): randomPivotIndex → " << randomPivotIndex << std::endl;
+	std::cerr << "[WARN] <<< Exiting getRandomIndex(start=" << start << ",end=" << end << ")" << std::endl;
     return randomPivotIndex;
 }
 
@@ -187,8 +193,10 @@ class TestCases {
      * */
     template <typename T>
     void log(T msg) {
+		std::cerr << "[ERROR] >>> Entering log(msg=" << msg << ")" << std::endl;
         // It's just to avoid writing cout and endl
         std::cout << "[TESTS] : ---> " << msg << std::endl;
+		std::cerr << "[WARN] <<< Exiting log(msg=" << msg << ")" << std::endl;
     }
 
  public:
@@ -197,6 +205,7 @@ class TestCases {
      * @returns void
      * */
     void runTests() {
+		std::cerr << "[ERROR] >>> Entering runTests()" << std::endl;
         log("Running Tests...");
 
         testCase_1();
@@ -205,6 +214,7 @@ class TestCases {
 
         log("Test Cases over!");
         std::cout << std::endl;
+		std::cerr << "[WARN] <<< Exiting runTests()" << std::endl;
     }
 
     /**
@@ -212,6 +222,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_1() {
+		std::cerr << "[ERROR] >>> Entering testCase_1()" << std::endl;
         const int64_t inputSize = 1;
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             "~");
@@ -222,6 +233,7 @@ class TestCases {
 
         int64_t start = 0;
         int64_t end = unsorted_arr.size() - 1;  // length - 1
+		std::cerr << "[ERROR] testCase_1(): end → " << end << std::endl;
 
         log("Running algorithm of data of length 50 ...");
         std::array<int64_t, unsorted_arr.size()> sorted_arr =
@@ -236,6 +248,7 @@ class TestCases {
         log("[PASS] : TEST CASE 1 PASS!");
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             "~");
+			std::cerr << "[WARN] <<< Exiting testCase_1()" << std::endl;
     }
 
     /**
@@ -243,6 +256,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_2() {
+		std::cerr << "[ERROR] >>> Entering testCase_2()" << std::endl;
         const int64_t inputSize = 500;
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             "~");
@@ -255,6 +269,7 @@ class TestCases {
 
         int64_t start = 0;
         int64_t end = unsorted_arr.size() - 1;  // length - 1
+		std::cerr << "[ERROR] testCase_2(): end → " << end << std::endl;
 
         log("Running algorithm of data of length 500 ...");
         std::array<int64_t, unsorted_arr.size()> sorted_arr =
@@ -269,6 +284,7 @@ class TestCases {
         log("[PASS] : TEST CASE 2 PASS!");
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             "~");
+			std::cerr << "[WARN] <<< Exiting testCase_2()" << std::endl;
     }
 
     /**
@@ -276,6 +292,7 @@ class TestCases {
      * @returns void
      * */
     void testCase_3() {
+		std::cerr << "[ERROR] >>> Entering testCase_3()" << std::endl;
         const int64_t inputSize = 1000;
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             "~");
@@ -288,6 +305,7 @@ class TestCases {
 
         int64_t start = 0;
         int64_t end = unsorted_arr.size() - 1;  // length - 1
+		std::cerr << "[ERROR] testCase_3(): end → " << end << std::endl;
 
         log("Running algorithm...");
         std::array<int64_t, unsorted_arr.size()> sorted_arr =
@@ -302,6 +320,7 @@ class TestCases {
         log("[PASS] : TEST CASE 3 PASS!");
         log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
             "~");
+			std::cerr << "[WARN] <<< Exiting testCase_3()" << std::endl;
     }
 };
 
@@ -310,7 +329,9 @@ class TestCases {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     TestCases tc = TestCases();
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
     tc.runTests();
 }
 
@@ -319,6 +340,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // Executes various test cases.
 
     const int64_t inputSize = 10;
@@ -333,5 +355,6 @@ int main() {
             unsorted_array, 0, unsorted_array.size() - 1);
     std::cout << "Sorted array is : " << std::endl;
     sorting::random_pivot_quick_sort::showArray(sorted_array);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

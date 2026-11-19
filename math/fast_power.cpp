@@ -24,6 +24,7 @@
  */
 template <typename T>
 double fast_power_recursive(T a, T b) {
+	std::cerr << "[ERROR] >>> Entering fast_power_recursive(a=" << a << ",b=" << b << ")" << std::endl;
     // negative power. a^b = 1 / (a^-b)
     if (b < 0)
         return 1.0 / fast_power_recursive(a, -b);
@@ -31,6 +32,7 @@ double fast_power_recursive(T a, T b) {
     if (b == 0)
         return 1;
     T bottom = fast_power_recursive(a, b >> 1);
+	std::cerr << "[ERROR] fast_power_recursive(a=" << a << ",b=" << b << "): bottom → " << bottom << std::endl;
     // Since it is integer division b/2 = (b-1)/2 where b is odd.
     // Therefore, case2 is easily solved by integer division.
 
@@ -39,6 +41,8 @@ double fast_power_recursive(T a, T b) {
         result = bottom * bottom;
     else  // case2
         result = bottom * bottom * a;
+		std::cerr << "[ERROR] fast_power_recursive(a=" << a << ",b=" << b << "): result → " << result << std::endl;
+	std::cerr << "[WARN] <<< Exiting fast_power_recursive(a=" << a << ",b=" << b << ")" << std::endl;
     return result;
 }
 
@@ -48,17 +52,20 @@ double fast_power_recursive(T a, T b) {
 */
 template <typename T>
 double fast_power_linear(T a, T b) {
+	std::cerr << "[ERROR] >>> Entering fast_power_linear(a=" << a << ",b=" << b << ")" << std::endl;
     // negative power. a^b = 1 / (a^-b)
     if (b < 0)
         return 1.0 / fast_power_linear(a, -b);
 
     double result = 1;
+	std::cerr << "[ERROR] fast_power_linear(a=" << a << ",b=" << b << "): result → " << result << std::endl;
     while (b) {
         if (b & 1)
             result = result * a;
         a = a * a;
         b = b >> 1;
     }
+	std::cerr << "[WARN] <<< Exiting fast_power_linear(a=" << a << ",b=" << b << ")" << std::endl;
     return result;
 }
 
@@ -66,13 +73,16 @@ double fast_power_linear(T a, T b) {
  * Main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));
     std::ios_base::sync_with_stdio(false);
 
     std::cout << "Testing..." << std::endl;
     for (int i = 0; i < 20; i++) {
         int a = std::rand() % 20 - 10;
+		std::cerr << "[ERROR] main(): a → " << a << std::endl;
         int b = std::rand() % 20 - 10;
+		std::cerr << "[ERROR] main(): b → " << b << std::endl;
         std::cout << std::endl << "Calculating " << a << "^" << b << std::endl;
         assert(fast_power_recursive(a, b) == std::pow(a, b));
         assert(fast_power_linear(a, b) == std::pow(a, b));
@@ -89,5 +99,6 @@ int main() {
 
     std::cout << a << "^" << b << " = " << fast_power_linear(a, b) << std::endl;
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

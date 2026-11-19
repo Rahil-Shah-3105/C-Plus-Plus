@@ -37,7 +37,10 @@ namespace ground_to_ground_projectile_motion {
  */
 
 double degrees_to_radians(double degrees){
+	std::cerr << "[ERROR] >>> Entering degrees_to_radians(degrees=" << degrees << ")" << std::endl;
     double radians = degrees * (M_PI / 180);
+	std::cerr << "[ERROR] degrees_to_radians(degrees=" << degrees << "): radians → " << radians << std::endl;
+	std::cerr << "[WARN] <<< Exiting degrees_to_radians(degrees=" << degrees << ")" << std::endl;
     return radians;
 }
 
@@ -50,7 +53,10 @@ double degrees_to_radians(double degrees){
  */
 template <typename T>
 T time_of_flight(T initial_velocity, T angle, double gravity = GRAVITY) {
+	std::cerr << "[ERROR] >>> Entering time_of_flight(initial_velocity=" << initial_velocity << ",angle=" << angle << ",gravity=" << gravity << ")" << std::endl;
     double Viy = initial_velocity * (std::sin(degrees_to_radians(angle))); // calculate y component of the initial velocity
+	std::cerr << "[ERROR] time_of_flight(initial_velocity=" << initial_velocity << ",angle=" << angle << ",gravity=" << gravity << "): Viy → " << Viy << std::endl;
+	std::cerr << "[WARN] <<< Exiting time_of_flight(initial_velocity=" << initial_velocity << ",angle=" << angle << ",gravity=" << gravity << ")" << std::endl;
     return 2.0 * Viy / gravity;
 }
 
@@ -62,7 +68,10 @@ T time_of_flight(T initial_velocity, T angle, double gravity = GRAVITY) {
  */
 template <typename T>
 T horizontal_range(T initial_velocity, T angle, T time) {
+	std::cerr << "[ERROR] >>> Entering horizontal_range(initial_velocity=" << initial_velocity << ",angle=" << angle << ",time=" << time << ")" << std::endl;
     double Vix = initial_velocity * (std::cos(degrees_to_radians(angle))); // calculate x component of the initial velocity
+	std::cerr << "[ERROR] horizontal_range(initial_velocity=" << initial_velocity << ",angle=" << angle << ",time=" << time << "): Vix → " << Vix << std::endl;
+	std::cerr << "[WARN] <<< Exiting horizontal_range(initial_velocity=" << initial_velocity << ",angle=" << angle << ",time=" << time << ")" << std::endl;
     return Vix * time;
 }
 
@@ -75,7 +84,10 @@ T horizontal_range(T initial_velocity, T angle, T time) {
  */
 template <typename T>
 T max_height(T initial_velocity, T angle, double gravity = GRAVITY) {
+	std::cerr << "[ERROR] >>> Entering max_height(initial_velocity=" << initial_velocity << ",angle=" << angle << ",gravity=" << gravity << ")" << std::endl;
     double Viy = initial_velocity * (std::sin(degrees_to_radians(angle))); // calculate y component of the initial velocity
+	std::cerr << "[ERROR] max_height(initial_velocity=" << initial_velocity << ",angle=" << angle << ",gravity=" << gravity << "): Viy → " << Viy << std::endl;
+	std::cerr << "[WARN] <<< Exiting max_height(initial_velocity=" << initial_velocity << ",angle=" << angle << ",gravity=" << gravity << ")" << std::endl;
     return (std::pow(Viy, 2) / (2.0 * gravity));
 }
 }  // namespace ground_to_ground_projectile_motion
@@ -86,6 +98,7 @@ T max_height(T initial_velocity, T angle, double gravity = GRAVITY) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // initial input variables
     double initial_velocity = 5.0;  // double initial_velocity input
     double angle = 40.0;            // double angle input
@@ -134,6 +147,7 @@ static void test() {
     std::cout << "Output: " << max_height_output << std::endl;
     assert(max_height_output == expected_max_height);
     std::cout << "TEST PASSED" << std::endl << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -141,6 +155,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

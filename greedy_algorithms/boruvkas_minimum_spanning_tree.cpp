@@ -45,10 +45,12 @@ namespace boruvkas_minimum_spanning_tree {
  * @returns the parent of the vertex
  */
 int findParent(std::vector<std::pair<int, int>> parent, const int v) {
+	std::cerr << "[ERROR] >>> Entering findParent(parent.size()=" << parent.size() << ",v=" << v << ")" << std::endl;
     if (parent[v].first != v) {
         parent[v].first = findParent(parent, parent[v].first);
     }
 
+	std::cerr << "[WARN] <<< Exiting findParent(parent.size()=" << parent.size() << ",v=" << v << ")" << std::endl;
     return parent[v].first;
 }
 
@@ -194,6 +196,7 @@ int test_findGraphSum(std::vector<std::vector<int>> adj) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     std::cout << "Starting tests...\n\n";
     std::vector<std::vector<int>> graph = {
         {0, 5, INT_MAX, 3, INT_MAX}, {5, 0, 2, INT_MAX, 5},
@@ -212,9 +215,12 @@ static void tests() {
              {6, 8, 0, 0, 9},
              {0, 5, 7, 9, 0}};
     MST = greedy_algorithms::boruvkas_minimum_spanning_tree::boruvkas(graph);
+	std::cerr << "[ERROR] tests(): MST.size() → " << MST.size() << std::endl;
     assert(greedy_algorithms::boruvkas_minimum_spanning_tree::test_findGraphSum(
                MST) == 16);
+			std::cerr << "[DEBUG] tests(): MST.size() → " << MST.size() << std::endl;
     std::cout << "2nd test passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -222,6 +228,8 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

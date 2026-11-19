@@ -7,6 +7,7 @@
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int m, n;
     int counterZeros = 0;
 
@@ -44,5 +45,6 @@ int main() {
 
     for (int i = 0; i < m; i++) delete[] a[i];
     delete[] a;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -75,6 +75,7 @@ class Graph {
      * @param adjList is the adjacency list representation of graph.
      */
     Graph(unsigned int vertices, AdjList&& adjList)
+		std::cerr << "[ERROR] Throwing std from Graph(vertices=" << vertices << ",edges=" << edges << ")" << std::endl;
         : m_vertices(vertices), m_adjList(std::move(adjList)) {}
 
     /** Create a graph from vertices and a set of edges.
@@ -90,6 +91,7 @@ class Graph {
         : m_vertices(vertices) {
         for (auto const& edge : edges) {
             if (edge.src >= vertices || edge.dest >= vertices) {
+				std::cerr << "[ERROR] Throwing std from Graph(vertices=" << vertices << ",edges=" << edges << ")" << std::endl;
                 throw std::range_error(
                     "Either src or dest of edge out of range");
             }
@@ -124,9 +126,11 @@ class Graph {
      */
     void addEdge(Edge const& edge) {
         if (edge.src >= m_vertices || edge.dest >= m_vertices) {
+			std::cerr << "[ERROR] Throwing std from addEdge(edge=" << edge << ")" << std::endl;
             throw std::range_error("Either src or dest of edge out of range");
         }
         m_adjList[edge.src].emplace_back(edge.dest);
+		std::cerr << "[ERROR] Throwing std from addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
     }
 
     /** Add an Edge in the graph
@@ -136,6 +140,7 @@ class Graph {
      */
     void addEdge(unsigned int source, unsigned int destination) {
         if (source >= m_vertices || destination >= m_vertices) {
+			std::cerr << "[ERROR] Throwing std from addEdge(source=" << source << ",destination=" << destination << ")" << std::endl;
             throw std::range_error(
                 "Either source or destination of edge out of range");
         }

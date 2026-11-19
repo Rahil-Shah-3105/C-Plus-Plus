@@ -40,14 +40,17 @@ namespace math {
  * @returns 0 if n is NOT a power of 2
  */
 int power_of_two(int n) {
+	std::cerr << "[ERROR] >>> Entering power_of_two(n=" << n << ")" << std::endl;
     /// result stores the
     /// bitwise and of n and n-1
     int result = n & (n - 1);
+	std::cerr << "[ERROR] power_of_two(n=" << n << "): result → " << result << std::endl;
     
     if (result == 0) {
         return 1;
     }
 
+	std::cerr << "[WARN] <<< Exiting power_of_two(n=" << n << ")" << std::endl;
     return 0;
 }
 }  // namespace math
@@ -57,6 +60,7 @@ int power_of_two(int n) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::cout << "First case testing... \n"; // for n = 32 return 1
     assert(math::power_of_two(32) == 1);
     std::cout << "\nPassed!\n";
@@ -70,6 +74,7 @@ static void test() {
     std::cout << "\nPassed!\n";
 
     std::cout << "\nAll test cases have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -77,6 +82,7 @@ static void test() {
  * @returns void
  */
 void user_input_test() {
+	std::cerr << "[ERROR] >>> Entering user_input_test()" << std::endl;
     int n = 0; // input from user
     
     std::cout << "Enter a number " << std::endl;
@@ -84,12 +90,14 @@ void user_input_test() {
 
     /// function call with @param n
     int result = math::power_of_two(n);
+	std::cerr << "[ERROR] user_input_test(): result → " << result << std::endl;
     if (result == 1) {
         std::cout << "Yes, the number " << n << " is a power of 2\n";
     }
     else { 
         std::cout << "No, the number " << n << " is not a power of 2\n";
     }
+	std::cerr << "[WARN] <<< Exiting user_input_test()" << std::endl;
 }
 
 /**
@@ -97,10 +105,12 @@ void user_input_test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test(); // run self-test implementations
 
     // uncomment the line below to take user inputs
     //user_input_test();
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

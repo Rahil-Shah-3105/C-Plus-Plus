@@ -107,6 +107,7 @@ void depth_first_search(const std::vector<std::vector<size_t>> &adj,
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     size_t vertices = 0, edges = 0;
     std::cout << "Enter the Vertices : ";
     std::cin >> vertices;
@@ -129,5 +130,6 @@ int main() {
     graph::depth_first_search(adj, 2);
 
     std::cout << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

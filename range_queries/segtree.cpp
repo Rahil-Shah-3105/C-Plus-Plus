@@ -145,8 +145,10 @@ void update(std::vector<int64_t> *segtree, std::vector<int64_t> *lazy,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     auto max = static_cast<int64_t>(2 * pow(2, ceil(log2(7))) - 1);
     assert(max == 15);
+	std::cerr << "[ERROR] test(): max → " << max << std::endl;
 
     std::vector<int64_t> arr{1, 2, 3, 4, 5, 6, 7}, lazy(max), segtree(max);
     ConsTree(arr, &segtree, 0, 7 - 1, 0);
@@ -158,6 +160,7 @@ static void test() {
 
     update(&segtree, &lazy, 0, 6, -2, 0, 7 - 1, 0);
     assert(query(&segtree, &lazy, 0, 4, 0, 7 - 1, 0) == -1 + 0 + 2 + 3 + 4);
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -166,6 +169,7 @@ static void test() {
  * @return  0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     std::cout << "Enter number of elements: ";
@@ -174,6 +178,7 @@ int main() {
     std::cin >> n;
 
     auto max = static_cast<uint64_t>(2 * pow(2, ceil(log2(n))) - 1);
+	std::cerr << "[ERROR] main(): max → " << max << std::endl;
     std::vector<int64_t> arr(n), lazy(max), segtree(max);
 
     int choice = 0;
@@ -215,5 +220,6 @@ int main() {
         }
     } while (choice > 0);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

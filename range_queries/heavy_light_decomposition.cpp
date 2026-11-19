@@ -101,12 +101,14 @@ class Tree {
      * @returns void
      */
     void dfs_size(int u, int p = -1) {
+		std::cerr << "[ERROR] >>> Entering dfs_size(u=" << u << ",p=" << p << ")" << std::endl;
         for (const int &v : t_adj[u]) {
             if (v ^ p) {
                 dfs_size(v, u);
                 t_size[u] += t_size[v];
             }
         }
+		std::cerr << "[WARN] <<< Exiting dfs_size(u=" << u << ",p=" << p << ")" << std::endl;
     }
 
     /**
@@ -116,6 +118,7 @@ class Tree {
      * @returns void
      */
     void dfs_lca(int u, int p = -1) {
+		std::cerr << "[ERROR] >>> Entering dfs_lca(u=" << u << ",p=" << p << ")" << std::endl;
         t_par[u][0] = p;
         if (p != -1) {
             t_depth[u] = 1 + t_depth[p];
@@ -131,6 +134,7 @@ class Tree {
                 dfs_lca(v, u);
             }
         }
+		std::cerr << "[WARN] <<< Exiting dfs_lca(u=" << u << ",p=" << p << ")" << std::endl;
     }
 
  public:
@@ -141,6 +145,7 @@ class Tree {
      */
     explicit Tree(int nodes)
         : t_nodes(nodes), t_maxlift(static_cast<int>(floor(log2(nodes))) + 1) {
+		std::cerr << "[ERROR] >>> Entering Tree(nodes=" << nodes << ")" << std::endl;
         /* Initialize and resize all the vectors */
         t_root = 0; /* Default */
         t_adj.resize(t_nodes);
@@ -148,6 +153,7 @@ class Tree {
         t_depth.assign(t_nodes, 0);
         t_size.assign(t_nodes, 1);
         t_val.resize(t_nodes);
+		std::cerr << "[WARN] <<< Exiting Tree(nodes=" << nodes << ")" << std::endl;
     }
 
     /**
@@ -157,8 +163,10 @@ class Tree {
      * @returns void
      */
     void add_edge(const int u, const int v) {
+		std::cerr << "[ERROR] >>> Entering add_edge(u=" << u << ",v=" << v << ")" << std::endl;
         t_adj[u].push_back(v);
         t_adj[v].push_back(u);
+		std::cerr << "[WARN] <<< Exiting add_edge(u=" << u << ",v=" << v << ")" << std::endl;
     }
 
     /**
@@ -186,9 +194,11 @@ class Tree {
      * @returns void
      */
     void init() {
+		std::cerr << "[ERROR] >>> Entering init()" << std::endl;
         assert(t_nodes > 0);
         dfs_size(t_root);
         dfs_lca(t_root);
+		std::cerr << "[WARN] <<< Exiting init()" << std::endl;
     }
 
     /**
@@ -200,6 +210,7 @@ class Tree {
      * @returns void
      */
     void lift(int *const p, int dist) {
+		std::cerr << "[ERROR] >>> Entering lift(p=" << p << ",dist=" << dist << ")" << std::endl;
         for (int k = 0; k < t_maxlift; k++) {
             if (*p == -1) {
                 return;
@@ -209,6 +220,7 @@ class Tree {
             }
             dist >>= 1;
         }
+		std::cerr << "[WARN] <<< Exiting lift(p=" << p << ",dist=" << dist << ")" << std::endl;
     }
 
     /**
@@ -218,7 +230,9 @@ class Tree {
      * @returns the kth ancestor of node
      */
     int kth_ancestor(int p, const int &dist) {
+		std::cerr << "[ERROR] >>> Entering kth_ancestor(p=" << p << ",dist=" << dist << ")" << std::endl;
         lift(&p, dist);
+		std::cerr << "[WARN] <<< Exiting kth_ancestor(p=" << p << ",dist=" << dist << ")" << std::endl;
         return p;
     }
 
@@ -229,6 +243,7 @@ class Tree {
      * @returns the least common ancestor of node a, and node b
      */
     int lca(int a, int b) {
+		std::cerr << "[ERROR] >>> Entering lca(a=" << a << ",b=" << b << ")" << std::endl;
         assert(a >= 0 and b >= 0 and a < t_nodes and b < t_nodes);
         if (t_depth[a] > t_depth[b]) {
             lift(&a, t_depth[a] - t_depth[b]);
@@ -245,6 +260,7 @@ class Tree {
                 b = t_par[b][k];
             }
         }
+		std::cerr << "[WARN] <<< Exiting lca(a=" << a << ",b=" << b << ")" << std::endl;
         return t_par[a][0];
     }
 };
@@ -284,7 +300,10 @@ class SG {
      * @returns void
      */
     explicit SG(int size) {
+		std::cerr << "[ERROR] >>> Entering SG(size=" << size << ")" << std::endl;
         s_size = size;
+		std::cerr << "[WARN] <<< Exiting SG(size=" << size << ")" << std::endl;
+		std::cerr << "[DEBUG] SG(size=" << size << "): s_size → " << s_size << std::endl;
         s_tree.assign(2 * s_size, 0ll);
     }
 
@@ -295,9 +314,11 @@ class SG {
      * @returns void
      */
     void update(int p, X v) {
+		std::cerr << "[ERROR] >>> Entering update(p=" << p << ",v=" << v << ")" << std::endl;
         for (p += s_size; p > 0; p >>= 1) {
             s_tree[p] += v;
         }
+		std::cerr << "[WARN] <<< Exiting update(p=" << p << ",v=" << v << ")" << std::endl;
     }
 
     /**
@@ -307,15 +328,20 @@ class SG {
      * @returns void
      */
     X query(int l, int r) {
+		std::cerr << "[ERROR] >>> Entering query(l=" << l << ",r=" << r << ")" << std::endl;
         X lhs = sret_init, rhs = sret_init;
         for (l += s_size, r += s_size + 1; l < r; l >>= 1, r >>= 1) {
+			std::cerr << "[ERROR] query(l=" << l << ",r=" << r << "): rhs → " << rhs << std::endl;
+			std::cerr << "[ERROR] query(l=" << l << ",r=" << r << "): lhs → " << lhs << std::endl;
             if (l & 1) {
                 lhs = combine(lhs, s_tree[l++]);
             }
             if (r & 1) {
                 rhs = combine(s_tree[--r], rhs);
             }
+			std::cerr << "[DEBUG] query(l=" << l << ",r=" << r << "): rhs → " << rhs << std::endl;
         }
+		std::cerr << "[WARN] <<< Exiting query(l=" << l << ",r=" << r << ")" << std::endl;
         return combine(lhs, rhs);
     }
 
@@ -354,17 +380,21 @@ class HLD : public Tree<X>, public SG<X> {
      * @returns void
      */
     void dfs_hc(int u, int p = -1) {
+		std::cerr << "[ERROR] >>> Entering dfs_hc(u=" << u << ",p=" << p << ")" << std::endl;
         int hc_size = -1, hc_id = -1;
         for (const int &v : Tree<X>::t_adj[u]) {
+			std::cerr << "[ERROR] dfs_hc(u=" << u << ",p=" << p << "): hc_size → " << hc_size << std::endl;
             if (v ^ p) {
                 dfs_hc(v, u);
                 if (Tree<X>::t_size[v] > hc_size) {
                     hc_size = Tree<X>::t_size[v];
                     hc_id = v;
+					std::cerr << "[DEBUG] dfs_hc(u=" << u << ",p=" << p << "): hc_id → " << hc_id << std::endl;
                 }
             }
         }
         h_heavychlid[u] = hc_id;
+		std::cerr << "[WARN] <<< Exiting dfs_hc(u=" << u << ",p=" << p << ")" << std::endl;
     }
 
     /**
@@ -375,6 +405,7 @@ class HLD : public Tree<X>, public SG<X> {
      * @returns void
      */
     void dfs_par(int u, int p = -1) {
+		std::cerr << "[ERROR] >>> Entering dfs_par(u=" << u << ",p=" << p << ")" << std::endl;
         if (h_heavychlid[u] != -1) {
             h_parent[h_heavychlid[u]] = h_parent[u];
             dfs_par(h_heavychlid[u], u);
@@ -384,6 +415,7 @@ class HLD : public Tree<X>, public SG<X> {
                 dfs_par(v, u);
             }
         }
+		std::cerr << "[WARN] <<< Exiting dfs_par(u=" << u << ",p=" << p << ")" << std::endl;
     }
 
     /**
@@ -394,6 +426,7 @@ class HLD : public Tree<X>, public SG<X> {
      * @returns void
      */
     void dfs_labels(int u, int p = -1) {
+		std::cerr << "[ERROR] >>> Entering dfs_labels(u=" << u << ",p=" << p << ")" << std::endl;
         h_label[u] = label++;
         if (h_heavychlid[u] != -1) {
             dfs_labels(h_heavychlid[u], u);
@@ -403,6 +436,7 @@ class HLD : public Tree<X>, public SG<X> {
                 dfs_labels(v, u);
             }
         }
+		std::cerr << "[WARN] <<< Exiting dfs_labels(u=" << u << ",p=" << p << ")" << std::endl;
     }
 
     /**
@@ -413,8 +447,10 @@ class HLD : public Tree<X>, public SG<X> {
      * @returns the sum of ndoe values in the simple path from a to b
      */
     X chain_query(int a, int b) {
+		std::cerr << "[ERROR] >>> Entering chain_query(a=" << a << ",b=" << b << ")" << std::endl;
         X ret = SG<X>::sret_init;
         if (Tree<X>::t_depth[a] < Tree<X>::t_depth[b]) {
+			std::cerr << "[ERROR] chain_query(a=" << a << ",b=" << b << "): ret → " << ret << std::endl;
             std::swap(a, b);
         }
         while (Tree<X>::t_depth[a] >= Tree<X>::t_depth[b]) {
@@ -429,6 +465,7 @@ class HLD : public Tree<X>, public SG<X> {
                 break;
             }
         }
+		std::cerr << "[WARN] <<< Exiting chain_query(a=" << a << ",b=" << b << ")" << std::endl;
         return ret;
     }
 
@@ -439,12 +476,15 @@ class HLD : public Tree<X>, public SG<X> {
      * @param nodes the total number of nodes in the tree
      */
     explicit HLD(int nodes) : Tree<X>(nodes), SG<X>(nodes) {
+		std::cerr << "[ERROR] >>> Entering HLD(nodes=" << nodes << ")" << std::endl;
         /* Initialization and resize vectors */
         label = 0;
+		std::cerr << "[DEBUG] HLD(nodes=" << nodes << "): label → " << label << std::endl;
         h_label.assign(Tree<X>::t_nodes, -1);
         h_heavychlid.assign(Tree<X>::t_nodes, -1);
         h_parent.resize(Tree<X>::t_nodes);
         iota(h_parent.begin(), h_parent.end(), 0);
+		std::cerr << "[WARN] <<< Exiting HLD(nodes=" << nodes << ")" << std::endl;
     }
 
     /**
@@ -509,6 +549,7 @@ class HLD : public Tree<X>, public SG<X> {
  * @returns none
  */
 static void test_1() {
+	std::cerr << "[ERROR] >>> Entering test_1()" << std::endl;
     std::cout << "Test 1:\n";
 
     // Test details
@@ -521,6 +562,7 @@ static void test_1() {
         {2, 1, 4},
     };
     std::vector<int> expected_result = {11, 8};
+	std::cerr << "[ERROR] test_1(): expected_result.size() → " << expected_result.size() << std::endl;
     std::vector<int> code_result;
 
     range_queries::heavy_light_decomposition::HLD<int64_t> hld(n);
@@ -546,6 +588,7 @@ static void test_1() {
         assert(expected_result[i] == code_result[i]);
     }
     std::cout << "\nTest 1 passed!\n";
+	std::cerr << "[WARN] <<< Exiting test_1()" << std::endl;
 }
 
 /**
@@ -553,6 +596,7 @@ static void test_1() {
  * @returns void
  */
 static void test_2() {
+	std::cerr << "[ERROR] >>> Entering test_2()" << std::endl;
     std::cout << "Test 2:\n";
 
     // Test details (Bamboo)
@@ -565,6 +609,7 @@ static void test_2() {
         {2, 1, 10}, {2, 1, 6}, {1, 3, 4}, {2, 1, 9}, {1, 5, 3},
         {1, 7, 8},  {2, 1, 4}, {2, 1, 8}, {1, 1, 4}, {1, 2, 7}};
     std::vector<int> expected_result = {27, 11, 45, 9, 34};
+	std::cerr << "[ERROR] test_2(): expected_result.size() → " << expected_result.size() << std::endl;
     std::vector<int> code_result;
 
     range_queries::heavy_light_decomposition::HLD<int64_t> hld(n);
@@ -590,6 +635,7 @@ static void test_2() {
         assert(expected_result[i] == code_result[i]);
     }
     std::cout << "\nTest2 passed!\n";
+	std::cerr << "[WARN] <<< Exiting test_2()" << std::endl;
 }
 
 /**
@@ -597,6 +643,7 @@ static void test_2() {
  * @returns void
  */
 static void test_3() {
+	std::cerr << "[ERROR] >>> Entering test_3()" << std::endl;
     std::cout << "Test 3:\n";
 
     // Test details
@@ -608,6 +655,7 @@ static void test_3() {
         {2, 6, 8}, {2, 3, 6}, {1, 3, 4}, {2, 7, 1}, {1, 5, 3},
         {1, 7, 8}, {2, 6, 4}, {2, 7, 8}, {1, 1, 4}, {1, 2, 7}};
     std::vector<int> expected_result = {34, 8, 16, 14, 10};
+	std::cerr << "[ERROR] test_3(): expected_result.size() → " << expected_result.size() << std::endl;
     std::vector<int> code_result;
 
     range_queries::heavy_light_decomposition::HLD<int64_t> hld(n);
@@ -633,14 +681,17 @@ static void test_3() {
         assert(expected_result[i] == code_result[i]);
     }
     std::cout << "\nTest3 passed!\n";
+	std::cerr << "[WARN] <<< Exiting test_3()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test_1();
     test_2();
     test_3();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

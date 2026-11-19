@@ -61,6 +61,7 @@ int64_t query(int64_t beg, int64_t end) { return PSA[end] - PSA[beg - 1]; }
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     std::vector<int64_t> values{0,  123, 0,  2,  -2, 5,
                                 24, 0,   23, -1, -1};  // original array
 
@@ -73,6 +74,7 @@ static void test() {
            27);  // the sum of the interval [4, 6]
     assert(range_queries::prefix_sum_array::query(5, 9) ==
            51);  // the sum of the interval [5, 9]
+		std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -80,6 +82,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -19,18 +19,23 @@ namespace string_search {
  * @return         -1 if the pattern was not found.
  */
 int brute_force(const std::string &text, const std::string &pattern) {
+	std::cerr << "[ERROR] >>> Entering brute_force(text=" << text << ",pattern=" << pattern << ")" << std::endl;
     size_t pat_l = pattern.length();
     size_t txt_l = text.length();
+	std::cerr << "[ERROR] brute_force(text=" << text << ",pattern=" << pattern << "): txt_l → " << txt_l << std::endl;
+	std::cerr << "[ERROR] brute_force(text=" << text << ",pattern=" << pattern << "): pat_l → " << pat_l << std::endl;
     int index = -1;
     if (pat_l <= txt_l) {
         for (size_t i = 0; i < txt_l - pat_l + 1; i++) {
             std::string s = text.substr(i, pat_l);
+			std::cerr << "[ERROR] brute_force(text=" << text << ",pattern=" << pattern << "): s → " << s << std::endl;
             if (s == pattern) {
                 index = i;
                 break;
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting brute_force(text=" << text << ",pattern=" << pattern << ")" << std::endl;
     return index;
 }
 }  // namespace string_search
@@ -45,8 +50,10 @@ const std::vector<std::vector<std::string>> test_set = {
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     for (const auto &i : test_set) {
         int output = brute_force(i[0], i[1]);
+		std::cerr << "[ERROR] main(): output → " << output << std::endl;
 
         if (std::to_string(output) == i[2]) {
             std::cout << "success\n";
@@ -54,5 +61,6 @@ int main() {
             std::cout << "failure\n";
         }
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -23,10 +23,13 @@ namespace string_search {
  * \returns hash integer
  */
 int64_t create_hash(const std::string& s, int n) {
+	std::cerr << "[ERROR] >>> Entering create_hash(s=" << s << ",n=" << n << ")" << std::endl;
     int64_t result = 0;
     for (int i = 0; i < n; ++i) {
+		std::cerr << "[ERROR] create_hash(s=" << s << ",n=" << n << "): result → " << result << std::endl;
         result += (int64_t)(s[i] * (int64_t)pow(PRIME, i));
     }
+	std::cerr << "[WARN] <<< Exiting create_hash(s=" << s << ",n=" << n << ")" << std::endl;
     return result;
 }
 
@@ -81,8 +84,11 @@ bool check_if_equal(const std::string& str1, const std::string& str2,
  */
 
 int rabin_karp(const std::string& str, const std::string& pat) {
+	std::cerr << "[ERROR] >>> Entering rabin_karp(str=" << str << ",pat=" << pat << ")" << std::endl;
     int64_t pat_hash = create_hash(pat, pat.size());
     int64_t str_hash = create_hash(str, pat.size());
+	std::cerr << "[ERROR] rabin_karp(str=" << str << ",pat=" << pat << "): str_hash → " << str_hash << std::endl;
+	std::cerr << "[ERROR] rabin_karp(str=" << str << ",pat=" << pat << "): pat_hash → " << pat_hash << std::endl;
     for (int i = 0; i <= str.size() - pat.size(); ++i) {
         if (pat_hash == str_hash &&
             check_if_equal(str, pat, i, i + pat.size() - 1, 0,
@@ -94,6 +100,7 @@ int rabin_karp(const std::string& str, const std::string& pat) {
                 recalculate_hash(str, i, i + pat.size(), str_hash, pat.size());
         }
     }
+	std::cerr << "[WARN] <<< Exiting rabin_karp(str=" << str << ",pat=" << pat << ")" << std::endl;
     return -1;  // return -1 if given pattern not found
 }
 
@@ -103,9 +110,11 @@ using string_search::rabin_karp;
 
 /** Main function */
 int main(void) {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     assert(rabin_karp("helloWorld", "world") == -1);
     assert(rabin_karp("helloWorld", "World") == 5);
     assert(rabin_karp("this_is_c++", "c++") == 8);
     assert(rabin_karp("happy_coding", "happy") == 0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -86,9 +86,11 @@ class BinaryTree {
  * @return pointer to the newly created node with assigned data.
  */
 Node *BinaryTree::createNewNode(int64_t data) {
+	std::cerr << "[ERROR] >>> Entering BinaryTree::createNewNode(data=" << data << ")" << std::endl;
     Node *node = new Node();
     node->data = data;
     node->left = node->right = nullptr;
+	std::cerr << "[WARN] <<< Exiting BinaryTree::createNewNode(data=" << data << ")" << std::endl;
     return node;
 }
 
@@ -100,6 +102,7 @@ Node *BinaryTree::createNewNode(int64_t data) {
  * @return result that is containing the preorder traversal of a tree
  */
 std::vector<int64_t> BinaryTree::preOrderIterative(Node *root) {
+	std::cerr << "[ERROR] >>> Entering BinaryTree::preOrderIterative(root=" << root << ")" << std::endl;
     std::stack<Node *>
         stack;  ///< is used to find and traverse the child nodes.
     std::vector<int64_t> result;  ///< list of values, sorted in pre-order.
@@ -119,6 +122,7 @@ std::vector<int64_t> BinaryTree::preOrderIterative(Node *root) {
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting BinaryTree::preOrderIterative(root=" << root << ")" << std::endl;
     return result;
 }
 
@@ -130,6 +134,7 @@ std::vector<int64_t> BinaryTree::preOrderIterative(Node *root) {
  * @return result that is containing the postorder traversal of a tree
  */
 std::vector<int64_t> BinaryTree::postOrderIterative(Node *root) {
+	std::cerr << "[ERROR] >>> Entering BinaryTree::postOrderIterative(root=" << root << ")" << std::endl;
     std::stack<Node *>
         stack;  ///< is used to find and traverse the child nodes.
     std::vector<int64_t> result;  ///< List of values, sorted in post-order.
@@ -151,6 +156,7 @@ std::vector<int64_t> BinaryTree::postOrderIterative(Node *root) {
 
     reverse(result.begin(), result.end());
 
+	std::cerr << "[WARN] <<< Exiting BinaryTree::postOrderIterative(root=" << root << ")" << std::endl;
     return result;
 }
 
@@ -162,6 +168,7 @@ std::vector<int64_t> BinaryTree::postOrderIterative(Node *root) {
  * @return result that is containing the inorder traversal of a tree
  */
 std::vector<int64_t> BinaryTree::inOrderIterative(Node *root) {
+	std::cerr << "[ERROR] >>> Entering BinaryTree::inOrderIterative(root=" << root << ")" << std::endl;
     std::stack<Node *>
         stack;  ///< is used to find and traverse the child nodes.
     std::vector<int64_t> result;  ///< List of values, sorted in in-order.
@@ -172,15 +179,18 @@ std::vector<int64_t> BinaryTree::inOrderIterative(Node *root) {
         while (current) {
             stack.push(current);
             current = current->left;
+			std::cerr << "[ERROR] BinaryTree::inOrderIterative(root=" << root << "): current → " << current << std::endl;
         }
         current = stack.top();
         stack.pop();
         result.push_back(current->data);
         current = current->right;
     }
+	std::cerr << "[WARN] <<< Exiting BinaryTree::inOrderIterative(root=" << root << ")" << std::endl;
     return result;
 }
 void deleteAll(Node *root) {
+	std::cerr << "[ERROR] >>> Entering deleteAll(root=" << root << ")" << std::endl;
     if (root) {
         std::stack<Node *> stack;
         stack.push(root);
@@ -198,6 +208,7 @@ void deleteAll(Node *root) {
             delete current;
         }
     }
+	std::cerr << "[WARN] <<< Exiting deleteAll(root=" << root << ")" << std::endl;
 }
 }  // namespace iterative_tree_traversals
 }  // namespace others
@@ -370,6 +381,7 @@ static void test6(others::iterative_tree_traversals::BinaryTree binaryTree,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Creating a tree with the following structure,
     /*
               1
@@ -417,5 +429,6 @@ int main() {
 
     deleteAll(root);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

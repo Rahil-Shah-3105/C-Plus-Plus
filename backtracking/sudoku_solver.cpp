@@ -152,6 +152,7 @@ bool solveSudoku(std::array<std::array<int, V>, V> &mat,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     const int V = 9;
     std::array<std::array<int, V>, V> mat = {
         std::array<int, V>{5, 3, 0, 0, 7, 0, 0, 0, 0},
@@ -169,5 +170,6 @@ int main() {
     std::array<std::array<int, V>, V> starting_mat = mat;
     backtracking::sudoku_solver::solveSudoku<V>(mat, starting_mat, 0, 0);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

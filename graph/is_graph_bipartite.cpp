@@ -63,9 +63,11 @@ class Graph {
      * @param size number of vertices of the graph
      */
     explicit Graph(int size) {
+		std::cerr << "[ERROR] >>> Entering Graph(size=" << size << ")" << std::endl;
         n = size;
         adj.resize(n);
         side.resize(n, -1);
+		std::cerr << "[WARN] <<< Exiting Graph(size=" << size << ")" << std::endl;
     }
 
     void addEdge(int u, int v);  /// function to add edges to our graph
@@ -81,8 +83,10 @@ class Graph {
  * @param v is a node or vertex of graph
  */
 void Graph::addEdge(int u, int v) {
+	std::cerr << "[ERROR] >>> Entering Graph::addEdge(u=" << u << ",v=" << v << ")" << std::endl;
     adj[u - 1].push_back(v - 1);
     adj[v - 1].push_back(u - 1);
+	std::cerr << "[WARN] <<< Exiting Graph::addEdge(u=" << u << ",v=" << v << ")" << std::endl;
 }
 
 /**
@@ -104,6 +108,7 @@ void Graph::addEdge(int u, int v) {
  * @returns `false` otherwise
  */
 bool Graph::is_bipartite() {
+	std::cerr << "[ERROR] >>> Entering Graph::is_bipartite()" << std::endl;
     bool check = true;
     std::queue<int> q;
     for (int current_edge = 0; current_edge < n; ++current_edge) {
@@ -112,6 +117,7 @@ bool Graph::is_bipartite() {
             side[current_edge] = 0;
             while (q.size()) {
                 int current = q.front();
+				std::cerr << "[ERROR] Graph::is_bipartite(): current → " << current << std::endl;
                 q.pop();
                 for (auto neighbour : adj[current]) {
                     if (side[neighbour] == -1) {
@@ -124,6 +130,7 @@ bool Graph::is_bipartite() {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting Graph::is_bipartite()" << std::endl;
     return check;
 }
 }  // namespace is_graph_bipartite
@@ -134,6 +141,7 @@ bool Graph::is_bipartite() {
  * @returns none
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     graph::is_graph_bipartite::Graph G1(
         5);  /// creating graph G1 with 5 vertices
     /// adding edges to the graphs as per the illustrated example
@@ -160,12 +168,15 @@ static void test() {
     } else {
         std::cout << "The given graph G2 is not a bipartite graph\n";
     }
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
  * Main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  /// Testing
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

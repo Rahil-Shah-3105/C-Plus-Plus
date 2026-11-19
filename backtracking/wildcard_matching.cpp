@@ -100,10 +100,13 @@ bool wildcard_matching(std::string s, std::string p, uint32_t pos1,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test
     std::cout << "1st test ";
     std::string matching1 = "baaabab";
+	std::cerr << "[ERROR] test(): matching1 → " << matching1 << std::endl;
     std::string pattern1 = "*****ba*****ab";
+	std::cerr << "[ERROR] test(): pattern1 → " << pattern1 << std::endl;
     assert(backtracking::wildcard_matching::wildcard_matching(matching1,
                                                               pattern1, 0, 0) ==
            1);  // here the pattern matches with given string
@@ -112,7 +115,9 @@ static void test() {
     // 2nd test
     std::cout << "2nd test ";
     std::string matching2 = "baaabab";
+	std::cerr << "[ERROR] test(): matching2 → " << matching2 << std::endl;
     std::string pattern2 = "ba*****ab";
+	std::cerr << "[ERROR] test(): pattern2 → " << pattern2 << std::endl;
     assert(backtracking::wildcard_matching::wildcard_matching(matching2,
                                                               pattern2, 0, 0) ==
            1);  // here the pattern matches with given string
@@ -121,7 +126,9 @@ static void test() {
     // 3rd test
     std::cout << "3rd test ";
     std::string matching3 = "baaabab";
+	std::cerr << "[ERROR] test(): matching3 → " << matching3 << std::endl;
     std::string pattern3 = "ba*ab";
+	std::cerr << "[ERROR] test(): pattern3 → " << pattern3 << std::endl;
     assert(backtracking::wildcard_matching::wildcard_matching(matching3,
                                                               pattern3, 0, 0) ==
            1);  // here the pattern matches with given string
@@ -130,7 +137,9 @@ static void test() {
     // 4th test
     std::cout << "4th test ";
     std::string matching4 = "baaabab";
+	std::cerr << "[ERROR] test(): matching4 → " << matching4 << std::endl;
     std::string pattern4 = "a*ab";
+	std::cerr << "[ERROR] test(): pattern4 → " << pattern4 << std::endl;
     assert(backtracking::wildcard_matching::wildcard_matching(matching4,
                                                               pattern4, 0, 0) ==
            1);  // here the pattern matches with given string
@@ -139,11 +148,14 @@ static void test() {
     // 5th test
     std::cout << "5th test ";
     std::string matching5 = "baaabab";
+	std::cerr << "[ERROR] test(): matching5 → " << matching5 << std::endl;
     std::string pattern5 = "aa?ab";
+	std::cerr << "[ERROR] test(): pattern5 → " << pattern5 << std::endl;
     assert(backtracking::wildcard_matching::wildcard_matching(matching5,
                                                               pattern5, 0, 0) ==
            1);  // here the pattern matches with given string
     std::cout << "passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -151,6 +163,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

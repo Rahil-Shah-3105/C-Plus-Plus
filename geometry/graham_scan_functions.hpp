@@ -76,10 +76,12 @@ Point p0;
  * @returns @param Point Co-ordinates of the Point <int, int>
  *******************************************************************************/
 Point nextToTop(std::stack<Point> *S) {
+	std::cerr << "[ERROR] >>> Entering nextToTop(S=" << S << ")" << std::endl;
     Point p = S->top();
     S->pop();
     Point res = S->top();
     S->push(p);
+	std::cerr << "[WARN] <<< Exiting nextToTop(S=" << S << ")" << std::endl;
     return res;
 }
 
@@ -118,15 +120,18 @@ int orientation(Point p, Point q, Point r) {
  * @returns @param int distance between p1 and p2.
  *******************************************************************************/
 int compare(const void *vp1, const void *vp2) {
+	std::cerr << "[ERROR] >>> Entering compare(vp1=" << vp1 << ",vp2=" << vp2 << ")" << std::endl;
     auto *p1 = static_cast<const Point *>(vp1);
     auto *p2 = static_cast<const Point *>(vp2);
 
     // Find orientation
     int o = orientation(p0, *p1, *p2);
+	std::cerr << "[ERROR] compare(vp1=" << vp1 << ",vp2=" << vp2 << "): o → " << o << std::endl;
     if (o == 0) {
         return (distSq(p0, *p2) >= distSq(p0, *p1)) ? -1 : 1;
     }
 
+	std::cerr << "[WARN] <<< Exiting compare(vp1=" << vp1 << ",vp2=" << vp2 << ")" << std::endl;
     return (o == 2) ? -1 : 1;
 }
 

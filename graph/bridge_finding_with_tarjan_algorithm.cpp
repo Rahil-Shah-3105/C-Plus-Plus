@@ -15,6 +15,7 @@ class Solution {
     std::vector<std::vector<int>> bridge;
     std::vector<bool> visited;
     void dfs(int current_node, int parent) {
+		std::cerr << "[ERROR] >>> Entering dfs(current_node=" << current_node << ",parent=" << parent << ")" << std::endl;
         visited.at(current_node) = true;
         in_time[current_node] = out_time[current_node] = timer++;
         for (auto& itr : graph[current_node]) {
@@ -30,6 +31,7 @@ class Solution {
             out_time[current_node] =
                 std::min(out_time[current_node], out_time[itr]);
         }
+		std::cerr << "[WARN] <<< Exiting dfs(current_node=" << current_node << ",parent=" << parent << ")" << std::endl;
     }
 
  public:
@@ -53,6 +55,7 @@ class Solution {
  * Main function
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     Solution s1;
     int number_of_node = 5;
     std::vector<std::vector<int>> node;
@@ -79,5 +82,6 @@ int main() {
     for (auto& itr : bridges) {
         std::cout << itr[0] << " --> " << itr[1] << '\n';
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

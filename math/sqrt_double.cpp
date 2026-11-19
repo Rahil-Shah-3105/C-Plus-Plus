@@ -14,10 +14,12 @@
  * whose roots are \f$\pm\sqrt{a}\f$ and only the positive root is returned.
  */
 double Sqrt(double a) {
+	std::cerr << "[ERROR] >>> Entering Sqrt(a=" << a << ")" << std::endl;
     if (a > 0 && a < 1) {
         return 1 / Sqrt(1 / a);
     }
     double l = 0, r = a;
+	std::cerr << "[ERROR] Sqrt(a=" << a << "): l → " << l << std::endl;
     /* Epsilon is the precision.
     A great precision is
     between 1e-7 and 1e-12.
@@ -26,6 +28,7 @@ double Sqrt(double a) {
     double epsilon = 1e-12;
     while (l <= r) {
         double mid = (l + r) / 2;
+		std::cerr << "[ERROR] Sqrt(a=" << a << "): mid → " << mid << std::endl;
         if (mid * mid > a) {
             r = mid;
         } else {
@@ -35,15 +38,18 @@ double Sqrt(double a) {
             l = mid;
         }
     }
+	std::cerr << "[WARN] <<< Exiting Sqrt(a=" << a << ")" << std::endl;
     return -1;
 }
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     double n{};
     std::cin >> n;
     assert(n >= 0);
     // Change this line for a better precision
     std::cout.precision(12);
     std::cout << std::fixed << Sqrt(n);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

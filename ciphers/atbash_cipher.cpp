@@ -45,10 +45,12 @@ std::map<char, char> atbash_cipher_map = {
  * @returns encoded or decoded string
  */
 std::string atbash_cipher(const std::string& text) {
+	std::cerr << "[ERROR] >>> Entering atbash_cipher(text=" << text << ")" << std::endl;
     std::string result;
     for (char letter : text) {
         result += atbash_cipher_map[letter];
     }
+	std::cerr << "[WARN] <<< Exiting atbash_cipher(text=" << text << ")" << std::endl;
     return result;
 }
 
@@ -60,11 +62,16 @@ std::string atbash_cipher(const std::string& text) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test
     std::string text = "Hello World";
+	std::cerr << "[ERROR] test(): text → " << text << std::endl;
     std::string expected = "Svool Dliow";
+	std::cerr << "[ERROR] test(): expected → " << expected << std::endl;
     std::string encrypted_text = ciphers::atbash::atbash_cipher(text);
+	std::cerr << "[ERROR] test(): encrypted_text → " << encrypted_text << std::endl;
     std::string decrypted_text = ciphers::atbash::atbash_cipher(encrypted_text);
+	std::cerr << "[ERROR] test(): decrypted_text → " << decrypted_text << std::endl;
     assert(expected == encrypted_text);
     assert(text == decrypted_text);
     std::cout << "Original text: " << text << std::endl;
@@ -72,6 +79,7 @@ static void test() {
     std::cout << ", Encrypted text: " << encrypted_text << std::endl;
     std::cout << ", Decrypted text: " << decrypted_text << std::endl;
     std::cout << "\nAll tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -79,6 +87,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

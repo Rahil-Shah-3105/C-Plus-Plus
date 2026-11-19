@@ -49,6 +49,7 @@ std::map<char, uint8_t> a1z26_encrypt_map = {
  * @returns encoded string with dashes to seperate letters
  */
 std::string encrypt(std::string text) {
+	std::cerr << "[ERROR] >>> Entering encrypt(text=" << text << ")" << std::endl;
     std::string result;
     std::transform(text.begin(), text.end(), text.begin(),
                    ::tolower);  // convert string to lowercase
@@ -65,6 +66,7 @@ std::string encrypt(std::string text) {
         }
     }
     result.pop_back();  // remove leading dash
+	std::cerr << "[WARN] <<< Exiting encrypt(text=" << text << ")" << std::endl;
     return result;
 }
 
@@ -76,6 +78,7 @@ std::string encrypt(std::string text) {
  * @returns the decrypted string in all uppercase or all lowercase
  */
 std::string decrypt(const std::string& text, bool bReturnUppercase = false) {
+	std::cerr << "[ERROR] >>> Entering decrypt(text=" << text << ",bReturnUppercase=" << bReturnUppercase << ")" << std::endl;
     std::string result;
 
     // split words seperated by spaces into a vector array
@@ -107,6 +110,7 @@ std::string decrypt(const std::string& text, bool bReturnUppercase = false) {
     if (bReturnUppercase) {
         std::transform(result.begin(), result.end(), result.begin(), ::toupper);
     }
+	std::cerr << "[WARN] <<< Exiting decrypt(text=" << text << ",bReturnUppercase=" << bReturnUppercase << ")" << std::endl;
     return result;
 }
 
@@ -118,10 +122,14 @@ std::string decrypt(const std::string& text, bool bReturnUppercase = false) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test
     std::string input = "Hello World";
+	std::cerr << "[ERROR] test(): input → " << input << std::endl;
     std::string expected = "8-5-12-12-15 23-15-18-12-4";
+	std::cerr << "[ERROR] test(): expected → " << expected << std::endl;
     std::string output = ciphers::a1z26::encrypt(input);
+	std::cerr << "[ERROR] test(): output → " << output << std::endl;
 
     std::cout << "Input: " << input << std::endl;
     std::cout << "Expected: " << expected << std::endl;
@@ -150,6 +158,7 @@ static void test() {
     std::cout << "Output: " << output << std::endl;
     assert(output == expected);
     std::cout << "TEST PASSED";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -157,6 +166,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

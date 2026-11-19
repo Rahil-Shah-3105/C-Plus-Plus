@@ -24,6 +24,7 @@ int min(int x, int y, int z) { return min(min(x, y), z); }
  * O(3^m)
  */
 int editDist(string str1, string str2, int m, int n) {
+	std::cerr << "[ERROR] >>> Entering editDist(str1=" << str1 << ",str2=" << str2 << ",m=" << m << ",n=" << n << ")" << std::endl;
     if (m == 0)
         return n;
     if (n == 0)
@@ -46,6 +47,7 @@ int editDist(string str1, string str2, int m, int n) {
  * O(m x n)
  */
 int editDistDP(string str1, string str2, int m, int n) {
+	std::cerr << "[ERROR] >>> Entering editDistDP(str1=" << str1 << ",str2=" << str2 << ",m=" << m << ",n=" << n << ")" << std::endl;
     // Create Table for SubProblems
     std::vector<std::vector<int> > dp(m + 1, std::vector<int>(n + 1));
 
@@ -72,15 +74,20 @@ int editDistDP(string str1, string str2, int m, int n) {
         }
     }
 
+	std::cerr << "[WARN] <<< Exiting editDistDP(str1=" << str1 << ",str2=" << str2 << ",m=" << m << ",n=" << n << ")" << std::endl;
     return dp[m][n];
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     string str1 = "sunday";
     string str2 = "saturday";
+	std::cerr << "[ERROR] main(): str2 → " << str2 << std::endl;
+	std::cerr << "[ERROR] main(): str1 → " << str1 << std::endl;
 
     cout << editDist(str1, str2, str1.length(), str2.length()) << endl;
     cout << editDistDP(str1, str2, str1.length(), str2.length()) << endl;
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

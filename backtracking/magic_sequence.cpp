@@ -78,6 +78,7 @@ bool filtering(const sequence_t& s, unsigned int depth) {
  * @param depth current depth in the tree
  */
 void solve(sequence_t* s, std::list<sequence_t>* ret, unsigned int depth = 0) {
+	std::cerr << "[ERROR] >>> Entering solve(s=" << s << ",ret=" << ret << ",depth=" << depth << ")" << std::endl;
     if (depth == s->size()) {
         if (is_magic(*s)) {
             ret->push_back(*s);
@@ -90,6 +91,7 @@ void solve(sequence_t* s, std::list<sequence_t>* ret, unsigned int depth = 0) {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting solve(s=" << s << ",ret=" << ret << ",depth=" << depth << ")" << std::endl;
 }
 
 }  // namespace magic_sequence
@@ -100,6 +102,7 @@ void solve(sequence_t* s, std::list<sequence_t>* ret, unsigned int depth = 0) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // test a valid magic sequence
     backtracking::magic_sequence::sequence_t s_magic = {6, 2, 1, 0, 0,
                                                         0, 1, 0, 0, 0};
@@ -109,6 +112,7 @@ static void test() {
     backtracking::magic_sequence::sequence_t s_not_magic = {5, 2, 1, 0, 0,
                                                             0, 1, 0, 0, 0};
     assert(!backtracking::magic_sequence::is_magic(s_not_magic));
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -116,6 +120,7 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     // solve magic sequences of size 2 to 11 and print the solutions
@@ -132,5 +137,6 @@ int main() {
             backtracking::magic_sequence::print(item);
         }
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

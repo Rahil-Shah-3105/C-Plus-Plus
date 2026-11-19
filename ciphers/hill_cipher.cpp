@@ -91,10 +91,13 @@ class HillCipher {
      */
     template <typename T1, typename T2>
     static const T2 rand_range(T1 a, T1 b) {
+		std::cerr << "[ERROR] >>> Entering rand_range(a=" << a << ",b=" << b << ")" << std::endl;
         // generate random number between 0 and 1
         long double r = static_cast<long double>(std::rand()) / RAND_MAX;
+		std::cerr << "[ERROR] rand_range(a=" << a << ",b=" << b << "): r → " << r << std::endl;
 
         // scale and return random number as integer
+		std::cerr << "[WARN] <<< Exiting rand_range(a=" << a << ",b=" << b << ")" << std::endl;
         return static_cast<T2>(r * (b - a) + a);
     }
 
@@ -137,6 +140,7 @@ class HillCipher {
      */
     template <typename T>
     static const T gcd(T a, T b) {
+		std::cerr << "[ERROR] >>> Entering gcd(a=" << a << ",b=" << b << ")" << std::endl;
         if (b > a)  // ensure always a < b
             std::swap(a, b);
 
@@ -146,6 +150,7 @@ class HillCipher {
             a = tmp;
         }
 
+		std::cerr << "[WARN] <<< Exiting gcd(a=" << a << ",b=" << b << ")" << std::endl;
         return a;
     }
 
@@ -189,6 +194,7 @@ class HillCipher {
      * @return index of character
      */
     static inline uint8_t get_char_idx(const char ch) {
+		std::cerr << "[ERROR] >>> Entering get_char_idx(ch=" << ch << ")" << std::endl;
         size_t L = std::strlen(STRKEY);
 
         for (size_t idx = 0; idx <= L; idx++)
@@ -197,6 +203,7 @@ class HillCipher {
 
         std::cerr << __func__ << ":" << __LINE__ << ": (" << ch
                   << ") Should not reach here!\n";
+		std::cerr << "[WARN] <<< Exiting get_char_idx(ch=" << ch << ")" << std::endl;
         return 0;
     }
 
@@ -249,6 +256,7 @@ class HillCipher {
      **/
     template <typename T>
     static matrix<double> get_inverse(matrix<T> const &A) {
+		std::cerr << "[ERROR] >>> Entering get_inverse(A=" << A << ")" << std::endl;
         // Assuming A is square matrix
         size_t N = A.size();
 
@@ -309,13 +317,16 @@ class HillCipher {
             }
         }
 
+		std::cerr << "[WARN] <<< Exiting get_inverse(A=" << A << ")" << std::endl;
         return inverse;
     }
 
     static int modulo(int a, int b) {
+		std::cerr << "[ERROR] >>> Entering modulo(a=" << a << ",b=" << b << ")" << std::endl;
         int ret = a % b;
         if (ret < 0)
             ret += b;
+		std::cerr << "[WARN] <<< Exiting modulo(a=" << a << ",b=" << b << ")" << std::endl;
         return ret;
     }
 
@@ -370,18 +381,25 @@ class HillCipher {
      * @return Decryption martix
      */
     static matrix<int> generate_decryption_key(matrix<int> const &encrypt_key) {
+		std::cerr << "[ERROR] >>> Entering generate_decryption_key(encrypt_key=" << encrypt_key << ")" << std::endl;
         size_t size = encrypt_key.size();
         int L = std::strlen(STRKEY);
+		std::cerr << "[ERROR] generate_decryption_key(encrypt_key=" << encrypt_key << "): L → " << L << std::endl;
+		std::cerr << "[ERROR] generate_decryption_key(encrypt_key=" << encrypt_key << "): size → " << size << std::endl;
 
         matrix<int> decrypt_key(size, std::valarray<int>(size));
         int det_encrypt = static_cast<int>(determinant_lu(encrypt_key));
+		std::cerr << "[ERROR] generate_decryption_key(encrypt_key=" << encrypt_key << "): det_encrypt → " << det_encrypt << std::endl;
 
         int mat_determinant = det_encrypt < 0 ? det_encrypt % L : det_encrypt;
+		std::cerr << "[ERROR] generate_decryption_key(encrypt_key=" << encrypt_key << "): mat_determinant → " << mat_determinant << std::endl;
 
         matrix<double> tmp_inverse = get_inverse(encrypt_key);
+		std::cerr << "[ERROR] generate_decryption_key(encrypt_key=" << encrypt_key << "): tmp_inverse → " << tmp_inverse << std::endl;
 
         // find co-prime factor for inversion
         int det_inv = -1;
+		std::cerr << "[ERROR] generate_decryption_key(encrypt_key=" << encrypt_key << "): det_inv → " << det_inv << std::endl;
         for (int i = 0; i < L; i++) {
             if (modulo(mat_determinant * i, L) == 1) {
                 det_inv = i;
@@ -397,6 +415,7 @@ class HillCipher {
         mat_determinant = det_inv * det_encrypt;
 
         // perform modular inverse of encryption matrix
+		std::cerr << "[WARN] <<< Exiting generate_decryption_key(encrypt_key=" << encrypt_key << ")" << std::endl;
         int i;
 #ifdef _OPENMP
 #pragma parallel omp for private(i)
@@ -468,6 +487,7 @@ class HillCipher {
  * @param text string to encrypt and decrypt
  */
 void test1(const std::string &text) {
+	std::cerr << "[ERROR] >>> Entering test1(text=" << text << ")" << std::endl;
     // std::string text = "Hello world!";
     std::cout << "======Test 1 (3x3 key) ======\nOriginal text:\n\t" << text
               << std::endl;
@@ -480,11 +500,13 @@ void test1(const std::string &text) {
     // matrix<int> ekey = {{22, 28, 25}, {5, 26, 15}, {14, 18, 9}};
     // std::cout << "Encryption key: \n" << ekey;
     std::string gibberish = ciphers::HillCipher::encrypt_text(text, ekey);
+	std::cerr << "[ERROR] test1(text=" << text << "): gibberish → " << gibberish << std::endl;
     std::cout << "Encrypted text:\n\t" << gibberish << std::endl;
 
     // matrix<int> dkey = ciphers::HillCipher::generate_decryption_key(ekey);
     // std::cout << "Decryption key: \n" << dkey;
     std::string txt_back = ciphers::HillCipher::decrypt_text(gibberish, dkey);
+	std::cerr << "[ERROR] test1(text=" << text << "): txt_back → " << txt_back << std::endl;
     std::cout << "Reconstruct text:\n\t" << txt_back << std::endl;
 
     std::ofstream out_file("hill_cipher_test1.txt");
@@ -495,6 +517,7 @@ void test1(const std::string &text) {
 
     assert(txt_back == text);
     std::cout << "Passed :)\n";
+	std::cerr << "[WARN] <<< Exiting test1(text=" << text << ")" << std::endl;
 }
 
 /**
@@ -503,6 +526,7 @@ void test1(const std::string &text) {
  * @param text string to encrypt and decrypt
  */
 void test2(const std::string &text) {
+	std::cerr << "[ERROR] >>> Entering test2(text=" << text << ")" << std::endl;
     // std::string text = "Hello world!";
     std::cout << "======Test 2 (8x8 key) ======\nOriginal text:\n\t" << text
               << std::endl;
@@ -513,9 +537,11 @@ void test2(const std::string &text) {
     matrix<int> dkey = p.second;
 
     std::string gibberish = ciphers::HillCipher::encrypt_text(text, ekey);
+	std::cerr << "[ERROR] test2(text=" << text << "): gibberish → " << gibberish << std::endl;
     std::cout << "Encrypted text:\n\t" << gibberish << std::endl;
 
     std::string txt_back = ciphers::HillCipher::decrypt_text(gibberish, dkey);
+	std::cerr << "[ERROR] test2(text=" << text << "): txt_back → " << txt_back << std::endl;
     std::cout << "Reconstruct text:\n\t" << txt_back << std::endl;
 
     std::ofstream out_file("hill_cipher_test2.txt");
@@ -526,18 +552,22 @@ void test2(const std::string &text) {
 
     assert(txt_back.compare(0, text.size(), text) == 0);
     std::cout << "Passed :)\n";
+	std::cerr << "[WARN] <<< Exiting test2(text=" << text << ")" << std::endl;
 }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));
     std::cout << "Key dictionary: (" << std::strlen(ciphers::STRKEY) << ")\n\t"
               << ciphers::STRKEY << "\n";
 
     std::string text = "This is a simple text with numb3r5 and exclamat!0n.";
+	std::cerr << "[ERROR] main(): text → " << text << std::endl;
 
     test1(text);
     test2(text);
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

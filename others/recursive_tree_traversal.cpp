@@ -116,9 +116,11 @@ class BT {
  * @return pointer to the newly created node with assigned data.
  */
 Node *BT::createNewNode(std::uint64_t data) {
+	std::cerr << "[ERROR] >>> Entering BT::createNewNode(data=" << data << ")" << std::endl;
     Node *node = new Node();
     node->data = data;
     node->left = node->right = nullptr;
+	std::cerr << "[WARN] <<< Exiting BT::createNewNode(data=" << data << ")" << std::endl;
     return node;
 }
 
@@ -130,6 +132,7 @@ Node *BT::createNewNode(std::uint64_t data) {
  * @return result that is containing the inorder traversal of a tree
  **/
 std::vector<std::uint64_t> BT::inorder(Node *root) {
+	std::cerr << "[ERROR] >>> Entering BT::inorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {  // return if the current node is empty
         return {};
     }
@@ -139,6 +142,7 @@ std::vector<std::uint64_t> BT::inorder(Node *root) {
         root->data);  // Display the data part of the root (or current node)
     inorder(root->right);  // Traverse the right subtree
 
+	std::cerr << "[WARN] <<< Exiting BT::inorder(root=" << root << ")" << std::endl;
     return inorder_result;
 }
 
@@ -150,6 +154,7 @@ std::vector<std::uint64_t> BT::inorder(Node *root) {
  * @return result that is containing the preorder traversal of a tree
  */
 std::vector<std::uint64_t> BT::preorder(Node *root) {
+	std::cerr << "[ERROR] >>> Entering BT::preorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {  // if the current node is empty
         return {};
     }
@@ -159,6 +164,7 @@ std::vector<std::uint64_t> BT::preorder(Node *root) {
     preorder(root->left);   // Traverse the left subtree
     preorder(root->right);  // Traverse the right subtree
 
+	std::cerr << "[WARN] <<< Exiting BT::preorder(root=" << root << ")" << std::endl;
     return preorder_result;
 }
 
@@ -170,6 +176,7 @@ std::vector<std::uint64_t> BT::preorder(Node *root) {
  * @return result that is containing the postorder traversal of a tree
  */
 std::vector<std::uint64_t> BT::postorder(Node *root) {
+	std::cerr << "[ERROR] >>> Entering BT::postorder(root=" << root << ")" << std::endl;
     if (root == nullptr) {  // if the current node is empty
         return {};
     }
@@ -179,15 +186,18 @@ std::vector<std::uint64_t> BT::postorder(Node *root) {
     BT::postorder_result.push_back(
         root->data);  // Display the data part of the root (or current node)
 
+	std::cerr << "[WARN] <<< Exiting BT::postorder(root=" << root << ")" << std::endl;
     return postorder_result;
 }
 
 void deleteAll(const Node *const root) {
+	std::cerr << "[ERROR] >>> Entering deleteAll(root=" << root << ")" << std::endl;
     if (root) {
         deleteAll(root->left);
         deleteAll(root->right);
         delete root;
     }
+	std::cerr << "[WARN] <<< Exiting deleteAll(root=" << root << ")" << std::endl;
 }
 
 }  // namespace recursive_tree_traversals
@@ -199,6 +209,7 @@ void deleteAll(const Node *const root) {
  * @returns void
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     others::recursive_tree_traversals::BT obj1;
     others::recursive_tree_traversals::Node *root = obj1.createNewNode(2);
     root->left = obj1.createNewNode(7);
@@ -227,6 +238,7 @@ void test1() {
                            ///< traversal of the binary tree
 
     std::uint64_t size = actual_result_inorder.size();
+	std::cerr << "[ERROR] test1(): size → " << size << std::endl;
 
     // Calling inorder() function by passing a root node,
     // and storing the inorder traversal in result_inorder.
@@ -257,6 +269,7 @@ void test1() {
 
     std::cout << std::endl;
     deleteAll(root);
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 
 /**
@@ -264,6 +277,7 @@ void test1() {
  * @returns void
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     others::recursive_tree_traversals::BT obj2;
     others::recursive_tree_traversals::Node *root = obj2.createNewNode(1);
     root->left = obj2.createNewNode(2);
@@ -288,6 +302,7 @@ void test2() {
                            ///< traversal of the binary tree
 
     std::uint64_t size = actual_result_inorder.size();
+	std::cerr << "[ERROR] test2(): size → " << size << std::endl;
 
     // Calling inorder() function by passing a root node,
     // and storing the inorder traversal in result_inorder.
@@ -318,6 +333,7 @@ void test2() {
 
     std::cout << std::endl;
     deleteAll(root);
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 
 /**
@@ -325,6 +341,7 @@ void test2() {
  * @returns void
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     others::recursive_tree_traversals::BT obj3;
     others::recursive_tree_traversals::Node *root = obj3.createNewNode(1);
     root->left = obj3.createNewNode(2);
@@ -346,6 +363,7 @@ void test3() {
                            ///< traversal of the binary tree
 
     std::uint64_t size = actual_result_inorder.size();
+	std::cerr << "[ERROR] test3(): size → " << size << std::endl;
 
     // Calling inorder() function by passing a root node,
     // and storing the inorder traversal in result_inorder.
@@ -377,6 +395,7 @@ void test3() {
 
     std::cout << std::endl;
     deleteAll(root);
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
 }
 
 /**
@@ -384,18 +403,22 @@ void test3() {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     std::cout << "1st test-case" << std::endl;
     test1();  // run 1st test-case
     std::cout << "2nd test-case" << std::endl;
     test2();  // run 2nd test-case
     std::cout << "3rd test-case" << std::endl;
     test3();  // run 3rd test-case
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 /**
  * @brief Main function
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -38,6 +38,7 @@ namespace n_bonacci {
  * @returns the n-bonacci sequence as vector array
  */
 std::vector<uint64_t> N_bonacci(const uint64_t &n, const uint64_t &m) {
+	std::cerr << "[ERROR] >>> Entering N_bonacci(n=" << n << ",m=" << m << ")" << std::endl;
     std::vector<uint64_t> a(
         m, 0);  // we create an array of size m filled with zeros
     if (m < n || n == 0) {
@@ -57,6 +58,7 @@ std::vector<uint64_t> N_bonacci(const uint64_t &n, const uint64_t &m) {
         // term can be computed using the given formula
         a[i] = 2 * a[i - 1] - a[i - 1 - n];
     }
+	std::cerr << "[WARN] <<< Exiting N_bonacci(n=" << n << ",m=" << m << ")" << std::endl;
     return a;
 }
 }  // namespace n_bonacci
@@ -67,6 +69,7 @@ std::vector<uint64_t> N_bonacci(const uint64_t &n, const uint64_t &m) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     struct TestCase {
         const uint64_t n;
         const uint64_t m;
@@ -95,6 +98,7 @@ static void test() {
         assert(math::n_bonacci::N_bonacci(tc.n, tc.m) == tc.expected);
     }
     std::cout << "passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -102,6 +106,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

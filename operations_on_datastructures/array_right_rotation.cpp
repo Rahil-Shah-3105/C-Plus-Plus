@@ -74,51 +74,61 @@ using operations_on_datastructures::shift_right;
  * @returns void
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {4, 5, 1, 2, 3}\n";
     std::vector<int32_t> arr = {1, 2, 3, 4, 5};
     std::vector<int32_t> res = shift_right(arr, 2);
+	std::cerr << "[ERROR] test1(): res.size() → " << res.size() << std::endl;
     std::vector<int32_t> expected = {4, 5, 1, 2, 3};
     assert(res == expected);
     print(res);  ///< Should print 4 5 1 2 3
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an empty vector
  * @returns void
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Initialized arr = {}\n";
     std::cout << "Expected result: {}\n";
     std::vector<int32_t> arr = {};
     std::vector<int32_t> res = shift_right(arr, 2);
+	std::cerr << "[ERROR] test2(): res.size() → " << res.size() << std::endl;
     std::vector<int32_t> expected = {};
     assert(res == expected);
     print(res);  ///< Should print empty newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check an invalid shift value
  * @returns void
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {}\n";
     std::vector<int32_t> arr = {1, 2, 3, 4, 5};
     std::vector<int32_t> res = shift_right(arr, 7);  ///< 7 > 5
+	std::cerr << "[ERROR] test3(): res.size() → " << res.size() << std::endl;
     std::vector<int32_t> expected = {};
     assert(res == expected);
     print(res);  ///< Should print empty newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check a very large input
  * @returns void
  */
 void test4() {
+	std::cerr << "[ERROR] >>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Initialized arr = {2, 4, ..., 420}\n";
     std::cout << "Expected result: {420, 2, 4, ..., 418}\n";
@@ -128,6 +138,7 @@ void test4() {
     }
     print(arr);
     std::vector<int32_t> res = shift_right(arr, 1);
+	std::cerr << "[ERROR] test4(): res.size() → " << res.size() << std::endl;
     std::vector<int32_t> expected;
     expected.push_back(420);
     for (int i = 0; i < 209; i++) {
@@ -136,20 +147,24 @@ void test4() {
     assert(res == expected);
     print(res);  ///< Should print {420, 2, 4, ..., 418}
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test4()" << std::endl;
 }
 /**
  * @brief A Test to check a shift of zero
  * @returns void
  */
 void test5() {
+	std::cerr << "[ERROR] >>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Initialized arr = {1, 2, 3, 4, 5}\n";
     std::cout << "Expected result: {1, 2, 3, 4, 5}\n";
     std::vector<int32_t> arr = {1, 2, 3, 4, 5};
     std::vector<int32_t> res = shift_right(arr, 0);
+	std::cerr << "[ERROR] test5(): res.size() → " << res.size() << std::endl;
     assert(res == arr);
     print(res);  ///< Should print 1 2 3 4 5
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test5()" << std::endl;
 }
 }  // namespace tests
 
@@ -158,11 +173,13 @@ void test5() {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -170,6 +187,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -93,6 +93,7 @@ void iterativeQuickSort(std::vector<int> &arr)
  */
 void tests()
 {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     //TEST 1 - Positive numbers
     std::vector<int> case1={100,534,1000000,553,10,61,2000,238,2756,9,12,56,30};
     std::cout<<"TEST 1\n";
@@ -118,6 +119,7 @@ void tests()
     std::cout<<"After: \n";
     for(auto x : case2) std::cout<<x<<",";
     std::cout<<"\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 
@@ -127,6 +129,8 @@ void tests()
  */
 int main()
 {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests(); // run self test implementation
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

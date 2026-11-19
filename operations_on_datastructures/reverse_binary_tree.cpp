@@ -39,9 +39,11 @@ struct Node {
      * @brief Creates a new Node with some initial data
      */
     explicit Node(int64_t _data) {
+		std::cerr << "[ERROR] >>> Entering Node(_data=" << _data << ")" << std::endl;
         data = _data;     ///< Set value of Node data
         left = nullptr;   ///< Initialize left child to NULL
         right = nullptr;  ///< Initialize right child to NULL
+		std::cerr << "[WARN] <<< Exiting Node(_data=" << _data << ")" << std::endl;
     }
 };
 
@@ -82,12 +84,14 @@ class BinaryTree {
      * @returns Node pointer to root node
      */
     Node* reverseBinaryTree(Node* pivot) {
+		std::cerr << "[ERROR] >>> Entering reverseBinaryTree(pivot=" << pivot << ")" << std::endl;
         if (pivot == nullptr) {
             return pivot;  ///< Base case
         }
         Node* temp = pivot->left;  ///< pointer to the left subtree
         pivot->left = reverseBinaryTree(pivot->right);  ///< Swap
         pivot->right = reverseBinaryTree(temp);         ///< Swap
+		std::cerr << "[WARN] <<< Exiting reverseBinaryTree(pivot=" << pivot << ")" << std::endl;
         return pivot;
     }
 
@@ -105,10 +109,12 @@ class BinaryTree {
     explicit BinaryTree(int64_t data) { root = new Node(data); }
 
     ~BinaryTree() {
+		std::cerr << "[ERROR] >>> Entering ~BinaryTree()" << std::endl;
         std::vector<Node*> nodes;
         nodes.emplace_back(root);
         while (!nodes.empty()) {
             const auto cur_node = nodes.back();
+			std::cerr << "[ERROR] ~BinaryTree(): cur_node → " << cur_node << std::endl;
             nodes.pop_back();
             if (cur_node) {
                 nodes.emplace_back(cur_node->left);
@@ -116,6 +122,7 @@ class BinaryTree {
                 delete cur_node;
             }
         }
+		std::cerr << "[WARN] <<< Exiting ~BinaryTree()" << std::endl;
     }
 
     /**
@@ -137,6 +144,7 @@ class BinaryTree {
      * @returns vector<int64_t> of nodes of the tree.
      */
     std::vector<int64_t> get_level_order() {
+		std::cerr << "[ERROR] >>> Entering get_level_order()" << std::endl;
         std::vector<int64_t> data;  ///< Result vector of int
         if (root == nullptr) {
             return data;  ///< Return empty vector if root is Invalid
@@ -154,6 +162,7 @@ class BinaryTree {
                 nodes.push(temp->right);  ///< Insert right node
             }
         }  /// Add nodes while Tree is not empty
+		std::cerr << "[WARN] <<< Exiting get_level_order()" << std::endl;
         return data;
     }
     /**
@@ -162,10 +171,12 @@ class BinaryTree {
      * @returns void
      */
     void print() {
+		std::cerr << "[ERROR] >>> Entering print()" << std::endl;
         for (int i : get_level_order()) {
             std::cout << i << " ";  /// Print each element in the tree
         }
         std::cout << "\n";  /// Print newline
+		std::cerr << "[WARN] <<< Exiting print()" << std::endl;
     }
 };
 
@@ -183,12 +194,15 @@ using operations_on_datastructures::reverse_binary_tree::
  * @brief A Test to check an edge case (single element reversal)
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     BinaryTree bst;
     std::vector<int64_t> pre_reversal, post_reversal;
     std::cout << "TEST CASE 1\n";
     std::cout << "Initializing tree with a single element (5)\n";
     bst.add(5);
     pre_reversal = bst.get_level_order();
+	std::cerr << "[ERROR] test1(): pre_reversal.size() → " << pre_reversal.size() << std::endl;
+	std::cerr << "[DEBUG] test1(): pre_reversal.size() → " << pre_reversal.size() << std::endl;
     std::cout << "Before reversal: ";
     bst.print();
     std::cout << "After reversal: ";
@@ -202,16 +216,20 @@ void test1() {
            post_reversal[0]);  ///< Check if both elements are same
     bst.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an edge case (NULL root element)
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     BinaryTree bst;
     std::vector<int64_t> pre_reversal, post_reversal;
     std::cout << "TEST CASE 2\n";
     std::cout << "Creating empty tree (root points to NULL)\n";
     pre_reversal = bst.get_level_order();
+	std::cerr << "[ERROR] test2(): pre_reversal.size() → " << pre_reversal.size() << std::endl;
+	std::cerr << "[DEBUG] test2(): pre_reversal.size() → " << pre_reversal.size() << std::endl;
     std::cout << "Before reversal: ";
     bst.print();
     std::cout << "After reversal: ";
@@ -223,11 +241,13 @@ void test2() {
            0);  ///< Ensure that there is only one element
     bst.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check correct reversal of a Binary Tree
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     BinaryTree bst;
     std::vector<int64_t> pre_reversal, post_reversal;
     std::vector<int64_t> pre_res = {4, 3, 6, 2, 5, 7, 1};
@@ -242,6 +262,8 @@ void test3() {
     bst.add(7);
     bst.add(1);
     pre_reversal = bst.get_level_order();
+	std::cerr << "[ERROR] test3(): pre_reversal.size() → " << pre_reversal.size() << std::endl;
+	std::cerr << "[DEBUG] test3(): pre_reversal.size() → " << pre_reversal.size() << std::endl;
     assert(pre_reversal == pre_res);  ///< Check for equality
     std::cout << "Before reversal: ";
     bst.print();
@@ -251,6 +273,7 @@ void test3() {
     assert(post_reversal == post_res);  ///< Check for equality
     bst.print();
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
 }
 }  // namespace tests
 
@@ -258,9 +281,11 @@ void test3() {
  * @brief Function to test the correctness of the Tree Reversal
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     tests::test1();  ///< Single element test
     tests::test2();  ///< No element test
     tests::test3();  ///< Correct reversal test
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -268,6 +293,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -39,11 +39,13 @@ namespace graph_coloring {
  */
 template <size_t V>
 void printSolution(const std::array<int, V>& color) {
+	std::cerr << "[ERROR] >>> Entering printSolution(color.size()=" << color.size() << ")" << std::endl;
     std::cout << "Following are the assigned colors\n";
     for (auto& col : color) {
         std::cout << col;
     }
     std::cout << "\n";
+	std::cerr << "[WARN] <<< Exiting printSolution(color.size()=" << color.size() << ")" << std::endl;
 }
 
 /**
@@ -109,6 +111,7 @@ void graphColoring(const std::array<std::array<int, V>, V>& graph, int m,
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Create following graph and test whether it is 3 colorable
     // (3)---(2)
     // |   / |
@@ -125,5 +128,6 @@ int main() {
     std::array<int, V> color{};
 
     backtracking::graph_coloring::graphColoring<V>(graph, m, color, 0);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -6,6 +6,7 @@
 using PII = std::pair<int, int>;
 
 int prim(int x, const std::vector<std::vector<PII> > &graph) {
+	std::cerr << "[ERROR] >>> Entering prim(x=" << x << ",graph.size()=" << graph.size() << ")" << std::endl;
     // priority queue to maintain edges with respect to weights
     std::priority_queue<PII, std::vector<PII>, std::greater<PII> > Q;
     std::vector<bool> marked(graph.size(), false);
@@ -30,10 +31,12 @@ int prim(int x, const std::vector<std::vector<PII> > &graph) {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting prim(x=" << x << ",graph.size()=" << graph.size() << ")" << std::endl;
     return minimum_cost;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int nodes = 0, edges = 0;
     std::cin >> nodes >> edges;  // number of nodes & edges in graph
     if (nodes == 0 || edges == 0) {
@@ -52,6 +55,8 @@ int main() {
 
     // Selecting 1 as the starting node
     int minimum_cost = prim(1, graph);
+	std::cerr << "[ERROR] main(): minimum_cost → " << minimum_cost << std::endl;
     std::cout << minimum_cost << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

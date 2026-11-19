@@ -49,6 +49,7 @@ namespace sorting {
  */
 template <typename T>
 void insertionSort(T *arr, int n) {
+	std::cerr << "[ERROR] >>> Entering insertionSort(arr=" << arr << ",n=" << n << ")" << std::endl;
     for (int i = 1; i < n; i++) {
         T temp = arr[i];
         int j = i - 1;
@@ -58,6 +59,10 @@ void insertionSort(T *arr, int n) {
         }
         arr[j + 1] = temp;
     }
+	std::cerr << "[ERROR] >>> Entering insertionSort(arr=" << arr << ")" << std::endl;
+	std::cerr << "[ERROR] insertionSort(arr=" << arr << "): n → " << n << std::endl;
+	std::cerr << "[WARN] <<< Exiting insertionSort(arr=" << arr << ",n=" << n << ")" << std::endl;
+	std::cerr << "[WARN] <<< Exiting insertionSort(arr=" << arr << ")" << std::endl;
 }
 
 /**
@@ -92,10 +97,13 @@ void insertionSort(std::vector<T> *arr) {
  */
 template <typename T>
 static void create_random_array(T *arr, int N) {
+	std::cerr << "[ERROR] >>> Entering create_random_array(arr=" << arr << ",N=" << N << ")" << std::endl;
     while (N--) {
         double r = (std::rand() % 10000 - 5000) / 100.f;
+		std::cerr << "[ERROR] create_random_array(arr=" << arr << ",N=" << N << "): r → " << r << std::endl;
         arr[N] = static_cast<T>(r);
     }
+	std::cerr << "[WARN] <<< Exiting create_random_array(arr=" << arr << ",N=" << N << ")" << std::endl;
 }
 
 /** 
@@ -103,6 +111,7 @@ static void create_random_array(T *arr, int N) {
  * @return void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     int arr1[10] = {78, 34, 35, 6, 34, 56, 3, 56, 2, 4};
     std::cout << "Test 1... ";
     sorting::insertionSort(arr1, 10);
@@ -140,6 +149,7 @@ static void tests() {
     sorting::insertionSort(arr6, 50);
     assert(std::is_sorted(arr6, arr6 + 50));
     std::cout << "passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /** 
@@ -147,6 +157,8 @@ static void tests() {
  * @return 0 on successful exit.
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests(); /// run self test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

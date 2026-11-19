@@ -10,6 +10,7 @@ int dp[MAX][MAX];
 // Function to find the most efficient way to multiply the given sequence of
 // matrices
 int MatrixChainMultiplication(int dim[], int i, int j) {
+	std::cerr << "[ERROR] >>> Entering MatrixChainMultiplication(dim=" << dim << ",i=" << i << ",j=" << j << ")" << std::endl;
     // base case: one matrix
     if (j <= i + 1)
         return 0;
@@ -17,6 +18,7 @@ int MatrixChainMultiplication(int dim[], int i, int j) {
     // stores minimum number of scalar multiplications (i.e., cost)
     // needed to compute the matrix M[i+1]...M[j] = M[i..j]
     int min = INT_MAX;
+	std::cerr << "[ERROR] MatrixChainMultiplication(dim=" << dim << ",i=" << i << ",j=" << j << "): min → " << min << std::endl;
 
     // if dp[i][j] is not calculated (calculate it!!)
 
@@ -27,6 +29,7 @@ int MatrixChainMultiplication(int dim[], int i, int j) {
         for (int k = i + 1; k <= j - 1; k++) {
             // recur for M[i+1]..M[k] to get a i x k matrix
             int cost = MatrixChainMultiplication(dim, i, k);
+			std::cerr << "[ERROR] MatrixChainMultiplication(dim=" << dim << ",i=" << i << ",j=" << j << "): cost → " << cost << std::endl;
 
             // recur for M[k+1]..M[j] to get a k x j matrix
             cost += MatrixChainMultiplication(dim, k, j);
@@ -41,15 +44,18 @@ int MatrixChainMultiplication(int dim[], int i, int j) {
     }
 
     // return min cost to multiply M[j+1]..M[j]
+	std::cerr << "[WARN] <<< Exiting MatrixChainMultiplication(dim=" << dim << ",i=" << i << ",j=" << j << ")" << std::endl;
     return dp[i][j];
 }
 
 // main function
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Matrix i has Dimensions dim[i-1] & dim[i] for i=1..n
     // input is 10 x 30 matrix, 30 x 5 matrix, 5 x 60 matrix
     int dim[] = {10, 30, 5, 60};
     int n = sizeof(dim) / sizeof(dim[0]);
+	std::cerr << "[ERROR] main(): n → " << n << std::endl;
 
     // Function Calling: MatrixChainMultiplications(dimensions_array, starting,
     // ending);
@@ -57,5 +63,6 @@ int main() {
     cout << "Minimum cost is " << MatrixChainMultiplication(dim, 0, n - 1)
          << "\n";
 
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

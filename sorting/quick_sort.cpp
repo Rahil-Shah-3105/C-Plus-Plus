@@ -133,8 +133,10 @@ std::vector<T> quick_sort(std::vector<T> arr, const int &low, const int &high) {
  */
 template <typename T>
 void show(const std::vector<T> &arr, const int &size) {
+	std::cerr << "[ERROR] >>> Entering show(arr.size()=" << arr.size() << ",size=" << size << ")" << std::endl;
     for (int i = 0; i < size; i++) std::cout << arr[i] << " ";
     std::cout << "\n";
+	std::cerr << "[WARN] <<< Exiting show(arr.size()=" << arr.size() << ",size=" << size << ")" << std::endl;
 }
 
 }  // namespace quick_sort
@@ -145,6 +147,7 @@ void show(const std::vector<T> &arr, const int &size) {
  * @returns void
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     // 1st test (normal numbers)
     std::vector<uint64_t> arr = {5, 3, 8, 12, 14, 16, 28, 96, 2, 5977};
     std::vector<uint64_t> arr_sorted = sorting::quick_sort::quick_sort(
@@ -173,6 +176,7 @@ static void tests() {
 
     // 4th test (random decimal and negative numbers)
     size_t size = std::rand() % 750 + 100;
+	std::cerr << "[ERROR] tests(): size → " << size << std::endl;
 
     std::vector<float> arr4(size);
     for (uint64_t i = 0; i < size; i++) {
@@ -204,6 +208,7 @@ static void tests() {
     sorting::quick_sort::show(
         arr4_sorted, int(std::end(arr4_sorted) - std::begin(arr4_sorted)) - 1);
     std::cout << "\nEnd: 4th array.\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
@@ -211,6 +216,7 @@ static void tests() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int choice = 0;
 
     std::cout << "\tAvailable modes\t\n\n";
@@ -246,5 +252,6 @@ int main() {
         std::cout << "\nSorted array: \n";
         sorting::quick_sort::show(arr, size);
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

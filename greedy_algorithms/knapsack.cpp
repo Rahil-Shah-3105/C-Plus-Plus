@@ -9,6 +9,7 @@ struct Item {
 float profitPerUnit(Item x) { return (float)x.profit / (float)x.weight; }
 
 int partition(Item arr[], int low, int high) {
+	std::cerr << "[ERROR] >>> Entering partition(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
     Item pivot = arr[high];  // pivot
     int i = (low - 1);       // Index of smaller element
 
@@ -25,19 +26,24 @@ int partition(Item arr[], int low, int high) {
     Item temp = arr[i + 1];
     arr[i + 1] = arr[high];
     arr[high] = temp;
+	std::cerr << "[WARN] <<< Exiting partition(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
     return (i + 1);
 }
 
 void quickSort(Item arr[], int low, int high) {
+	std::cerr << "[ERROR] >>> Entering quickSort(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
     if (low < high) {
         int p = partition(arr, low, high);
+		std::cerr << "[ERROR] quickSort(arr=" << arr << ",low=" << low << ",high=" << high << "): p → " << p << std::endl;
 
         quickSort(arr, low, p - 1);
         quickSort(arr, p + 1, high);
     }
+	std::cerr << "[WARN] <<< Exiting quickSort(arr=" << arr << ",low=" << low << ",high=" << high << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     cout << "\nEnter the capacity of the knapsack : ";
     float capacity;
     cin >> capacity;
@@ -68,11 +74,13 @@ int main() {
             cout << "\n\t" << capacity << "\t"
                  << profitPerUnit(itemArray[i]) * capacity;
             capacity = 0;
+			std::cerr << "[DEBUG] main(): capacity → " << capacity << std::endl;
             break;
         }
     }
 
     cout << "\nMax Profit : " << maxProfit;
     delete[] itemArray;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

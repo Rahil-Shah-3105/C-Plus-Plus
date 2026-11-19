@@ -64,11 +64,14 @@ int64_t gcdExtended(const int64_t& a, const int64_t& b, int64_t& x,
  * @return the inverce of a modulo m, if it exists, -1 otherwise
  */
 int64_t modInverse(const int64_t& a, const int64_t& m) {
+	std::cerr << "[ERROR] >>> Entering modInverse(a=" << a << ",m=" << m << ")" << std::endl;
     int64_t x = 0, y = 0;
     const int64_t g = gcdExtended(a, m, x, y);
+	std::cerr << "[ERROR] modInverse(a=" << a << ",m=" << m << "): g → " << g << std::endl;
     if (g != 1) {  // modular inverse doesn't exist
         return -1;
     } else {
+		std::cerr << "[WARN] <<< Exiting modInverse(a=" << a << ",m=" << m << ")" << std::endl;
         return ((x + m) % m);
     }
 }
@@ -114,6 +117,7 @@ class NCRModuloP {
      * @return the value nCr % p
      */
     int64_t ncr(const int64_t& n, const int64_t& r) const {
+		std::cerr << "[ERROR] >>> Entering ncr(n=" << n << ",r=" << r << ")" << std::endl;
         // Base cases
         if (r > n) {
             return 0;
@@ -126,10 +130,13 @@ class NCRModuloP {
         }
         // fac is a global array with fac[r] = (r! % p)
         const auto denominator = (fac[r] * fac[n - r]) % p;
+		std::cerr << "[ERROR] ncr(n=" << n << ",r=" << r << "): denominator → " << denominator << std::endl;
         const auto denominator_inv = utils::modInverse(denominator, p);
+		std::cerr << "[ERROR] ncr(n=" << n << ",r=" << r << "): denominator_inv → " << denominator_inv << std::endl;
         if (denominator_inv < 0) {  // modular inverse doesn't exist
             return -1;
         }
+		std::cerr << "[WARN] <<< Exiting ncr(n=" << n << ",r=" << r << ")" << std::endl;
         return (fac[n] * denominator_inv) % p;
     }
 };
@@ -140,6 +147,7 @@ class NCRModuloP {
  * @brief tests math::ncr_modulo_p::NCRModuloP
  */
 static void tests() {
+	std::cerr << "[ERROR] >>> Entering tests()" << std::endl;
     struct TestCase {
         const int64_t size;
         const int64_t p;
@@ -167,12 +175,14 @@ static void tests() {
     }
 
     std::cout << "\n\nAll tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting tests()" << std::endl;
 }
 
 /**
  * @brief example showing the usage of the math::ncr_modulo_p::NCRModuloP class
  */
 void example() {
+	std::cerr << "[ERROR] >>> Entering example()" << std::endl;
     const int64_t size = 1e6 + 1;
     const int64_t p = 1e9 + 7;
 
@@ -186,10 +196,13 @@ void example() {
         std::cout << 6 << "C" << i << " mod " << p << " = " << ncrObj.ncr(6, i)
                   << "\n";
     }
+	std::cerr << "[WARN] <<< Exiting example()" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     tests();
     example();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

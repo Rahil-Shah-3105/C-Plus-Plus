@@ -24,24 +24,32 @@
 /** define \f$f(x)\f$ to find root for
  */
 static double eq(double i) {
+	std::cerr << "[ERROR] >>> Entering eq(i=" << i << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting eq(i=" << i << ")" << std::endl;
     return (std::pow(i, 3) - (4 * i) - 9);  // original equation
 }
 
 /** get the sign of any given number */
 template <typename T>
 int sgn(T val) {
+	std::cerr << "[ERROR] >>> Entering sgn(val=" << val << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting sgn(val=" << val << ")" << std::endl;
     return (T(0) < val) - (val < T(0));
 }
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     double a = -1, b = 1, x, z;
     int i;
+	std::cerr << "[ERROR] main(): a → " << a << std::endl;
 
     // loop to find initial intervals a, b
     for (int i = 0; i < MAX_ITERATIONS; i++) {
         z = eq(a);
+		std::cerr << "[ERROR] main(): z → " << z << std::endl;
         x = eq(b);
+		std::cerr << "[ERROR] main(): x → " << x << std::endl;
         if (sgn(z) == sgn(x)) {  // same signs, increase interval
             b++;
             a--;
@@ -71,5 +79,6 @@ int main() {
     }
 
     std::cout << "\n\nRoot: " << x << "\t\tSteps: " << i << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

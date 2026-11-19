@@ -9,6 +9,7 @@
     https://oeis.org/A000108/
  */
 
+#include "iostream"
 #include <cassert>     /// for assert
 #include <cstdint>     /// for std::uint64_t
 #include <cstdlib>     /// for std::size_t
@@ -24,6 +25,8 @@ class catalan_numbers {
     std::vector<value_type> known{1, 1};
 
     value_type compute_next() {
+		std::cerr << "[ERROR] >>> Entering compute_next()" << std::endl;
+        std::cerr << "[WARN] <<< Exiting compute_next()" << std::endl;
         return std::transform_reduce(known.begin(), known.end(), known.rbegin(),
                                      static_cast<value_type>(0), std::plus<>(),
                                      std::multiplies<>());
@@ -37,14 +40,17 @@ class catalan_numbers {
      * @return the n-th Catalan number
      */
     value_type get(std::size_t n) {
+		std::cerr << "[ERROR] >>> Entering get(n=" << n << ")" << std::endl;
         while (known.size() <= n) {
             this->add();
         }
+		std::cerr << "[WARN] <<< Exiting get(n=" << n << ")" << std::endl;
         return known[n];
     }
 };
 
 void test_catalan_numbers_up_to_20() {
+	std::cerr << "[ERROR] >>> Entering test_catalan_numbers_up_to_20()" << std::endl;
     // data verified with https://oeis.org/A000108/
     catalan_numbers cn;
     assert(cn.get(0) == 1ULL);
@@ -68,15 +74,20 @@ void test_catalan_numbers_up_to_20() {
     assert(cn.get(18) == 477638700ULL);
     assert(cn.get(19) == 1767263190ULL);
     assert(cn.get(20) == 6564120420ULL);
+	std::cerr << "[WARN] <<< Exiting test_catalan_numbers_up_to_20()" << std::endl;
 }
 
 void test_catalan_numbers_25() {
+	std::cerr << "[ERROR] >>> Entering test_catalan_numbers_25()" << std::endl;
     // data verified with https://oeis.org/A000108/
     catalan_numbers cn;
     assert(cn.get(25) == 4861946401452ULL);
+	std::cerr << "[WARN] <<< Exiting test_catalan_numbers_25()" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test_catalan_numbers_up_to_20();
     test_catalan_numbers_25();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

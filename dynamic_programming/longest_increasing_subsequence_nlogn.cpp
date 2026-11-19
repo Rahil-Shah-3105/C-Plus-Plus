@@ -30,6 +30,7 @@ int LIS(const std::vector<int>& arr, int n) {
     return active.size();  // size of the LIS.
 }
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int n;
     cout << "Enter size of array: ";
     cin >> n;
@@ -39,5 +40,6 @@ int main() {
         cin >> a[i];
     }
     cout << LIS(a, n) << endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

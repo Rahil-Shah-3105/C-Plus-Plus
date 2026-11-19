@@ -160,12 +160,16 @@ static void test(std::int32_t N, double h, double a, double b,
  * @returns 0 on exit
  */
 int main(int argc, char** argv) {
+	std::cerr << "[ERROR] >>> Entering main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     std::int32_t N =
         16;  /// Number of intervals to divide the integration interval.
     /// MUST BE EVEN
     double a = 1, b = 3;  /// Starting and ending point of the integration in
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): a → " << a << std::endl;
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): b → " << b << std::endl;
     /// the real axis
     double h = NAN;  /// Step, calculated by a, b and N
+	std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): h → " << h << std::endl;
 
     bool used_argv_parameters =
         false;  // If argv parameters are used then the assert must be omitted
@@ -175,6 +179,7 @@ int main(int argc, char** argv) {
     // displaying messages)
     if (argc == 4) {
         N = std::atoi(argv[1]);
+		std::cerr << "[ERROR] main(argc=" << argc << ",argv=" << argv << "): N → " << N << std::endl;
         a = std::atof(argv[2]);
         b = std::atof(argv[3]);
         // Check if a<b else abort
@@ -195,5 +200,6 @@ int main(int argc, char** argv) {
 
     test(N, h, a, b, used_argv_parameters);  // run self-test implementations
 
+	std::cerr << "[WARN] <<< Exiting main(argc=" << argc << ",argv=" << argv << ")" << std::endl;
     return 0;
 }

@@ -38,6 +38,7 @@ const std::string chars =
  * @returns Base64 encoded string
  */
 std::string base64_encode(const std::string &input) {
+	std::cerr << "[ERROR] >>> Entering base64_encode(input=" << input << ")" << std::endl;
     std::string base64_string;  /// Output of this function: base64 string
     // base64 deals with 6-bit chars encoded as per chars, so
     // we will always filter 6-bits from input.
@@ -78,6 +79,7 @@ std::string base64_encode(const std::string &input) {
             base64_string.push_back('=');  // padding characters
         }
     }
+	std::cerr << "[WARN] <<< Exiting base64_encode(input=" << input << ")" << std::endl;
     return base64_string;
 }
 /**
@@ -88,6 +90,7 @@ std::string base64_encode(const std::string &input) {
  * @returns integer denoting position of character in array `chars`
  */
 uint8_t find_idx(const char c) {
+	std::cerr << "[ERROR] >>> Entering find_idx(c=" << c << ")" << std::endl;
     if (c >= 'A' && c <= 'Z') {
         return c - 'A';
     } else if (c >= 'a' && c <= 'z') {
@@ -99,6 +102,7 @@ uint8_t find_idx(const char c) {
     } else if (c == '/') {
         return 63;
     }
+	std::cerr << "[WARN] <<< Exiting find_idx(c=" << c << ")" << std::endl;
     return -1;
 }
 /**
@@ -108,6 +112,7 @@ uint8_t find_idx(const char c) {
  * @returns Base64 decoded string
  */
 std::string base64_decode(const std::string &base64_str) {
+	std::cerr << "[ERROR] >>> Entering base64_decode(base64_str=" << base64_str << ")" << std::endl;
     std::string
         base64_decoded;  /// Output of this function: base64 decoded string
     for (uint32_t i = 0; i < base64_str.size(); i += 4) {
@@ -144,6 +149,7 @@ std::string base64_decode(const std::string &base64_str) {
             }
         }
     }
+	std::cerr << "[WARN] <<< Exiting base64_decode(base64_str=" << base64_str << ")" << std::endl;
     return base64_decoded;
 }
 }  // namespace base64_encoding
@@ -154,10 +160,12 @@ std::string base64_decode(const std::string &base64_str) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st Test
     std::string str =
         "To err is human, but to really foul things up you need a computer.";
     std::string base64_str = ciphers::base64_encoding::base64_encode(str);
+	std::cerr << "[ERROR] test(): base64_str → " << base64_str << std::endl;
     std::string verify =
         "VG8gZXJyIGlzIGh1bWFuLCBidXQgdG8gcmVhbGx5IGZvdWwgdGhpbmdzIHVwIHlvdSBuZW"
         "VkIGEgY29tcHV0ZXIu";
@@ -186,8 +194,10 @@ static void test() {
     // verify encoding
     assert(base64_str == verify);
     original_str = ciphers::base64_encoding::base64_decode(base64_str);
+	std::cerr << "[ERROR] test(): original_str → " << original_str << std::endl;
     // verify decoding
     assert(original_str == str);
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -195,6 +205,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -72,11 +72,13 @@ std::vector<T> dnfSort(const std::vector<T> &in_arr) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test
     // [1, 0, 2, 1] return [0, 1, 1, 2]
     std::vector<uint64_t> array1 = {0, 1, 1, 2};
     std::cout << "Test 1... ";
     std::vector<uint64_t> arr1 = sorting::dnf_sort::dnfSort(array1);
+	std::cerr << "[ERROR] test(): arr1.size() → " << arr1.size() << std::endl;
     assert(std::is_sorted(std::begin(arr1), std::end(arr1)));
     std::cout << "passed" << std::endl;
     // 2nd test
@@ -84,6 +86,7 @@ static void test() {
     std::vector<uint64_t> array2 = {1, 0, 0, 1, 1, 0, 2, 1};
     std::cout << "Test 2... ";
     std::vector<uint64_t> arr2 = sorting::dnf_sort::dnfSort(array2);
+	std::cerr << "[ERROR] test(): arr2.size() → " << arr2.size() << std::endl;
     assert(std::is_sorted(std::begin(arr2), std::end(arr2)));
     std::cout << "passed" << std::endl;
     // 3rd test
@@ -91,6 +94,7 @@ static void test() {
     std::vector<uint64_t> array3 = {1, 1, 0, 0, 1, 2, 2, 0, 2, 1};
     std::cout << "Test 3... ";
     std::vector<uint64_t> arr3 = sorting::dnf_sort::dnfSort(array3);
+	std::cerr << "[ERROR] test(): arr3.size() → " << arr3.size() << std::endl;
     assert(std::is_sorted(std::begin(arr3), std::end(arr3)));
     std::cout << "passed" << std::endl;
     // 4th test
@@ -98,8 +102,10 @@ static void test() {
     std::vector<uint64_t> array4 = {2, 2, 2, 0, 0, 1, 1};
     std::cout << "Test 4... ";
     std::vector<uint64_t> arr4 = sorting::dnf_sort::dnfSort(array4);
+	std::cerr << "[ERROR] test(): arr4.size() → " << arr4.size() << std::endl;
     assert(std::is_sorted(std::begin(arr4), std::end(arr4)));
     std::cout << "passed" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -107,6 +113,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // execute the test
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

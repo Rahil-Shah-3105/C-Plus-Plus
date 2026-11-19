@@ -69,11 +69,13 @@ Bitset::Bitset(std::size_t initSize) : data(initSize) {}
  * @returns void
  */
 void Bitset::add(std::size_t x) {
+	std::cerr << "[ERROR] >>> Entering Bitset::add(x=" << x << ")" << std::endl;
     std::size_t blockIndex = x / blockSize;
     if (blockIndex >= data.size()) {
         data.resize(blockIndex + 1);
     }
     data[blockIndex] |= 1 << (x % blockSize);
+	std::cerr << "[WARN] <<< Exiting Bitset::add(x=" << x << ")" << std::endl;
 }
 
 /**
@@ -84,10 +86,12 @@ void Bitset::add(std::size_t x) {
  * @returns false if bit position x is 0
  */
 bool Bitset::contains(std::size_t x) {
+	std::cerr << "[ERROR] >>> Entering Bitset::contains(x=" << x << ")" << std::endl;
     std::size_t blockIndex = x / blockSize;
     if (blockIndex >= data.size()) {
         return false;
     }
+	std::cerr << "[WARN] <<< Exiting Bitset::contains(x=" << x << ")" << std::endl;
     return data[blockIndex] & (1 << (x % blockSize));
 }
 
@@ -164,10 +168,13 @@ bool BloomFilter<T>::contains(T x) {
  * @returns hash for a string
  */
 static std::size_t hashDJB2(std::string const& s) {
+	std::cerr << "[ERROR] >>> Entering hashDJB2(s=" << s << ")" << std::endl;
     std::size_t hash = 5381;
     for (char c : s) {
         hash = ((hash << 5) + hash) + c;
+		std::cerr << "[ERROR] hashDJB2(s=" << s << "): hash → " << hash << std::endl;
     }
+	std::cerr << "[WARN] <<< Exiting hashDJB2(s=" << s << ")" << std::endl;
     return hash;
 }
 
@@ -180,12 +187,15 @@ static std::size_t hashDJB2(std::string const& s) {
  * @returns hash for the given string
  */
 static std::size_t hashStr(std::string const& s) {
+	std::cerr << "[ERROR] >>> Entering hashStr(s=" << s << ")" << std::endl;
     std::size_t hash = 37;
     std::size_t primeNum1 = 54059;
+	std::cerr << "[ERROR] hashStr(s=" << s << "): hash → " << hash << std::endl;
     std::size_t primeNum2 = 76963;
     for (char c : s) {
         hash = (hash * primeNum1) ^ (c * primeNum2);
     }
+	std::cerr << "[WARN] <<< Exiting hashStr(s=" << s << ")" << std::endl;
     return hash;
 }
 
@@ -197,9 +207,12 @@ static std::size_t hashStr(std::string const& s) {
  * @returns hash for the `x` parameter
  */
 std::size_t hashInt_1(int x) {
+	std::cerr << "[ERROR] >>> Entering hashInt_1(x=" << x << ")" << std::endl;
     x = ((x >> 16) ^ x) * 0x45d9f3b;
     x = ((x >> 16) ^ x) * 0x45d9f3b;
     x = (x >> 16) ^ x;
+	std::cerr << "[ERROR] hashInt_1(x=" << x << "): x → " << x << std::endl;
+	std::cerr << "[WARN] <<< Exiting hashInt_1(x=" << x << ")" << std::endl;
     return x;
 }
 
@@ -211,10 +224,13 @@ std::size_t hashInt_1(int x) {
  * @returns hash for the `x` parameter
  */
 std::size_t hashInt_2(int x) {
+	std::cerr << "[ERROR] >>> Entering hashInt_2(x=" << x << ")" << std::endl;
     auto y = static_cast<std::size_t>(x);
     y = (y ^ (y >> 30)) * static_cast<std::size_t>(0xbf58476d1ce4e5b9);
     y = (y ^ (y >> 27)) * static_cast<std::size_t>(0x94d049bb133111eb);
     y = y ^ (y >> 31);
+	std::cerr << "[ERROR] hashInt_2(x=" << x << "): y → " << y << std::endl;
+	std::cerr << "[WARN] <<< Exiting hashInt_2(x=" << x << ")" << std::endl;
     return y;
 }
 }  // namespace data_structures
@@ -224,6 +240,7 @@ std::size_t hashInt_2(int x) {
  * @returns void
  */
 static void test_bloom_filter_string() {
+	std::cerr << "[ERROR] >>> Entering test_bloom_filter_string()" << std::endl;
     data_structures::BloomFilter<std::string> filter(
         10, {data_structures::hashDJB2, data_structures::hashStr});
     std::vector<std::string> toCheck{"hello", "world", "!"};
@@ -237,6 +254,7 @@ static void test_bloom_filter_string() {
     for (const auto& x : toCheck) {
         assert(filter.contains(x));
     }
+	std::cerr << "[WARN] <<< Exiting test_bloom_filter_string()" << std::endl;
 }
 
 /**
@@ -244,6 +262,7 @@ static void test_bloom_filter_string() {
  * @returns void
  */
 static void test_bloom_filter_int() {
+	std::cerr << "[ERROR] >>> Entering test_bloom_filter_int()" << std::endl;
     data_structures::BloomFilter<int> filter(
         20, {data_structures::hashInt_1, data_structures::hashInt_2});
     std::vector<int> toCheck{100, 200, 300, 50};
@@ -257,6 +276,7 @@ static void test_bloom_filter_int() {
     for (int x : toCheck) {
         assert(filter.contains(x));
     }
+	std::cerr << "[WARN] <<< Exiting test_bloom_filter_int()" << std::endl;
 }
 
 /**
@@ -265,6 +285,7 @@ static void test_bloom_filter_int() {
  * @returns void
  */
 static void test_bitset() {
+	std::cerr << "[ERROR] >>> Entering test_bitset()" << std::endl;
     data_structures::Bitset set(2);
     std::vector<std::size_t> toCheck{0, 1, 5, 8, 63, 64, 67, 127};
     for (auto x : toCheck) {
@@ -273,6 +294,7 @@ static void test_bitset() {
     }
     assert(set.contains(128) == false);
     assert(set.contains(256) == false);
+	std::cerr << "[WARN] <<< Exiting test_bitset()" << std::endl;
 }
 
 /**
@@ -280,6 +302,7 @@ static void test_bitset() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // run self-test implementations
 
     test_bitset();  // run test for bitset, because bloom filter is depending on it
@@ -287,5 +310,6 @@ int main() {
     test_bloom_filter_int();
     
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

@@ -33,8 +33,11 @@ class binary_search_tree {
         * @param _value The value of the constructed node.
         */
         explicit bst_node(T _value) {
+			std::cerr << "[ERROR] >>> Entering bst_node(_value=" << _value << ")" << std::endl;
             value = _value;
             left = nullptr;
+			std::cerr << "[DEBUG] bst_node(_value=" << _value << "): value → " << value << std::endl;
+        std::cerr << "[WARN] <<< Exiting bst_node(_value=" << _value << ")" << std::endl;
             right = nullptr;
         }
     };
@@ -111,6 +114,7 @@ class binary_search_tree {
         } else {
             return false;
         }
+		std::cerr << "[ERROR] >>> Entering insert(new_value=" << new_value << ")" << std::endl;
     }
 
     /**
@@ -164,6 +168,8 @@ class binary_search_tree {
         } else {
             return remove(node, node->right, rm_value);
         }
+		std::cerr << "[ERROR] >>> Entering remove(rm_value=" << rm_value << ")" << std::endl;
+		std::cerr << "[WARN] <<< Exiting remove(rm_value=" << rm_value << ")" << std::endl;
     }
 
     /**
@@ -319,9 +325,11 @@ class binary_search_tree {
      * @return std::vector<T> List of values, sorted in in-order order.
      */
     std::vector<T> get_elements_inorder() {
+		std::cerr << "[ERROR] >>> Entering get_elements_inorder()" << std::endl;
         std::vector<T> result;
         traverse_inorder([&](T node_value) { result.push_back(node_value); },
                          root_);
+		std::cerr << "[WARN] <<< Exiting get_elements_inorder()" << std::endl;
         return result;
     }
 
@@ -331,9 +339,11 @@ class binary_search_tree {
      * @return std::vector<T> List of values, sorted in pre-order order.
      */
     std::vector<T> get_elements_preorder() {
+		std::cerr << "[ERROR] >>> Entering get_elements_preorder()" << std::endl;
         std::vector<T> result;
         traverse_preorder([&](T node_value) { result.push_back(node_value); },
                           root_);
+		std::cerr << "[WARN] <<< Exiting get_elements_preorder()" << std::endl;
         return result;
     }
 
@@ -343,9 +353,11 @@ class binary_search_tree {
      * @return std::vector<T> List of values, sorted in post-order order.
      */
     std::vector<T> get_elements_postorder() {
+		std::cerr << "[ERROR] >>> Entering get_elements_postorder()" << std::endl;
         std::vector<T> result;
         traverse_postorder([&](T node_value) { result.push_back(node_value); },
                            root_);
+		std::cerr << "[WARN] <<< Exiting get_elements_postorder()" << std::endl;
         return result;
     }
 };
@@ -356,10 +368,12 @@ class binary_search_tree {
  * @returns `void`
  */
 static void test_insert() {
+	std::cerr << "[ERROR] >>> Entering test_insert()" << std::endl;
     std::cout << "Testing BST insert...";
 
     binary_search_tree<int> tree;
     bool res = tree.insert(5);
+	std::cerr << "[ERROR] test_insert(): res → " << res << std::endl;
     int min = -1, max = -1;
     assert(res);
     assert(tree.find_max(max));
@@ -378,10 +392,12 @@ static void test_insert() {
     assert(tree.size() == 4);
 
     bool fail_res = tree.insert(4);
+	std::cerr << "[ERROR] test_insert(): fail_res → " << fail_res << std::endl;
     assert(!fail_res);
     assert(tree.size() == 4);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_insert()" << std::endl;
 }
 
 /**
@@ -390,6 +406,7 @@ static void test_insert() {
  * @returns `void`
  */
 static void test_remove() {
+	std::cerr << "[ERROR] >>> Entering test_remove()" << std::endl;
     std::cout << "Testing BST remove...";
 
     binary_search_tree<int> tree;
@@ -399,6 +416,7 @@ static void test_remove() {
     tree.insert(6);
 
     bool res = tree.remove(5);
+	std::cerr << "[ERROR] test_remove(): res → " << res << std::endl;
     int min = -1, max = -1;
     assert(res);
     assert(tree.find_max(max));
@@ -415,10 +433,12 @@ static void test_remove() {
     assert(tree.contains(6) == false);
 
     bool fail_res = tree.remove(5);
+	std::cerr << "[ERROR] test_remove(): fail_res → " << fail_res << std::endl;
     assert(!fail_res);
     assert(tree.size() == 0);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_remove()" << std::endl;
 }
 
 /**
@@ -427,6 +447,7 @@ static void test_remove() {
  * @returns `void`
  */
 static void test_contains() {
+	std::cerr << "[ERROR] >>> Entering test_contains()" << std::endl;
     std::cout << "Testing BST contains...";
 
     binary_search_tree<int> tree;
@@ -442,6 +463,7 @@ static void test_contains() {
     assert(!tree.contains(999));
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_contains()" << std::endl;
 }
 
 /**
@@ -450,6 +472,7 @@ static void test_contains() {
  * @returns `void`
  */
 static void test_find_min() {
+	std::cerr << "[ERROR] >>> Entering test_find_min()" << std::endl;
     std::cout << "Testing BST find_min...";
 
     int min = 0;
@@ -465,6 +488,7 @@ static void test_find_min() {
     assert(min == 3);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_find_min()" << std::endl;
 }
 
 /**
@@ -473,6 +497,7 @@ static void test_find_min() {
  * @returns `void`
  */
 static void test_find_max() {
+	std::cerr << "[ERROR] >>> Entering test_find_max()" << std::endl;
     std::cout << "Testing BST find_max...";
 
     int max = 0;
@@ -488,6 +513,7 @@ static void test_find_max() {
     assert(max == 6);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_find_max()" << std::endl;
 }
 
 /**
@@ -496,6 +522,7 @@ static void test_find_max() {
  * @returns `void`
  */
 static void test_get_elements_inorder() {
+	std::cerr << "[ERROR] >>> Entering test_get_elements_inorder()" << std::endl;
     std::cout << "Testing BST get_elements_inorder...";
 
     binary_search_tree<int> tree;
@@ -506,9 +533,11 @@ static void test_get_elements_inorder() {
 
     std::vector<int> expected = {3, 4, 5, 6};
     std::vector<int> actual = tree.get_elements_inorder();
+	std::cerr << "[ERROR] test_get_elements_inorder(): actual.size() → " << actual.size() << std::endl;
     assert(actual == expected);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_get_elements_inorder()" << std::endl;
 }
 
 /**
@@ -517,6 +546,7 @@ static void test_get_elements_inorder() {
  * @returns `void`
  */
 static void test_get_elements_preorder() {
+	std::cerr << "[ERROR] >>> Entering test_get_elements_preorder()" << std::endl;
     std::cout << "Testing BST get_elements_preorder...";
 
     binary_search_tree<int> tree;
@@ -527,9 +557,11 @@ static void test_get_elements_preorder() {
 
     std::vector<int> expected = {5, 4, 3, 6};
     std::vector<int> actual = tree.get_elements_preorder();
+	std::cerr << "[ERROR] test_get_elements_preorder(): actual.size() → " << actual.size() << std::endl;
     assert(actual == expected);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_get_elements_preorder()" << std::endl;
 }
 
 /**
@@ -538,6 +570,7 @@ static void test_get_elements_preorder() {
  * @returns `void`
  */
 static void test_get_elements_postorder() {
+	std::cerr << "[ERROR] >>> Entering test_get_elements_postorder()" << std::endl;
     std::cout << "Testing BST get_elements_postorder...";
 
     binary_search_tree<int> tree;
@@ -548,12 +581,15 @@ static void test_get_elements_postorder() {
 
     std::vector<int> expected = {3, 4, 6, 5};
     std::vector<int> actual = tree.get_elements_postorder();
+	std::cerr << "[ERROR] test_get_elements_postorder(): actual.size() → " << actual.size() << std::endl;
     assert(actual == expected);
 
     std::cout << "ok" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_get_elements_postorder()" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test_insert();
     test_remove();
     test_contains();
@@ -562,4 +598,5 @@ int main() {
     test_get_elements_inorder();
     test_get_elements_preorder();
     test_get_elements_postorder();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

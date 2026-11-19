@@ -44,6 +44,8 @@
  * \returns random number in the range \f$[a,b]\f$
  */
 double _random(double a, double b) {
+	std::cerr << "[ERROR] >>> Entering _random(a=" << a << ",b=" << b << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting _random(a=" << a << ",b=" << b << ")" << std::endl;
     return ((b - a) * (std::rand() % 100) / 100.f) + a;
 }
 
@@ -194,10 +196,13 @@ using machine_learning::kohonen_som_tracer;
  * \param[out] data matrix to store data in
  */
 void test_circle(std::vector<std::valarray<double>> *data) {
+	std::cerr << "[ERROR] >>> Entering test_circle(data=" << data << ")" << std::endl;
     const int N = data->size();
     const double R = 0.75, dr = 0.3;
     double a_t = 0., b_t = 2.f * M_PI;  // theta random between 0 and 2*pi
+	std::cerr << "[ERROR] test_circle(data=" << data << "): N → " << N << std::endl;
     double a_r = R - dr, b_r = R + dr;  // radius random between R-dr and R+dr
+	std::cerr << "[WARN] <<< Exiting test_circle(data=" << data << ")" << std::endl;
     int i = 0;
 
 #ifdef _OPENMP
@@ -205,7 +210,9 @@ void test_circle(std::vector<std::valarray<double>> *data) {
 #endif
     for (i = 0; i < N; i++) {
         double r = _random(a_r, b_r);      // random radius
+		std::cerr << "[ERROR] test_circle(data=" << data << "): r → " << r << std::endl;
         double theta = _random(a_t, b_t);  // random theta
+		std::cerr << "[ERROR] test_circle(data=" << data << "): theta → " << theta << std::endl;
         data[0][i][0] = r * cos(theta);    // convert from polar to cartesian
         data[0][i][1] = r * sin(theta);
     }
@@ -231,11 +238,13 @@ void test_circle(std::vector<std::valarray<double>> *data) {
  * output](https://raw.githubusercontent.com/TheAlgorithms/C-Plus-Plus/docs/images/machine_learning/kohonen/test1.svg)
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     int j = 0, N = 500;
     int features = 2;
     int num_out = 50;
     std::vector<std::valarray<double>> X(N);
     std::vector<std::valarray<double>> W(num_out);
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
     for (int i = 0; i < std::max(num_out, N); i++) {
         // loop till max(N, num_out)
         if (i < N) {  // only add new arrays if i < N
@@ -275,8 +284,11 @@ void test1() {
  * \param[out] data matrix to store data in
  */
 void test_lamniscate(std::vector<std::valarray<double>> *data) {
+	std::cerr << "[ERROR] >>> Entering test_lamniscate(data=" << data << ")" << std::endl;
     const int N = data->size();
     const double dr = 0.2;
+	std::cerr << "[ERROR] test_lamniscate(data=" << data << "): N → " << N << std::endl;
+	std::cerr << "[WARN] <<< Exiting test_lamniscate(data=" << data << ")" << std::endl;
     int i = 0;
 
 #ifdef _OPENMP
@@ -284,8 +296,11 @@ void test_lamniscate(std::vector<std::valarray<double>> *data) {
 #endif
     for (i = 0; i < N; i++) {
         double dx = _random(-dr, dr);     // random change in x
+		std::cerr << "[ERROR] test_lamniscate(data=" << data << "): dx → " << dx << std::endl;
         double dy = _random(-dr, dr);     // random change in y
+		std::cerr << "[ERROR] test_lamniscate(data=" << data << "): dy → " << dy << std::endl;
         double theta = _random(0, M_PI);  // random theta
+		std::cerr << "[ERROR] test_lamniscate(data=" << data << "): theta → " << theta << std::endl;
         data[0][i][0] = dx + cos(theta);  // convert from polar to cartesian
         data[0][i][1] = dy + sin(2. * theta) / 2.f;
     }
@@ -313,11 +328,13 @@ void test_lamniscate(std::vector<std::valarray<double>> *data) {
  * output](https://raw.githubusercontent.com/TheAlgorithms/C-Plus-Plus/docs/images/machine_learning/kohonen/test2.svg)
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     int j = 0, N = 500;
     int features = 2;
     int num_out = 20;
     std::vector<std::valarray<double>> X(N);
     std::vector<std::valarray<double>> W(num_out);
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
     for (int i = 0; i < std::max(num_out, N); i++) {
         // loop till max(N, num_out)
         if (i < N) {  // only add new arrays if i < N
@@ -357,10 +374,13 @@ void test2() {
  * \param[out] data matrix to store data in
  */
 void test_3d_classes(std::vector<std::valarray<double>> *data) {
+	std::cerr << "[ERROR] >>> Entering test_3d_classes(data=" << data << ")" << std::endl;
     const int N = data->size();
     const double R = 0.1;  // radius of cluster
+	std::cerr << "[ERROR] test_3d_classes(data=" << data << "): N → " << N << std::endl;
     int i = 0;
     const int num_classes = 8;
+	std::cerr << "[WARN] <<< Exiting test_3d_classes(data=" << data << ")" << std::endl;
     const std::array<const std::array<double, 3>, num_classes> centres = {
         // centres of each class cluster
         std::array<double, 3>({.5, .5, .5}),    // centre of class 0
@@ -412,11 +432,13 @@ void test_3d_classes(std::vector<std::valarray<double>> *data) {
  * output](https://raw.githubusercontent.com/TheAlgorithms/C-Plus-Plus/docs/images/machine_learning/kohonen/test3.svg)
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     int j = 0, N = 200;
     int features = 3;
     int num_out = 20;
     std::vector<std::valarray<double>> X(N);
     std::vector<std::valarray<double>> W(num_out);
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
     for (int i = 0; i < std::max(num_out, N); i++) {
         // loop till max(N, num_out)
         if (i < N) {  // only add new arrays if i < N
@@ -450,12 +472,16 @@ void test3() {
  * \returns time difference in seconds
  */
 double get_clock_diff(clock_t start_t, clock_t end_t) {
+	std::cerr << "[ERROR] >>> Entering get_clock_diff(start_t=" << start_t << ",end_t=" << end_t << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting get_clock_diff(start_t=" << start_t << ",end_t=" << end_t << ")" << std::endl;
     return static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
 }
 
 /** Main function */
 int main() {
 #ifdef _OPENMP
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     std::cout << "Using OpenMP based parallelization\n";
 #else
     std::cout << "NOT using OpenMP based parallelization\n";
@@ -464,8 +490,10 @@ int main() {
     std::srand(std::time(nullptr));
 
     std::clock_t start_clk = std::clock();
+	std::cerr << "[ERROR] main(): start_clk → " << start_clk << std::endl;
     test1();
     auto end_clk = std::clock();
+	std::cerr << "[ERROR] main(): end_clk → " << end_clk << std::endl;
     std::cout << "Test 1 completed in " << get_clock_diff(start_clk, end_clk)
               << " sec\n";
 

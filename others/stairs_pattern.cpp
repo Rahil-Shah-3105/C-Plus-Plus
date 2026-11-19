@@ -15,10 +15,12 @@ where number of pairs line is given by user
 
 /** main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     int l, st = 2, x, r, z, n, sp;
     std::cout << "Enter number of pair - ";
     std::cin >> x;
     z = x;
+	std::cerr << "[ERROR] main(): z → " << z << std::endl;
     for (r = 1; r <= x; r++) {
         z = z - 1;
         for (n = 1; n <= 2; n++) {
@@ -32,4 +34,5 @@ int main() {
         }
         st = st + 2;
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

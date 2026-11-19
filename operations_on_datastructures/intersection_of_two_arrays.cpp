@@ -85,78 +85,93 @@ using operations_on_datastructures::print;
  * @returns void
  */
 void test1() {
+	std::cerr << "[ERROR] >>> Entering test1()" << std::endl;
     std::cout << "TEST CASE 1\n";
     std::cout << "Intialized a = {} b = {}\n";
     std::cout << "Expected result: {}\n";
     std::vector<int32_t> a = {};
     std::vector<int32_t> b = {};
     std::vector<int32_t> result = get_intersection(a, b);
+	std::cerr << "[ERROR] test1(): result.size() → " << result.size() << std::endl;
     assert(result == a);  ///< Check if result is empty
     print(result);        ///< Should only print newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test1()" << std::endl;
 }
 /**
  * @brief A Test to check an edge case (one empty array)
  * @returns void
  */
 void test2() {
+	std::cerr << "[ERROR] >>> Entering test2()" << std::endl;
     std::cout << "TEST CASE 2\n";
     std::cout << "Intialized a = {} b = {2, 3}\n";
     std::cout << "Expected result: {}\n";
     std::vector<int32_t> a = {};
     std::vector<int32_t> b = {2, 3};
     std::vector<int32_t> result = get_intersection(a, b);
+	std::cerr << "[ERROR] test2(): result.size() → " << result.size() << std::endl;
     assert(result == a);  ///< Check if result is equal to a
     print(result);        ///< Should only print newline
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test2()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with a simple test case
  * @returns void
  */
 void test3() {
+	std::cerr << "[ERROR] >>> Entering test3()" << std::endl;
     std::cout << "TEST CASE 3\n";
     std::cout << "Intialized a = {4, 6} b = {3, 6}\n";
     std::cout << "Expected result: {6}\n";
     std::vector<int32_t> a = {4, 6};
     std::vector<int32_t> b = {3, 6};
     std::vector<int32_t> result = get_intersection(a, b);
+	std::cerr << "[ERROR] test3(): result.size() → " << result.size() << std::endl;
     std::vector<int32_t> expected = {6};
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 6
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test3()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with duplicate values
  * @returns void
  */
 void test4() {
+	std::cerr << "[ERROR] >>> Entering test4()" << std::endl;
     std::cout << "TEST CASE 4\n";
     std::cout << "Intialized a = {4, 6, 6, 6} b = {2, 4, 4, 6}\n";
     std::cout << "Expected result: {4, 6}\n";
     std::vector<int32_t> a = {4, 6, 6, 6};
     std::vector<int32_t> b = {2, 4, 4, 6};
     std::vector<int32_t> result = get_intersection(a, b);
+	std::cerr << "[ERROR] test4(): result.size() → " << result.size() << std::endl;
     std::vector<int32_t> expected = {4, 6};
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 4 6
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test4()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with a harder test case
  * @returns void
  */
 void test5() {
+	std::cerr << "[ERROR] >>> Entering test5()" << std::endl;
     std::cout << "TEST CASE 5\n";
     std::cout << "Intialized a = {1, 2, 3, 4, 6, 7, 9} b = {2, 3, 4, 5}\n";
     std::cout << "Expected result: {2, 3, 4}\n";
     std::vector<int32_t> a = {1, 2, 3, 4, 6, 7, 9};
     std::vector<int32_t> b = {2, 3, 4, 5};
     std::vector<int32_t> result = get_intersection(a, b);
+	std::cerr << "[ERROR] test5(): result.size() → " << result.size() << std::endl;
     std::vector<int32_t> expected = {2, 3, 4};
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 2 3 4
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test5()" << std::endl;
 }
 /**
  * @brief A Test to check correct functionality with an array sorted using
@@ -164,6 +179,7 @@ void test5() {
  * @returns void
  */
 void test6() {
+	std::cerr << "[ERROR] >>> Entering test6()" << std::endl;
     std::cout << "TEST CASE 6\n";
     std::cout << "Intialized a = {1, 3, 3, 2, 5, 9, 4, 7, 3, 2} ";
     std::cout << "b = {11, 3, 7, 8, 6}\n";
@@ -173,10 +189,12 @@ void test6() {
     std::sort(a.begin(), a.end());  ///< Sort vector a
     std::sort(b.begin(), b.end());  ///< Sort vector b
     std::vector<int32_t> result = get_intersection(a, b);
+	std::cerr << "[ERROR] test6(): result.size() → " << result.size() << std::endl;
     std::vector<int32_t> expected = {3, 7};
     assert(result == expected);  ///< Check if result is correct
     print(result);               ///< Should print 3 7
     std::cout << "TEST PASSED!\n\n";
+	std::cerr << "[WARN] <<< Exiting test6()" << std::endl;
 }
 }  // namespace tests
 
@@ -185,12 +203,14 @@ void test6() {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     tests::test1();
     tests::test2();
     tests::test3();
     tests::test4();
     tests::test5();
     tests::test6();
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -198,6 +218,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

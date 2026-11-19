@@ -70,6 +70,7 @@ int maxProfitByCuttingRod(const std::array<int, T> &price, const uint64_t &n) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test 1
     const int16_t n1 = 8;                                         // size of rod
     std::array<int32_t, n1> price1 = {1, 2, 4, 6, 8, 45, 21, 9};  // price array
@@ -102,6 +103,7 @@ static void test() {
     assert(max_profit3 == expected_max_profit3);
     std::cout << "Maximum profit with " << n3 << " inch road is " << max_profit3
               << std::endl;
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -109,7 +111,9 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Testing
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

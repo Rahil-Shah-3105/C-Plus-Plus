@@ -53,6 +53,8 @@ namespace even_odd {
  * @returns "Even" if N is even, "Odd" if N is odd.
      */
         bool is_even(std::int64_t N) {
+			std::cerr << "[ERROR] >>> Entering is_even(N=" << N << ")" << std::endl;
+            std::cerr << "[WARN] <<< Exiting is_even(N=" << N << ")" << std::endl;
             return (N & 1) == 0 ? true : false;
         }
 
@@ -64,6 +66,7 @@ namespace even_odd {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     using bit_manipulation::even_odd::is_even;
 
     // Test Even numbers
@@ -81,6 +84,7 @@ static void test() {
     assert(is_even(-999) == false);
 
     std::cout << "All test cases successfully passed!" << std::endl;
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -88,6 +92,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

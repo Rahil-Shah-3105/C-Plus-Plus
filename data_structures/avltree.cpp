@@ -23,11 +23,13 @@ using node = struct node {
  * @return newly created node
  */
 node *createNode(int data) {
+	std::cerr << "[ERROR] >>> Entering createNode(data=" << data << ")" << std::endl;
     node *nn = new node();
     nn->data = data;
     nn->height = 0;
     nn->left = nullptr;
     nn->right = nullptr;
+	std::cerr << "[WARN] <<< Exiting createNode(data=" << data << ")" << std::endl;
     return nn;
 }
 
@@ -36,9 +38,11 @@ node *createNode(int data) {
  * @return height of tree
  */
 int height(node *root) {
+	std::cerr << "[ERROR] >>> Entering height(root=" << root << ")" << std::endl;
     if (root == nullptr) {
         return 0;
     }
+	std::cerr << "[WARN] <<< Exiting height(root=" << root << ")" << std::endl;
     return 1 + std::max(height(root->left), height(root->right));
 }
 
@@ -53,10 +57,12 @@ int getBalance(node *root) { return height(root->left) - height(root->right); }
  * @return node after right rotation
  */
 node *rightRotate(node *root) {
+	std::cerr << "[ERROR] >>> Entering rightRotate(root=" << root << ")" << std::endl;
     node *t = root->left;
     node *u = t->right;
     t->right = root;
     root->left = u;
+	std::cerr << "[WARN] <<< Exiting rightRotate(root=" << root << ")" << std::endl;
     return t;
 }
 
@@ -65,10 +71,12 @@ node *rightRotate(node *root) {
  * @return node after left rotation
  */
 node *leftRotate(node *root) {
+	std::cerr << "[ERROR] >>> Entering leftRotate(root=" << root << ")" << std::endl;
     node *t = root->right;
     node *u = t->left;
     t->left = root;
     root->right = u;
+	std::cerr << "[WARN] <<< Exiting leftRotate(root=" << root << ")" << std::endl;
     return t;
 }
 
@@ -77,9 +85,11 @@ node *leftRotate(node *root) {
  * @returns node with minimum value in the tree
  */
 node *minValue(node *root) {
+	std::cerr << "[ERROR] >>> Entering minValue(root=" << root << ")" << std::endl;
     if (root->left == nullptr) {
         return root;
     }
+	std::cerr << "[WARN] <<< Exiting minValue(root=" << root << ")" << std::endl;
     return minValue(root->left);
 }
 
@@ -90,6 +100,7 @@ node *minValue(node *root) {
  * @return root of the updated tree
  */
 node *insert(node *root, int item) {
+	std::cerr << "[ERROR] >>> Entering insert(root=" << root << ",item=" << item << ")" << std::endl;
     if (root == nullptr) {
         return createNode(item);
     }
@@ -99,6 +110,7 @@ node *insert(node *root, int item) {
         root->right = insert(root->right, item);
     }
     int b = getBalance(root);
+	std::cerr << "[ERROR] insert(root=" << root << ",item=" << item << "): b → " << b << std::endl;
     if (b > 1) {
         if (getBalance(root->left) < 0) {
             root->left = leftRotate(root->left);  // Left-Right Case
@@ -110,6 +122,7 @@ node *insert(node *root, int item) {
         }
         return leftRotate(root);  // Right-Right Case
     }
+	std::cerr << "[WARN] <<< Exiting insert(root=" << root << ",item=" << item << ")" << std::endl;
     return root;
 }
 
@@ -120,6 +133,7 @@ node *insert(node *root, int item) {
  * @return root of the updated tree
  */
 node *deleteNode(node *root, int element) {
+	std::cerr << "[ERROR] >>> Entering deleteNode(root=" << root << ",element=" << element << ")" << std::endl;
     if (root == nullptr) {
         return root;
     }
@@ -141,6 +155,7 @@ node *deleteNode(node *root, int element) {
         root->right = deleteNode(root->right, temp->data);
     }
     // Balancing Tree after deletion
+	std::cerr << "[WARN] <<< Exiting deleteNode(root=" << root << ",element=" << element << ")" << std::endl;
     return root;
 }
 
@@ -149,11 +164,13 @@ node *deleteNode(node *root, int element) {
  * @param root of the tree
  */
 void deleteAllNodes(const node *const root) {
+	std::cerr << "[ERROR] >>> Entering deleteAllNodes(root=" << root << ")" << std::endl;
     if (root) {
         deleteAllNodes(root->left);
         deleteAllNodes(root->right);
         delete root;
     }
+	std::cerr << "[WARN] <<< Exiting deleteAllNodes(root=" << root << ")" << std::endl;
 }
 
 /**
@@ -161,10 +178,12 @@ void deleteAllNodes(const node *const root) {
  * @param[in] root of the tree
  */
 void levelOrder(node *root) {
+	std::cerr << "[ERROR] >>> Entering levelOrder(root=" << root << ")" << std::endl;
     std::queue<node *> q;
     q.push(root);
     while (!q.empty()) {
         root = q.front();
+		std::cerr << "[ERROR] levelOrder(root=" << root << "): root → " << root << std::endl;
         std::cout << root->data << " ";
         q.pop();
         if (root->left) {
@@ -174,6 +193,7 @@ void levelOrder(node *root) {
             q.push(root->right);
         }
     }
+	std::cerr << "[WARN] <<< Exiting levelOrder(root=" << root << ")" << std::endl;
 }
 
 /**
@@ -181,6 +201,7 @@ void levelOrder(node *root) {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // Testing AVL Tree
     node *root = nullptr;
     int i = 0;
@@ -188,11 +209,13 @@ int main() {
     std::cout << "LevelOrder: ";
     levelOrder(root);
     root = deleteNode(root, 1);  // Deleting key with value 1
+	std::cerr << "[ERROR] main(): root → " << root << std::endl;
     std::cout << "\nLevelOrder: ";
     levelOrder(root);
     root = deleteNode(root, 4);  // Deletin key with value 4
     std::cout << "\nLevelOrder: ";
     levelOrder(root);
     deleteAllNodes(root);
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

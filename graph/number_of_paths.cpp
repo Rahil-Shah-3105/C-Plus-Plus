@@ -84,6 +84,7 @@ namespace graph {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Test case 1: Simple directed graph with multiple paths
     std::vector<std::vector<std::uint32_t>> graph1 = {
         {0, 1, 0, 1, 0}, 
@@ -139,6 +140,7 @@ static void test() {
     assert(graph::count_paths(graph6, u6, v6, n6) == 0);  // Should return 0 because `v = 5` is invalid
 
     std::cout << "All tests have successfully passed!\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -146,6 +148,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test(); // Run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

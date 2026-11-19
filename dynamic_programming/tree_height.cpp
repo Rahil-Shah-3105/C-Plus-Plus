@@ -30,8 +30,10 @@ std::vector<bool> visited;
 std::vector<int> dp;
 
 void depth_first_search(int u) {
+	std::cerr << "[ERROR] >>> Entering depth_first_search(u=" << u << ")" << std::endl;
     visited[u] = true;
     int child_height = 1;
+	std::cerr << "[ERROR] depth_first_search(u=" << u << "): child_height → " << child_height << std::endl;
     for (int v : adj[u]) {
         if (!visited[v]) {
             depth_first_search(v);
@@ -42,9 +44,11 @@ void depth_first_search(int u) {
     }
     // assigned the max child height to current visited node.
     dp[u] = child_height;
+	std::cerr << "[WARN] <<< Exiting depth_first_search(u=" << u << ")" << std::endl;
 }
 
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     // number of nodes
     int number_of_nodes;
     std::cout << "Enter number of nodes of the tree : " << std::endl;
@@ -67,4 +71,5 @@ int main() {
     // function call which will initialize the height of all nodes.
     depth_first_search(1);
     std::cout << "Height of the Tree : " << dp[1] << std::endl;
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
 }

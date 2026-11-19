@@ -18,11 +18,14 @@ static float eqd(float y) { return 0.5 * (cos(y) + 2); }
 
 /** Main function */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     float y, x1, x2, sum;
     int i, n;
 
     for (i = 0; i < 10; i++) {
         sum = eq(y);
+		std::cerr << "[ERROR] main(): sum → " << sum << std::endl;
+		std::cerr << "[DEBUG] main(): sum → " << sum << std::endl;
         std::cout << "value of equation at " << i << " " << sum << "\n";
         y++;
     }
@@ -33,8 +36,10 @@ int main() {
 
     for (i = 0; i <= n; i++) {
         x2 = eqd(x1);
+		std::cerr << "[ERROR] main(): x2 → " << x2 << std::endl;
         std::cout << "\nenter the x2->" << x2;
         x1 = x2;
     }
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

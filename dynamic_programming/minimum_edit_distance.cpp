@@ -66,12 +66,14 @@ namespace minimum_edit_distance {
  * @returns z if `z` is the minimum value
  */
 uint64_t min(uint64_t x, uint64_t y, uint64_t z) {
+	std::cerr << "[ERROR] >>> Entering min(x=" << x << ",y=" << y << ",z=" << z << ")" << std::endl;
     if (x <= y && x <= z) {
         return x;  /// returns x, if x is the minimum value
     }
     if (y <= x && y <= z) {
         return y;  /// returns y, if y is the minimum value
     } else {
+		std::cerr << "[WARN] <<< Exiting min(x=" << x << ",y=" << y << ",z=" << z << ")" << std::endl;
         return z;  /// returns z if z is the minimum value
     }
 }
@@ -140,9 +142,12 @@ uint64_t editDistDP(std::string str1, std::string str2, uint64_t m,
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // 1st test
     std::string str1 = "INTENTION";  // Sample input of 1st string
+	std::cerr << "[ERROR] test(): str1 → " << str1 << std::endl;
     std::string str2 = "EXECUTION";  // Sample input of 2nd string
+	std::cerr << "[ERROR] test(): str2 → " << str2 << std::endl;
     uint64_t expected_output1 = 5;   // Expected minimum cost
     uint64_t output1 = dynamic_programming::minimum_edit_distance::editDistDP(
         str1, str2, str1.length(),
@@ -155,13 +160,16 @@ static void test() {
 
     // 2nd test
     std::string str3 = "SATURDAY";
+	std::cerr << "[ERROR] test(): str3 → " << str3 << std::endl;
     std::string str4 = "SUNDAY";
+	std::cerr << "[ERROR] test(): str4 → " << str4 << std::endl;
     uint64_t expected_output2 = 3;
     uint64_t output2 = dynamic_programming::minimum_edit_distance::editDistDP(
         str3, str4, str3.length(), str4.length());
     assert(output2 == expected_output2);
     std::cout << "Minimum Number of Operations Required: " << output2
               << std::endl;
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -169,6 +177,8 @@ static void test() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

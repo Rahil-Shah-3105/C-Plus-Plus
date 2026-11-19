@@ -35,6 +35,8 @@ namespace merge_insertion {
  */
 template <typename T, size_t N>
 static void InsertionSort(std::array<T, N> *A, size_t start, size_t end) {
+	std::cerr << "[ERROR] >>> Entering InsertionSort(A=" << A << ",start=" << start << ",end=" << end << ")" << std::endl;
+    std::cerr << "[ERROR] >>> Entering InsertionSort(A=" << A << ",start=" << start << ",end=" << end << ")" << std::endl;
     size_t i = 0, j = 0;
     T *ptr = A->data();
 
@@ -51,6 +53,7 @@ static void InsertionSort(std::array<T, N> *A, size_t start, size_t end) {
 
         ptr[j] = temp;
     }
+	std::cerr << "[WARN] <<< Exiting InsertionSort(A=" << A << ",start=" << start << ",end=" << end << ")" << std::endl;
 }
 
 /**
@@ -65,10 +68,12 @@ static void InsertionSort(std::array<T, N> *A, size_t start, size_t end) {
  */
 template <typename T, size_t N>
 static void merge(std::array<T, N> *array, size_t min, size_t max, size_t mid) {
+	std::cerr << "[ERROR] >>> Entering merge(array.size()=" << array.size() << ",min=" << min << ",max=" << max << ",mid=" << mid << ")" << std::endl;
     size_t firstIndex = min;
     size_t secondIndex = mid + 1;
 
     auto ptr = array->data();
+	std::cerr << "[ERROR] merge(array.size()=" << array.size() << ",min=" << min << ",max=" << max << ",mid=" << mid << "): ptr → " << ptr << std::endl;
     std::array<T, N + 1> tempArray{0};
 
     // While there are elements in the left or right runs
@@ -88,6 +93,7 @@ static void merge(std::array<T, N> *array, size_t min, size_t max, size_t mid) {
     memcpy(ptr + min, tempArray.data() + min, (max - min) * sizeof(T));
     //  for (int index = min; index <= max; index++) ptr[index] =
     //  tempArray[index];
+	std::cerr << "[WARN] <<< Exiting merge(array.size()=" << array.size() << ",min=" << min << ",max=" << max << ",mid=" << mid << ")" << std::endl;
 }
 
 /**
@@ -130,6 +136,7 @@ void mergeSort(std::array<T, N> *array, size_t min, size_t max,
  * @returns none
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     constexpr size_t size = 30;
     std::array<int, size> array{0};
     // input
@@ -150,6 +157,7 @@ static void test() {
 
     assert(std::is_sorted(std::begin(array), std::end(array)));
     std::cout << "Test passed\n";
+	std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -157,7 +165,9 @@ static void test() {
  * @return 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     std::srand(std::time(nullptr));
     test();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }

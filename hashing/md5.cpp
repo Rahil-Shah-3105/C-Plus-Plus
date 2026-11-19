@@ -65,6 +65,8 @@ namespace md5 {
  * @return uint32_t The rotated integer
  */
 uint32_t leftRotate32bits(uint32_t n, std::size_t rotate) {
+	std::cerr << "[ERROR] >>> Entering leftRotate32bits(n=" << n << ",rotate=" << rotate << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting leftRotate32bits(n=" << n << ",rotate=" << rotate << ")" << std::endl;
     return (n << rotate) | (n >> (32 - rotate));
 }
 /**
@@ -75,11 +77,13 @@ uint32_t leftRotate32bits(uint32_t n, std::size_t rotate) {
  * @return false IF integers are detected to work as little-endian
  */
 bool isBigEndian() {
+	std::cerr << "[ERROR] >>> Entering isBigEndian()" << std::endl;
     union {
         uint32_t i;
         std::array<char, 4> c;
     } bint = {0x01020304};
 
+	std::cerr << "[WARN] <<< Exiting isBigEndian()" << std::endl;
     return bint.c[0] == 1;
 }
 /**
@@ -88,11 +92,13 @@ bool isBigEndian() {
  * @return uint32_t param n with binary representation as little-endian
  */
 uint32_t toLittleEndian32(uint32_t n) {
+	std::cerr << "[ERROR] >>> Entering toLittleEndian32(n=" << n << ")" << std::endl;
     if (!isBigEndian()) {
         return ((n << 24) & 0xFF000000) | ((n << 8) & 0x00FF0000) |
                ((n >> 8) & 0x0000FF00) | ((n >> 24) & 0x000000FF);
     }
     // Machine works on little endian, no need to change anything
+	std::cerr << "[WARN] <<< Exiting toLittleEndian32(n=" << n << ")" << std::endl;
     return n;
 }
 /**
@@ -101,6 +107,7 @@ uint32_t toLittleEndian32(uint32_t n) {
  * @return uint64_t param n with binary representation as little-endian
  */
 uint64_t toLittleEndian64(uint64_t n) {
+	std::cerr << "[ERROR] >>> Entering toLittleEndian64(n=" << n << ")" << std::endl;
     if (!isBigEndian()) {
         return ((n << 56) & 0xFF00000000000000) |
                ((n << 40) & 0x00FF000000000000) |
@@ -113,6 +120,7 @@ uint64_t toLittleEndian64(uint64_t n) {
         ;
     }
     // Machine works on little endian, no need to change anything
+	std::cerr << "[WARN] <<< Exiting toLittleEndian64(n=" << n << ")" << std::endl;
     return n;
 }
 /**
@@ -121,13 +129,16 @@ uint64_t toLittleEndian64(uint64_t n) {
  * @return std::string The hex signature
  */
 std::string sig2hex(void* sig) {
+	std::cerr << "[ERROR] >>> Entering sig2hex(sig=" << sig << ")" << std::endl;
     const char* hexChars = "0123456789abcdef";
     auto* intsig = static_cast<uint8_t*>(sig);
     std::string hex = "";
+	std::cerr << "[ERROR] sig2hex(sig=" << sig << "): hex → " << hex << std::endl;
     for (uint8_t i = 0; i < 16; i++) {
         hex.push_back(hexChars[(intsig[i] >> 4) & 0xF]);
         hex.push_back(hexChars[(intsig[i]) & 0xF]);
     }
+	std::cerr << "[WARN] <<< Exiting sig2hex(sig=" << sig << ")" << std::endl;
     return hex;
 }
 /**
@@ -137,6 +148,7 @@ std::string sig2hex(void* sig) {
  * @return void* Pointer to the 128-bit signature
  */
 void* hash_bs(const void* input_bs, uint64_t input_size) {
+	std::cerr << "[ERROR] >>> Entering hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << ")" << std::endl;
     auto* input = static_cast<const uint8_t*>(input_bs);
 
     // Step 0: Initial Data (Those are decided in the MD5 protocol)
@@ -174,8 +186,10 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
 
     // The initial 128-bit state
     uint32_t a0 = 0x67452301, A = 0;
+	std::cerr << "[ERROR] hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): A → " << A << std::endl;
     uint32_t b0 = 0xefcdab89, B = 0;
     uint32_t c0 = 0x98badcfe, C = 0;
+	std::cerr << "[ERROR] hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): C → " << C << std::endl;
     uint32_t d0 = 0x10325476, D = 0;
 
     // Step 1: Processing the bytestring
@@ -207,6 +221,7 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
     // When there is a conversion from int to bytestring or vice-versa
     // We always need to make sure it is little endian
     uint64_t input_bitsize_le = toLittleEndian64(input_size * 8);
+	std::cerr << "[ERROR] hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): input_bitsize_le → " << input_bitsize_le << std::endl;
     for (uint8_t i = 0; i < 8; i++) {
         padded_message[padded_message_size - 8 + i] =
             (input_bitsize_le >> (56 - 8 * i)) & 0xFF;
@@ -237,6 +252,8 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
         // Main "hashing" loop
         for (uint8_t i = 0; i < 64; i++) {
             uint32_t F = 0, g = 0;
+			std::cerr << "[ERROR] hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): F → " << F << std::endl;
+			std::cerr << "[ERROR] hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << "): g → " << g << std::endl;
             if (i < 16) {
                 F = (B & C) | ((~B) & D);
                 g = i;
@@ -278,6 +295,7 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
         sig[i + 12] = (d0 >> (8 * i)) & 0xFF;
     }
 
+	std::cerr << "[WARN] <<< Exiting hash_bs(input_bs=" << input_bs << ",input_size=" << input_size << ")" << std::endl;
     return sig;
 }
 /**
@@ -286,6 +304,8 @@ void* hash_bs(const void* input_bs, uint64_t input_size) {
  * @return void* Pointer to the MD5 signature
  */
 void* hash(const std::string& message) {
+	std::cerr << "[ERROR] >>> Entering hash(message=" << message << ")" << std::endl;
+    std::cerr << "[WARN] <<< Exiting hash(message=" << message << ")" << std::endl;
     return hash_bs(&message[0], message.size());
 }
 }  // namespace md5
@@ -296,6 +316,7 @@ void* hash(const std::string& message) {
  * @returns void
  */
 static void test() {
+	std::cerr << "[ERROR] >>> Entering test()" << std::endl;
     // Hashes empty string and stores signature
     void* sig = hashing::md5::hash("");
     std::cout << "Hashing empty string" << std::endl;
@@ -342,6 +363,7 @@ static void test() {
     // Test with cassert whether sig is correct from the expected value
     assert(hashing::md5::sig2hex(sig4).compare(
                "d174ab98d277d9f5a5611c2c9f419d9f") == 0);
+			std::cerr << "[WARN] <<< Exiting test()" << std::endl;
 }
 
 /**
@@ -350,6 +372,7 @@ static void test() {
  * @returns void
  */
 static void interactive() {
+	std::cerr << "[ERROR] >>> Entering interactive()" << std::endl;
     while (true) {
         std::string input;
         std::cout << "Enter a message to be hashed (Ctrl-C to exit): "
@@ -364,6 +387,7 @@ static void interactive() {
             if (input.compare("y") == 0) {
                 break;
             } else if (input.compare("n") == 0) {
+				std::cerr << "[WARN] <<< Exiting interactive()" << std::endl;
                 return;
             }
         }
@@ -375,10 +399,12 @@ static void interactive() {
  * @returns 0 on exit
  */
 int main() {
+	std::cerr << "[ERROR] >>> Entering main()" << std::endl;
     test();  // run self-test implementations
 
     // Launch interactive mode where user can input messages and see
     // their hash
     interactive();
+	std::cerr << "[WARN] <<< Exiting main()" << std::endl;
     return 0;
 }
